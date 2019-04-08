@@ -5,6 +5,9 @@
   "repository": "git@github.com:ijufumi/openreports_web.git",
   "author": "Takafumi Iju <ijufumi@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "./node_modules/.bin/webpack-dev-server"
+  },
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "7",
