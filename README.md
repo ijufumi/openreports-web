@@ -1,1 +1,1 @@
-# openreports_web
+# OpenReports Web Client
