@@ -1,7 +1,9 @@
-var outputDir = __dirname + '/dist';
+const outputDir = __dirname + '/dist';
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = [{
   entry: [
-    './websrc/index.js'
+    './src/index.js'
   ],
   output: {
     path: outputDir,
@@ -10,7 +12,12 @@ module.exports = [{
   },
   module: {
     rules: [{
-      exclude: '/node_modules'
+      test: /\.js$/,
+      exclude: '/node_modules',
+      loader: 'babel-loader',
+      query: {
+        presets:['react','es2015']
+      }
     }]
   },
   resolve: {
@@ -18,7 +25,10 @@ module.exports = [{
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: outputDir
-  }
+    contentBase: 'src'
+  },
+  plugins: [
+    new HtmlWebpackPlugin({template: './src/index.html'})
+  ]
 }];
 

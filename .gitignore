@@ -1,2 +1,6 @@
+# for React
 node_modules
+dist/
+
+# for IDEA
 .idea/
