@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = [{
   entry: [
-    './src/index.js'
+    './src/index.jsx'
   ],
   output: {
     path: outputDir,
@@ -12,7 +12,7 @@ module.exports = [{
   },
   module: {
     rules: [{
-      test: /\.js$/,
+      test: /\.jsx$/,
       exclude: '/node_modules',
       loader: 'babel-loader',
       query: {
