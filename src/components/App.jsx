@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter, Route} from "react-router-dom";
 
-import Top from './Top'
+import Top from './public/top/Top'
 
 const App = () => (
     <BrowserRouter>
