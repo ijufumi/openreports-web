@@ -1,5 +1,5 @@
 import React from 'react'
-import {Layout, Panel, NavDrawer} from 'react-toolbox/lib/layout/'
+import {Layout, Panel} from 'react-toolbox/lib/layout/'
 import Navigation from 'react-toolbox/lib/navigation'
 import {Input} from 'react-toolbox/lib/input/index'
 import {Button} from 'react-toolbox/lib/button/index'
@@ -21,18 +21,13 @@ class Top extends React.Component {
         return (
             <Layout className={styles.layout}>
                 <Panel className={styles.panel}>
-                    <NavDrawer>
-                        aaa
-                    </NavDrawer>
                     <Navigation type='horizontal'>
                         <Button label='Home' raised/>
                     </Navigation>
                     <h2>OpenReports</h2>
-                    <div>
-                        <Input type='email' name="loginId"
-                               label='Email Address' value={this.state.loginId}
-                               onChange={this.handleChange.bind(this, 'loginId')} className={inputStyles.input}/>
-                    </div>
+                    <Input type='email' name="loginId"
+                           label='Email Address' value={this.state.loginId}
+                           onChange={this.handleChange.bind(this, 'loginId')} className={inputStyles.input}/>
                     <Input type='password' name="password"
                            label='Password' value={this.state.password}
                            onChange={this.handleChange.bind(this, 'password')} className={inputStyles.input}/>
