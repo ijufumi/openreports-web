@@ -3,9 +3,9 @@ import {Layout, Panel} from 'react-toolbox/lib/layout/'
 import Navigation from 'react-toolbox/lib/navigation'
 import {Input} from 'react-toolbox/lib/input/index'
 import {Button} from 'react-toolbox/lib/button/index'
-import styles from './theme.css'
 
 import inputStyles from '../../css/input.css'
+import layoutStyles from '../../css/layout.css'
 
 class Top extends React.Component {
     constructor(props) {
@@ -19,8 +19,8 @@ class Top extends React.Component {
 
     render() {
         return (
-            <Layout className={styles.layout}>
-                <Panel className={styles.panel}>
+            <Layout className={layoutStyles.layout}>
+                <Panel className={layoutStyles.panel}>
                     <Navigation type='horizontal'>
                         <Button label='Home' raised/>
                     </Navigation>
