@@ -21,7 +21,7 @@ class Top extends React.Component {
         return (
             <Layout className={layoutStyles.layout}>
                 <Panel className={layoutStyles.panel}>
-                    <Navigation type='horizontal'>
+                    <Navigation type='horizontal' className={layoutStyles.header}>
                         <Button label='Home' raised/>
                     </Navigation>
                     <h2>OpenReports</h2>

@@ -1,7 +1,19 @@
 .layout {
-    width: 1200px;
+}
+
+.header {
+    margin-left: -20px;
+    background-color: #add8e6;
 }
 
 .panel {
+    width: 75%;
+    height: 80%;
     margin-left: 100px;
+    border-style: inset;
+    border-width: 1px;
+}
+
+.panel h2,div,button {
+    padding-left: 20px;
 }
