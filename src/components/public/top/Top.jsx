@@ -6,6 +6,8 @@ import {TextInput} from 'grommet/components/TextInput'
 import {Button} from 'grommet/components/Button'
 import {Heading} from 'grommet/components/Heading'
 
+import layoutStyle from '../../css/layout.css'
+
 class Top extends React.Component {
     constructor(props) {
         super(props);
@@ -18,7 +20,7 @@ class Top extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={layoutStyle.layout}>
                 <Helmet>
                     <title>OpenReports</title>
                 </Helmet>

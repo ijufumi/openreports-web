@@ -6,11 +6,12 @@ import {Heading} from 'grommet/components/Heading'
 import {Grid} from 'grommet/components/Grid'
 
 import SideMenu from '../layout/Menu'
+import layoutStyle from '../../css/layout.css'
 
 class Top extends React.Component {
     render() {
         return(
-            <div>
+            <div className={layoutStyle.layout}>
                 <Helmet>
                     <title>OpenReports - Home</title>
                 </Helmet>
