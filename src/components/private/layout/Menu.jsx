@@ -2,25 +2,30 @@ import React from 'react';
 import {Accordion} from 'grommet/components/Accordion'
 import {AccordionPanel} from 'grommet/components/AccordionPanel'
 import {Box} from "grommet/components/Box";
-import {Add} from 'grommet-icons'
-import extendDefaultTheme from 'grommet/default-props'
-
+import {FormAdd, FormSubtract} from 'grommet-icons'
 
 const accordionTheme = {
+    global: {
+      colors: {
+//          icon: "red"
+      }
+    },
     accordion: {
         icons: {
-            collapse: <Add/>,
-            expand: <Add/>,
+            collapse: FormSubtract,
+            expand: FormAdd,
+            color: "blue",
         },
         border : {"side": "bottom", "color": "border"},
     }
-} | extendDefaultTheme;
+};
+
 
 class SideMenu extends React.Component {
     render() {
         return (
             <Accordion multiple={true}>
-                <AccordionPanel label="nav1" theme={accordionTheme}>
+                <AccordionPanel label="メニュー１" theme={accordionTheme}>
                     <Box>
                         menu1
                     </Box>
@@ -31,7 +36,7 @@ class SideMenu extends React.Component {
                         menu3
                     </Box>
                 </AccordionPanel>
-                <AccordionPanel label="nav2">
+                <AccordionPanel label="メニュー２" theme={accordionTheme}>
                     <Box>
                         menu1
                     </Box>
