@@ -1,8 +1,11 @@
-import React from 'react';
+import React from 'react'
 import {Accordion} from 'grommet/components/Accordion'
 import {AccordionPanel} from 'grommet/components/AccordionPanel'
-import {Box} from "grommet/components/Box";
+import {Box} from "grommet/components/Box"
+import {Heading} from "grommet/components/Heading";
 import {FormAdd, FormSubtract} from 'grommet-icons'
+
+import menuStyles from '../layout/theme.css'
 
 const accordionTheme = {
     global: {
@@ -24,30 +27,34 @@ const accordionTheme = {
 class SideMenu extends React.Component {
     render() {
         return (
-            <Accordion multiple={true}>
-                <AccordionPanel label="メニュー１" theme={accordionTheme}>
-                    <Box>
-                        menu1
-                    </Box>
-                    <Box>
-                        menu2
-                    </Box>
-                    <Box>
-                        menu3
-                    </Box>
-                </AccordionPanel>
-                <AccordionPanel label="メニュー２" theme={accordionTheme}>
-                    <Box>
-                        menu1
-                    </Box>
-                    <Box>
-                        menu2
-                    </Box>
-                    <Box>
-                        menu3
-                    </Box>
-                </AccordionPanel>
-            </Accordion>
+            <div className={menuStyles.menu}>
+                <header className={menuStyles.menu_header}><Heading level="3">header</Heading></header>
+                <Accordion multiple={true}>
+
+                    <AccordionPanel label="メニュー１" theme={accordionTheme}>
+                        <Box>
+                            menu1
+                        </Box>
+                        <Box>
+                            menu2
+                        </Box>
+                        <Box>
+                            menu3
+                        </Box>
+                    </AccordionPanel>
+                    <AccordionPanel label="メニュー２" theme={accordionTheme}>
+                        <Box>
+                            menu1
+                        </Box>
+                        <Box>
+                            menu2
+                        </Box>
+                        <Box>
+                            menu3
+                        </Box>
+                    </AccordionPanel>
+                </Accordion>
+            </div>
         );
     }
 }

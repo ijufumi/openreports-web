@@ -1,4 +1,13 @@
-.header {
-    background-color: #add8e6;
-    margin-left: -20px;
+.menu {
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.33);
+}
+
+.menu_header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.33);
+    display: flex;
+    box-sizing: border-box;
+    padding-left: 12px;
+    padding-right: 12px;
 }
