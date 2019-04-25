@@ -32,24 +32,29 @@ class SideMenu extends React.Component {
                 <Accordion multiple={true}>
 
                     <AccordionPanel label="メニュー１" theme={accordionTheme}>
-                        <Box>
+                        <Box pad="medium">
                             menu1
                         </Box>
-                        <Box>
+                        <Box pad="medium">
                             menu2
                         </Box>
-                        <Box>
+                        <Box pad="medium">
                             menu3
+                        </Box>
+                        <Box pad="medium">
+                            <Box pad="medium">
+                                menu3
+                            </Box>
                         </Box>
                     </AccordionPanel>
                     <AccordionPanel label="メニュー２" theme={accordionTheme}>
-                        <Box>
+                        <Box pad="medium">
                             menu1
                         </Box>
-                        <Box>
+                        <Box pad="medium">
                             menu2
                         </Box>
-                        <Box>
+                        <Box pad="medium">
                             menu3
                         </Box>
                     </AccordionPanel>
