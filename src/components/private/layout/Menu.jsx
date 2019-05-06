@@ -23,6 +23,16 @@ const accordionTheme = {
     }
 };
 
+const hasChildPad = {
+    left: "medium",
+    bottom: "small"
+};
+
+const childPad = {
+    top: "small",
+    left: "medium",
+    bottom: "small"
+};
 
 class SideMenu extends React.Component {
     render() {
@@ -41,8 +51,8 @@ class SideMenu extends React.Component {
                         <Box pad="medium">
                             menu3
                         </Box>
-                        <Box pad="medium">
-                            <Box pad="medium">
+                        <Box pad={hasChildPad}>
+                            <Box pad={childPad}>
                                 menu3
                             </Box>
                         </Box>
