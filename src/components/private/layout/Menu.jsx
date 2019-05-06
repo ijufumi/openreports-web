@@ -31,14 +31,14 @@ const hasChildPad = {
 const childPad = {
     top: "small",
     left: "medium",
-    bottom: "small"
+    bottom: "medium"
 };
 
 class SideMenu extends React.Component {
     render() {
         return (
             <div className={menuStyles.menu}>
-                <header className={menuStyles.menu_header}><Heading level="3">header</Heading></header>
+                <header className={menuStyles.menu_header}><Heading level="3">メニュー</Heading></header>
                 <Accordion multiple={true}>
 
                     <AccordionPanel label="メニュー１" theme={accordionTheme}>
@@ -51,21 +51,30 @@ class SideMenu extends React.Component {
                         <Box pad="medium">
                             menu3
                         </Box>
+                    </AccordionPanel>
+                    <AccordionPanel label="設定" theme={accordionTheme}>
+                        <Box pad="medium">
+                            ユーザ設定
+                        </Box>
+                        <Box pad="medium">
+                            ユーザグループ設定
+                        </Box>
+                        <Box pad="medium">
+                            レポート設定
+                        </Box>
                         <Box pad={hasChildPad}>
                             <Box pad={childPad}>
-                                menu3
+                                レポート一覧
                             </Box>
-                        </Box>
-                    </AccordionPanel>
-                    <AccordionPanel label="メニュー２" theme={accordionTheme}>
-                        <Box pad="medium">
-                            menu1
-                        </Box>
-                        <Box pad="medium">
-                            menu2
-                        </Box>
-                        <Box pad="medium">
-                            menu3
+                            <Box pad={childPad}>
+                                レポートグループ一覧
+                            </Box>
+                            <Box pad={childPad}>
+                                レポートテンプレート一覧
+                            </Box>
+                            <Box pad={childPad}>
+                                レポートパラメータ一覧
+                            </Box>
                         </Box>
                     </AccordionPanel>
                 </Accordion>
