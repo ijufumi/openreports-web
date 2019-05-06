@@ -16,7 +16,7 @@ class Top extends React.Component {
                     <title>OpenReports - Home</title>
                 </Helmet>
                 <Grid rows={['large']}
-                      columns={['small', 'xlarge']}
+                      columns={['medium', 'xlarge']}
                       gap="small"
                       areas={[
                           { name: 'nav', start: [0, 0], end: [0, 0] },
