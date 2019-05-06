@@ -5,15 +5,15 @@ import {Heading} from 'grommet/components/Heading'
 
 import {Grid} from 'grommet/components/Grid'
 
-import SideMenu from '../layout/Menu'
-import layoutStyle from '../../css/layout.css'
+import SideMenu from '../../layout/Menu'
+import layoutStyle from '../../../css/layout.css'
 
-class Top extends React.Component {
+class Index extends React.Component {
     render() {
         return(
             <div className={layoutStyle.layout}>
                 <Helmet>
-                    <title>Home | OpenReports</title>
+                    <title>レポートグループ一覧 | OpenReports</title>
                 </Helmet>
                 <Grid rows={['large']}
                       columns={['medium', 'xlarge']}
@@ -37,4 +37,4 @@ class Top extends React.Component {
     }
 }
 
-export default Top
+export default Index
