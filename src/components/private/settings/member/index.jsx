@@ -27,7 +27,9 @@ class Index extends React.Component {
                     <Box gridArea="main">
                         <Heading>ユーザ一覧</Heading>
                         <Box width="small">
-                            <Button label="登録"/>
+                            <Button label="登録" onClick={() => {
+                                window.location.href="/private/settings/member/register"
+                            }}/>
                         </Box>
                         <Box width="medium" pad={{top:"medium"}} gap="small">
                             <Box border="all" pad="xsmall" round="small">
