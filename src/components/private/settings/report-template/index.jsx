@@ -7,6 +7,7 @@ import {Grid} from 'grommet/components/Grid'
 
 import SideMenu from '../../layout/Menu'
 import layoutStyle from '../../../css/layout.css'
+import {Button} from "grommet/components/Button";
 
 class Index extends React.Component {
     render() {
@@ -23,8 +24,22 @@ class Index extends React.Component {
                           { name: 'main', start: [1, 0], end: [1, 0] }
                       ]}>
 
-                    <Box gridArea="main" width="medium">
-                        <Heading>Home</Heading>
+                    <Box gridArea="main">
+                        <Heading>レポートテンプレート一覧</Heading>
+                        <Box width="small">
+                            <Button label="登録"/>
+                        </Box>
+                        <Box width="medium" pad={{top:"medium"}} gap="small">
+                            <Box border="all" pad="xsmall" round="small">
+                                aaaaa
+                            </Box>
+                            <Box border="all" pad="xsmall" round="small">
+                                bbbbb
+                            </Box>
+                            <Box border="all" pad="xsmall" round="small">
+                                ccccc
+                            </Box>
+                        </Box>
                     </Box>
                     <Box gridArea="nav" width="medium">
                         <SideMenu/>
