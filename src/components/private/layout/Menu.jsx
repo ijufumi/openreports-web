@@ -1,4 +1,5 @@
 import React from 'react'
+import {BrowserRouter, Link} from 'react-router-dom'
 import {Accordion} from 'grommet/components/Accordion'
 import {AccordionPanel} from 'grommet/components/AccordionPanel'
 import {Box} from "grommet/components/Box"
@@ -38,48 +39,49 @@ const childPad = {
 class SideMenu extends React.Component {
     render() {
         return (
-            <div className={menuStyles.menu}>
-                <header className={menuStyles.menu_header}><Heading level="3">メニュー</Heading></header>
-                <Accordion multiple={true} activeIndex={[0,1]}>
-
-                    <AccordionPanel label="メニュー１" theme={accordionTheme}>
-                        <Box pad="medium">
-                            menu1
-                        </Box>
-                        <Box pad="medium">
-                            menu2
-                        </Box>
-                        <Box pad="medium">
-                            menu3
-                        </Box>
-                    </AccordionPanel>
-                    <AccordionPanel label="設定" theme={accordionTheme}>
-                        <Box pad="medium">
-                            <Anchor href="/private/settings/member" label="ユーザ設定" color="black"/>
-                        </Box>
-                        <Box pad="medium">
-                            <Anchor href="/private/settings/group" label="ユーザグループ設定" color="black"/>
-                        </Box>
-                        <Box pad="medium">
-                            レポート設定
-                        </Box>
-                        <Box pad={hasChildPad}>
-                            <Box pad={childPad}>
-                                <Anchor href="/private/settings/report" label="レポート一覧" color="black"/>
+            <BrowserRouter>
+                <div className={menuStyles.menu}>
+                    <header className={menuStyles.menu_header}><Heading level="3">メニュー</Heading></header>
+                    <Accordion multiple={true}>
+                        <AccordionPanel label="メニュー１" theme={accordionTheme}>
+                            <Box pad="medium">
+                                menu1
                             </Box>
-                            <Box pad={childPad}>
-                                <Anchor href="/private/settings/report-group" label="レポートグループ一覧" color="black"/>
+                            <Box pad="medium">
+                                menu2
                             </Box>
-                            <Box pad={childPad}>
-                                <Anchor href="/private/settings/report-template" label="レポートテンプレート一覧" color="black"/>
+                            <Box pad="medium">
+                                menu3
                             </Box>
-                            <Box pad={childPad}>
-                                <Anchor href="/private/settings/report-param" label="レポートパラメータ一覧" color="black"/>
+                        </AccordionPanel>
+                        <AccordionPanel label="設定" theme={accordionTheme}>
+                            <Box pad="medium">
+                                <Link to="/private/settings/member">ユーザ設定</Link>
                             </Box>
-                        </Box>
-                    </AccordionPanel>
-                </Accordion>
-            </div>
+                            <Box pad="medium">
+                                <Anchor href="/private/settings/group" label="ユーザグループ設定" color="black"/>
+                            </Box>
+                            <Box pad="medium">
+                                レポート設定
+                            </Box>
+                            <Box pad={hasChildPad}>
+                                <Box pad={childPad}>
+                                    <Anchor href="/private/settings/report" label="レポート一覧" color="black"/>
+                                </Box>
+                                <Box pad={childPad}>
+                                    <Anchor href="/private/settings/report-group" label="レポートグループ一覧" color="black"/>
+                                </Box>
+                                <Box pad={childPad}>
+                                    <Anchor href="/private/settings/report-template" label="レポートテンプレート一覧" color="black"/>
+                                </Box>
+                                <Box pad={childPad}>
+                                    <Anchor href="/private/settings/report-param" label="レポートパラメータ一覧" color="black"/>
+                                </Box>
+                            </Box>
+                        </AccordionPanel>
+                    </Accordion>
+                </div>
+            </BrowserRouter>
         );
     }
 }
