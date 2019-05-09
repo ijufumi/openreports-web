@@ -32,7 +32,9 @@ class Top extends React.Component {
                     <FormField label="Password">
                         <TextInput placeholder="Password" type="password" value={this.state.password} onChange={e => this.handleChange('password', e.target.value)}/>
                     </FormField>
-                    <Button label="Sign In" onClick={() => {alert("clicked")}}/>
+                    <Button label="Sign In" onClick={() => {
+                        window.location.href = "/private/";
+                    }}/>
                 </Box>
             </div>
         );
