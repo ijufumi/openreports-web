@@ -6,16 +6,22 @@ import {Heading} from 'grommet/components/Heading'
 
 import {Grid} from 'grommet/components/Grid'
 
-import SideMenu from '../../layout/Menu'
-import layoutStyle from '../../../css/layout.css'
-import {Button} from "grommet/components/Button";
+import SideMenu from './Menu'
+import layoutStyle from '../../css/layout.css'
 
 class Index extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentWillMount() {
+    }
+
     render() {
         return(
             <div className={layoutStyle.layout}>
                 <Helmet>
-                    <title>ユーザグループ一覧 | OpenReports</title>
+                    <title>{this.props.title} | OpenReports</title>
                 </Helmet>
                 <Grid rows={['large']}
                       columns={['medium', 'xlarge']}
@@ -26,21 +32,8 @@ class Index extends React.Component {
                       ]}>
 
                     <Box gridArea="main">
-                        <Heading>ユーザグループ一覧</Heading>
-                        <Box width="small">
-                            <Button label="登録"/>
-                        </Box>
-                        <Box width="medium" pad={{top:"medium"}} gap="small">
-                            <Box border="all" pad="xsmall" round="small">
-                                aaaaa
-                            </Box>
-                            <Box border="all" pad="xsmall" round="small">
-                                bbbbb
-                            </Box>
-                            <Box border="all" pad="xsmall" round="small">
-                                ccccc
-                            </Box>
-                        </Box>
+                        <Heading>{this.props.title}</Heading>
+                        {this.props.children}
                     </Box>
                     <Box gridArea="nav" width="medium">
                         <SideMenu/>

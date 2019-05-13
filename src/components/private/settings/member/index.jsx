@@ -1,4 +1,5 @@
 import React from 'react'
+import {withRouter} from 'react-router'
 import {Helmet} from 'react-helmet'
 import {Box} from 'grommet/components/Box'
 import {Heading} from 'grommet/components/Heading'
@@ -54,4 +55,4 @@ class Index extends React.Component {
     }
 }
 
-export default Index
+export default withRouter(Index)

@@ -1,6 +1,8 @@
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
+import Base from './private/layout/base'
+
 import Top from './public/top/Top'
 import PrivateTop from './private/top/Top'
 import MemberTop from './private/settings/member/index'
@@ -15,7 +17,9 @@ const App = () => (
     <BrowserRouter>
         <div>
             <Switch>
-                <Route exact path='/' component={Top}/>
+                <Route component={Base}>
+                    <Route exact path="/" component={Top} />
+                </Route>
                 <Route exact path='/private/' component={PrivateTop}/>
                 <Route exact path='/private/settings/member' component={MemberTop}/>
                 <Route exact path='/private/settings/member/register' component={MemberRegister}/>

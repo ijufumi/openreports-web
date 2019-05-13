@@ -1,8 +1,10 @@
 import React from 'react'
+import {withRouter} from 'react-router'
 import {BrowserRouter, Link} from 'react-router-dom'
 import {Accordion} from 'grommet/components/Accordion'
 import {AccordionPanel} from 'grommet/components/AccordionPanel'
 import {Box} from "grommet/components/Box"
+import {Button} from "grommet/components/Button"
 import {Heading} from "grommet/components/Heading";
 import {Anchor} from 'grommet/components/Anchor';
 import {FormAdd, FormSubtract} from 'grommet-icons'
@@ -36,13 +38,38 @@ const childPad = {
     bottom: "medium"
 };
 
+
+// https://qiita.com/iktakahiro/items/b8b4f699ad5de6aa2503
 class SideMenu extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeMenus: [],
+        };
+        console.log("constructed!!");
+
+        this.setState = this.setState.bind(this);
+    }
+
+    handleClicked(path){
+        this.props.history.push(path);
+    };
+
+    activePanel(v) {
+        this.setState({
+            activeMenus: v
+        });
+    };
+
     render() {
+        const activeMenu = this.state.activeMenus;
+        console.log(activeMenu);
         return (
             <BrowserRouter>
                 <div className={menuStyles.menu}>
                     <header className={menuStyles.menu_header}><Heading level="3">メニュー</Heading></header>
-                    <Accordion multiple={true}>
+                    <Accordion multiple={true} onActive={v => this.activePanel(v)} activeIndex={activeMenu}>
+
                         <AccordionPanel label="メニュー１" theme={accordionTheme}>
                             <Box pad="medium">
                                 menu1
@@ -56,26 +83,26 @@ class SideMenu extends React.Component {
                         </AccordionPanel>
                         <AccordionPanel label="設定" theme={accordionTheme}>
                             <Box pad="medium">
-                                <Link to="/private/settings/member">ユーザ設定</Link>
+                                <Button type="button" onClick={() => {this.handleClicked("/private/settings/member")}}>ユーザ設定</Button>
                             </Box>
                             <Box pad="medium">
-                                <Anchor href="/private/settings/group" label="ユーザグループ設定" color="black"/>
+                                <Button type="button" onClick={() => {this.handleClicked("/private/settings/group")}}>ユーザグループ設定</Button>
                             </Box>
                             <Box pad="medium">
                                 レポート設定
                             </Box>
                             <Box pad={hasChildPad}>
                                 <Box pad={childPad}>
-                                    <Anchor href="/private/settings/report" label="レポート一覧" color="black"/>
+                                    <Button type="button" onClick={() => {this.handleClicked("/private/settings/report")}}>レポート一覧</Button>
                                 </Box>
                                 <Box pad={childPad}>
-                                    <Anchor href="/private/settings/report-group" label="レポートグループ一覧" color="black"/>
+                                    <Button type="button" onClick={() => {this.handleClicked("/private/settings/report-group")}}>レポートグループ一覧</Button>
                                 </Box>
                                 <Box pad={childPad}>
-                                    <Anchor href="/private/settings/report-template" label="レポートテンプレート一覧" color="black"/>
+                                    <Button type="button" onClick={() => {this.handleClicked("/private/settings/report-template")}}>レポートテンプレート一覧</Button>
                                 </Box>
                                 <Box pad={childPad}>
-                                    <Anchor href="/private/settings/report-param" label="レポートパラメータ一覧" color="black"/>
+                                    <Button type="button" onClick={() => {this.handleClicked("/private/settings/report-param")}}>レポートパラメータ一覧</Button>
                                 </Box>
                             </Box>
                         </AccordionPanel>
@@ -86,4 +113,4 @@ class SideMenu extends React.Component {
     }
 }
 
-export default SideMenu
+export default withRouter(SideMenu)
