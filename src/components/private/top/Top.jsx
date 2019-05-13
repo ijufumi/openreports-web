@@ -29,7 +29,6 @@ class Top extends React.Component {
                     <Box gridArea="nav" width="medium">
                         <SideMenu/>
                     </Box>
-
                 </Grid>
 
             </div>

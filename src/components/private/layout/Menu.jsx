@@ -1,12 +1,10 @@
 import React from 'react'
 import {withRouter} from 'react-router'
-import {BrowserRouter, Link} from 'react-router-dom'
 import {Accordion} from 'grommet/components/Accordion'
 import {AccordionPanel} from 'grommet/components/AccordionPanel'
 import {Box} from "grommet/components/Box"
 import {Button} from "grommet/components/Button"
 import {Heading} from "grommet/components/Heading";
-import {Anchor} from 'grommet/components/Anchor';
 import {FormAdd, FormSubtract} from 'grommet-icons'
 
 import menuStyles from '../layout/theme.css'
@@ -43,32 +41,18 @@ const childPad = {
 class SideMenu extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            activeMenus: [],
-        };
-        console.log("constructed!!");
-
-        this.setState = this.setState.bind(this);
     }
 
     handleClicked(path){
         this.props.history.push(path);
     };
 
-    activePanel(v) {
-        this.setState({
-            activeMenus: v
-        });
-    };
-
     render() {
-        const activeMenu = this.state.activeMenus;
-        console.log(activeMenu);
         return (
-            <BrowserRouter>
+            <div>
                 <div className={menuStyles.menu}>
                     <header className={menuStyles.menu_header}><Heading level="3">メニュー</Heading></header>
-                    <Accordion multiple={true} onActive={v => this.activePanel(v)} activeIndex={activeMenu}>
+                    <Accordion multiple={true}>
 
                         <AccordionPanel label="メニュー１" theme={accordionTheme}>
                             <Box pad="medium">
@@ -108,7 +92,7 @@ class SideMenu extends React.Component {
                         </AccordionPanel>
                     </Accordion>
                 </div>
-            </BrowserRouter>
+            </div>
         );
     }
 }
