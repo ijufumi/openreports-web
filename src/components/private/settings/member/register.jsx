@@ -13,7 +13,7 @@ import {TableCell} from "grommet/components/TableCell";
 
 import {TextInput} from 'grommet/components/TextInput';
 
-import SideMenu from '../../layout/Menu'
+import SideMenu from '../../layout/menu'
 import layoutStyle from '../../../css/layout.css'
 
 class Index extends React.Component {

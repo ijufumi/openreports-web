@@ -6,7 +6,7 @@ import {Heading} from 'grommet/components/Heading'
 
 import {Grid} from 'grommet/components/Grid'
 
-import SideMenu from './Menu'
+import SideMenu from './menu'
 import layoutStyle from '../../css/layout.css'
 import MemberTop from "../settings/member";
 import MemberRegister from "../settings/member/register";
