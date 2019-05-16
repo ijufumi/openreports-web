@@ -37,7 +37,6 @@ const childPad = {
 };
 
 
-// https://qiita.com/iktakahiro/items/b8b4f699ad5de6aa2503
 class SideMenu extends React.Component {
     constructor(props) {
         super(props);
@@ -52,7 +51,7 @@ class SideMenu extends React.Component {
             <div>
                 <div className={menuStyles.menu}>
                     <header className={menuStyles.menu_header}><Heading level="3">メニュー</Heading></header>
-                    <Accordion multiple={true}>
+                    <Accordion multiple={true} activeIndex={[0, 1]}>
 
                         <AccordionPanel label="メニュー１" theme={accordionTheme}>
                             <Box pad="medium">
