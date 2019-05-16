@@ -13,21 +13,41 @@ import {Button} from "grommet/components/Button";
 class Index extends React.Component {
     render() {
         return(
-            <div>
-                <Box width="small">
-                    <Button label="登録"/>
-                </Box>
-                <Box width="medium" pad={{top:"medium"}} gap="small">
-                    <Box border="all" pad="xsmall" round="small">
-                        aaaaa
+            <div className={layoutStyle.layout}>
+                <Helmet>
+                    <title>ユーザグループ一覧 | OpenReports</title>
+                </Helmet>
+                <Grid rows={['large']}
+                      columns={['medium', 'xlarge']}
+                      gap="small"
+                      areas={[
+                          { name: 'nav', start: [0, 0], end: [0, 0] },
+                          { name: 'main', start: [1, 0], end: [1, 0] }
+                      ]}>
+
+                    <Box gridArea="main">
+                        <Heading>ユーザグループ一覧</Heading>
+                        <Box width="small">
+                            <Button label="登録"/>
+                        </Box>
+                        <Box width="medium" pad={{top:"medium"}} gap="small">
+                            <Box border="all" pad="xsmall" round="small">
+                                aaaaa
+                            </Box>
+                            <Box border="all" pad="xsmall" round="small">
+                                bbbbb
+                            </Box>
+                            <Box border="all" pad="xsmall" round="small">
+                                ccccc
+                            </Box>
+                        </Box>
                     </Box>
-                    <Box border="all" pad="xsmall" round="small">
-                        bbbbb
+                    <Box gridArea="nav" width="medium">
+                        <SideMenu/>
                     </Box>
-                    <Box border="all" pad="xsmall" round="small">
-                        ccccc
-                    </Box>
-                </Box>
+
+                </Grid>
+
             </div>
         );
     }

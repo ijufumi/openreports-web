@@ -42,8 +42,11 @@ class SideMenu extends React.Component {
         super(props);
     }
 
-    handleClicked(path){
-        this.props.history.push(path);
+    handleClicked(path, title){
+        this.props.history.push({
+            pathname: path,
+            state: {title}
+        });
     };
 
     render() {
@@ -66,26 +69,38 @@ class SideMenu extends React.Component {
                         </AccordionPanel>
                         <AccordionPanel label="設定" theme={accordionTheme}>
                             <Box pad="medium">
-                                <Button type="button" onClick={() => {this.handleClicked("/private/settings/member")}}>ユーザ設定</Button>
+                                <Button type="button" onClick={() => {
+                                    this.handleClicked("/private/settings/member", "ユーザ設定")
+                                }}>ユーザ設定</Button>
                             </Box>
                             <Box pad="medium">
-                                <Button type="button" onClick={() => {this.handleClicked("/private/settings/group")}}>ユーザグループ設定</Button>
+                                <Button type="button" onClick={() => {
+                                    this.handleClicked("/private/settings/group", "ユーザグループ設定")
+                                }}>ユーザグループ設定</Button>
                             </Box>
                             <Box pad="medium">
                                 レポート設定
                             </Box>
                             <Box pad={hasChildPad}>
                                 <Box pad={childPad}>
-                                    <Button type="button" onClick={() => {this.handleClicked("/private/settings/report")}}>レポート一覧</Button>
+                                    <Button type="button" onClick={() => {
+                                        this.handleClicked("/private/settings/report", "レポート一覧")
+                                    }}>レポート一覧</Button>
                                 </Box>
                                 <Box pad={childPad}>
-                                    <Button type="button" onClick={() => {this.handleClicked("/private/settings/report-group")}}>レポートグループ一覧</Button>
+                                    <Button type="button" onClick={() => {
+                                        this.handleClicked("/private/settings/report-group", "レポートグループ一覧")
+                                    }}>レポートグループ一覧</Button>
                                 </Box>
                                 <Box pad={childPad}>
-                                    <Button type="button" onClick={() => {this.handleClicked("/private/settings/report-template")}}>レポートテンプレート一覧</Button>
+                                    <Button type="button" onClick={() => {
+                                        this.handleClicked("/private/settings/report-template", "レポートテンプレート一覧")
+                                    }}>レポートテンプレート一覧</Button>
                                 </Box>
                                 <Box pad={childPad}>
-                                    <Button type="button" onClick={() => {this.handleClicked("/private/settings/report-param")}}>レポートパラメータ一覧</Button>
+                                    <Button type="button" onClick={() => {
+                                        this.handleClicked("/private/settings/report-param", "レポートパラメータ一覧")
+                                    }}>レポートパラメータ一覧</Button>
                                 </Box>
                             </Box>
                         </AccordionPanel>
