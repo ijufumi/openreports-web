@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
-import Top from './public/top/Top'
+import Top from './public/top/top'
 import Base from './private/layout/base'
 
 const App = () => (
