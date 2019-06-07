@@ -6,6 +6,8 @@ import {TextInput} from 'grommet/components/TextInput'
 import {Button} from 'grommet/components/Button'
 import {Heading} from 'grommet/components/Heading'
 
+import {getUser} from '../../../actions/public/top'
+
 import layoutStyle from '../../css/layout.css'
 
 class Top extends React.Component {
@@ -32,9 +34,7 @@ class Top extends React.Component {
                     <FormField label="Password">
                         <TextInput placeholder="Password" type="password" value={this.state.password} onChange={e => this.handleChange('password', e.target.value)}/>
                     </FormField>
-                    <Button label="Sign In" onClick={() => {
-                        window.location.href = "/private/";
-                    }}/>
+                    <Button label="Sign In" onClick={getUser}/>
                 </Box>
             </div>
         );
