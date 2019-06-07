@@ -1,3 +1,4 @@
-export const getUser = () => ({
-   type : 'GET_USER',
+export const login = (state) => ({
+   type : 'LOGIN',
+   state: state,
 });
