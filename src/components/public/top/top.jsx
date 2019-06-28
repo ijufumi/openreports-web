@@ -36,7 +36,7 @@ class Top extends React.Component {
                     <FormField label="Password">
                         <TextInput placeholder="Password" type="password" value={this.state.password} onChange={e => this.handleChange('password', e.target.value)}/>
                     </FormField>
-                    <Button label="Sign In" onClick={login(this.state)}/>
+                    <Button label="Sign In" onClick={() => login()}/>
                 </Box>
             </div>
         );

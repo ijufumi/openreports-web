@@ -1,4 +1,5 @@
-export const login = (state) => ({
-   type : 'LOGIN',
-   state: state,
-});
+export function login() {
+   return {
+      type : 'LOGIN'
+   }
+};
