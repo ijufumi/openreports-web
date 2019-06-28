@@ -1,4 +1,6 @@
 import React from 'react'
+import {bindActionCreators} from "redux";
+import {connect} from 'react-redux'
 import {Helmet} from 'react-helmet'
 import {Box} from 'grommet/components/Box'
 import {FormField} from 'grommet/components/FormField'
@@ -41,4 +43,12 @@ class Top extends React.Component {
     }
 }
 
-export default Top
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators(login, dispatch)
+};
+
+const mapStateToProps = state => {
+    return {"loginId": state.loginId}
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Top)
