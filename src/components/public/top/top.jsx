@@ -15,6 +15,7 @@ import layoutStyle from '../../css/layout.css'
 class Top extends React.Component {
     constructor(props) {
         super(props);
+        console.log(this.props);
         this.state = {loginId: '', password: ''};
     }
 
@@ -23,6 +24,7 @@ class Top extends React.Component {
     };
 
     render() {
+        const login = this.props.login;
         return (
             <div className={layoutStyle.layout}>
                 <Helmet>
@@ -36,7 +38,7 @@ class Top extends React.Component {
                     <FormField label="Password">
                         <TextInput placeholder="Password" type="password" value={this.state.password} onChange={e => this.handleChange('password', e.target.value)}/>
                     </FormField>
-                    <Button label="Sign In" onClick={() => login()}/>
+                    <Button label="Sign In" onClick={login}/>
                 </Box>
             </div>
         );

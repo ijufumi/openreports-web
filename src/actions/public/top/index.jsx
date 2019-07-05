@@ -1,5 +1,5 @@
 export function login() {
    return {
-      type : 'LOGIN'
+      type : 'FETCH_REQUESTED'
    }
 };

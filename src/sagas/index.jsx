@@ -1,9 +1,8 @@
 import {all} from 'redux-saga/effects'
 
-import login from './public/top'
+import doLogin from './public/top'
 
 export default function* rootSaga() {
-    yield all([
-        login,
-    ]);
+    console.log("rootSaga");
+    yield all([doLogin()])
 }

@@ -3,22 +3,26 @@ import {render} from 'react-dom';
 import createSagaMiddleware from 'redux-saga'
 import {createStore, applyMiddleware} from "redux";
 import { Provider } from 'react-redux';
-import { logger } from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import reducer from './reducers'
 import rootSaga from './sagas';
 
 import App from './components/App'
 
 const sagaMiddleware = createSagaMiddleware();
+const logger = createLogger();
+
 const store = createStore(
     reducer,
     applyMiddleware(sagaMiddleware, logger),
 );
 sagaMiddleware.run(rootSaga);
 
+const action = type => store.dispatch({type})
+
 render(
     <Provider store={store}>
-        <App/>
+        <App login={() => action('FETCH_REQUESTED')}/>
     </Provider>
     ,
     document.getElementById('root')
