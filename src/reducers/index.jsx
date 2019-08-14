@@ -1,7 +1,7 @@
 export default (state = {}, action) => {
     switch (action.type) {
-        case 'LOGIN':
-            // return {...state, loginId: action.state.loginId, password: action.state.password} ;
+        case 'FETCH_REQUESTED':
+            console.log("FETCH_REQUESTED received.");
             return state;
         case 'LOGOUT':
             return state;

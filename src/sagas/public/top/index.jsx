@@ -7,7 +7,7 @@ export function* doLogin() {
 export default function* login() {
     console.log("login called.");
     try {
-        yield put({type: "USER_FETCH_FAILED", message: "e.message"})
+        yield put({type: "USER_FETCH_SUCCESS"})
     } catch (e) {
         yield put({type: "USER_FETCH_FAILED", message: e.message})
     }

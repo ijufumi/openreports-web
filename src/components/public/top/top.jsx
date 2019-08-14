@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {bindActionCreators} from "redux";
 import {connect} from 'react-redux'
 import {Helmet} from 'react-helmet'
@@ -15,7 +16,6 @@ import layoutStyle from '../../css/layout.css'
 class Top extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
         this.state = {loginId: '', password: ''};
     }
 
@@ -24,7 +24,8 @@ class Top extends React.Component {
     };
 
     render() {
-        const login = this.props.login;
+        const {login} = this.props;
+        console.log(login);
         return (
             <div className={layoutStyle.layout}>
                 <Helmet>
@@ -33,24 +34,33 @@ class Top extends React.Component {
                 <Box width="medium">
                     <Heading>OpenReports</Heading>
                     <FormField label="Email Address">
-                        <TextInput placeholder="Email Address" type="email" value={this.state.loginId} onChange={e => this.handleChange('loginId', e.target.value)}/>
+                        <TextInput placeholder="Email Address" type="email" onChange={e => this.handleChange('loginId', e.target.value)}/>
                     </FormField>
                     <FormField label="Password">
-                        <TextInput placeholder="Password" type="password" value={this.state.password} onChange={e => this.handleChange('password', e.target.value)}/>
+                        <TextInput placeholder="Password" type="password" onChange={e => this.handleChange('password', e.target.value)}/>
                     </FormField>
-                    <Button label="Sign In" onClick={login}/>
+                    <Button label="Sign In" onClick={() => login(this.state.loginId, this.state.password)}/>
                 </Box>
             </div>
         );
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(login, dispatch)
+Top.propTypes = {
+    login: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => {
-    return {"loginId": state.loginId}
+const mapDispatchToProps = dispatch => {
+    return {
+        login: bindActionCreators(login, dispatch),
+    }
+};
+
+function mapStateToProps(state) {
+    return {
+        loginId: state.loginId,
+        password: state.password,
+    }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Top)

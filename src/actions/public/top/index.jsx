@@ -1,5 +1,7 @@
-export function login() {
+export function login(loginId, password) {
    return {
-      type : 'FETCH_REQUESTED'
+      type : 'FETCH_REQUESTED',
+      loginId,
+      password,
    }
-};
+}
