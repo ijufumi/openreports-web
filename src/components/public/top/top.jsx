@@ -36,9 +36,9 @@ class Top extends React.Component {
                     <FormField label="Email Address">
                         <TextInput placeholder="Email Address" type="email" onChange={e => this.handleChange('loginId', e.target.value)}/>
                     </FormField>
-                    <FormField label="Password">
-                        <TextInput placeholder="Password" type="password" onChange={e => this.handleChange('password', e.target.value)}/>
-                    </FormField>
+                    {/*<FormField label="Password">*/}
+                    {/*    <TextInput placeholder="Password" type="password" onChange={e => this.handleChange('password', e.target.value)}/>*/}
+                    {/*</FormField>*/}
                     <Button label="Sign In" onClick={() => login(this.state.loginId, this.state.password)}/>
                 </Box>
             </div>
@@ -61,6 +61,6 @@ function mapStateToProps(state) {
         loginId: state.loginId,
         password: state.password,
     }
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Top)

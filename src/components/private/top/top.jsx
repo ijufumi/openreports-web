@@ -30,7 +30,6 @@ class Top extends React.Component {
                         <SideMenu/>
                     </Box>
                 </Grid>
-
             </div>
         );
     }
