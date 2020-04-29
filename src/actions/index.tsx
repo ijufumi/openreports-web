@@ -6,7 +6,7 @@ export default class Action {
         this.rootRepository = rootRepository;
     }
 
-    login = async (username: string, password) => {
+    login = async (username: string, password: string) => {
         return await this.rootRepository.user.login({username, password});
     };
 
