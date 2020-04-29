@@ -1,9 +1,10 @@
 import { IUserRepository } from "../IUserRepository";
 import UserStore from "../../stores/UserStore";
+import BaseRepository from "../BaseRepository";
 
 
-export default class UserRepository implements IUserRepository {
+export default class UserRepository extends BaseRepository implements IUserRepository {
     login = async (args : { username: string, password: string }) =>  {
-        return Promise.resolve(undefined);
+        return this.post(null, "", , "null");
     };
 }
