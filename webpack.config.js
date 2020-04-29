@@ -5,6 +5,9 @@ module.exports = {
         filename: 'main.js',
         path: `${__dirname}/dist`
     },
+    resolve: {
+        extensions: ['.tsx', '.js']
+    },
     module: {
         rules: [
             {
@@ -14,7 +17,11 @@ module.exports = {
                     options: {
                         presets: [
                             '@babel/preset-env',
+                            '@babel/preset-typescript',
                             '@babel/react'
+                        ],
+                        plugins: [
+                            '@babel/plugin-proposal-class-properties'
                         ]
                     }
                 }
