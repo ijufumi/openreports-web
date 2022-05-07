@@ -5,26 +5,31 @@ enum Methods {
     Delete = "DELETE"
 }
 abstract class BaseRepository {
-    get = async (args: { apiEndpoint: string, path: string, headers: object }) => {
-        return await this._request(Methods.Get, args.apiEndpoint, args.path, null, args.headers);
+    private readonly apiEndpoint: string;
+
+    constructor(apiEndpoint: string) {
+        this.apiEndpoint = apiEndpoint;
     }
-    post = async (args: { apiEndpoint: string, path: string, headers: object, body: string}) => {
-        return await this._request(Methods.Post, args.apiEndpoint, args.path, args.body, args.headers);
+
+    get = async (args: { path: string, headers?: object }) => {
+        return await this._request(Methods.Get, this.apiEndpoint, args.path, null, args.headers);
+    }
+    post = async (args: { path: string, headers?: object, body?: object}) => {
+        return await this._request(Methods.Post, this.apiEndpoint, args.path, args.body, args.headers);
     }
 
     _request = async (method: Methods, apiEndpoint: string, path: string,
-        body: string, header: object) => {
-        const response = fetch(
+        body?: object, header?: object) => {
+
+        return fetch(
             apiEndpoint,
             {
                 method: method.toString(),
-                body: body,
+                body: body ? JSON.stringify(body) : "",
             }
         )
             .then((res) => res.json())
-            .catch(e => console.log(e))
-
-        return response;
+            .catch(e => console.log(e));
     }
 }
 
