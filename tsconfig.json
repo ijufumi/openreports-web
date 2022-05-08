@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "sourceMap": true,
+    "target": "es2022",
+    "module": "es2022",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "lib": [
+      "ES2022",
+      "DOM"
+    ]
+  }
+}
