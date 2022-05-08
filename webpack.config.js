@@ -1,35 +1,25 @@
 module.exports = {
     mode: 'development',
-    entry: './src/index.ts',
+    entry: './src/index.tsx',
     output: {
         filename: 'main.js',
         path: `${__dirname}/dist`
     },
     resolve: {
-        extensions: ['.tsx', '.js']
+        extensions: ['.tsx', '.ts', '.js']
     },
     module: {
         rules: [
             {
-                test: /\.tsx$/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            '@babel/preset-env',
-                            '@babel/preset-typescript',
-                            '@babel/react'
-                        ],
-                        plugins: [
-                            '@babel/plugin-proposal-class-properties'
-                        ]
-                    }
-                }
+                test: /\.tsx?$/,
+                use: "ts-loader"
             }
         ]
     },
     devServer: {
-        contentBase: 'dist',
+        static: {
+            directory: 'dist',
+        },
         open: true
     }
 };
