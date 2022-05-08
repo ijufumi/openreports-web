@@ -1,41 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { FC, useState } from 'react';
+import { InputText } from 'primereact/inputtext';
+import { Card } from 'primereact/card';
 
-import { injectContext } from "../contexts/InjectContext";
+interface Props {
 
-class Login extends React.Component {
-    state = {
-        username: '',
-        password: ''
-    };
-
-    handleInputUsername = (e) => {
-        const { username } = e.target;
-        this.setState({
-            username
-        });
-    };
-
-    handleInputPassword = (e) => {
-        const { password } = e.target;
-        this.setState({
-            password
-        });
-    }
-    render() {
-        return (
-            <LoginContainer>
-                <input type={'email'} placeholder={'Input username'} />
-            </LoginContainer>
-        );
-    }
 }
 
-const LoginContainer = styled.div`
-  width: 500px;
-  height: 500px;
-  border: solid 1px;
-`;
+const Login: FC<Props> = () => {
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
+    return (
+        <Card>
+            <label htmlFor="email" className="block text-900 font-medium mb-2">Email</label>
+            <InputText id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <InputText id="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+        </Card>
+    );
+};
 
-export default injectContext(Login);
+export default Login;
