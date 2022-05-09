@@ -29,6 +29,6 @@
     "webpack-dev-server": "^4.9.0"
   },
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server"
+    "start": "npx webpack serve"
   }
 }
