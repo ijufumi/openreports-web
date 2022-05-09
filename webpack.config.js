@@ -3,7 +3,7 @@ module.exports = {
     entry: './src/index.tsx',
     output: {
         filename: 'main.js',
-        path: `${__dirname}/dist`
+        path: `${__dirname}/public`
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
@@ -18,7 +18,7 @@ module.exports = {
     },
     devServer: {
         static: {
-            directory: 'dist',
+            directory: 'public',
         },
         open: true
     }
