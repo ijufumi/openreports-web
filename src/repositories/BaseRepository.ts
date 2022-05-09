@@ -12,7 +12,7 @@ abstract class BaseRepository {
     }
 
     get = async (args: { path: string, headers?: object }) => {
-        return await this._request(Methods.Get, this.apiEndpoint, args.path, null, args.headers);
+        return await this._request(Methods.Get, this.apiEndpoint, args.path, undefined, args.headers);
     }
     post = async (args: { path: string, headers?: object, body?: object}) => {
         return await this._request(Methods.Post, this.apiEndpoint, args.path, args.body, args.headers);

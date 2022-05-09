@@ -5,6 +5,6 @@ export class RootRepository {
     readonly  user: IUserRepository;
 
     constructor() {
-        this.user = new UserRepository();
+        this.user = new UserRepository("");
     }
 }
