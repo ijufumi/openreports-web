@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react'
 
 import Login from "./Login";
+import theme from "../config/theme";
 
 interface Props {
 
@@ -10,7 +11,7 @@ interface Props {
 
 const App: FC<Props> = () => {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Routes>
         <Route path="/" element={<Login />} />
       </Routes>
