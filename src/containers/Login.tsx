@@ -15,7 +15,7 @@ const Login: FC<Props> = () => {
 
   return (
     <Flex minWidth='100%' alignItems='center' justifyContent="center" minHeight='100%'>
-      <Box w='550px' bg={"white"}>
+      <Box w='550px' bg={"white"} borderRadius="10px">
         <VStack margin={"10px"}>
           <Text fontSize='3xl'>Login</Text>
           <InputGroup>
@@ -26,6 +26,7 @@ const Login: FC<Props> = () => {
             <Input
               id="email"
               value={email}
+              placeholder={"Enter your email address"}
               onChange={(e) => setEmail(e.target.value)}
             />
           </InputGroup>
@@ -38,9 +39,10 @@ const Login: FC<Props> = () => {
               id="password"
               value={password}
               type={showPassword ? 'text' : 'password'}
+              placeholder={"Enter your password"}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <InputRightElement width='4.5rem'>
+            <InputRightElement width='4.5rem' cursor="pointer">
               <Icon as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible } color='gray.500' w={8} h={8} onClick={() => setShowPassword(!showPassword)} />
             </InputRightElement>
           </InputGroup>
