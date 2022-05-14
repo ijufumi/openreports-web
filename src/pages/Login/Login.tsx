@@ -16,36 +16,38 @@ const Login: FC<Props> = () => {
   return (
     <Flex minWidth='100%' alignItems='center' justifyContent="center" minHeight='100%'>
       <Box w='550px' bg={"white"} borderRadius="10px">
-        <VStack margin={"10px"}>
+        <VStack margin={"10px"} spacing={"25px"}>
           <Text fontSize='3xl'>Login</Text>
-          <InputGroup>
-            <InputLeftElement
-              pointerEvents='none'
-              children={<Icon as={MdOutlineEmail} color='gray.500' w={10} h={10} style={{ padding: "0 5px 0 5px" }} />}
-            />
-            <Input
-              id="email"
-              value={email}
-              placeholder={"Enter your email address"}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </InputGroup>
-          <InputGroup>
-            <InputLeftElement
-              pointerEvents='none'
-              children={<Icon as={CgPassword} color='gray.500' w={10} h={10} style={{ padding: "0 5px 0 5px" }} />}
-            />
-            <Input
-              id="password"
-              value={password}
-              type={showPassword ? 'text' : 'password'}
-              placeholder={"Enter your password"}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <InputRightElement width='4.5rem' cursor="pointer">
-              <Icon as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible } color='gray.500' w={8} h={8} onClick={() => setShowPassword(!showPassword)} />
-            </InputRightElement>
-          </InputGroup>
+          <VStack width={"90%"} spacing={"15px"}>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents='none'
+                children={<Icon as={MdOutlineEmail} color='gray.500' w={10} h={10} style={{ padding: "0 5px 0 5px" }} />}
+              />
+              <Input
+                id="email"
+                value={email}
+                placeholder={"Enter your email address"}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </InputGroup>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents='none'
+                children={<Icon as={CgPassword} color='gray.500' w={10} h={10} style={{ padding: "0 5px 0 5px" }} />}
+              />
+              <Input
+                id="password"
+                value={password}
+                type={showPassword ? 'text' : 'password'}
+                placeholder={"Enter your password"}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <InputRightElement width='4.5rem' cursor="pointer">
+                <Icon as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible } color='gray.500' w={8} h={8} onClick={() => setShowPassword(!showPassword)} />
+              </InputRightElement>
+            </InputGroup>
+          </VStack>
           <Button>Login</Button>
         </VStack>
       </Box>
