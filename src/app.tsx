@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 
-import Login from "./pages/Login";
+import Login from "./pages/login";
 import theme from "./config/theme";
 
 interface Props {}
