@@ -1,13 +1,12 @@
-import React, { FC } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { ChakraProvider } from '@chakra-ui/react'
+import React, { FC } from "react";
+import { Routes, Route } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
 
 import Login from "./pages/Login";
+
 import theme from "./config/theme";
 
-interface Props {
-
-}
+interface Props {}
 
 const App: FC<Props> = () => {
   return (
@@ -16,7 +15,7 @@ const App: FC<Props> = () => {
         <Route path="/" element={<Login />} />
       </Routes>
     </ChakraProvider>
-  )
-}
+  );
+};
 
 export default App;
