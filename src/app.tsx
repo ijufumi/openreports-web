@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 
 import Login from "./pages/login/login";
@@ -20,16 +20,19 @@ interface Props {}
 const App: FC<Props> = () => {
   return (
     <ChakraProvider theme={theme}>
-      <Routes>
-        <Route path="top">
-          <Authorized>
-            <Top />
-          </Authorized>
-        </Route>
-        <Route path="/">
-          <Login />
-        </Route>
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route
+            path="/top"
+            element={
+              <Authorized>
+                <Top />
+              </Authorized>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </ChakraProvider>
   );
 };

@@ -1,10 +1,14 @@
 import React, { FC } from "react";
-import { Stack } from "@chakra-ui/react";
+import { Stack, Box } from "@chakra-ui/react";
 
 interface Props {}
 
 const Top: FC<Props> = () => {
-  return <Stack>{"top..."}</Stack>;
+  return (
+    <Stack>
+      <Box>{"top..."}</Box>
+    </Stack>
+  );
 };
 
 export default Top;
