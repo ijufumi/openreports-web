@@ -4,7 +4,7 @@ import { Stack } from "@chakra-ui/react";
 interface Props {}
 
 const Top: FC<Props> = () => {
-  return <Stack></Stack>;
+  return <Stack>{"top..."}</Stack>;
 };
 
 export default Top;
