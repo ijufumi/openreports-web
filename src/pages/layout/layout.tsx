@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { HStack, Box } from "@chakra-ui/react";
 
 interface Props {
-  children: any;
+  children: React.ReactNode;
 }
 
 const Layout: FC<Props> = ({ children }) => {
