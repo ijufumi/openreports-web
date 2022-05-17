@@ -22,7 +22,8 @@ module.exports = {
         static: {
             directory: 'public',
         },
-        open: true
+        open: true,
+        historyApiFallback: true,
     },
     plugins: [new HtmlWebpackPlugin({
         template: 'public/index.html',
