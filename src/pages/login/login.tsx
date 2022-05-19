@@ -10,10 +10,12 @@ import {
   Box,
   Flex,
   Text,
+  Image,
 } from "@chakra-ui/react";
 import { MdOutlineEmail } from "react-icons/md";
 import { CgPassword } from "react-icons/cg";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import logoImg from "../../assets/logo.png";
 
 interface Props {}
 
@@ -31,6 +33,7 @@ const Login: FC<Props> = () => {
     >
       <Box w="550px" bg={"white"} borderRadius="10px">
         <VStack margin={"10px"} spacing={"25px"}>
+          <Image src={logoImg} alt={"logo"} margin={"10px"} />
           <Text fontSize="3xl">Login</Text>
           <VStack width={"90%"} spacing={"15px"}>
             <InputGroup>

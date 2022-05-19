@@ -8,13 +8,20 @@ module.exports = {
         path: `${__dirname}/public`
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js']
+        extensions: ['.tsx', '.ts', '.js', '.png']
     },
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
                 use: "ts-loader"
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/,
+                generator: {
+                    filename: 'images/[name][ext][query]'
+                },
+                type: 'asset'
             }
         ]
     },
