@@ -18,19 +18,16 @@ const Authorized: FC<AuthorizedRouteProps> = ({ children }) => {
 interface Props {}
 
 const App: FC<Props> = () => {
+  const renderAuthorized = (path: string, element: any) => {
+    return <Route path={path} element={<Authorized>{element}</Authorized>} />;
+  };
+
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route
-            path="/top"
-            element={
-              <Authorized>
-                <Top />
-              </Authorized>
-            }
-          />
+          {renderAuthorized("/top", <Top />)}
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
