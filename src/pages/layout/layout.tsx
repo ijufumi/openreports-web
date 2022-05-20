@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   VStack,
   HStack,
@@ -9,14 +10,18 @@ import {
   MenuButton,
   Icon,
   IconButton,
+  Image,
 } from "@chakra-ui/react";
 import { FaRegUserCircle } from "react-icons/fa";
+import logoImg from "../../assets/logo.png";
 
 interface Props {
   children: React.ReactNode;
 }
 
 const Layout: FC<Props> = ({ children }) => {
+  const navigate = useNavigate();
+
   return (
     <VStack spacing={"5px"} h={"100%"}>
       <Box
@@ -29,6 +34,18 @@ const Layout: FC<Props> = ({ children }) => {
         padding={"0 10px 0 10px"}
       >
         <HStack spacing={"10px"}>
+          <Box>
+            <Image
+              onClick={() => navigate("/top")}
+              src={logoImg}
+              alt={"logo"}
+              margin={"10px"}
+              style={{
+                transform: "scale(0.8, 0.8)",
+                cursor: "pointer",
+              }}
+            />
+          </Box>
           <Menu>
             <MenuButton
               sx={{
