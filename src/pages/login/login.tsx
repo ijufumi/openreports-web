@@ -11,10 +11,12 @@ import {
   Flex,
   Text,
   Image,
+  Divider,
 } from "@chakra-ui/react";
 import { MdOutlineEmail } from "react-icons/md";
 import { CgPassword } from "react-icons/cg";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 import logoImg from "../../assets/logo.png";
 
 interface Props {}
@@ -31,7 +33,7 @@ const Login: FC<Props> = () => {
       justifyContent="center"
       minHeight="100%"
     >
-      <Box w="550px" bg={"white"} borderRadius="10px">
+      <Box w="450px" bg={"white"} borderRadius="10px">
         <VStack margin={"10px"} spacing={"25px"}>
           <Image src={logoImg} alt={"logo"} margin={"10px"} />
           <Text fontSize="3xl">Login</Text>
@@ -88,6 +90,12 @@ const Login: FC<Props> = () => {
             </InputGroup>
           </VStack>
           <Button>Login</Button>
+        </VStack>
+        <Box margin={"10px"}>
+          <Divider />
+        </Box>
+        <VStack margin={"10px"} spacing={"25px"}>
+          <Button leftIcon={<Icon as={FcGoogle} />}>Login with Google</Button>
         </VStack>
       </Box>
     </Flex>
