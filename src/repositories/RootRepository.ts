@@ -1,10 +1,11 @@
-import {IUserRepository} from "./IUserRepository";
+import { IUserRepository } from "./IUserRepository";
 import UserRepository from "./impl/UserRepository";
+import { API_ENDPOINT } from "../config/const";
 
 export class RootRepository {
-    readonly  user: IUserRepository;
+  readonly user: IUserRepository;
 
-    constructor() {
-        this.user = new UserRepository("");
-    }
+  constructor() {
+    this.user = new UserRepository(`${API_ENDPOINT}`);
+  }
 }
