@@ -1,11 +1,11 @@
-import { IMemberRepository } from "./IMemberRepository";
-import MemberRepository from "./impl/MemberRepository";
+import { ILoginRepository } from "./ILoginRepository";
+import LoginRepository from "./impl/LoginRepository";
 import { API_ENDPOINT } from "../config/const";
 
 export class RootRepository {
-  readonly user: IMemberRepository;
+  readonly login: ILoginRepository;
 
   constructor() {
-    this.user = new MemberRepository(`${API_ENDPOINT}/members`);
+    this.login = new LoginRepository(`${API_ENDPOINT}`);
   }
 }

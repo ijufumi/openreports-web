@@ -1,6 +1,6 @@
 import UserStore from "../stores/UserStore";
 
-export interface IMemberRepository {
+export interface ILoginRepository {
   login(args: { username: string; password: string }): Promise<UserStore>;
 
   getGoogleLoginUrl(): Promise<string>;

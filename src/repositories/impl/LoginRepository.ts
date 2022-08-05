@@ -1,9 +1,9 @@
-import { IMemberRepository } from "../IMemberRepository";
+import { ILoginRepository } from "../ILoginRepository";
 import BaseRepository from "../BaseRepository";
 
-export default class MemberRepository
+export default class LoginRepository
   extends BaseRepository
-  implements IMemberRepository
+  implements ILoginRepository
 {
   login = async (args: { username: string; password: string }) => {
     const { username, password } = args;
