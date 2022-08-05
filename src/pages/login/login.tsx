@@ -18,6 +18,7 @@ import { CgPassword } from "react-icons/cg";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import logoImg from "../../assets/logo.png";
+import actions from "../../actions";
 
 interface Props {}
 
@@ -26,6 +27,16 @@ const Login: FC<Props> = () => {
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
+  const handleLogin = async () => {
+    await actions.login(email, password);
+  };
+
+  const handleGoogleLogin = async () => {
+    const googleUrl = await actions.googleLogin();
+    if (googleUrl != undefined) {
+      window.location.replace(googleUrl);
+    }
+  };
   return (
     <Flex
       minWidth="100%"
@@ -89,13 +100,15 @@ const Login: FC<Props> = () => {
               </InputRightElement>
             </InputGroup>
           </VStack>
-          <Button>Login</Button>
+          <Button onClick={handleLogin}>Login</Button>
         </VStack>
         <Box margin={"10px"}>
           <Divider />
         </Box>
         <VStack margin={"10px"} spacing={"25px"}>
-          <Button leftIcon={<Icon as={FcGoogle} />}>Login with Google</Button>
+          <Button leftIcon={<Icon as={FcGoogle} />} onClick={handleGoogleLogin}>
+            Login with Google
+          </Button>
         </VStack>
       </Box>
     </Flex>
