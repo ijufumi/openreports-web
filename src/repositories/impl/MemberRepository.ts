@@ -1,13 +1,13 @@
-import { IUserRepository } from "../IUserRepository";
+import { IMemberRepository } from "../IMemberRepository";
 import BaseRepository from "../BaseRepository";
 
-export default class UserRepository
+export default class MemberRepository
   extends BaseRepository
-  implements IUserRepository
+  implements IMemberRepository
 {
   login = async (args: { username: string; password: string }) => {
     const { username, password } = args;
-    return this.post({ path: "", body: { username, password } });
+    return this.post({ path: "/login", body: { username, password } });
   };
 
   getGoogleLoginUrl = async () => {
