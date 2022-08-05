@@ -1,20 +1,15 @@
-import { Repositories } from "../repositories/Repositories";
+import repos from "../repositories/";
 
 class Action {
-  readonly repos: Repositories;
-  constructor(repos: Repositories) {
-    this.repos = repos;
-  }
-
   login = async (username: string, password: string) => {
-    return await this.repos.login.login({ username, password });
+    return await repos.login.login({ username, password });
   };
 
   googleLogin = async () => {
-    return await this.repos.login.getGoogleLoginUrl();
+    return await repos.login.getGoogleLoginUrl();
   };
 }
 
-const actions = new Action(new Repositories());
+const actions = new Action();
 
 export default actions;
