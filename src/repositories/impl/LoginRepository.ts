@@ -7,7 +7,7 @@ export default class LoginRepository
 {
   login = async (args: { username: string; password: string }) => {
     const { username, password } = args;
-    return this.post({ path: "/login", body: { username, password } });
+    return this.post({ path: "/password", body: { username, password } });
   };
 
   getGoogleLoginUrl = async () => {
@@ -15,6 +15,6 @@ export default class LoginRepository
   };
 
   loginWithGoogle = async (args: { code: string; state: string }) => {
-    return this.post({ path: "/google/login", body: args });
+    return this.post({ path: "/google", body: args });
   };
 }

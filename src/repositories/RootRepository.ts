@@ -6,6 +6,6 @@ export class RootRepository {
   readonly login: ILoginRepository;
 
   constructor() {
-    this.login = new LoginRepository(`${API_ENDPOINT}`);
+    this.login = new LoginRepository(`${API_ENDPOINT}/login`);
   }
 }
