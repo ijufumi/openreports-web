@@ -2,10 +2,10 @@ import React, { FC, ReactNode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 
-import Login from "./pages/login/login";
-import Top from "./pages/top/top";
+import Login from "./pages/login/Login";
+import Top from "./pages/top/Top";
 import theme from "./config/theme";
-import Layout from "./pages/layout/layout";
+import Layout from "./pages/layout/Layout";
 
 interface AuthorizedRouteProps {
   children: any;
