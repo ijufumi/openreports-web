@@ -25,7 +25,13 @@ interface Props {}
 
 const App: FC<Props> = () => {
   const renderRoute = (path: string, element: ReactNode) => {
-    return <Route path={path} element={<LayoutRoute>{element}</LayoutRoute>} />;
+    return (
+      <Route
+        key={path}
+        path={path}
+        element={<LayoutRoute>{element}</LayoutRoute>}
+      />
+    );
   };
 
   const publicPaths: Path[] = [
@@ -54,7 +60,9 @@ const App: FC<Props> = () => {
       <BrowserRouter>
         <Routes>
           {publicPaths.map((path: Path) => {
-            return <Route path={path.path} element={path.element} />;
+            return (
+              <Route key={path.path} path={path.path} element={path.element} />
+            );
           })}
           {authorizedPaths.map((path: Path) => {
             return renderRoute(path.path, path.element);
