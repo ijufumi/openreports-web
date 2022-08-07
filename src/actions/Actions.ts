@@ -5,8 +5,12 @@ class Action {
     return await repos.login.login({ username, password });
   };
 
-  googleLogin = async () => {
+  getGoogleLoginUrl = async () => {
     return await repos.login.getGoogleLoginUrl();
+  };
+
+  googleLogin = async (code: any, state: any) => {
+    return await repos.login.loginWithGoogle({ code, state });
   };
 }
 

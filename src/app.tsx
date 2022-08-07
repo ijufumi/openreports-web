@@ -6,16 +6,17 @@ import Login from "./pages/login/Login";
 import Top from "./pages/top/Top";
 import theme from "./config/theme";
 import Layout from "./pages/layout/Layout";
+import GoogleCallback from "./pages/google_callback/GoogleCallback";
 
-interface AuthorizedRouteProps {
+interface LayoutRouteProps {
   children: any;
 }
 
-const Authorized: FC<AuthorizedRouteProps> = ({ children }) => {
+const LayoutRoute: FC<LayoutRouteProps> = ({ children }) => {
   return <Layout>{children}</Layout>;
 };
 
-interface AuthorizedPath {
+interface Path {
   path: string;
   element: ReactNode;
 }
@@ -23,11 +24,25 @@ interface AuthorizedPath {
 interface Props {}
 
 const App: FC<Props> = () => {
-  const renderAuthorized = (path: string, element: ReactNode) => {
-    return <Route path={path} element={<Authorized>{element}</Authorized>} />;
+  const renderRoute = (path: string, element: ReactNode) => {
+    return <Route path={path} element={<LayoutRoute>{element}</LayoutRoute>} />;
   };
 
-  const authorizedPaths: AuthorizedPath[] = [
+  const publicPaths: Path[] = [
+    {
+      path: "/",
+      element: <Login />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/google/callback",
+      element: <GoogleCallback />,
+    },
+  ];
+  const authorizedPaths: Path[] = [
     {
       path: "/top",
       element: <Top />,
@@ -38,9 +53,11 @@ const App: FC<Props> = () => {
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          {authorizedPaths.map((e: AuthorizedPath) => {
-            return renderAuthorized(e.path, e.element);
+          {publicPaths.map((e: Path) => {
+            return renderRoute(e.path, e.element);
+          })}
+          {authorizedPaths.map((e: Path) => {
+            return renderRoute(e.path, e.element);
           })}
         </Routes>
       </BrowserRouter>
