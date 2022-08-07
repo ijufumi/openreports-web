@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require('webpack');
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   mode: "development",
@@ -38,7 +38,7 @@ module.exports = {
       template: "public/index.html",
       hash: true,
     }),
-    new webpack.ProvidePlugin({
-      process: "process/browser",
-    })],
+    new Dotenv({
+      systemvars: true,})
+  ]
 };
