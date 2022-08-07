@@ -1,39 +1,44 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require('webpack');
 
 module.exports = {
-    mode: 'development',
-    entry: './src/index.tsx',
-    output: {
-        filename: 'main.js',
-        path: `${__dirname}/public`
-    },
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js', '.png']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: "ts-loader"
-            },
-            {
-                test: /\.(png|jpe?g|gif)$/,
-                generator: {
-                    filename: 'images/[name][ext][query]'
-                },
-                type: 'asset'
-            }
-        ]
-    },
-    devServer: {
-        static: {
-            directory: 'public',
+  mode: "development",
+  entry: "./src/index.tsx",
+  output: {
+    filename: "main.js",
+    path: `${__dirname}/public`,
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js", ".png"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/,
+        generator: {
+          filename: "images/[name][ext][query]",
         },
-        open: true,
-        historyApiFallback: true,
+        type: "asset",
+      },
+    ],
+  },
+  devServer: {
+    static: {
+      directory: "public",
     },
-    plugins: [new HtmlWebpackPlugin({
-        template: 'public/index.html',
-        hash: true,
-    })]
+    open: true,
+    historyApiFallback: true,
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "public/index.html",
+      hash: true,
+    }),
+    new webpack.ProvidePlugin({
+      process: "process/browser",
+    })],
 };
