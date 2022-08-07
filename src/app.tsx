@@ -53,11 +53,11 @@ const App: FC<Props> = () => {
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          {publicPaths.map((e: Path) => {
-            return renderRoute(e.path, e.element);
+          {publicPaths.map((path: Path) => {
+            return <Route path={path.path} element={path.element} />;
           })}
-          {authorizedPaths.map((e: Path) => {
-            return renderRoute(e.path, e.element);
+          {authorizedPaths.map((path: Path) => {
+            return renderRoute(path.path, path.element);
           })}
         </Routes>
       </BrowserRouter>
