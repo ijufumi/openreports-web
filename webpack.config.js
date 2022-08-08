@@ -32,6 +32,7 @@ module.exports = {
     },
     open: true,
     historyApiFallback: true,
+    port: 3000,
   },
   plugins: [
     new HtmlWebpackPlugin({
