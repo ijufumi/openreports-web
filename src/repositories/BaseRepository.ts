@@ -37,7 +37,7 @@ abstract class BaseRepository {
     body?: object,
     header?: object
   ) => {
-    return fetch(`${apiEndpoint}/${path}`, {
+    return fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
       body: body ? JSON.stringify(body) : undefined,
     })
