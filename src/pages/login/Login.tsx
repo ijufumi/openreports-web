@@ -34,7 +34,7 @@ const Login: FC<Props> = () => {
   const handleGoogleLogin = async () => {
     const googleUrl = await actions.getGoogleLoginUrl();
     if (googleUrl != undefined) {
-      window.location.replace(googleUrl);
+      window.location.replace(googleUrl.url);
     }
   };
   return (
