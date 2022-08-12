@@ -11,7 +11,7 @@ abstract class BaseRepository {
     this.apiEndpoint = apiEndpoint;
   }
 
-  get = async (args: { path: string; headers?: object }) => {
+  get = async (args: { path: string; headers?: Record<string, string> }) => {
     return await this._request(
       Methods.Get,
       this.apiEndpoint,
@@ -20,13 +20,18 @@ abstract class BaseRepository {
       args.headers
     );
   };
-  post = async (args: { path: string; headers?: object; body?: object }) => {
+  post = async (args: {
+    path: string;
+    headers?: Record<string, string>;
+    body?: object;
+  }) => {
+    const baseHeaders = { "Content-Type": "application/json;charset=utf-8" };
     return await this._request(
       Methods.Post,
       this.apiEndpoint,
       args.path,
       args.body,
-      args.headers
+      Object.assign(baseHeaders, args.headers ? args.headers : {})
     );
   };
 
@@ -35,10 +40,11 @@ abstract class BaseRepository {
     apiEndpoint: string,
     path: string,
     body?: object,
-    header?: object
+    header?: Record<string, string>
   ) => {
     return fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
+      headers: header,
       body: body ? JSON.stringify(body) : undefined,
     })
       .then((res) => res.json())
