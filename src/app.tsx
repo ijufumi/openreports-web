@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 
 import Login from "./pages/login/Login";
@@ -37,7 +37,7 @@ const App: FC<Props> = () => {
   const publicPaths: Path[] = [
     {
       path: "/",
-      element: <Login />,
+      element: <Navigate to={"/login"} />,
     },
     {
       path: "/login",
