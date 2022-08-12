@@ -3,7 +3,9 @@ import { useLocation, useNavigate } from "react-router";
 import actions from "../../actions";
 import StringUtils from "../../components/utils/StringUtils";
 
-const GoogleCallback: FC = () => {
+interface Props {}
+
+const GoogleCallback: FC<Props> = () => {
   const { search } = useLocation();
   const navigation = useNavigate();
   const [initialized, setInitialized] = useState<boolean>(false);
