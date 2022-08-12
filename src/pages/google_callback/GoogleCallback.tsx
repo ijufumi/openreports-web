@@ -1,10 +1,11 @@
 import React, { FC, useMemo, useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import actions from "../../actions";
 import StringUtils from "../../components/utils/StringUtils";
 
 const GoogleCallback: FC = () => {
   const { search } = useLocation();
+  const navigation = useNavigate();
   const [initialized, setInitialized] = useState<boolean>(false);
 
   const params = useMemo(() => {
@@ -18,7 +19,7 @@ const GoogleCallback: FC = () => {
       if (!StringUtils.isBlank(code) && !StringUtils.isBlank(state)) {
         const member = await actions.googleLogin(code, state);
         if (member) {
-          // TODO
+          navigation("/top");
         }
       }
       setInitialized(true);
