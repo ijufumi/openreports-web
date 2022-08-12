@@ -24,12 +24,16 @@ interface Path {
 interface Props {}
 
 const App: FC<Props> = () => {
-  const renderRoute = (path: string, element: ReactNode) => {
+  const renderRoute = (
+    path: string,
+    element: ReactNode,
+    includeLayout = false
+  ) => {
     return (
       <Route
         key={path}
         path={path}
-        element={<LayoutRoute>{element}</LayoutRoute>}
+        element={includeLayout ? <LayoutRoute>{element}</LayoutRoute> : element}
       />
     );
   };
@@ -60,12 +64,10 @@ const App: FC<Props> = () => {
       <BrowserRouter>
         <Routes>
           {publicPaths.map((path: Path) => {
-            return (
-              <Route key={path.path} path={path.path} element={path.element} />
-            );
+            return renderRoute(path.path, path.element, false);
           })}
           {authorizedPaths.map((path: Path) => {
-            return renderRoute(path.path, path.element);
+            return renderRoute(path.path, path.element, true);
           })}
         </Routes>
       </BrowserRouter>
