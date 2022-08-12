@@ -38,6 +38,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "public/index.html",
       hash: true,
+      publicPath: "/"
     }),
     new Dotenv({
       systemvars: true,})
