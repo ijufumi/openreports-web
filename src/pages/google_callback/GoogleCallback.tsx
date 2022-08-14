@@ -23,6 +23,7 @@ const GoogleCallback: FC<Props> = () => {
         if (member) {
           navigation("/top");
         }
+        navigation("/error/google");
       }
       setInitialized(true);
     };

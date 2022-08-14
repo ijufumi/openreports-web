@@ -7,6 +7,7 @@ import Top from "./pages/top/Top";
 import theme from "./config/theme";
 import Layout from "./pages/layout/Layout";
 import GoogleCallback from "./pages/google_callback/GoogleCallback";
+import GoogleAuthError from "./pages/errors/GoogleAuthError";
 
 interface LayoutRouteProps {
   children: any;
@@ -58,12 +59,21 @@ const App: FC<Props> = () => {
       element: <Top />,
     },
   ];
+  const errorsPath: Path[] = [
+    {
+      path: "/error/google",
+      element: <GoogleAuthError />,
+    },
+  ];
 
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
           {publicPaths.map((path: Path) => {
+            return renderRoute(path.path, path.element, false);
+          })}
+          {errorsPath.map((path: Path) => {
             return renderRoute(path.path, path.element, false);
           })}
           {authorizedPaths.map((path: Path) => {
