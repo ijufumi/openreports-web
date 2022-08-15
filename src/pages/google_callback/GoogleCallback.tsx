@@ -17,9 +17,8 @@ const GoogleCallback: FC<Props> = () => {
   useEffect(() => {
     const initialize = async () => {
       const code = params.get("code");
-      const state = params.get("state");
-      if (!StringUtils.isBlank(code) && !StringUtils.isBlank(state)) {
-        const member = await actions.googleLogin(code, state);
+      if (!StringUtils.isBlank(code)) {
+        const member = await actions.googleLogin(code);
         if (member) {
           navigation("/top");
         }

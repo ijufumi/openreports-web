@@ -9,8 +9,8 @@ class Action {
     return await repos.login.getGoogleLoginUrl();
   };
 
-  googleLogin = async (code: any, state: any) => {
-    return await repos.login.loginWithGoogle({ code, state });
+  googleLogin = async (code: any) => {
+    return await repos.login.loginWithGoogle({ code });
   };
 }
 

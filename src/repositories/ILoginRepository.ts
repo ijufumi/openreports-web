@@ -9,8 +9,5 @@ export interface ILoginRepository {
 
   getGoogleLoginUrl(): Promise<GoogleAuthUrl | undefined>;
 
-  loginWithGoogle(args: {
-    code: string;
-    state: string;
-  }): Promise<UserVo | undefined>;
+  loginWithGoogle(args: { code: string }): Promise<UserVo | undefined>;
 }

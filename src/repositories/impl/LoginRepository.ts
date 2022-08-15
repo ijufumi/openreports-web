@@ -14,7 +14,7 @@ export default class LoginRepository
     return this.get({ path: "/google/authorization_url" });
   };
 
-  loginWithGoogle = async (args: { code: string; state: string }) => {
+  loginWithGoogle = async (args: { code: string }) => {
     return this.post({ path: "/google", body: args });
   };
 }
