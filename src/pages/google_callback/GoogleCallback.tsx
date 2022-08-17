@@ -21,6 +21,7 @@ const GoogleCallback: FC<Props> = () => {
         const member = await actions.googleLogin(code);
         if (member) {
           navigation("/top");
+          return;
         }
         navigation("/error/google");
       }
