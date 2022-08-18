@@ -5,9 +5,8 @@ export default class LoginRepository
   extends BaseRepository
   implements ILoginRepository
 {
-  login = async (args: { username: string; password: string }) => {
-    const { username, password } = args;
-    return this.post({ path: "/password", body: { username, password } });
+  login = async (args: { email: string; password: string }) => {
+    return this.post({ path: "/password", body: args });
   };
 
   getGoogleLoginUrl = async () => {

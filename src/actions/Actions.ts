@@ -1,8 +1,8 @@
 import repos from "../repositories/";
 
 class Action {
-  login = async (username: string, password: string) => {
-    return await repos.login.login({ username, password });
+  login = async (email: string, password: string) => {
+    return await repos.login.login({ email, password });
   };
 
   getGoogleLoginUrl = async () => {
