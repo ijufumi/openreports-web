@@ -1,4 +1,5 @@
 import React, { FC, useState } from "react";
+import { useNavigate } from "react-router";
 import {
   Input,
   InputGroup,
@@ -23,12 +24,17 @@ import actions from "../../actions";
 interface Props {}
 
 const Login: FC<Props> = () => {
+  const navigation = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleLogin = async () => {
-    await actions.login(email, password);
+    const member = await actions.login(email, password);
+    if (member) {
+      navigation("/top");
+      return;
+    }
   };
 
   const handleGoogleLogin = async () => {
