@@ -23,7 +23,7 @@ const Layout: FC<Props> = ({ children }) => {
   const navigate = useNavigate();
 
   return (
-    <VStack spacing={"5px"} h={"100%"}>
+    <VStack spacing={"5px"} h={"100%"} w={"100%"}>
       <Box
         h={"70px"}
         w={"100%"}
@@ -33,9 +33,10 @@ const Layout: FC<Props> = ({ children }) => {
         justifyContent={"space-between"}
         padding={"0 10px 0 10px"}
       >
-        <HStack spacing={"10px"}>
+        <HStack spacing={"10px"} w={"100%"}>
           <Box>
             <Image
+              minW={"250px"}
               onClick={() => navigate("/top")}
               src={logoImg}
               alt={"logo"}
