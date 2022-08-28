@@ -8,7 +8,7 @@
     "jsx": "react",
     "moduleResolution": "node",
     "lib": [
-      "ES2022",
+      "ES2021",
       "DOM"
     ]
   }
