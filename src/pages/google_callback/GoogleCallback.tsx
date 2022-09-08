@@ -1,6 +1,7 @@
 import React, { FC, useMemo, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
+import StringUtils from "../../components/utils/StringUtils";
 
 interface Props {}
 
@@ -18,7 +19,7 @@ const GoogleCallback: FC<Props> = () => {
   useEffect(() => {
     const initialize = async () => {
       const code = params.get("code");
-      if (code !== undefined && code !== "") {
+      if (!StringUtils.isBlank(code)) {
         const member = await loginUseCase.loginWithGoogle({ code });
         if (member) {
           navigation("/top");
