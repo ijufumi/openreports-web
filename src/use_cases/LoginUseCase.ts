@@ -1,10 +1,12 @@
 import UserVo from "../vos/UserVo";
-import GoogleAuthUrl from "../vos/GoogleAuthUrl";
+import GoogleAuthUrlVo from "../vos/GoogleAuthUrlVo";
 
-export interface ILoginRepository {
+interface LoginUseCase {
   login(args: { email: string; password: string }): Promise<UserVo | undefined>;
 
-  getGoogleLoginUrl(): Promise<GoogleAuthUrl | undefined>;
+  getGoogleLoginUrl(): Promise<GoogleAuthUrlVo | undefined>;
 
   loginWithGoogle(args: { code: string }): Promise<UserVo | undefined>;
 }
+
+export default LoginUseCase;

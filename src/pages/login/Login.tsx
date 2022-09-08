@@ -19,7 +19,7 @@ import { CgPassword } from "react-icons/cg";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import logoImg from "../../assets/logo.png";
-import actions from "../../actions";
+import UseCaseFactory from "../../use_cases/UseCaseFactory";
 
 interface Props {}
 
@@ -29,8 +29,10 @@ const Login: FC<Props> = () => {
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
+  const loginUseCase = UseCaseFactory.createLoginUseCase();
+
   const handleLogin = async () => {
-    const member = await actions.login(email, password);
+    const member = await loginUseCase.login({ email, password });
     if (member) {
       navigation("/top");
       return;
@@ -38,7 +40,7 @@ const Login: FC<Props> = () => {
   };
 
   const handleGoogleLogin = async () => {
-    const googleUrl = await actions.getGoogleLoginUrl();
+    const googleUrl = await loginUseCase.getGoogleLoginUrl();
     if (googleUrl != undefined) {
       window.location.replace(googleUrl.url);
     }

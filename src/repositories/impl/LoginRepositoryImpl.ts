@@ -1,9 +1,9 @@
-import { ILoginRepository } from "../ILoginRepository";
+import LoginRepository from "../LoginRepository";
 import BaseRepository from "../BaseRepository";
 
-export default class LoginRepository
+export default class LoginRepositoryImpl
   extends BaseRepository
-  implements ILoginRepository
+  implements LoginRepository
 {
   login = async (args: { email: string; password: string }) => {
     return this.post({ path: "/password", body: args });
