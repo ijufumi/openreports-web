@@ -58,12 +58,14 @@ const Layout: FC<Props> = ({ children }) => {
                 w: "100px",
               }}
             >
-              Menu 1
+              Reports
             </MenuButton>
             <MenuList>
-              <MenuItem>Item 1</MenuItem>
-              <MenuItem>Item 2</MenuItem>
-              <MenuItem>Item 3</MenuItem>
+              <MenuItem>Report</MenuItem>
+              <MenuItem>Template</MenuItem>
+              <MenuItem>Parameters</MenuItem>
+              <MenuItem>Groups</MenuItem>
+              <MenuItem>Scheduling</MenuItem>
             </MenuList>
           </Menu>
           <Menu>
@@ -77,50 +79,12 @@ const Layout: FC<Props> = ({ children }) => {
                 w: "100px",
               }}
             >
-              Menu 2
+              Settings
             </MenuButton>
             <MenuList>
-              <MenuItem>Item 1</MenuItem>
-              <MenuItem>Item 2</MenuItem>
-              <MenuItem>Item 3</MenuItem>
-            </MenuList>
-          </Menu>
-          <Menu>
-            <MenuButton
-              sx={{
-                bg: "blue.50",
-                borderColor: "blue.200",
-                borderWidth: "1px",
-                borderRadius: "5px",
-                h: "40px",
-                w: "100px",
-              }}
-            >
-              Menu 3
-            </MenuButton>
-            <MenuList>
-              <MenuItem>Item 1</MenuItem>
-              <MenuItem>Item 2</MenuItem>
-              <MenuItem>Item 3</MenuItem>
-            </MenuList>
-          </Menu>
-          <Menu>
-            <MenuButton
-              sx={{
-                bg: "blue.50",
-                borderColor: "blue.200",
-                borderWidth: "1px",
-                borderRadius: "5px",
-                h: "40px",
-                w: "100px",
-              }}
-            >
-              Menu 4
-            </MenuButton>
-            <MenuList>
-              <MenuItem>Item 1</MenuItem>
-              <MenuItem>Item 2</MenuItem>
-              <MenuItem>Item 3</MenuItem>
+              <MenuItem>Workspace</MenuItem>
+              <MenuItem>DataSource</MenuItem>
+              <MenuItem>Logs</MenuItem>
             </MenuList>
           </Menu>
         </HStack>
