@@ -8,11 +8,11 @@ import {
   MenuList,
   MenuItem,
   MenuButton,
-  Icon,
   IconButton,
   Image,
 } from "@chakra-ui/react";
 import { FaRegUserCircle } from "react-icons/fa";
+import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import logoImg from "../../assets/logo.png";
 
 interface Props {
@@ -21,6 +21,12 @@ interface Props {
 
 const Layout: FC<Props> = ({ children }) => {
   const navigate = useNavigate();
+  const loginUseCase = UseCaseFactory.createLoginUseCase();
+
+  const handleLogout = async () => {
+    await loginUseCase.logout();
+    navigate("/login");
+  };
 
   return (
     <VStack spacing={"5px"} h={"100%"} w={"100%"}>
@@ -89,19 +95,17 @@ const Layout: FC<Props> = ({ children }) => {
           </Menu>
         </HStack>
         <HStack>
-          <IconButton
-            aria-label="profile"
-            colorScheme="whiteAlpha"
-            icon={
-              <Icon
-                as={FaRegUserCircle}
-                color="gray.600"
-                w={10}
-                h={10}
-                style={{ padding: "0 5px 0 5px" }}
-              />
-            }
-          />
+          <Menu>
+            <MenuButton
+              variant={"profile"}
+              as={IconButton}
+              aria-label="Options"
+              icon={<FaRegUserCircle />}
+            />
+            <MenuList>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
         </HStack>
       </Box>
       <Box w={"100%"} h={"100%"} padding={"10px"}>

@@ -17,6 +17,11 @@ const theme = extendTheme({
         login: {
           bg: "blue.50 !important",
         },
+        profile: {
+          minWidth: "70px !important",
+          borderWidth: "1px",
+          borderRadius: "6px",
+        },
       },
     },
   },
