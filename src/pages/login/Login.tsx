@@ -108,13 +108,19 @@ const Login: FC<Props> = () => {
               </InputRightElement>
             </InputGroup>
           </VStack>
-          <Button onClick={handleLogin}>Login</Button>
+          <Button onClick={handleLogin} variant="login">
+            Login
+          </Button>
         </VStack>
         <Box margin={"10px"}>
           <Divider />
         </Box>
         <VStack margin={"10px"} spacing={"25px"}>
-          <Button leftIcon={<Icon as={FcGoogle} />} onClick={handleGoogleLogin}>
+          <Button
+            leftIcon={<Icon as={FcGoogle} />}
+            onClick={handleGoogleLogin}
+            variant="login"
+          >
             Login with Google
           </Button>
         </VStack>

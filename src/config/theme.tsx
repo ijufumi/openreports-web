@@ -7,8 +7,16 @@ const theme = extendTheme({
         bg: "gray.100",
       },
       button: {
-        bg: "blue.50 !important",
         minWidth: "200px !important",
+      },
+    },
+  },
+  components: {
+    Button: {
+      variants: {
+        login: {
+          bg: "blue.50 !important",
+        },
       },
     },
   },
