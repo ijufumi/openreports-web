@@ -14,13 +14,16 @@ abstract class BaseRepository {
     this.apiEndpoint = apiEndpoint;
   }
 
-  protected needsAuth = false;
-
-  get = async (args: { path: string; headers?: Record<string, string> }) => {
+  get = async (args: {
+    path: string;
+    auth?: boolean;
+    headers?: Record<string, string>;
+  }) => {
     return await this._request(
       Methods.Get,
       this.apiEndpoint,
       args.path,
+      args.auth,
       undefined,
       args.headers
     );
@@ -28,6 +31,7 @@ abstract class BaseRepository {
 
   post = async (args: {
     path: string;
+    auth?: boolean;
     headers?: Record<string, string>;
     body?: object;
   }) => {
@@ -36,6 +40,7 @@ abstract class BaseRepository {
       Methods.Post,
       this.apiEndpoint,
       args.path,
+      args.auth,
       args.body,
       Object.assign(baseHeaders, args.headers ? args.headers : {})
     );
@@ -45,11 +50,12 @@ abstract class BaseRepository {
     method: Methods,
     apiEndpoint: string,
     path: string,
+    auth?: boolean,
     body?: object,
     header?: Record<string, string>
   ) => {
     let baseHeaders = {};
-    if (this.needsAuth) {
+    if (auth) {
       baseHeaders = { Authorization: `Bearer ${credentials.getToken()}` };
     }
     return fetch(`${apiEndpoint}${path}`, {
