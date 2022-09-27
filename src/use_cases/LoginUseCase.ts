@@ -7,6 +7,8 @@ interface LoginUseCase {
   getGoogleLoginUrl(): Promise<GoogleAuthUrlVo | undefined>;
 
   loginWithGoogle(args: { code: string }): Promise<UserVo | undefined>;
+
+  logout(): void;
 }
 
 export default LoginUseCase;
