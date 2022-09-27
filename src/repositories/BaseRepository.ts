@@ -1,15 +1,20 @@
+import credentials from "../states/Credentials";
+
 enum Methods {
   Get = "GET",
   Put = "PUT",
   Post = "POST",
   Delete = "DELETE",
 }
+
 abstract class BaseRepository {
   private readonly apiEndpoint: string;
 
   constructor(apiEndpoint: string) {
     this.apiEndpoint = apiEndpoint;
   }
+
+  protected needsAuth = false;
 
   get = async (args: { path: string; headers?: Record<string, string> }) => {
     return await this._request(
@@ -20,6 +25,7 @@ abstract class BaseRepository {
       args.headers
     );
   };
+
   post = async (args: {
     path: string;
     headers?: Record<string, string>;
@@ -42,9 +48,13 @@ abstract class BaseRepository {
     body?: object,
     header?: Record<string, string>
   ) => {
+    let baseHeaders = {};
+    if (this.needsAuth) {
+      baseHeaders = { Authorization: `Bearer ${credentials.getToken()}` };
+    }
     return fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
-      headers: header,
+      headers: Object.assign(baseHeaders, header ? header : {}),
       body: body ? JSON.stringify(body) : undefined,
     })
       .then((res) => res.json())
