@@ -16,8 +16,4 @@ export default class LoginRepositoryImpl
   loginWithGoogle = async (args: { code: string }) => {
     return await this.post({ path: "/google", body: args });
   };
-
-  logout = async () => {
-    return await this.get({ path: "/logout", auth: true });
-  };
 }

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   VStack,
@@ -20,13 +20,30 @@ interface Props {
 }
 
 const Layout: FC<Props> = ({ children }) => {
+  const [initialized, setInitialized] = useState<boolean>(false);
   const navigate = useNavigate();
-  const loginUseCase = UseCaseFactory.createLoginUseCase();
+  const membersUseCase = UseCaseFactory.createMembersUseCase();
+
+  useEffect(() => {
+    const initialize = async () => {
+      const isLoggedIn = await membersUseCase.isLoggedIn();
+      if (!isLoggedIn) {
+        await handleLogout();
+      }
+      setInitialized(true);
+    };
+
+    initialize();
+  });
 
   const handleLogout = async () => {
-    await loginUseCase.logout();
+    await membersUseCase.logout();
     navigate("/login");
   };
+
+  if (!initialized) {
+    return null;
+  }
 
   return (
     <VStack spacing={"5px"} h={"100%"} w={"100%"}>

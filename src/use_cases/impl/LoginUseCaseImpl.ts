@@ -29,11 +29,6 @@ class LoginUseCaseImpl implements LoginUseCase {
     }
     return user;
   };
-
-  logout = async () => {
-    await this.repository.logout();
-    credentials.removeToken();
-  };
 }
 
 export default LoginUseCaseImpl;

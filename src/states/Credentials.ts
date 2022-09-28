@@ -3,6 +3,10 @@ enum Keys {
 }
 
 class Credentials {
+  hasToken = () => {
+    return this.getToken() != undefined;
+  };
+
   setToken = (token: string) => {
     sessionStorage.setItem(Keys.API_TOKEN, token);
   };

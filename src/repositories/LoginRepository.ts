@@ -7,8 +7,6 @@ interface LoginRepository {
   getGoogleLoginUrl(): Promise<GoogleAuthUrlVo | undefined>;
 
   loginWithGoogle(args: { code: string }): Promise<UserVo | undefined>;
-
-  logout(): Promise<undefined>;
 }
 
 export default LoginRepository;
