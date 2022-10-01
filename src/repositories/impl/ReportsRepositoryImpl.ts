@@ -1,10 +1,10 @@
 import BaseRepository from "../BaseRepository";
-import ReportRepository from "../ReportRepository";
+import ReportsRepository from "../ReportsRepository";
 import ReportsVo from "../../vos/ReportsVo";
 
 export default class ReportsRepositoryImpl
   extends BaseRepository
-  implements ReportRepository
+  implements ReportsRepository
 {
   reports = async () => {
     const result = await this.get({ path: "/" });
