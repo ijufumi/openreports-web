@@ -10,6 +10,6 @@ export default class MembersRepositoryImpl
   };
 
   status = async () => {
-    return await this.get({ path: "/status" });
+    return await this.get({ path: "/status", auth: true });
   };
 }
