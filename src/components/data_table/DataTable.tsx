@@ -43,8 +43,19 @@ const DataTable: FC<Props> = ({
     }),
     [pageState]
   );
+  const fixedData = useMemo(() => {
+    if (data.length >= pageState.pageSize) {
+      return data;
+    }
+    const modifiedData = Object.assign([], data);
+    for (let i = 0; i < pageState.pageSize - data.length; i++) {
+      modifiedData.push({});
+    }
+    return modifiedData;
+  }, [data]);
+
   const table = useReactTable({
-    data,
+    data: fixedData,
     columns,
     pageCount,
     state: {
