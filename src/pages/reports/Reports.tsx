@@ -23,7 +23,7 @@ const Reports: FC<Props> = () => {
 
   useEffect(() => {
     const initialize = async () => {
-      const reports = await reportsUseCase.reports();
+      const reports = await reportsUseCase.reports(0, 10);
       if (reports !== undefined) {
         setReports(reports);
       }

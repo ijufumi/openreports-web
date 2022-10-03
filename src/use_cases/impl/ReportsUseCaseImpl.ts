@@ -8,7 +8,7 @@ export default class ReportsUseCaseImpl implements ReportsUseCase {
   constructor() {
     this.repository = RepositoryFactory.createReportRepository();
   }
-  reports = async () => {
-    return await this.repository.reports();
+  reports = async (page: number, limit: number) => {
+    return await this.repository.reports({ page, limit });
   };
 }
