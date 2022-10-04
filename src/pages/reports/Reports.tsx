@@ -22,6 +22,9 @@ const Reports: FC<Props> = () => {
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
 
   useEffect(() => {
+    if (initialized) {
+      return;
+    }
     const initialize = async () => {
       const reports = await reportsUseCase.reports(0, 10);
       if (reports !== undefined) {
