@@ -45,6 +45,10 @@ const Layout: FC<Props> = ({ children }) => {
     return null;
   }
 
+  const handleClick = (path: string) => {
+    navigate(path);
+  };
+
   return (
     <VStack spacing={"5px"} h={"100%"} w={"100%"}>
       <Box
@@ -80,6 +84,7 @@ const Layout: FC<Props> = ({ children }) => {
                 h: "40px",
                 w: "100px",
               }}
+              onClick={() => handleClick("/reports")}
             >
               Reports
             </MenuButton>
