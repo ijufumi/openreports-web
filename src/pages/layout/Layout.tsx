@@ -123,7 +123,7 @@ const Layout: FC<Props> = ({ children }) => {
               variant={"profile"}
               as={IconButton}
               aria-label="Options"
-              icon={<FaRegUserCircle />}
+              icon={<FaRegUserCircle size="30" style={{ color: "gray" }} />}
             />
             <MenuList>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
