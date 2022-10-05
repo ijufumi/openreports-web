@@ -6,6 +6,8 @@ interface Props {
   offset: number;
 
   limit: number;
+
+  count: number;
 }
 
 export default class ReportsVo {
@@ -15,9 +17,12 @@ export default class ReportsVo {
 
   limit: number;
 
+  count: number;
+
   constructor(props: Props) {
     this.offset = props.offset;
     this.limit = props.limit;
+    this.count = props.count;
     if (props.items) {
       this.items = props.items.map((item) => new ReportVo(item));
     } else {
