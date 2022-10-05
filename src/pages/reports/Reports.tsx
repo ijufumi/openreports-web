@@ -1,17 +1,10 @@
 import React, { FC, useState, useEffect } from "react";
-import {
-  HStack,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-} from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import ReportsVo from "../../vos/ReportsVo";
+import ReportVo from "../../vos/ReportVo";
+import DataTable from "../../components/data_table/DataTable";
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 
 interface Props {}
 
@@ -39,32 +32,32 @@ const Reports: FC<Props> = () => {
     return null;
   }
 
+  const columnHelper = createColumnHelper<ReportVo>();
+
+  const columns = [
+    columnHelper.accessor("id", {
+      header: "ID",
+      cell: (props) => props.getValue(),
+    }),
+    columnHelper.accessor("name", {
+      header: "Name",
+      cell: (props) => props.getValue(),
+    }),
+    columnHelper.accessor("reportTemplateName", {
+      header: "Template name",
+      cell: (props) => props.getValue(),
+    }),
+  ] as ColumnDef<ReportVo>[];
+
   return (
     <HStack>
-      <TableContainer>
-        <Table variant="striped">
-          <TableCaption>Report</TableCaption>
-          <Thead>
-            <Tr>
-              <Th>ID</Th>
-              <Th>Name</Th>
-              <Th>Template name</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {reports &&
-              reports.items.map((r) => {
-                return (
-                  <Tr>
-                    <Td>{r.id}</Td>
-                    <Td>{r.name}</Td>
-                    <Td>{r.reportTemplateName}</Td>
-                  </Tr>
-                );
-              })}
-          </Tbody>
-        </Table>
-      </TableContainer>
+      <DataTable
+        columns={columns}
+        data={reports?.items || []}
+        pageSizes={[10]}
+        defaultPageSize={10}
+        pageCount={reports?.count || 0}
+      />
     </HStack>
   );
 };
