@@ -84,12 +84,13 @@ const Layout: FC<Props> = ({ children }) => {
                 h: "40px",
                 w: "100px",
               }}
-              onClick={() => handleClick("/reports")}
             >
               Reports
             </MenuButton>
             <MenuList>
-              <MenuItem>Report</MenuItem>
+              <MenuItem onClick={() => handleClick("/reports")}>
+                Report
+              </MenuItem>
               <MenuItem>Template</MenuItem>
               <MenuItem>Parameters</MenuItem>
               <MenuItem>Groups</MenuItem>
