@@ -38,6 +38,7 @@ const Reports: FC<Props> = () => {
     columnHelper.accessor("id", {
       header: "ID",
       cell: (props) => props.getValue(),
+      size: 100,
     }),
     columnHelper.accessor("name", {
       header: "Name",

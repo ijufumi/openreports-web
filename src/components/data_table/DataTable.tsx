@@ -98,7 +98,7 @@ const DataTable: FC<Props> = ({
                 <Tr key={row.id}>
                   {row.getVisibleCells().map((cell) => {
                     return (
-                      <Td key={cell.id}>
+                      <Td key={cell.id} width={cell.column.columnDef.size}>
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
