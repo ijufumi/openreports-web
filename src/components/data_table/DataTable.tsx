@@ -69,7 +69,7 @@ const DataTable: FC<Props> = ({
   });
 
   return (
-    <Box sx={{ bgColor: "#FFFFFF", width: "100%" }}>
+    <Box sx={{ bgColor: "#FFFFFF", width: "100%", borderRadius: "6px" }}>
       <TableContainer>
         <Table variant="simple">
           <Thead>
