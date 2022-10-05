@@ -18,7 +18,7 @@ const theme = extendTheme({
           bg: "blue.50 !important",
         },
         profile: {
-          minWidth: "70px !important",
+          minWidth: "80px !important",
           borderWidth: "1px",
           borderRadius: "6px",
         },
