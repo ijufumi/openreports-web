@@ -13,8 +13,8 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
+  Box,
 } from "@chakra-ui/react";
 
 interface Props {
@@ -69,49 +69,50 @@ const DataTable: FC<Props> = ({
   });
 
   return (
-    <TableContainer>
-      <Table variant="striped">
-        <TableCaption>Report</TableCaption>
-        <Thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <Tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <Th key={header.id} colSpan={header.colSpan}>
-                    {header.isPlaceholder ? null : (
-                      <div>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </div>
-                    )}
-                  </Th>
-                );
-              })}
-            </Tr>
-          ))}
-        </Thead>
-        <Tbody>
-          {table.getRowModel().rows.map((row) => {
-            return (
-              <Tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
+    <Box sx={{ bgColor: "#FFFFFF", width: "100%" }}>
+      <TableContainer>
+        <Table variant="simple">
+          <Thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <Tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
                   return (
-                    <Td key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
+                    <Th key={header.id} colSpan={header.colSpan}>
+                      {header.isPlaceholder ? null : (
+                        <div>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </div>
                       )}
-                    </Td>
+                    </Th>
                   );
                 })}
               </Tr>
-            );
-          })}
-        </Tbody>
-      </Table>
-    </TableContainer>
+            ))}
+          </Thead>
+          <Tbody>
+            {table.getRowModel().rows.map((row) => {
+              return (
+                <Tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <Td key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </Td>
+                    );
+                  })}
+                </Tr>
+              );
+            })}
+          </Tbody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 };
 
