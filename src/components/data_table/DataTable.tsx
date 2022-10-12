@@ -64,11 +64,7 @@ const DataTable: FC<Props> = ({
   );
 
   const pageCount = useMemo(() => {
-    let count = totalCount / pageState.pageSize;
-    if (totalCount % pageState.pageSize !== 0) {
-      count += 1;
-    }
-    return count;
+    return Math.ceil(totalCount / pageState.pageSize);
   }, [totalCount, pageState]);
 
   const fixedData = useMemo(() => {
@@ -80,7 +76,7 @@ const DataTable: FC<Props> = ({
       modifiedData.push({});
     }
     return modifiedData;
-  }, [data]);
+  }, [data, pageState]);
 
   const table = useReactTable({
     data: fixedData,
@@ -95,22 +91,6 @@ const DataTable: FC<Props> = ({
     // getPaginationRowModel: getPaginationRowModel(), // If only doing manual pagination, you don't need this
     debugTable: true,
   });
-
-  const handleChangePageSize = (pageSize: number) => {
-    setPageState(Object.assign({ pageSize: pageSize }, pageState));
-  };
-
-  const handleChangePage = (page: number) => {
-    setPageState(Object.assign({ pageIndex: page }, pageState));
-  };
-
-  const handlePreviousPage = () => {
-    handleChangePage(pageState.pageIndex - 1);
-  };
-
-  const handleNextPage = () => {
-    handleChangePage(pageState.pageIndex + 1);
-  };
 
   return (
     <Box sx={{ bgColor: "#FFFFFF", width: "100%", borderRadius: "6px" }}>
@@ -159,8 +139,8 @@ const DataTable: FC<Props> = ({
           <Flex>
             <Tooltip label="First Page">
               <IconButton
-                onClick={() => handleChangePage(0)}
-                //isDisabled={!canPreviousPage}
+                onClick={() => table.setPageIndex(0)}
+                disabled={!table.getCanPreviousPage()}
                 icon={<Icon as={BsChevronDoubleLeft} />}
                 aria-label={"previous page"}
                 mr={4}
@@ -168,8 +148,8 @@ const DataTable: FC<Props> = ({
             </Tooltip>
             <Tooltip label="Previous Page">
               <IconButton
-                onClick={handlePreviousPage}
-                //isDisabled={!canPreviousPage}
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
                 icon={<Icon as={BsChevronLeft} />}
                 aria-label={"previous page"}
               />
@@ -180,11 +160,11 @@ const DataTable: FC<Props> = ({
             <Text flexShrink="0" mr={8}>
               Page{" "}
               <Text fontWeight="bold" as="span">
-                {pageState.pageIndex + 1}
+                {table.getState().pagination.pageIndex + 1}
               </Text>{" "}
               of{" "}
               <Text fontWeight="bold" as="span">
-                {pageSizes.length}
+                {table.getPageCount()}
               </Text>
             </Text>
             <Text flexShrink="0">Go to page:</Text>{" "}
@@ -196,7 +176,7 @@ const DataTable: FC<Props> = ({
               max={pageSizes.length}
               onChange={(value) => {
                 const page = value ? parseInt(value, 10) - 1 : 0;
-                handleChangePage(page);
+                table.setPageIndex(page);
               }}
               defaultValue={pageState.pageIndex + 1}
             >
@@ -208,9 +188,9 @@ const DataTable: FC<Props> = ({
             </NumberInput>
             <Select
               w={32}
-              value={pageState.pageSize}
+              value={table.getState().pagination.pageSize}
               onChange={(e) => {
-                handleChangePageSize(Number(e.target.value));
+                table.setPageSize(Number(e.target.value));
               }}
             >
               {pageSizes.map((pageSize) => (
@@ -224,16 +204,16 @@ const DataTable: FC<Props> = ({
           <Flex>
             <Tooltip label="Next Page">
               <IconButton
-                onClick={handleNextPage}
-                //isDisabled={!canNextPage}
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
                 icon={<Icon as={BsChevronRight} />}
                 aria-label={"next page"}
               />
             </Tooltip>
             <Tooltip label="Last Page">
               <IconButton
-                onClick={() => handleChangePage(pageCount - 1)}
-                //isDisabled={!canNextPage}
+                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                disabled={!table.getCanNextPage()}
                 icon={<Icon as={BsChevronDoubleRight} />}
                 aria-label={"next page"}
                 ml={4}
