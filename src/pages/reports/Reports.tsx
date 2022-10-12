@@ -55,9 +55,9 @@ const Reports: FC<Props> = () => {
       <DataTable
         columns={columns}
         data={reports?.items || []}
-        pageSizes={[10]}
+        pageSizes={[10, 20, 30]}
         defaultPageSize={10}
-        pageCount={reports?.count || 0}
+        totalCount={reports?.count || 0}
       />
     </HStack>
   );
