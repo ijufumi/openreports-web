@@ -28,6 +28,13 @@ const Reports: FC<Props> = () => {
     initialize();
   });
 
+  const handleOnChange = async (pageIndex: number, pageSize: number) => {
+    const reports = await reportsUseCase.reports(pageIndex, pageSize);
+    if (reports !== undefined) {
+      setReports(reports);
+    }
+  };
+
   if (!initialized) {
     return null;
   }
@@ -58,6 +65,7 @@ const Reports: FC<Props> = () => {
         pageSizes={[10, 20, 30]}
         defaultPageSize={10}
         totalCount={reports?.count || 0}
+        onChange={handleOnChange}
       />
     </HStack>
   );

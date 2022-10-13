@@ -1,4 +1,4 @@
-import React, { FC, useState, useMemo } from "react";
+import React, { FC, useState, useMemo, useEffect } from "react";
 import {
   PaginationState,
   useReactTable,
@@ -35,12 +35,15 @@ import {
   BsChevronLeft,
 } from "react-icons/bs";
 
+type OnChangeType = (pageIndex: number, pageSize: number) => void;
+
 interface Props {
   columns: Array<ColumnDef<any>>;
   pageSizes: Array<number>;
   defaultPageSize: number;
   data: Array<any>;
   totalCount: number;
+  onChange: OnChangeType;
 }
 
 const DataTable: FC<Props> = ({
@@ -49,6 +52,7 @@ const DataTable: FC<Props> = ({
   defaultPageSize,
   data,
   totalCount,
+  onChange,
 }) => {
   const [pageState, setPageState] = useState<PaginationState>({
     pageIndex: 0,
@@ -77,6 +81,10 @@ const DataTable: FC<Props> = ({
     }
     return modifiedData;
   }, [data, pageState]);
+
+  useEffect(() => {
+    onChange(pageState.pageIndex, pageState.pageSize);
+  }, [pageState]);
 
   const table = useReactTable({
     data: fixedData,
