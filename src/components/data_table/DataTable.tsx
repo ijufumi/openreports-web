@@ -181,7 +181,7 @@ const DataTable: FC<Props> = ({
               mr={8}
               w={28}
               min={1}
-              max={pageSizes.length}
+              max={table.getPageCount()}
               onChange={(value) => {
                 const page = value ? parseInt(value, 10) - 1 : 0;
                 table.setPageIndex(page);
