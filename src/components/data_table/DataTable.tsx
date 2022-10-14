@@ -54,6 +54,7 @@ const DataTable: FC<Props> = ({
   totalCount,
   onChange,
 }) => {
+  const [initialized, setInitialized] = useState<boolean>(false);
   const [pageState, setPageState] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: defaultPageSize,
@@ -83,6 +84,10 @@ const DataTable: FC<Props> = ({
   }, [data, pageState]);
 
   useEffect(() => {
+    if (!initialized) {
+      setInitialized(true);
+      return;
+    }
     onChange(pageState.pageIndex, pageState.pageSize);
   }, [pageState]);
 
