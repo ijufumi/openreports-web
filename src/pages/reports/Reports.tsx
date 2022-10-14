@@ -55,6 +55,14 @@ const Reports: FC<Props> = () => {
       header: "Template name",
       cell: (props) => props.getValue(),
     }),
+    columnHelper.accessor("formattedCreatedAt", {
+      header: "Created at",
+      cell: (props) => props.getValue(),
+    }),
+    columnHelper.accessor("formattedUpdatedAt", {
+      header: "Updated at",
+      cell: (props) => props.getValue(),
+    }),
   ] as ColumnDef<ReportVo>[];
 
   return (
