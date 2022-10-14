@@ -1,18 +1,39 @@
 # OpenReports Web Client
 
+## Technical Stack
+
+ | Name        | Version     | Usage          |
+ |-------------|-------------|----------------|
+ | React       | 18          | All of them    |
+ | Chakra UI   | 2.3.4       | UI             |
+ | React Table | 8.5.15      | Headless table |
+
 ## Package structure
-T.B.D
 
-### src
+```
+.
+├── public             # HTML and favicon
+├── src                
+│   ├── assets         # Images
+│   ├── components     # Components using by several pages
+│   ├── config         # Configuration files
+│   ├── pages          # Page component
+│   ├── repositories   # Connecting to external systems
+│   ├── states         # Manage state
+│   ├── use_cases      # Use case pattern for pages
+│   └── vos            # Value Object
+├── .eslintrc.json
+├── .prettierrc.json
+├── package.json
+├── README.md
+├── tsconfig.json
+├── webpack.config.js
+└── yarn.lock
+```
 
-### src/actions
+## How to run
 
-### src/components
+```bash
+yarn start
+```
 
-### src/config
-
-### src/pages
-
-### src/repositories
-
-### src/stores
