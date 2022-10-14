@@ -5,13 +5,16 @@ import {
   HStack,
   Box,
   Menu,
+  MenuGroup,
   MenuList,
   MenuItem,
   MenuButton,
+  MenuDivider,
   IconButton,
   Image,
 } from "@chakra-ui/react";
 import { FaRegUserCircle } from "react-icons/fa";
+import { CgMenu } from "react-icons/cg";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import logoImg from "../../assets/logo.png";
 
@@ -61,6 +64,31 @@ const Layout: FC<Props> = ({ children }) => {
         padding={"0 10px 0 10px"}
       >
         <HStack spacing={"10px"} w={"100%"}>
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              aria-label="Options"
+              icon={<CgMenu size="30" />}
+              variant={"icon"}
+            />
+            <MenuList>
+              <MenuGroup title={"Reporting"}>
+                <MenuItem onClick={() => handleClick("/reports")}>
+                  Report
+                </MenuItem>
+                <MenuItem>Template</MenuItem>
+                <MenuItem>Parameters</MenuItem>
+                <MenuItem>Groups</MenuItem>
+                <MenuItem>Scheduling</MenuItem>
+              </MenuGroup>
+              <MenuDivider />
+              <MenuGroup title={"Setting"}>
+                <MenuItem>Workspace</MenuItem>
+                <MenuItem>DataSource</MenuItem>
+                <MenuItem>Logs</MenuItem>
+              </MenuGroup>
+            </MenuList>
+          </Menu>
           <Box>
             <Image
               minW={"250px"}
@@ -74,53 +102,11 @@ const Layout: FC<Props> = ({ children }) => {
               }}
             />
           </Box>
-          <Menu>
-            <MenuButton
-              sx={{
-                bg: "blue.50",
-                borderColor: "blue.200",
-                borderWidth: "1px",
-                borderRadius: "5px",
-                h: "40px",
-                w: "100px",
-              }}
-            >
-              Reports
-            </MenuButton>
-            <MenuList>
-              <MenuItem onClick={() => handleClick("/reports")}>
-                Report
-              </MenuItem>
-              <MenuItem>Template</MenuItem>
-              <MenuItem>Parameters</MenuItem>
-              <MenuItem>Groups</MenuItem>
-              <MenuItem>Scheduling</MenuItem>
-            </MenuList>
-          </Menu>
-          <Menu>
-            <MenuButton
-              sx={{
-                bg: "blue.50",
-                borderColor: "blue.200",
-                borderWidth: "1px",
-                borderRadius: "5px",
-                h: "40px",
-                w: "100px",
-              }}
-            >
-              Settings
-            </MenuButton>
-            <MenuList>
-              <MenuItem>Workspace</MenuItem>
-              <MenuItem>DataSource</MenuItem>
-              <MenuItem>Logs</MenuItem>
-            </MenuList>
-          </Menu>
         </HStack>
         <HStack>
           <Menu>
             <MenuButton
-              variant={"profile"}
+              variant={"icon"}
               as={IconButton}
               aria-label="Options"
               icon={<FaRegUserCircle size="30" style={{ color: "gray" }} />}

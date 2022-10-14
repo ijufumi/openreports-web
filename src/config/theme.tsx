@@ -17,7 +17,7 @@ const theme = extendTheme({
         login: {
           bg: "blue.50 !important",
         },
-        profile: {
+        icon: {
           minWidth: "80px !important",
           borderWidth: "1px",
           borderRadius: "6px",
