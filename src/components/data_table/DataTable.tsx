@@ -101,7 +101,6 @@ const DataTable: FC<Props> = ({
     onPaginationChange: setPageState,
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
-    // getPaginationRowModel: getPaginationRowModel(), // If only doing manual pagination, you don't need this
     debugTable: true,
   });
 
