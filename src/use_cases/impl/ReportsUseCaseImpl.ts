@@ -11,4 +11,8 @@ export default class ReportsUseCaseImpl implements ReportsUseCase {
   reports = async (page: number, limit: number) => {
     return await this.repository.reports({ page, limit });
   };
+
+  report = async (id: string) => {
+    return await this.repository.report({ id });
+  };
 }
