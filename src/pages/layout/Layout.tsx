@@ -12,17 +12,25 @@ import {
   MenuDivider,
   IconButton,
   Image,
+  Icon,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
 } from "@chakra-ui/react";
 import { FaRegUserCircle } from "react-icons/fa";
+import { MdKeyboardArrowRight } from "react-icons/md";
 import { CgMenu } from "react-icons/cg";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import logoImg from "../../assets/logo.png";
+import { BreadcrumbsProps } from "../paths";
 
 interface Props {
   children: React.ReactNode;
+  breadcrumbs?: Array<BreadcrumbsProps>;
 }
 
-const Layout: FC<Props> = ({ children }) => {
+const Layout: FC<Props> = ({ children, breadcrumbs }) => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const navigate = useNavigate();
   const membersUseCase = UseCaseFactory.createMembersUseCase();
@@ -102,6 +110,22 @@ const Layout: FC<Props> = ({ children }) => {
               }}
             />
           </Box>
+          {breadcrumbs && breadcrumbs.length && (
+            <Breadcrumb
+              separator={<Icon color="gray.500" as={MdKeyboardArrowRight} />}
+            >
+              {breadcrumbs.map((b, idx) => {
+                return (
+                  <BreadcrumbItem
+                    isCurrentPage={breadcrumbs?.length - 1 === idx}
+                  >
+                    <BreadcrumbSeparator />
+                    <BreadcrumbLink href={b.path}>{b.title}</BreadcrumbLink>
+                  </BreadcrumbItem>
+                );
+              })}
+            </Breadcrumb>
+          )}
         </HStack>
         <HStack>
           <Menu>

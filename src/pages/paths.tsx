@@ -12,6 +12,15 @@ export interface Path {
   element: ReactNode;
 }
 
+export interface BreadcrumbsProps {
+  path: string;
+  title: string;
+}
+
+export interface PathWithBreadcrumbs extends Path {
+  breadcrumbs?: Array<BreadcrumbsProps>;
+}
+
 export const PUBLIC_PATHS: Path[] = [
   {
     path: "/",
@@ -26,7 +35,7 @@ export const PUBLIC_PATHS: Path[] = [
     element: <GoogleCallback />,
   },
 ];
-export const AUTHORIZED_PATHS: Path[] = [
+export const AUTHORIZED_PATHS: PathWithBreadcrumbs[] = [
   {
     path: "/top",
     element: <Top />,
@@ -34,6 +43,12 @@ export const AUTHORIZED_PATHS: Path[] = [
   {
     path: "/reports",
     element: <Reports />,
+    breadcrumbs: [
+      {
+        path: "",
+        title: "Reports",
+      },
+    ],
   },
 ];
 export const ERRORS_PATHS: Path[] = [
