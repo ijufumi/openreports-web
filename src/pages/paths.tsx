@@ -6,10 +6,15 @@ import GoogleCallback from "./google_callback/GoogleCallback";
 import Top from "./top/Top";
 import GoogleAuthError from "./errors/GoogleAuthError";
 import Reports from "./reports/Reports";
+import Report from "./report/Report";
+
+type ElementFunc = () => ReactNode;
+
+export type ElementType = ReactNode | ElementFunc;
 
 export interface Path {
   path: string;
-  element: ReactNode;
+  element: ElementType;
 }
 
 export interface BreadcrumbsProps {
@@ -17,8 +22,12 @@ export interface BreadcrumbsProps {
   title: string;
 }
 
+type BreadcrumbsFunc = () => Array<BreadcrumbsProps>;
+
+export type BreadcrumbsType = Array<BreadcrumbsProps> | BreadcrumbsFunc;
+
 export interface PathWithBreadcrumbs extends Path {
-  breadcrumbs?: Array<BreadcrumbsProps>;
+  breadcrumbs?: BreadcrumbsType;
 }
 
 export const PUBLIC_PATHS: Path[] = [
@@ -49,6 +58,12 @@ export const AUTHORIZED_PATHS: PathWithBreadcrumbs[] = [
         title: "Reports",
       },
     ],
+  },
+  {
+    path: "/report/:id",
+    element: () => {
+      return <Report />;
+    },
   },
 ];
 export const ERRORS_PATHS: Path[] = [

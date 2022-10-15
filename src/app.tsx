@@ -6,6 +6,8 @@ import theme from "./config/theme";
 import Layout from "./pages/layout/Layout";
 import {
   Path,
+  BreadcrumbsType,
+  ElementType,
   PathWithBreadcrumbs,
   BreadcrumbsProps,
   PUBLIC_PATHS,
@@ -27,10 +29,16 @@ interface Props {}
 const App: FC<Props> = () => {
   const renderRoute = (
     path: string,
-    element: ReactNode,
+    elementParam: ElementType,
     includeLayout = false,
-    breadcrumbs: Array<BreadcrumbsProps> = []
+    breadcrumbsParam?: BreadcrumbsType
   ) => {
+    const element =
+      typeof elementParam === "function" ? elementParam() : elementParam;
+    const breadcrumbs =
+      typeof breadcrumbsParam === "function"
+        ? breadcrumbsParam()
+        : breadcrumbsParam;
     return (
       <Route
         key={path}
