@@ -118,6 +118,7 @@ const Layout: FC<Props> = ({ children, breadcrumbs }) => {
               {breadcrumbs.map((b, idx) => {
                 return (
                   <BreadcrumbItem
+                    key={b.title}
                     isCurrentPage={breadcrumbs?.length - 1 === idx}
                   >
                     <BreadcrumbLink href={b.path}>{b.title}</BreadcrumbLink>
