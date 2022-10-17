@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
-import { HStack } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
+import { HStack, Link } from "@chakra-ui/react";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import ReportsVo from "../../vos/ReportsVo";
 import ReportVo from "../../vos/ReportVo";
@@ -12,6 +13,7 @@ const Reports: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [reports, setReports] = useState<ReportsVo | undefined>(undefined);
 
+  const navigate = useNavigate();
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
 
   useEffect(() => {
@@ -35,6 +37,10 @@ const Reports: FC<Props> = () => {
     }
   };
 
+  const handleClick = (id: string) => {
+    navigate(`/reports/${id}`);
+  };
+
   if (!initialized) {
     return null;
   }
@@ -44,7 +50,16 @@ const Reports: FC<Props> = () => {
   const columns = [
     columnHelper.accessor("id", {
       header: "ID",
-      cell: (props) => props.getValue(),
+      cell: (props) => {
+        if (!props.getValue()) {
+          return "";
+        }
+        return (
+          <Link onClick={() => handleClick(props.getValue())}>
+            {props.getValue()}
+          </Link>
+        );
+      },
       size: 100,
     }),
     columnHelper.accessor("name", {
