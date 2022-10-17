@@ -16,18 +16,17 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbSeparator,
 } from "@chakra-ui/react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { CgMenu } from "react-icons/cg";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import logoImg from "../../assets/logo.png";
-import { BreadcrumbsProps } from "../paths";
+import { BreadcrumbsType } from "../paths";
 
 interface Props {
   children: React.ReactNode;
-  breadcrumbs?: Array<BreadcrumbsProps>;
+  breadcrumbs?: BreadcrumbsType;
 }
 
 const Layout: FC<Props> = ({ children, breadcrumbs }) => {

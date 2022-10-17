@@ -6,18 +6,16 @@ import theme from "./config/theme";
 import Layout from "./pages/layout/Layout";
 import {
   Path,
-  BreadcrumbsType,
-  ElementType,
   PathWithBreadcrumbs,
-  BreadcrumbsProps,
-  PUBLIC_PATHS,
-  AUTHORIZED_PATHS,
-  ERRORS_PATHS,
+  BreadcrumbsType,
+  usePublicPath,
+  useAuthorizedPath,
+  useErrorsPath,
 } from "./pages/paths";
 
 interface LayoutRouteProps {
-  children: any;
-  breadcrumbs?: Array<any>;
+  children: ReactNode;
+  breadcrumbs?: BreadcrumbsType;
 }
 
 const LayoutRoute: FC<LayoutRouteProps> = ({ children, breadcrumbs }) => {
@@ -27,18 +25,16 @@ const LayoutRoute: FC<LayoutRouteProps> = ({ children, breadcrumbs }) => {
 interface Props {}
 
 const App: FC<Props> = () => {
+  const publicPaths = usePublicPath();
+  const authorizedPaths = useAuthorizedPath();
+  const errorsPaths = useErrorsPath();
+
   const renderRoute = (
     path: string,
-    elementParam: ElementType,
+    element: ReactNode,
     includeLayout = false,
-    breadcrumbsParam?: BreadcrumbsType
+    breadcrumbs?: BreadcrumbsType
   ) => {
-    const element =
-      typeof elementParam === "function" ? elementParam() : elementParam;
-    const breadcrumbs =
-      typeof breadcrumbsParam === "function"
-        ? breadcrumbsParam()
-        : breadcrumbsParam;
     return (
       <Route
         key={path}
@@ -58,13 +54,13 @@ const App: FC<Props> = () => {
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          {PUBLIC_PATHS.map((path: Path) => {
+          {publicPaths.map((path: Path) => {
             return renderRoute(path.path, path.element, false);
           })}
-          {ERRORS_PATHS.map((path: Path) => {
+          {errorsPaths.map((path: Path) => {
             return renderRoute(path.path, path.element, false);
           })}
-          {AUTHORIZED_PATHS.map((path: PathWithBreadcrumbs) => {
+          {authorizedPaths.map((path: PathWithBreadcrumbs) => {
             return renderRoute(path.path, path.element, true, path.breadcrumbs);
           })}
         </Routes>
