@@ -114,12 +114,12 @@ const Layout: FC<Props> = ({ children, breadcrumbs }) => {
             <Breadcrumb
               separator={<Icon color="gray.500" as={MdKeyboardArrowRight} />}
             >
+              <BreadcrumbItem />
               {breadcrumbs.map((b, idx) => {
                 return (
                   <BreadcrumbItem
                     isCurrentPage={breadcrumbs?.length - 1 === idx}
                   >
-                    <BreadcrumbSeparator />
                     <BreadcrumbLink href={b.path}>{b.title}</BreadcrumbLink>
                   </BreadcrumbItem>
                 );
