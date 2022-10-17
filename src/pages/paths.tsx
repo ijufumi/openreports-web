@@ -5,6 +5,7 @@ import Login from "./login/Login";
 import GoogleCallback from "./google_callback/GoogleCallback";
 import Top from "./top/Top";
 import GoogleAuthError from "./errors/GoogleAuthError";
+import NotfoundError from "./errors/NotfoundError";
 import Reports from "./reports/Reports";
 import Report from "./report/Report";
 
@@ -79,6 +80,10 @@ export const useErrorsPath = () => {
     {
       path: "/error/google",
       element: <GoogleAuthError />,
+    },
+    {
+      path: "/error/notfound",
+      element: <NotfoundError />,
     },
   ];
 };
