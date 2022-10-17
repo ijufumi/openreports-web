@@ -6,8 +6,6 @@ import theme from "./config/theme";
 import Layout from "./pages/layout/Layout";
 import {
   Path,
-  PathWithBreadcrumbs,
-  BreadcrumbsType,
   usePublicPath,
   useAuthorizedPath,
   useErrorsPath,
@@ -15,11 +13,10 @@ import {
 
 interface LayoutRouteProps {
   children: ReactNode;
-  breadcrumbs?: BreadcrumbsType;
 }
 
-const LayoutRoute: FC<LayoutRouteProps> = ({ children, breadcrumbs }) => {
-  return <Layout breadcrumbs={breadcrumbs}>{children}</Layout>;
+const LayoutRoute: FC<LayoutRouteProps> = ({ children }) => {
+  return <Layout>{children}</Layout>;
 };
 
 interface Props {}
@@ -32,20 +29,13 @@ const App: FC<Props> = () => {
   const renderRoute = (
     path: string,
     element: ReactNode,
-    includeLayout = false,
-    breadcrumbs?: BreadcrumbsType
+    includeLayout = false
   ) => {
     return (
       <Route
         key={path}
         path={path}
-        element={
-          includeLayout ? (
-            <LayoutRoute breadcrumbs={breadcrumbs}>{element}</LayoutRoute>
-          ) : (
-            element
-          )
-        }
+        element={includeLayout ? <LayoutRoute>{element}</LayoutRoute> : element}
       />
     );
   };
@@ -60,8 +50,8 @@ const App: FC<Props> = () => {
           {errorsPaths.map((path: Path) => {
             return renderRoute(path.path, path.element, false);
           })}
-          {authorizedPaths.map((path: PathWithBreadcrumbs) => {
-            return renderRoute(path.path, path.element, true, path.breadcrumbs);
+          {authorizedPaths.map((path: Path) => {
+            return renderRoute(path.path, path.element, true);
           })}
         </Routes>
       </BrowserRouter>

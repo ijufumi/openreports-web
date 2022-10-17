@@ -1,5 +1,6 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useMemo, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { observer } from "mobx-react";
 import {
   VStack,
   HStack,
@@ -22,16 +23,16 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { CgMenu } from "react-icons/cg";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import logoImg from "../../assets/logo.png";
-import { BreadcrumbsType } from "../paths";
+import useBreadcrumbs from "../../states/Breadcrumbs";
 
 interface Props {
   children: React.ReactNode;
-  breadcrumbs?: BreadcrumbsType;
 }
 
-const Layout: FC<Props> = ({ children, breadcrumbs }) => {
+const Layout: FC<Props> = observer(({ children }) => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const navigate = useNavigate();
+  const breadcrumbs = useBreadcrumbs().get();
   const membersUseCase = UseCaseFactory.createMembersUseCase();
 
   useEffect(() => {
@@ -146,6 +147,6 @@ const Layout: FC<Props> = ({ children, breadcrumbs }) => {
       </Box>
     </VStack>
   );
-};
+});
 
 export default Layout;

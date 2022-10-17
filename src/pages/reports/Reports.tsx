@@ -6,6 +6,7 @@ import ReportsVo from "../../vos/ReportsVo";
 import ReportVo from "../../vos/ReportVo";
 import DataTable from "../../components/data_table/DataTable";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
+import useBreadcrumbs from "../../states/Breadcrumbs";
 
 interface Props {}
 
@@ -14,6 +15,7 @@ const Reports: FC<Props> = () => {
   const [reports, setReports] = useState<ReportsVo | undefined>(undefined);
 
   const navigate = useNavigate();
+  const breadcrumbs = useBreadcrumbs();
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
 
   useEffect(() => {
@@ -26,6 +28,11 @@ const Reports: FC<Props> = () => {
         setReports(reports);
       }
       setInitialized(true);
+      breadcrumbs.set([
+        {
+          title: "Reports",
+        },
+      ]);
     };
     initialize();
   });
