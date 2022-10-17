@@ -8,13 +8,9 @@ import GoogleAuthError from "./errors/GoogleAuthError";
 import Reports from "./reports/Reports";
 import Report from "./report/Report";
 
-type ElementFunc = () => ReactNode;
-
-export type ElementType = ReactNode | ElementFunc;
-
 export interface Path {
   path: string;
-  element: ElementType;
+  element: ReactNode;
 }
 
 export interface BreadcrumbsProps {
@@ -22,53 +18,67 @@ export interface BreadcrumbsProps {
   title: string;
 }
 
-type BreadcrumbsFunc = () => Array<BreadcrumbsProps>;
-
-export type BreadcrumbsType = Array<BreadcrumbsProps> | BreadcrumbsFunc;
+export type BreadcrumbsType = Array<BreadcrumbsProps>;
 
 export interface PathWithBreadcrumbs extends Path {
-  breadcrumbs?: BreadcrumbsType;
+  breadcrumbs?: Array<BreadcrumbsProps>;
 }
 
-export const PUBLIC_PATHS: Path[] = [
-  {
-    path: "/",
-    element: <Navigate to={"/login"} />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/google/callback",
-    element: <GoogleCallback />,
-  },
-];
-export const AUTHORIZED_PATHS: PathWithBreadcrumbs[] = [
-  {
-    path: "/top",
-    element: <Top />,
-  },
-  {
-    path: "/reports",
-    element: <Reports />,
-    breadcrumbs: [
-      {
-        path: "",
-        title: "Reports",
-      },
-    ],
-  },
-  {
-    path: "/report/:id",
-    element: () => {
-      return <Report />;
+export const usePublicPath = () => {
+  return [
+    {
+      path: "/",
+      element: <Navigate to={"/login"} />,
     },
-  },
-];
-export const ERRORS_PATHS: Path[] = [
-  {
-    path: "/error/google",
-    element: <GoogleAuthError />,
-  },
-];
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/google/callback",
+      element: <GoogleCallback />,
+    },
+  ];
+};
+
+export const useAuthorizedPath = () => {
+  return [
+    {
+      path: "/top",
+      element: <Top />,
+    },
+    {
+      path: "/reports",
+      element: <Reports />,
+      breadcrumbs: [
+        {
+          path: "",
+          title: "Reports",
+        },
+      ],
+    },
+    {
+      path: "/reports/:id",
+      element: <Report />,
+      breadcrumbs: [
+        {
+          path: "/reports",
+          title: "Reports",
+        },
+        {
+          path: "",
+          title: "",
+        },
+      ],
+    },
+  ];
+};
+
+export const useErrorsPath = () => {
+  return [
+    {
+      path: "/error/google",
+      element: <GoogleAuthError />,
+    },
+  ];
+};
