@@ -112,8 +112,14 @@ const Login: FC<Props> = () => {
             Login
           </Button>
         </VStack>
-        <Box margin={"10px"}>
+        <Box margin={"10px"} sx={{ position: "relative" }}>
           <Divider />
+          <Text
+            sx={{ position: "absolute", top: -3, left: 210 }}
+            color="gray.400"
+          >
+            or
+          </Text>
         </Box>
         <VStack margin={"10px"} spacing={"25px"}>
           <Button
