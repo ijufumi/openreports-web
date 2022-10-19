@@ -1,18 +1,31 @@
 import ReportsUseCase from "../ReportsUseCase";
 import RepositoryFactory from "../../repositories/RepositoryFactory";
 import ReportsRepository from "../../repositories/ReportsRepository";
+import ReportTemplatesRepository from "../../repositories/ReportTemplatesRepository";
 
 export default class ReportsUseCaseImpl implements ReportsUseCase {
-  private repository: ReportsRepository;
+  private reportsRepository: ReportsRepository;
+  private reportTemplatesRepository: ReportTemplatesRepository;
 
   constructor() {
-    this.repository = RepositoryFactory.createReportRepository();
+    this.reportsRepository = RepositoryFactory.createReportRepository();
+    this.reportTemplatesRepository =
+      RepositoryFactory.createReportTemplateRepository();
   }
+
   reports = async (page: number, limit: number) => {
-    return await this.repository.reports({ page, limit });
+    return await this.reportsRepository.getAll({ page, limit });
   };
 
   report = async (id: string) => {
-    return await this.repository.report({ id });
+    return await this.reportsRepository.getById({ id });
+  };
+
+  reportTemplates = async (page: number, limit: number) => {
+    return await this.reportTemplatesRepository.getAll({ page, limit });
+  };
+
+  reportTemplate = async (id: string) => {
+    return await this.reportTemplatesRepository.getById({ id });
   };
 }

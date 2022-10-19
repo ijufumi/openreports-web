@@ -2,6 +2,7 @@ import LoginRepositoryImpl from "./impl/LoginRepositoryImpl";
 import MembersRepositoryImpl from "./impl/MembersRepositoryImpl";
 import { API_ENDPOINT } from "../config/const";
 import ReportsRepositoryImpl from "./impl/ReportsRepositoryImpl";
+import ReportTemplatesRepositoryImpl from "./impl/ReportTemplatesRepositoryImpl";
 
 class RepositoryFactory {
   static createLoginRepository = () => {
@@ -12,6 +13,11 @@ class RepositoryFactory {
   };
   static createReportRepository = () => {
     return new ReportsRepositoryImpl(`${API_ENDPOINT}/reports`);
+  };
+  static createReportTemplateRepository = () => {
+    return new ReportTemplatesRepositoryImpl(
+      `${API_ENDPOINT}/report_templates`
+    );
   };
 }
 
