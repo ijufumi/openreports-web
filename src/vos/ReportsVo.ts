@@ -1,32 +1,21 @@
 import ReportVo, { Props as ReportProps } from "./ReportVo";
+import { ListProps, ListVo } from "./base";
 
-interface Props {
+interface Props extends ListProps {
   items: Array<ReportProps>;
-
-  offset: number;
-
-  limit: number;
-
-  count: number;
 }
 
-export default class ReportsVo {
-  items: Array<ReportVo>;
-
-  offset: number;
-
-  limit: number;
-
-  count: number;
+export default class ReportsVo extends ListVo {
+  items: Array<ReportVo> = [];
 
   constructor(props: Props) {
-    this.offset = props.offset;
-    this.limit = props.limit;
-    this.count = props.count;
+    super(props);
+  }
+
+  getItems(props: ListProps): Array<ReportVo> {
     if (props.items) {
-      this.items = props.items.map((item) => new ReportVo(item));
-    } else {
-      this.items = [];
+      return props.items.map((item) => new ReportVo(item));
     }
+    return [];
   }
 }
