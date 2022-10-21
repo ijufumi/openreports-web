@@ -10,12 +10,12 @@ export interface Props {
 }
 
 export default class ReportVo {
-  id: string;
-  name: string;
-  createdAt: number;
-  updatedAt: number;
-  reportTemplateId: string;
-  reportTemplateName: string;
+  readonly id: string;
+  readonly name: string;
+  readonly createdAt: number;
+  readonly updatedAt: number;
+  readonly reportTemplateId: string;
+  readonly reportTemplateName: string;
 
   constructor(props: Props) {
     this.id = props.id;

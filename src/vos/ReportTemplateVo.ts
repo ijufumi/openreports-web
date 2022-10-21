@@ -9,11 +9,11 @@ export interface Props {
 }
 
 export default class ReportTemplateVo {
-  id: string;
-  name: string;
-  filePath: string;
-  createdAt: number;
-  updatedAt: number;
+  readonly id: string;
+  readonly name: string;
+  readonly filePath: string;
+  readonly createdAt: number;
+  readonly updatedAt: number;
 
   constructor(props: Props) {
     this.id = props.id;

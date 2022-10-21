@@ -6,18 +6,17 @@ interface Props extends ListProps {
 }
 
 export default class ReportsVo extends ListVo {
-  items: Array<ReportVo> = [];
+  readonly items: Array<ReportVo> = [];
 
   constructor(props: Props) {
     super(props);
-    this.setItems(props);
+    this.items = this.getItems(props);
   }
 
-  setItems(props: Props): void {
+  getItems(props: Props): Array<ReportVo> {
     if (props.items) {
-      this.items = props.items.map((item) => new ReportVo(item));
-    } else {
-      this.items = [];
+      return props.items.map((item) => new ReportVo(item));
     }
+    return [];
   }
 }

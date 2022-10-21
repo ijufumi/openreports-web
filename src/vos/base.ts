@@ -25,5 +25,5 @@ export abstract class ListVo {
     this.count = props.count;
   }
 
-  abstract setItems(props: ListProps): void;
+  abstract getItems(props: ListProps): Array<any>;
 }
