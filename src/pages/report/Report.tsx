@@ -1,15 +1,29 @@
 import React, { FC, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { HStack, Box, Grid, GridItem, Text } from "@chakra-ui/react";
+import {
+  HStack,
+  Box,
+  Grid,
+  GridItem,
+  Text,
+  Input,
+  Select,
+} from "@chakra-ui/react";
 import ReportVo from "../../vos/ReportVo";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../states/Breadcrumbs";
+import ReportTemplateVo from "../../vos/ReportTemplateVo";
 
 interface Props {}
 
 const Report: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [report, setReport] = useState<ReportVo | undefined>(undefined);
+  const [reportTemplates, setReportTemplates] = useState<ReportTemplateVo[]>(
+    []
+  );
+  const [name, setName] = useState<string>("");
+  const [reportTemplateId, setReportTemplateId] = useState<string>("");
 
   const params = useParams();
   const breadcrumbs = useBreadcrumbs();
@@ -23,6 +37,13 @@ const Report: FC<Props> = () => {
       if (id) {
         const _report = await reportsUseCase.report(id);
         setReport(_report);
+        if (_report) {
+          setName(_report.name);
+        }
+      }
+      const reportTemplatesVo = await reportsUseCase.reportTemplates(0, -1);
+      if (reportTemplatesVo) {
+        setReportTemplates(reportTemplatesVo.items);
       }
       breadcrumbs.set([
         {
@@ -78,13 +99,24 @@ const Report: FC<Props> = () => {
             alignItems="center"
             bgColor="gray.50"
           >
-            <Text>{report.name}</Text>
+            <Input value={name} onChange={(e) => setName(e.target.value)} />
           </GridItem>
           <GridItem colSpan={2} h={50} display="flex" alignItems="center">
             <Text fontWeight={600}>Template name</Text>
           </GridItem>
           <GridItem colSpan={3} h={50} display="flex" alignItems="center">
-            <Text>{report.reportTemplateName}</Text>
+            <Select
+              onChange={(e) => setReportTemplateId(e.target.value)}
+              value={reportTemplateId}
+            >
+              {reportTemplates.map((template) => {
+                return (
+                  <option key={template.id} value={template.id}>
+                    {template.name}
+                  </option>
+                );
+              })}
+            </Select>
           </GridItem>
           <GridItem
             colSpan={2}

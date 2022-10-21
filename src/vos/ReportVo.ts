@@ -5,6 +5,7 @@ export interface Props {
   name: string;
   createdAt: number;
   updatedAt: number;
+  reportTemplateId: string;
   reportTemplateName: string;
 }
 
@@ -13,6 +14,7 @@ export default class ReportVo {
   name: string;
   createdAt: number;
   updatedAt: number;
+  reportTemplateId: string;
   reportTemplateName: string;
 
   constructor(props: Props) {
@@ -20,6 +22,7 @@ export default class ReportVo {
     this.name = props.name;
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
+    this.reportTemplateId = props.reportTemplateId;
     this.reportTemplateName = props.reportTemplateName;
   }
 
