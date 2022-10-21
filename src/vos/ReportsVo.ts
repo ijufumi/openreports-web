@@ -10,12 +10,14 @@ export default class ReportsVo extends ListVo {
 
   constructor(props: Props) {
     super(props);
+    this.setItems(props);
   }
 
-  getItems(props: ListProps): Array<ReportVo> {
+  setItems(props: Props): void {
     if (props.items) {
-      return props.items.map((item) => new ReportVo(item));
+      this.items = props.items.map((item) => new ReportVo(item));
+    } else {
+      this.items = [];
     }
-    return [];
   }
 }

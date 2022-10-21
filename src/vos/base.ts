@@ -11,7 +11,7 @@ export interface ListProps {
 }
 
 export abstract class ListVo {
-  items: Array<any>;
+  abstract items: Array<any>;
 
   offset: number;
 
@@ -19,12 +19,11 @@ export abstract class ListVo {
 
   count: number;
 
-  constructor(props: ListProps) {
+  protected constructor(props: ListProps) {
     this.offset = props.offset;
     this.limit = props.limit;
     this.count = props.count;
-    this.items = this.getItems(props);
   }
 
-  abstract getItems(props: ListProps): Array<any>;
+  abstract setItems(props: ListProps): void;
 }
