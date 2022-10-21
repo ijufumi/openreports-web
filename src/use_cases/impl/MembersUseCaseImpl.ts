@@ -13,6 +13,7 @@ class MembersUseCaseImpl implements MembersUseCase {
   logout = async () => {
     await this.repository.logout();
     credentials.removeToken();
+    credentials.removeWorkspaceId();
   };
 
   isLoggedIn = async () => {

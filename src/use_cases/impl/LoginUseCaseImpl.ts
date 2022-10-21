@@ -2,6 +2,7 @@ import LoginUseCase from "../LoginUseCase";
 import LoginRepository from "../../repositories/LoginRepository";
 import RepositoryFactory from "../../repositories/RepositoryFactory";
 import credentials from "../../states/Credentials";
+import UserVo from "../../vos/UserVo";
 
 class LoginUseCaseImpl implements LoginUseCase {
   private repository: LoginRepository;
@@ -28,6 +29,13 @@ class LoginUseCaseImpl implements LoginUseCase {
       credentials.setToken(user.apiToken);
     }
     return user;
+  };
+
+  _updateCredential = (user: UserVo) => {
+    if (user) {
+      credentials.setToken(user.apiToken);
+      credentials.setWorkspaceId(user.workspaces[0].id);
+    }
   };
 }
 

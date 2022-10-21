@@ -12,11 +12,11 @@ class RepositoryFactory {
     return new MembersRepositoryImpl(`${API_ENDPOINT}/members`);
   };
   static createReportRepository = () => {
-    return new ReportsRepositoryImpl(`${API_ENDPOINT}/reports`);
+    return new ReportsRepositoryImpl(`${API_ENDPOINT}/:workspaceId/reports`);
   };
   static createReportTemplateRepository = () => {
     return new ReportTemplatesRepositoryImpl(
-      `${API_ENDPOINT}/report_templates`
+      `${API_ENDPOINT}/:workspaceId/report_templates`
     );
   };
 }

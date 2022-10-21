@@ -58,7 +58,16 @@ abstract class BaseRepository {
     if (auth) {
       baseHeaders = { Authorization: `Bearer ${credentials.getToken()}` };
     }
-    return fetch(`${apiEndpoint}${path}`, {
+
+    let requestEndpoint = `${apiEndpoint}${path}`;
+    if (requestEndpoint.includes(":workspaceId")) {
+      requestEndpoint = requestEndpoint.replace(
+        ":workspaceId",
+        credentials.getWorkspaceId() || ""
+      );
+    }
+
+    return fetch(requestEndpoint, {
       method: method.toString(),
       headers: Object.assign(baseHeaders, header ? header : {}),
       body: body ? JSON.stringify(body) : undefined,
