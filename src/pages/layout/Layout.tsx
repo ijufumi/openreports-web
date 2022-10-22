@@ -17,6 +17,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Select,
 } from "@chakra-ui/react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdKeyboardArrowRight } from "react-icons/md";
@@ -24,6 +25,7 @@ import { CgMenu } from "react-icons/cg";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import logoImg from "../../assets/logo.png";
 import useBreadcrumbs from "../../states/Breadcrumbs";
+import useLoginUser from "../../states/LoginUser";
 
 interface Props {
   children: React.ReactNode;
@@ -33,6 +35,7 @@ const Layout: FC<Props> = observer(({ children }) => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const navigate = useNavigate();
   const breadcrumbs = useBreadcrumbs().get();
+  const loginUser = useLoginUser();
   const membersUseCase = UseCaseFactory.createMembersUseCase();
 
   useEffect(() => {
@@ -109,6 +112,13 @@ const Layout: FC<Props> = observer(({ children }) => {
                 cursor: "pointer",
               }}
             />
+          </Box>
+          <Box>
+            <Select>
+              {loginUser.get()?.workspaces.map((w) => {
+                return <option value={w.id}>{w.name}</option>;
+              })}
+            </Select>
           </Box>
           {breadcrumbs && breadcrumbs.length && (
             <Breadcrumb
