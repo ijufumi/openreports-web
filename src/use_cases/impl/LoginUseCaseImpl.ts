@@ -13,9 +13,7 @@ class LoginUseCaseImpl implements LoginUseCase {
 
   login = async (args: { email: string; password: string }) => {
     const user = await this.repository.login(args);
-    if (user) {
-      credentials.setToken(user.apiToken);
-    }
+    this._updateCredential(user);
     return user;
   };
 
@@ -25,13 +23,11 @@ class LoginUseCaseImpl implements LoginUseCase {
 
   loginWithGoogle = async (args: { code: string }) => {
     const user = await this.repository.loginWithGoogle(args);
-    if (user) {
-      credentials.setToken(user.apiToken);
-    }
+    this._updateCredential(user);
     return user;
   };
 
-  _updateCredential = (user: UserVo) => {
+  _updateCredential = (user: UserVo | undefined) => {
     if (user) {
       credentials.setToken(user.apiToken);
       credentials.setWorkspaceId(user.workspaces[0].id);
