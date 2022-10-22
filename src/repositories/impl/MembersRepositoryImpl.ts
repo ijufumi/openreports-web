@@ -6,10 +6,10 @@ export default class MembersRepositoryImpl
   implements MembersRepository
 {
   logout = async () => {
-    return await this.get({ path: "/logout", auth: true });
+    return await this.get({ path: "/logout" });
   };
 
   status = async () => {
-    return await this.get({ path: "/status", auth: true });
+    return await this.get({ path: "/status" });
   };
 }

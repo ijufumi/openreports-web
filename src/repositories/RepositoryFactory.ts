@@ -9,14 +9,15 @@ class RepositoryFactory {
     return new LoginRepositoryImpl(`${API_ENDPOINT}/login`);
   };
   static createMemberRepository = () => {
-    return new MembersRepositoryImpl(`${API_ENDPOINT}/members`);
+    return new MembersRepositoryImpl(`${API_ENDPOINT}/members`, true);
   };
   static createReportRepository = () => {
-    return new ReportsRepositoryImpl(`${API_ENDPOINT}/reports/:workspaceId`);
+    return new ReportsRepositoryImpl(`${API_ENDPOINT}/reports`, true);
   };
   static createReportTemplateRepository = () => {
     return new ReportTemplatesRepositoryImpl(
-      `${API_ENDPOINT}/report_templates/:workspaceId`
+      `${API_ENDPOINT}/report_templates`,
+      true
     );
   };
 }

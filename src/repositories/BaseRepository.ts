@@ -9,9 +9,11 @@ enum Methods {
 
 abstract class BaseRepository {
   private readonly apiEndpoint: string;
+  private readonly needsAuth: boolean;
 
-  constructor(apiEndpoint: string) {
+  constructor(apiEndpoint: string, needsAuth = false) {
     this.apiEndpoint = apiEndpoint;
+    this.needsAuth = needsAuth;
   }
 
   get = async (args: {
@@ -55,19 +57,14 @@ abstract class BaseRepository {
     header?: Record<string, string>
   ) => {
     let baseHeaders = {};
-    if (auth) {
-      baseHeaders = { Authorization: `Bearer ${credentials.getToken()}` };
+    if (auth || this.needsAuth) {
+      baseHeaders = {
+        Authorization: `Bearer ${credentials.getToken()}`,
+        WorkspaceId: credentials.getWorkspaceId(),
+      };
     }
 
-    let requestEndpoint = `${apiEndpoint}${path}`;
-    if (requestEndpoint.includes(":workspaceId")) {
-      requestEndpoint = requestEndpoint.replace(
-        ":workspaceId",
-        credentials.getWorkspaceId() || ""
-      );
-    }
-
-    return fetch(requestEndpoint, {
+    return fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
       headers: Object.assign(baseHeaders, header ? header : {}),
       body: body ? JSON.stringify(body) : undefined,
