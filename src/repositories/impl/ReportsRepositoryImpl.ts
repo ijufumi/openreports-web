@@ -10,11 +10,17 @@ export default class ReportsRepositoryImpl
   getAll = async (args: { page: number; limit: number }) => {
     const path = `?page=${args.page}&limit=${args.limit}`;
     const result = await this.get({ path });
-    return new ReportsVo(result);
+    if (result) {
+      return new ReportsVo(result);
+    }
+    return undefined;
   };
   getById = async (args: { id: string }) => {
     const result = await this.get({ path: `/${args.id}` });
-    return new ReportVo(result);
+    if (result) {
+      return new ReportVo(result);
+    }
+    return undefined;
   };
   update = async (args: {
     id: string;
@@ -26,6 +32,9 @@ export default class ReportsRepositoryImpl
       path: `/${args.id}`,
       body: { name, reportTemplateId },
     });
-    return new ReportVo(result);
+    if (result) {
+      return new ReportVo(result);
+    }
+    return undefined;
   };
 }

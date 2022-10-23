@@ -81,13 +81,17 @@ abstract class BaseRepository {
       };
     }
 
+    console.info(body);
     return fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
       headers: Object.assign(baseHeaders, header ? header : {}),
       body: body ? JSON.stringify(body) : undefined,
     })
       .then((res) => res.json())
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.error(e);
+        return undefined;
+      });
   };
 }
 

@@ -8,6 +8,8 @@ import {
   Text,
   Input,
   Select,
+  Button,
+  useToast,
 } from "@chakra-ui/react";
 import ReportVo from "../../vos/ReportVo";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
@@ -28,7 +30,8 @@ const Report: FC<Props> = () => {
   const params = useParams();
   const breadcrumbs = useBreadcrumbs();
   const navigate = useNavigate();
-  const id = params.id;
+  const toast = useToast();
+  const id = params.id || "";
 
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
 
@@ -37,10 +40,6 @@ const Report: FC<Props> = () => {
       if (id) {
         const _report = await reportsUseCase.report(id);
         setReport(_report);
-        if (_report) {
-          setName(_report.name);
-          setReportTemplateId(_report.reportTemplateId);
-        }
       }
       const reportTemplatesVo = await reportsUseCase.reportTemplates(0, -1);
       if (reportTemplatesVo) {
@@ -52,13 +51,46 @@ const Report: FC<Props> = () => {
           title: "Reports",
         },
         {
-          title: id || "",
+          title: id,
         },
       ]);
       setInitialized(true);
     };
     initialize();
   }, [id]);
+
+  useEffect(() => {
+    if (report) {
+      setName(report.name);
+      setReportTemplateId(report.reportTemplateId);
+    }
+  }, [report]);
+
+  const handleUpdate = async () => {
+    const _report = await reportsUseCase.updateReport(
+      id,
+      name,
+      reportTemplateId
+    );
+    if (_report) {
+      setReport(_report);
+      toast({
+        title: "Report updated.",
+        description: "You've finished updating report well.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: "Report didn't updated.",
+        description: "You couldn't update report because of errors.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
 
   if (!initialized) {
     return null;
@@ -144,6 +176,9 @@ const Report: FC<Props> = () => {
             <Text>{report.formattedUpdatedAt}</Text>
           </GridItem>
         </Grid>
+        <Box mt={1} display="flex" justifyContent="flex-end">
+          <Button onClick={handleUpdate}>Update</Button>
+        </Box>
       </Box>
     </HStack>
   );
