@@ -48,6 +48,23 @@ abstract class BaseRepository {
     );
   };
 
+  put = async (args: {
+    path: string;
+    auth?: boolean;
+    headers?: Record<string, string>;
+    body?: object;
+  }) => {
+    const baseHeaders = { "Content-Type": "application/json;charset=utf-8" };
+    return await this._request(
+      Methods.Put,
+      this.apiEndpoint,
+      args.path,
+      args.auth,
+      args.body,
+      Object.assign(baseHeaders, args.headers ? args.headers : {})
+    );
+  };
+
   _request = async (
     method: Methods,
     apiEndpoint: string,

@@ -5,4 +5,10 @@ export default interface ReportsRepository {
   getAll(args: { page: number; limit: number }): Promise<ReportsVo | undefined>;
 
   getById(args: { id: string }): Promise<ReportVo | undefined>;
+
+  update(args: {
+    id: string;
+    name: string;
+    reportTemplateId: string;
+  }): Promise<ReportVo | undefined>;
 }
