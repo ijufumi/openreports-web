@@ -39,6 +39,7 @@ const Report: FC<Props> = () => {
         setReport(_report);
         if (_report) {
           setName(_report.name);
+          setReportTemplateId(_report.reportTemplateId);
         }
       }
       const reportTemplatesVo = await reportsUseCase.reportTemplates(0, -1);
