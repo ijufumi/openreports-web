@@ -13,6 +13,7 @@ import {
   Text,
   Image,
   Divider,
+  useToast,
 } from "@chakra-ui/react";
 import { MdOutlineEmail } from "react-icons/md";
 import { CgPassword } from "react-icons/cg";
@@ -29,6 +30,7 @@ const Login: FC<Props> = () => {
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
+  const toast = useToast();
   const loginUseCase = UseCaseFactory.createLoginUseCase();
 
   const handleLogin = async () => {
@@ -36,6 +38,14 @@ const Login: FC<Props> = () => {
     if (member) {
       navigation("/top");
       return;
+    } else {
+      toast({
+        title: "Login failed.",
+        description: "You couldn't logged in report because of some errors.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
@@ -43,6 +53,14 @@ const Login: FC<Props> = () => {
     const googleUrl = await loginUseCase.getGoogleLoginUrl();
     if (googleUrl != undefined) {
       window.location.replace(googleUrl.url);
+    } else {
+      toast({
+        title: "Google login failed.",
+        description: "You couldn't logged in report because of some errors.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
   return (
