@@ -3,6 +3,7 @@ import MembersRepository from "../../repositories/MembersRepository";
 import RepositoryFactory from "../../repositories/RepositoryFactory";
 import credentials from "../../states/Credentials";
 import useLoginUser from "../../states/LoginUser";
+import UserVo from "../../vos/UserVo";
 
 class MembersUseCaseImpl implements MembersUseCase {
   private repository: MembersRepository;
@@ -28,8 +29,16 @@ class MembersUseCaseImpl implements MembersUseCase {
     if (!user) {
       return false;
     }
-    credentials.setToken(user.apiToken);
+    this._updateCredential(user);
     return true;
+  };
+
+  _updateCredential = (user: UserVo | undefined) => {
+    if (user) {
+      credentials.setToken(user.apiToken);
+      credentials.setWorkspaceId(user.workspaces[0].id);
+      this.loginUser.set(user);
+    }
   };
 }
 
