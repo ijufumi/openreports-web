@@ -39,6 +39,9 @@ const Layout: FC<Props> = observer(({ children }) => {
   const membersUseCase = UseCaseFactory.createMembersUseCase();
 
   useEffect(() => {
+    if (initialized) {
+      return;
+    }
     const initialize = async () => {
       const isLoggedIn = await membersUseCase.isLoggedIn();
       if (!isLoggedIn) {
