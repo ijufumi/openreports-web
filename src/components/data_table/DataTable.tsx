@@ -39,8 +39,8 @@ type OnChangeType = (pageIndex: number, pageSize: number) => void;
 
 interface Props {
   columns: Array<ColumnDef<any>>;
-  pageSizes: Array<number>;
-  defaultPageSize: number;
+  pageSizes?: Array<number>;
+  defaultPageSize?: number;
   data: Array<any>;
   totalCount: number;
   onChange: OnChangeType;
@@ -48,8 +48,8 @@ interface Props {
 
 const DataTable: FC<Props> = ({
   columns,
-  pageSizes,
-  defaultPageSize,
+  pageSizes = [10, 20, 30],
+  defaultPageSize = 10,
   data,
   totalCount,
   onChange,
