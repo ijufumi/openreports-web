@@ -1,5 +1,3 @@
-import ReportTemplateVo from "./ReportTemplateVo";
-
 export interface ListProps {
   items: Array<any>;
 
