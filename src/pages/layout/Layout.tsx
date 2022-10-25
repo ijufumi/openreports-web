@@ -90,7 +90,9 @@ const Layout: FC<Props> = observer(({ children }) => {
                 <MenuItem onClick={() => handleClick("/reports")}>
                   Report
                 </MenuItem>
-                <MenuItem>Template</MenuItem>
+                <MenuItem onClick={() => handleClick("/report_templates")}>
+                  Template
+                </MenuItem>
                 <MenuItem>Parameters</MenuItem>
                 <MenuItem>Groups</MenuItem>
                 <MenuItem>Scheduling</MenuItem>

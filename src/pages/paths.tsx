@@ -8,6 +8,7 @@ import GoogleAuthError from "./errors/GoogleAuthError";
 import NotfoundError from "./errors/NotfoundError";
 import Reports from "./reports/Reports";
 import Report from "./report/Report";
+import ReportTemplates from "./report_templates/ReportTemplates";
 
 export interface Path {
   path: string;
@@ -32,7 +33,6 @@ export const usePublicPath = () => {
 };
 
 export const useAuthorizedPath = () => {
-  const params = useParams();
   return [
     {
       path: "/top",
@@ -45,6 +45,10 @@ export const useAuthorizedPath = () => {
     {
       path: "/reports/:id",
       element: <Report />,
+    },
+    {
+      path: "/report_templates",
+      element: <ReportTemplates />,
     },
   ];
 };
