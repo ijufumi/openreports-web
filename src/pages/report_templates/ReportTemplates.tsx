@@ -32,7 +32,7 @@ const ReportTemplates: FC<Props> = () => {
       setInitialized(true);
       breadcrumbs.set([
         {
-          title: "ReportTemplates",
+          title: "Templates",
         },
       ]);
     };
