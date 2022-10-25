@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import Login from "./login/Login";
 import GoogleCallback from "./google_callback/GoogleCallback";
