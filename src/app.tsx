@@ -35,7 +35,13 @@ const App: FC<Props> = () => {
       <Route
         key={path}
         path={path}
-        element={includeLayout ? <LayoutRoute>{element}</LayoutRoute> : element}
+        element={
+          includeLayout ? (
+            <LayoutRoute key={path}>{element}</LayoutRoute>
+          ) : (
+            element
+          )
+        }
       />
     );
   };

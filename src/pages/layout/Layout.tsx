@@ -86,7 +86,7 @@ const Layout: FC<Props> = observer(({ children }) => {
               variant={"icon"}
             />
             <MenuList>
-              <MenuGroup title={"Reporting"}>
+              <MenuGroup key="reporting" title={"Reporting"}>
                 <MenuItem onClick={() => handleClick("/reports")}>
                   Report
                 </MenuItem>
@@ -98,7 +98,7 @@ const Layout: FC<Props> = observer(({ children }) => {
                 <MenuItem>Scheduling</MenuItem>
               </MenuGroup>
               <MenuDivider />
-              <MenuGroup title={"Setting"}>
+              <MenuGroup key="setting" title={"Setting"}>
                 <MenuItem>Workspace</MenuItem>
                 <MenuItem>DataSource</MenuItem>
                 <MenuItem>Logs</MenuItem>
@@ -121,7 +121,11 @@ const Layout: FC<Props> = observer(({ children }) => {
           <Box>
             <Select>
               {loginUser.get()?.workspaces.map((w) => {
-                return <option value={w.id}>{w.name}</option>;
+                return (
+                  <option key={w.id} value={w.id}>
+                    {w.name}
+                  </option>
+                );
               })}
             </Select>
           </Box>
