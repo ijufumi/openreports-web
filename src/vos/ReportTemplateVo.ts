@@ -4,6 +4,8 @@ export interface Props {
   id: string;
   name: string;
   filePath: string;
+  storageType: string;
+  fileSize: number;
   createdAt: number;
   updatedAt: number;
 }
@@ -12,6 +14,8 @@ export default class ReportTemplateVo {
   readonly id: string;
   readonly name: string;
   readonly filePath: string;
+  readonly storageType: string;
+  readonly fileSize: number;
   readonly createdAt: number;
   readonly updatedAt: number;
 
@@ -19,6 +23,8 @@ export default class ReportTemplateVo {
     this.id = props.id;
     this.name = props.name;
     this.filePath = props.filePath;
+    this.storageType = props.storageType;
+    this.fileSize = props.fileSize;
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
   }

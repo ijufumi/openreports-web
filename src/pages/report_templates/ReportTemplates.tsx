@@ -78,6 +78,14 @@ const ReportTemplates: FC<Props> = () => {
       header: "Name",
       cell: (props) => props.getValue(),
     }),
+    columnHelper.accessor("storageType", {
+      header: "StorageType",
+      cell: (props) => props.getValue(),
+    }),
+    columnHelper.accessor("fileSize", {
+      header: "Size",
+      cell: (props) => props.getValue(),
+    }),
     columnHelper.accessor("formattedCreatedAt", {
       header: "Created at",
       cell: (props) => props.getValue(),
