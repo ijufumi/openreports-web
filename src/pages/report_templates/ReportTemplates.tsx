@@ -79,7 +79,7 @@ const ReportTemplates: FC<Props> = () => {
       cell: (props) => props.getValue(),
     }),
     columnHelper.accessor("storageType", {
-      header: "StorageType",
+      header: "Storage Type",
       cell: (props) => props.getValue(),
     }),
     columnHelper.accessor("fileSize", {
