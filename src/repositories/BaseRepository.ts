@@ -65,13 +65,30 @@ abstract class BaseRepository {
     );
   };
 
+  download = async (args: {
+    path: string;
+    auth?: boolean;
+    headers?: Record<string, string>;
+  }) => {
+    return await this._request(
+      Methods.Get,
+      this.apiEndpoint,
+      args.path,
+      args.auth,
+      undefined,
+      args.headers,
+      true
+    );
+  };
+
   _request = async (
     method: Methods,
     apiEndpoint: string,
     path: string,
     auth?: boolean,
     body?: object,
-    header?: Record<string, string>
+    header?: Record<string, string>,
+    asBlob?: boolean
   ) => {
     let baseHeaders = {};
     if (auth || this.needsAuth) {
@@ -81,13 +98,12 @@ abstract class BaseRepository {
       };
     }
 
-    console.info(body);
     return fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
       headers: Object.assign(baseHeaders, header ? header : {}),
       body: body ? JSON.stringify(body) : undefined,
     })
-      .then((res) => res.json())
+      .then((res) => (asBlob ? res.blob() : res.json()))
       .catch((e) => {
         console.error(e);
         return undefined;

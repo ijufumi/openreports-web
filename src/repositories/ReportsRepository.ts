@@ -11,4 +11,6 @@ export default interface ReportsRepository {
     name: string;
     reportTemplateId: string;
   }): Promise<ReportVo | undefined>;
+
+  output(args: { id: string }): Promise<Blob | undefined>;
 }

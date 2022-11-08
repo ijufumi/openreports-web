@@ -15,6 +15,7 @@ export default class ReportsRepositoryImpl
     }
     return undefined;
   };
+
   getById = async (args: { id: string }) => {
     const result = await this.get({ path: `/${args.id}` });
     if (result) {
@@ -22,6 +23,7 @@ export default class ReportsRepositoryImpl
     }
     return undefined;
   };
+
   update = async (args: {
     id: string;
     name: string;
@@ -36,5 +38,9 @@ export default class ReportsRepositoryImpl
       return new ReportVo(result);
     }
     return undefined;
+  };
+
+  output = async (args: { id: string }) => {
+    return await this.download({ path: `/outputs/${args.id}` });
   };
 }
