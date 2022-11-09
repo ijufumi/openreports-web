@@ -21,6 +21,10 @@ export default class ReportsUseCaseImpl implements ReportsUseCase {
     return await this.reportsRepository.getById({ id });
   };
 
+  outputReport = async (id: string) => {
+    return await this.reportsRepository.output({ id });
+  };
+
   updateReport = async (id: string, name: string, reportTemplateId: string) => {
     return await this.reportsRepository.update({ id, name, reportTemplateId });
   };

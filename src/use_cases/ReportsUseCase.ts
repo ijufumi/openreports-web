@@ -8,6 +8,8 @@ export default interface ReportsUseCase {
 
   report(id: string): Promise<ReportVo | undefined>;
 
+  outputReport(id: string): Promise<Blob | undefined>;
+
   updateReport(
     id: string,
     name: string,
