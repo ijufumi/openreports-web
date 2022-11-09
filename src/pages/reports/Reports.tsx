@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { HStack, Link } from "@chakra-ui/react";
+import { HStack, Link, Wrap, WrapItem, Button } from "@chakra-ui/react";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import ReportsVo from "../../vos/ReportsVo";
 import ReportVo from "../../vos/ReportVo";
@@ -84,6 +84,21 @@ const Reports: FC<Props> = () => {
     columnHelper.accessor("formattedUpdatedAt", {
       header: "Updated at",
       cell: (props) => props.getValue(),
+    }),
+    columnHelper.display({
+      header: "Actions",
+      cell: (props) => {
+        return (
+          <Wrap spacing={1}>
+            <WrapItem>
+              <Button>Output</Button>
+            </WrapItem>
+            <WrapItem>
+              <Button>Delete</Button>
+            </WrapItem>
+          </Wrap>
+        );
+      },
     }),
   ] as ColumnDef<ReportVo>[];
 
