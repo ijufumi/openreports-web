@@ -9,7 +9,7 @@ export default class ReportsRepositoryImpl
 {
   getAll = async (args: { page: number; limit: number }) => {
     const path = `?page=${args.page}&limit=${args.limit}`;
-    const result = await this.get({ path });
+    const result = await this._get({ path });
     if (result) {
       return new ReportsVo(result);
     }
@@ -17,7 +17,7 @@ export default class ReportsRepositoryImpl
   };
 
   getById = async (args: { id: string }) => {
-    const result = await this.get({ path: `/${args.id}` });
+    const result = await this._get({ path: `/${args.id}` });
     if (result) {
       return new ReportVo(result);
     }
@@ -30,7 +30,7 @@ export default class ReportsRepositoryImpl
     reportTemplateId: string;
   }) => {
     const { name, reportTemplateId } = args;
-    const result = await this.put({
+    const result = await this._put({
       path: `/${args.id}`,
       body: { name, reportTemplateId },
     });
@@ -41,6 +41,10 @@ export default class ReportsRepositoryImpl
   };
 
   output = async (args: { id: string }) => {
-    return await this.download({ path: `/outputs/${args.id}` });
+    return await this._download({ path: `/outputs/${args.id}` });
+  };
+
+  delete = async (args: { id: string }) => {
+    return await this._delete({ path: `/${args.id}` });
   };
 }

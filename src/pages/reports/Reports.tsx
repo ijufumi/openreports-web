@@ -44,6 +44,17 @@ const Reports: FC<Props> = () => {
     }
   };
 
+  const handleOutput = async (id: string) => {
+    const data = await reportsUseCase.outputReport(id);
+    if (data) {
+      console.warn(data);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    await reportsUseCase.deleteReport(id);
+  };
+
   const handleClick = (id: string) => {
     navigate(`/reports/${id}`);
   };
@@ -91,10 +102,14 @@ const Reports: FC<Props> = () => {
         return (
           <Wrap spacing={1}>
             <WrapItem>
-              <Button>Output</Button>
+              <Button onClick={() => handleClick(props.row.getValue("id"))}>
+                Output
+              </Button>
             </WrapItem>
             <WrapItem>
-              <Button>Delete</Button>
+              <Button onClick={() => handleDelete(props.row.getValue("id"))}>
+                Delete
+              </Button>
             </WrapItem>
           </Wrap>
         );

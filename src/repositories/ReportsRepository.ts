@@ -13,4 +13,6 @@ export default interface ReportsRepository {
   }): Promise<ReportVo | undefined>;
 
   output(args: { id: string }): Promise<Blob | undefined>;
+
+  delete(args: { id: string }): Promise<void>;
 }

@@ -25,6 +25,10 @@ export default class ReportsUseCaseImpl implements ReportsUseCase {
     return await this.reportsRepository.output({ id });
   };
 
+  deleteReport = async (id: string) => {
+    return await this.reportsRepository.delete({ id });
+  };
+
   updateReport = async (id: string, name: string, reportTemplateId: string) => {
     return await this.reportsRepository.update({ id, name, reportTemplateId });
   };

@@ -16,7 +16,7 @@ abstract class BaseRepository {
     this.needsAuth = needsAuth;
   }
 
-  get = async (args: {
+  _get = async (args: {
     path: string;
     auth?: boolean;
     headers?: Record<string, string>;
@@ -31,7 +31,22 @@ abstract class BaseRepository {
     );
   };
 
-  post = async (args: {
+  _delete = async (args: {
+    path: string;
+    auth?: boolean;
+    headers?: Record<string, string>;
+  }) => {
+    return await this._request(
+      Methods.Delete,
+      this.apiEndpoint,
+      args.path,
+      args.auth,
+      undefined,
+      args.headers
+    );
+  };
+
+  _post = async (args: {
     path: string;
     auth?: boolean;
     headers?: Record<string, string>;
@@ -48,7 +63,7 @@ abstract class BaseRepository {
     );
   };
 
-  put = async (args: {
+  _put = async (args: {
     path: string;
     auth?: boolean;
     headers?: Record<string, string>;
@@ -65,7 +80,7 @@ abstract class BaseRepository {
     );
   };
 
-  download = async (args: {
+  _download = async (args: {
     path: string;
     auth?: boolean;
     headers?: Record<string, string>;

@@ -16,6 +16,8 @@ export default interface ReportsUseCase {
     reportTemplateId: string
   ): Promise<ReportVo | undefined>;
 
+  deleteReport(id: string): Promise<void>;
+
   reportTemplates(
     page: number,
     limit: number
