@@ -4779,7 +4779,7 @@ react-devtools-core@4.26.1:
     shell-quote "^1.6.1"
     ws "^7"
 
-react-devtools@^4.26.0:
+react-devtools@^4.26.1:
   version "4.26.1"
   resolved "https://registry.yarnpkg.com/react-devtools/-/react-devtools-4.26.1.tgz#dc3095e2506bf7f6844c4b061b439e8aae020885"
   integrity sha512-WRcGPDQpuooI6UgBsyTy2KE89ekPnWwWepKZcBF1bpVmdKUqWMLEkYKBX0kWyL6Y2Yqyg8xwhn21yEI3xtWZkA==
