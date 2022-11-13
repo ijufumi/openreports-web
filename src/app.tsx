@@ -59,7 +59,7 @@ const App: FC<Props> = () => {
             width: "100vw",
             zIndex: 1000,
           }}
-          bgColor="blackAlpha.200"
+          bgColor="blackAlpha.400"
           alignItems="center"
           justifyContent="center"
         >
