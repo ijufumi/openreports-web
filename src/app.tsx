@@ -1,6 +1,7 @@
 import React, { FC, ReactNode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Box, Flex } from "@chakra-ui/react";
+import { Blocks } from "react-loader-spinner";
 
 import theme from "./config/theme";
 import Layout from "./pages/layout/Layout";
@@ -47,21 +48,45 @@ const App: FC<Props> = () => {
   };
 
   return (
-    <ChakraProvider theme={theme}>
-      <BrowserRouter>
-        <Routes>
-          {publicPaths.map((path: Path) => {
-            return renderRoute(path.path, path.element, false);
-          })}
-          {errorsPaths.map((path: Path) => {
-            return renderRoute(path.path, path.element, false);
-          })}
-          {authorizedPaths.map((path: Path) => {
-            return renderRoute(path.path, path.element, true);
-          })}
-        </Routes>
-      </BrowserRouter>
-    </ChakraProvider>
+    <Box sx={{ position: "relative" }}>
+      <ChakraProvider theme={theme}>
+        <Flex
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            height: "100vh",
+            width: "100vw",
+            zIndex: 1000,
+          }}
+          bgColor="blackAlpha.200"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Blocks
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+          />
+        </Flex>
+        <BrowserRouter>
+          <Routes>
+            {publicPaths.map((path: Path) => {
+              return renderRoute(path.path, path.element, false);
+            })}
+            {errorsPaths.map((path: Path) => {
+              return renderRoute(path.path, path.element, false);
+            })}
+            {authorizedPaths.map((path: Path) => {
+              return renderRoute(path.path, path.element, true);
+            })}
+          </Routes>
+        </BrowserRouter>
+      </ChakraProvider>
+    </Box>
   );
 };
 
