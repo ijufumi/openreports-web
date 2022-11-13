@@ -1,11 +1,20 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { HStack, Link, Wrap, WrapItem, Button } from "@chakra-ui/react";
+import {
+  HStack,
+  Link,
+  Wrap,
+  WrapItem,
+  Icon,
+  IconButton,
+  Tooltip,
+} from "@chakra-ui/react";
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
+import { GrDocumentPdf, GrTrash } from "react-icons/gr";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import ReportsVo from "../../vos/ReportsVo";
 import ReportVo from "../../vos/ReportVo";
 import DataTable from "../../components/data_table/DataTable";
-import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 
 interface Props {}
@@ -99,17 +108,31 @@ const Reports: FC<Props> = () => {
     columnHelper.display({
       header: "Actions",
       cell: (props) => {
+        const reportId = props.row.getValue("id") as string;
+        if (!reportId) {
+          return undefined;
+        }
         return (
-          <Wrap spacing={1}>
+          <Wrap spacing={5}>
             <WrapItem>
-              <Button onClick={() => handleClick(props.row.getValue("id"))}>
-                Output
-              </Button>
+              <Tooltip label="Output report">
+                <IconButton
+                  icon={<Icon as={GrDocumentPdf} />}
+                  variant="actions"
+                  aria-label="output"
+                  onClick={() => handleOutput(reportId)}
+                />
+              </Tooltip>
             </WrapItem>
             <WrapItem>
-              <Button onClick={() => handleDelete(props.row.getValue("id"))}>
-                Delete
-              </Button>
+              <Tooltip label="Delete report">
+                <IconButton
+                  icon={<Icon as={GrTrash} />}
+                  variant="actions"
+                  aria-label="output"
+                  onClick={() => handleDelete(reportId)}
+                />
+              </Tooltip>
             </WrapItem>
           </Wrap>
         );

@@ -22,6 +22,11 @@ const theme = extendTheme({
           borderWidth: "1px",
           borderRadius: "6px",
         },
+        actions: {
+          minWidth: "30px !important",
+          minHeight: "20px !important",
+          borderRadius: "6px",
+        },
       },
     },
   },
