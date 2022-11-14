@@ -2,7 +2,9 @@ import React, { FC, ReactNode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChakraProvider, Box, Flex } from "@chakra-ui/react";
 import { Blocks } from "react-loader-spinner";
+import { observer } from "mobx-react";
 
+import useLoader from "./states/Loader";
 import theme from "./config/theme";
 import Layout from "./pages/layout/Layout";
 import {
@@ -22,10 +24,11 @@ const LayoutRoute: FC<LayoutRouteProps> = ({ children }) => {
 
 interface Props {}
 
-const App: FC<Props> = () => {
+const App: FC<Props> = observer(() => {
   const publicPaths = usePublicPath();
   const authorizedPaths = useAuthorizedPath();
   const errorsPaths = useErrorsPath();
+  const loader = useLoader();
 
   const renderRoute = (
     path: string,
@@ -58,6 +61,7 @@ const App: FC<Props> = () => {
             height: "100vh",
             width: "100vw",
             zIndex: 1000,
+            display: loader.isVisible() ? "block" : "none",
           }}
           bgColor="blackAlpha.400"
           alignItems="center"
@@ -88,6 +92,6 @@ const App: FC<Props> = () => {
       </Box>
     </ChakraProvider>
   );
-};
+});
 
 export default App;
