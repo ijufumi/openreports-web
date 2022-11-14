@@ -48,8 +48,8 @@ const App: FC<Props> = () => {
   };
 
   return (
-    <Box sx={{ position: "relative" }}>
-      <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme}>
+      <Box sx={{ position: "relative" }}>
         <Flex
           sx={{
             position: "absolute",
@@ -85,8 +85,8 @@ const App: FC<Props> = () => {
             })}
           </Routes>
         </BrowserRouter>
-      </ChakraProvider>
-    </Box>
+      </Box>
+    </ChakraProvider>
   );
 };
 
