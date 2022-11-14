@@ -61,7 +61,7 @@ const App: FC<Props> = observer(() => {
             height: "100vh",
             width: "100vw",
             zIndex: 1000,
-            display: loader.isVisible() ? "block" : "none",
+            display: loader.isVisible() ? "flex" : "none",
           }}
           bgColor="blackAlpha.400"
           alignItems="center"
