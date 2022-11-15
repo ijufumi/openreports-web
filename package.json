@@ -10,7 +10,6 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@tanstack/react-table": "^8.5.28",
-    "@types/react-dom": "^18.0.9",
     "framer-motion": "^7.6.7",
     "history": "^5.3.0",
     "mobx": "^6.7.0",
@@ -25,6 +24,7 @@
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
+    "@types/react-dom": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
     "dotenv-webpack": "^8.0.1",
