@@ -2,11 +2,12 @@
 
 ## Technical Stack
 
- | Name        | Version     | Usage          |
- |-------------|-------------|----------------|
- | React       | 18          | All of them    |
- | Chakra UI   | 2.3.4       | UI             |
- | React Table | 8.5.15      | Headless table |
+ | Name        | Version | Usage          |
+ |---------|----------------|----------------|
+ | Typescript  | 4.9.3  | Language       |
+ | React       | 18      | All of them    |
+ | Chakra UI   | 2.4.1   | UI             |
+ | React Table | 8.5.28  | Headless table |
 
 ## Package structure
 
