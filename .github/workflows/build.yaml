@@ -5,6 +5,7 @@ on:
       - '**/*.tsx'
       - 'package.json'
       - 'yarn.lock'
+      - '.github/workflows/build.yaml'
 
 jobs:
   integrate:
