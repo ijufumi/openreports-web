@@ -53,29 +53,30 @@ const App: FC<Props> = observer(() => {
   return (
     <ChakraProvider theme={theme}>
       <Box sx={{ position: "relative" }}>
-        <Flex
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            height: "100vh",
-            width: "100vw",
-            zIndex: 1000,
-            display: loader.isVisible() ? "flex" : "none",
-          }}
-          bgColor="blackAlpha.400"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Blocks
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="blocks-loading"
-            wrapperStyle={{}}
-            wrapperClass="blocks-wrapper"
-          />
-        </Flex>
+        {loader.isVisible() && (
+          <Flex
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              height: "100vh",
+              width: "100vw",
+              zIndex: 1000,
+            }}
+            bgColor="blackAlpha.400"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Blocks
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+            />
+          </Flex>
+        )}
         <BrowserRouter>
           <Routes>
             {publicPaths.map((path: Path) => {
