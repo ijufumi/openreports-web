@@ -43,6 +43,7 @@
   "scripts": {
     "start": "npx webpack serve",
     "build": "npx webpack --mode production",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "npx eslint"
   }
 }
