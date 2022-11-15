@@ -1,7 +1,10 @@
-n:
+on:
   push:
-    paths-ignore:
-      - '**/*.md'
+    paths:
+      - '**/*.ts'
+      - '**/*.tsx'
+      - 'package.json'
+      - 'yarn.lock'
 
 jobs:
   integrate:
