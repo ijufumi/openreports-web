@@ -28,26 +28,60 @@ export default class ReportsUseCaseImpl
   };
 
   report = async (id: string) => {
-    return await this.reportsRepository.getById({ id });
+    try {
+      this.startLoader();
+      return await this.reportsRepository.getById({ id });
+    } finally {
+      this.stopLoader();
+    }
   };
 
   outputReport = async (id: string) => {
-    return await this.reportsRepository.output({ id });
+    try {
+      this.startLoader();
+      return await this.reportsRepository.output({ id });
+    } finally {
+      this.stopLoader();
+    }
   };
 
   deleteReport = async (id: string) => {
-    return await this.reportsRepository.delete({ id });
+    try {
+      this.startLoader();
+      return await this.reportsRepository.delete({ id });
+    } finally {
+      this.stopLoader();
+    }
   };
 
   updateReport = async (id: string, name: string, reportTemplateId: string) => {
-    return await this.reportsRepository.update({ id, name, reportTemplateId });
+    try {
+      this.startLoader();
+      return await this.reportsRepository.update({
+        id,
+        name,
+        reportTemplateId,
+      });
+    } finally {
+      this.stopLoader();
+    }
   };
 
   reportTemplates = async (page: number, limit: number) => {
-    return await this.reportTemplatesRepository.getAll({ page, limit });
+    try {
+      this.startLoader();
+      return await this.reportTemplatesRepository.getAll({ page, limit });
+    } finally {
+      this.stopLoader();
+    }
   };
 
   reportTemplate = async (id: string) => {
-    return await this.reportTemplatesRepository.getById({ id });
+    try {
+      this.startLoader();
+      return await this.reportTemplatesRepository.getById({ id });
+    } finally {
+      this.stopLoader();
+    }
   };
 }

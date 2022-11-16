@@ -4,12 +4,14 @@ import RepositoryFactory from "../../repositories/RepositoryFactory";
 import credentials from "../../states/Credentials";
 import useLoginUser from "../../states/LoginUser";
 import UserVo from "../../vos/UserVo";
+import UseCaseBase from "./UseCaseBase";
 
-class MembersUseCaseImpl implements MembersUseCase {
+class MembersUseCaseImpl extends UseCaseBase implements MembersUseCase {
   private repository: MembersRepository;
   private loginUser;
 
   constructor() {
+    super();
     this.repository = RepositoryFactory.createMemberRepository();
     this.loginUser = useLoginUser();
   }
