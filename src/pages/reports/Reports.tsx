@@ -8,6 +8,7 @@ import {
   Icon,
   IconButton,
   Tooltip,
+  useToast,
 } from "@chakra-ui/react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { GrDocumentPdf, GrTrash } from "react-icons/gr";
@@ -26,6 +27,7 @@ const Reports: FC<Props> = () => {
   const navigate = useNavigate();
   const breadcrumbs = useBreadcrumbs();
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
+  const toast = useToast();
 
   useEffect(() => {
     if (initialized) {
@@ -57,6 +59,14 @@ const Reports: FC<Props> = () => {
     const data = await reportsUseCase.outputReport(id);
     if (data) {
       console.warn(data);
+    } else {
+      toast({
+        title: "Report didn't output.",
+        description: "You couldn't output report because of errors.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
