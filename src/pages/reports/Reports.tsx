@@ -17,6 +17,8 @@ import ReportsVo from "../../vos/ReportsVo";
 import ReportVo from "../../vos/ReportVo";
 import DataTable from "../../components/data_table/DataTable";
 import useBreadcrumbs from "../../states/Breadcrumbs";
+import DownloadUtils from "../../components/utils/DownloadUtils";
+import DateUtils from "../../components/utils/DateUtils";
 
 interface Props {}
 
@@ -58,7 +60,10 @@ const Reports: FC<Props> = () => {
   const handleOutput = async (id: string) => {
     const data = await reportsUseCase.outputReport(id);
     if (data) {
-      console.warn(data);
+      const fileName = `sample-${DateUtils.nowAsString(
+        "YYYYMMDD-HHmmss"
+      )}.xlsx`;
+      DownloadUtils.download(data, fileName);
     } else {
       toast({
         title: "Report didn't output.",
