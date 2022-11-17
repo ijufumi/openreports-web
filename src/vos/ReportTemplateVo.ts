@@ -1,4 +1,4 @@
-import DateUtil from "../components/utils/DateUtil";
+import DateUtils from "../components/utils/DateUtils";
 
 export interface Props {
   id: string;
@@ -30,10 +30,10 @@ export default class ReportTemplateVo {
   }
 
   get formattedCreatedAt() {
-    return DateUtil.format(this.createdAt);
+    return DateUtils.format(this.createdAt);
   }
 
   get formattedUpdatedAt() {
-    return DateUtil.format(this.updatedAt);
+    return DateUtils.format(this.updatedAt);
   }
 }
