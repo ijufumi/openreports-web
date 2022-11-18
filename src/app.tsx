@@ -6,7 +6,7 @@ import { observer } from "mobx-react";
 
 import useLoader from "./states/Loader";
 import theme from "./config/theme";
-import Layout from "./pages/layout/Layout";
+import Layout from "./pages/layout";
 import {
   Path,
   usePublicPath,
