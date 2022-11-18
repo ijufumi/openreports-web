@@ -13,14 +13,14 @@ import {
   WrapItem,
   useToast,
 } from "@chakra-ui/react";
-import ReportVo from "../../vos/ReportVo";
-import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import useBreadcrumbs from "../../states/Breadcrumbs";
-import ReportTemplateVo from "../../vos/ReportTemplateVo";
+import ReportVo from "../../../vos/ReportVo";
+import UseCaseFactory from "../../../use_cases/UseCaseFactory";
+import useBreadcrumbs from "../../../states/Breadcrumbs";
+import ReportTemplateVo from "../../../vos/ReportTemplateVo";
 
 interface Props {}
 
-const Report: FC<Props> = () => {
+const ReportEdit: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [report, setReport] = useState<ReportVo | undefined>(undefined);
   const [reportTemplates, setReportTemplates] = useState<ReportTemplateVo[]>(
@@ -77,7 +77,7 @@ const Report: FC<Props> = () => {
     if (_report) {
       setReport(_report);
       toast({
-        title: "Report updated.",
+        title: "Edit updated.",
         description: "You've finished updating report well.",
         status: "success",
         duration: 3000,
@@ -85,7 +85,7 @@ const Report: FC<Props> = () => {
       });
     } else {
       toast({
-        title: "Report didn't updated.",
+        title: "Edit didn't updated.",
         description: "You couldn't update report because of errors.",
         status: "error",
         duration: 3000,
@@ -199,4 +199,4 @@ const Report: FC<Props> = () => {
   );
 };
 
-export default Report;
+export default ReportEdit;

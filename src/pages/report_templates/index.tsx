@@ -10,7 +10,7 @@ import DataTable from "../../components/data_table/DataTable";
 
 interface Props {}
 
-const ReportTemplates: FC<Props> = () => {
+const ReportsTemplates: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [reportTemplates, setReportTemplates] = useState<
     ReportTemplatesVo | undefined
@@ -108,4 +108,4 @@ const ReportTemplates: FC<Props> = () => {
   );
 };
 
-export default ReportTemplates;
+export default ReportsTemplates;

@@ -43,7 +43,7 @@ const Reports: FC<Props> = () => {
       setInitialized(true);
       breadcrumbs.set([
         {
-          title: "Reports",
+          title: "Index",
         },
       ]);
     };
@@ -66,7 +66,7 @@ const Reports: FC<Props> = () => {
       DownloadUtils.download(data, fileName);
     } else {
       toast({
-        title: "Report didn't output.",
+        title: "Edit didn't output.",
         description: "You couldn't output report because of errors.",
         status: "error",
         duration: 3000,

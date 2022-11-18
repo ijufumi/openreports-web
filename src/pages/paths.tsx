@@ -1,14 +1,14 @@
 import React, { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
-import Login from "./login/Login";
-import GoogleCallback from "./google_callback/GoogleCallback";
-import Top from "./top/Top";
-import GoogleAuthError from "./errors/GoogleAuthError";
-import NotfoundError from "./errors/NotfoundError";
-import Reports from "./reports/Reports";
-import Report from "./report/Report";
-import ReportTemplates from "./report_templates/ReportTemplates";
+import Login from "./login";
+import GoogleCallback from "./google_callback";
+import Top from "./top";
+import GoogleAuthError from "./errors/google_auth_error";
+import NotfoundError from "./errors/notfound_error";
+import Reports from "./reports";
+import ReportEdit from "./reports/id/edit";
+import ReportsTemplates from "./report_templates";
 
 export interface Path {
   path: string;
@@ -44,11 +44,11 @@ export const useAuthorizedPath = () => {
     },
     {
       path: "/reports/:id",
-      element: <Report />,
+      element: <ReportEdit />,
     },
     {
       path: "/report_templates",
-      element: <ReportTemplates />,
+      element: <ReportsTemplates />,
     },
   ];
 };
