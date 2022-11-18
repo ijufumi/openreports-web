@@ -9,6 +9,8 @@ import {
   Input,
   Select,
   Button,
+  Wrap,
+  WrapItem,
   useToast,
 } from "@chakra-ui/react";
 import ReportVo from "../../vos/ReportVo";
@@ -90,6 +92,10 @@ const Report: FC<Props> = () => {
         isClosable: true,
       });
     }
+  };
+
+  const handleCancel = () => {
+    navigate("/reports");
   };
 
   if (!initialized) {
@@ -177,7 +183,16 @@ const Report: FC<Props> = () => {
           </GridItem>
         </Grid>
         <Box mt={1} display="flex" justifyContent="flex-end">
-          <Button onClick={handleUpdate}>Update</Button>
+          <Wrap spacingX={2}>
+            <WrapItem>
+              <Button onClick={handleCancel} variant="outline">
+                Cancel
+              </Button>
+            </WrapItem>
+            <WrapItem>
+              <Button onClick={handleUpdate}>Update</Button>
+            </WrapItem>
+          </Wrap>
         </Box>
       </Box>
     </HStack>
