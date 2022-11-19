@@ -132,15 +132,6 @@ const ReportNew: FC<Props> = () => {
               })}
             </Select>
           </GridItem>
-          <GridItem
-            colSpan={2}
-            h={50}
-            display="flex"
-            alignItems="center"
-            bgColor="gray.50"
-          >
-            <Text fontWeight={600}>Created at</Text>
-          </GridItem>
         </Grid>
         <Box mt={1} display="flex" justifyContent="flex-end">
           <Wrap spacingX={2}>
