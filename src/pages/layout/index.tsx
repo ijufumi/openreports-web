@@ -26,6 +26,7 @@ import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import logoImg from "../../assets/logo.png";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import useLoginUser from "../../states/LoginUser";
+import { AuthorizedPath, PublicPath } from "../paths";
 
 interface Props {
   children: React.ReactNode;
@@ -55,7 +56,7 @@ const Layout: FC<Props> = observer(({ children }) => {
 
   const handleLogout = async () => {
     await membersUseCase.logout();
-    navigate("/login");
+    navigate(PublicPath.login);
   };
 
   if (!initialized) {
@@ -87,10 +88,12 @@ const Layout: FC<Props> = observer(({ children }) => {
             />
             <MenuList>
               <MenuGroup key="reporting" title={"Reports"}>
-                <MenuItem onClick={() => handleClick("/reports")}>
+                <MenuItem onClick={() => handleClick(AuthorizedPath.reports)}>
                   Reports
                 </MenuItem>
-                <MenuItem onClick={() => handleClick("/report_templates")}>
+                <MenuItem
+                  onClick={() => handleClick(AuthorizedPath.reportTemplates)}
+                >
                   Templates
                 </MenuItem>
                 <MenuItem>Parameters</MenuItem>
@@ -108,7 +111,7 @@ const Layout: FC<Props> = observer(({ children }) => {
           <Box>
             <Image
               minW={"250px"}
-              onClick={() => navigate("/top")}
+              onClick={() => navigate(AuthorizedPath.top)}
               src={logoImg}
               alt={"logo"}
               margin={"10px"}
