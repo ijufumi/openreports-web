@@ -17,6 +17,7 @@ import ReportsVo from "../../vos/ReportsVo";
 import ReportVo from "../../vos/ReportVo";
 import DataTable from "../../components/data_table/DataTable";
 import useBreadcrumbs from "../../states/Breadcrumbs";
+import { AuthorizedPath } from "../paths";
 import DownloadUtils from "../../components/utils/DownloadUtils";
 import DateUtils from "../../components/utils/DateUtils";
 
@@ -43,7 +44,7 @@ const Reports: FC<Props> = () => {
       setInitialized(true);
       breadcrumbs.set([
         {
-          title: "Index",
+          title: "Reports",
         },
       ]);
     };
@@ -80,7 +81,7 @@ const Reports: FC<Props> = () => {
   };
 
   const handleClick = (id: string) => {
-    navigate(`/reports/${id}`);
+    navigate(AuthorizedPath.reportEdit.replace(":id", id));
   };
 
   if (!initialized) {
