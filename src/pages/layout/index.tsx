@@ -86,21 +86,21 @@ const Layout: FC<Props> = observer(({ children }) => {
               variant={"icon"}
             />
             <MenuList>
-              <MenuGroup key="reporting" title={"Reporting"}>
+              <MenuGroup key="reporting" title={"Reports"}>
                 <MenuItem onClick={() => handleClick("/reports")}>
-                  Report
+                  Reports
                 </MenuItem>
                 <MenuItem onClick={() => handleClick("/report_templates")}>
-                  Template
+                  Templates
                 </MenuItem>
                 <MenuItem>Parameters</MenuItem>
                 <MenuItem>Groups</MenuItem>
                 <MenuItem>Scheduling</MenuItem>
               </MenuGroup>
               <MenuDivider />
-              <MenuGroup key="setting" title={"Setting"}>
+              <MenuGroup key="setting" title={"Settings"}>
                 <MenuItem>Workspace</MenuItem>
-                <MenuItem>DataSource</MenuItem>
+                <MenuItem>DataSources</MenuItem>
                 <MenuItem>Logs</MenuItem>
               </MenuGroup>
             </MenuList>
