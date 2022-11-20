@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import {
-  HStack,
   Box,
   Grid,
   GridItem,
@@ -89,63 +88,61 @@ const ReportNew: FC<Props> = () => {
   }
 
   return (
-    <HStack>
-      <Box
-        sx={{ borderRadius: "10px", borderColor: "gray.50", bgColor: "white" }}
-        p={5}
-        w="50%"
-      >
-        <Grid templateColumns="repeat(5, 1fr)" gap={0}>
-          <GridItem
-            colSpan={2}
-            h={50}
-            display="flex"
-            alignItems="center"
-            bgColor="gray.50"
+    <Box
+      sx={{ borderRadius: "10px", borderColor: "gray.50", bgColor: "white" }}
+      p={5}
+      w="50%"
+    >
+      <Grid templateColumns="repeat(5, 1fr)" gap={0}>
+        <GridItem
+          colSpan={2}
+          h={50}
+          display="flex"
+          alignItems="center"
+          bgColor="gray.50"
+        >
+          <Text fontWeight={600}>Name</Text>
+        </GridItem>
+        <GridItem
+          colSpan={3}
+          h={50}
+          display="flex"
+          alignItems="center"
+          bgColor="gray.50"
+        >
+          <Input value={name} onChange={(e) => setName(e.target.value)} />
+        </GridItem>
+        <GridItem colSpan={2} h={50} display="flex" alignItems="center">
+          <Text fontWeight={600}>Template name</Text>
+        </GridItem>
+        <GridItem colSpan={3} h={50} display="flex" alignItems="center">
+          <Select
+            onChange={(e) => setReportTemplateId(e.target.value)}
+            value={reportTemplateId}
           >
-            <Text fontWeight={600}>Name</Text>
-          </GridItem>
-          <GridItem
-            colSpan={3}
-            h={50}
-            display="flex"
-            alignItems="center"
-            bgColor="gray.50"
-          >
-            <Input value={name} onChange={(e) => setName(e.target.value)} />
-          </GridItem>
-          <GridItem colSpan={2} h={50} display="flex" alignItems="center">
-            <Text fontWeight={600}>Template name</Text>
-          </GridItem>
-          <GridItem colSpan={3} h={50} display="flex" alignItems="center">
-            <Select
-              onChange={(e) => setReportTemplateId(e.target.value)}
-              value={reportTemplateId}
-            >
-              {reportTemplates.map((template) => {
-                return (
-                  <option key={template.id} value={template.id}>
-                    {template.name}
-                  </option>
-                );
-              })}
-            </Select>
-          </GridItem>
-        </Grid>
-        <Box mt={1} display="flex" justifyContent="flex-end">
-          <Wrap spacingX={2}>
-            <WrapItem>
-              <Button onClick={handleCancel} variant="outline">
-                Cancel
-              </Button>
-            </WrapItem>
-            <WrapItem>
-              <Button onClick={handleUpdate}>Update</Button>
-            </WrapItem>
-          </Wrap>
-        </Box>
+            {reportTemplates.map((template) => {
+              return (
+                <option key={template.id} value={template.id}>
+                  {template.name}
+                </option>
+              );
+            })}
+          </Select>
+        </GridItem>
+      </Grid>
+      <Box mt={1} display="flex" justifyContent="flex-end">
+        <Wrap spacingX={2}>
+          <WrapItem>
+            <Button onClick={handleCancel} variant="outline">
+              Cancel
+            </Button>
+          </WrapItem>
+          <WrapItem>
+            <Button onClick={handleUpdate}>Update</Button>
+          </WrapItem>
+        </Wrap>
       </Box>
-    </HStack>
+    </Box>
   );
 };
 
