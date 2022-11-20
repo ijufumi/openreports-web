@@ -111,7 +111,6 @@ const ReportEdit: FC<Props> = () => {
   return (
     <HStack>
       <Box
-        m={5}
         sx={{ borderRadius: "10px", borderColor: "gray.50", bgColor: "white" }}
         p={5}
         w="50%"
