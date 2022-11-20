@@ -1,4 +1,9 @@
 import credentials from "../states/Credentials";
+import {
+  UnexpectedError,
+  ClientError,
+  ServerError,
+} from "../components/errors";
 
 enum Methods {
   Get = "GET",
@@ -113,16 +118,24 @@ abstract class BaseRepository {
       };
     }
 
-    return fetch(`${apiEndpoint}${path}`, {
+    const response = await fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
       headers: Object.assign(baseHeaders, header ? header : {}),
       body: body ? JSON.stringify(body) : undefined,
-    })
-      .then((res) => (asBlob ? res.blob() : res.json()))
-      .catch((e) => {
-        console.error(e);
-        return undefined;
-      });
+    }).catch((e) => {
+      throw new UnexpectedError(`No response error with ${e}`);
+    });
+
+    if (response.ok) {
+      if (asBlob) {
+        return response.blob();
+      }
+      return response.json();
+    }
+    if (response.status < 500) {
+      throw new ClientError(`ClientError with ${response}`);
+    }
+    throw new ServerError(`ServerError with ${response}`);
   };
 }
 
