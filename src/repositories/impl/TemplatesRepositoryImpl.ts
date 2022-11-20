@@ -1,20 +1,20 @@
 import BaseRepository from "../BaseRepository";
-import ReportTemplatesRepository from "../ReportTemplatesRepository";
-import ReportTemplatesVo from "../../vos/ReportTemplatesVo";
-import ReportTemplateVo from "../../vos/ReportTemplateVo";
+import TemplatesRepository from "../TemplatesRepository";
+import TemplatesVo from "../../vos/TemplatesVo";
+import TemplateVo from "../../vos/TemplateVo";
 
-export default class ReportTemplatesRepositoryImpl
+export default class TemplatesRepositoryImpl
   extends BaseRepository
-  implements ReportTemplatesRepository
+  implements TemplatesRepository
 {
   getAll = async (args: { page: number; limit: number }) => {
     const path = `?page=${args.page}&limit=${args.limit}`;
     const result = await this._get({ path });
-    return new ReportTemplatesVo(result);
+    return new TemplatesVo(result);
   };
 
   getById = async (args: { id: string }) => {
     const result = await this._get({ path: `/${args.id}` });
-    return new ReportTemplateVo(result);
+    return new TemplateVo(result);
   };
 }

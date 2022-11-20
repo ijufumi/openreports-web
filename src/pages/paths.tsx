@@ -9,8 +9,8 @@ import NotfoundError from "./errors/notfound_error";
 import Reports from "./reports";
 import ReportNew from "./reports/new";
 import ReportEdit from "./reports/id/edit";
-import ReportsTemplates from "./report_templates";
-import ReportTemplateNew from "./report_templates/new";
+import Templates from "./templates";
+import TemplateNew from "./templates/new";
 
 export interface Path {
   path: string;
@@ -74,11 +74,11 @@ export const useAuthorizedPath = () => {
     },
     {
       path: AuthorizedPath.reportTemplates,
-      element: <ReportsTemplates />,
+      element: <Templates />,
     },
     {
       path: AuthorizedPath.reportTemplateNew,
-      element: <ReportTemplateNew />,
+      element: <TemplateNew />,
     },
   ];
 };

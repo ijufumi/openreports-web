@@ -10,7 +10,7 @@ export interface Props {
   updatedAt: number;
 }
 
-export default class ReportTemplateVo {
+export default class TemplateVo {
   readonly id: string;
   readonly name: string;
   readonly filePath: string;

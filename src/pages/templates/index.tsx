@@ -2,19 +2,19 @@ import React, { FC, useEffect, useState } from "react";
 import { HStack, Link } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
-import ReportTemplatesVo from "../../vos/ReportTemplatesVo";
+import TemplatesVo from "../../vos/TemplatesVo";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import ReportTemplateVo from "../../vos/ReportTemplateVo";
+import TemplateVo from "../../vos/TemplateVo";
 import DataTable from "../../components/data_table/DataTable";
 
 interface Props {}
 
-const ReportsTemplates: FC<Props> = () => {
+const Templates: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [reportTemplates, setReportTemplates] = useState<
-    ReportTemplatesVo | undefined
-  >(undefined);
+  const [templates, setTemplates] = useState<TemplatesVo | undefined>(
+    undefined
+  );
 
   const navigate = useNavigate();
   const breadcrumbs = useBreadcrumbs();
@@ -25,9 +25,9 @@ const ReportsTemplates: FC<Props> = () => {
       return;
     }
     const initialize = async () => {
-      const _reportTemplates = await reportsUseCase.reportTemplates(0, 10);
+      const _reportTemplates = await reportsUseCase.templates(0, 10);
       if (_reportTemplates !== undefined) {
-        setReportTemplates(_reportTemplates);
+        setTemplates(_reportTemplates);
       }
       setInitialized(true);
       breadcrumbs.set([
@@ -40,12 +40,12 @@ const ReportsTemplates: FC<Props> = () => {
   });
 
   const handleOnChange = async (pageIndex: number, pageSize: number) => {
-    const _reportTemplates = await reportsUseCase.reportTemplates(
+    const _reportTemplates = await reportsUseCase.templates(
       pageIndex,
       pageSize
     );
     if (_reportTemplates !== undefined) {
-      setReportTemplates(_reportTemplates);
+      setTemplates(_reportTemplates);
     }
   };
 
@@ -57,7 +57,7 @@ const ReportsTemplates: FC<Props> = () => {
     return null;
   }
 
-  const columnHelper = createColumnHelper<ReportTemplateVo>();
+  const columnHelper = createColumnHelper<TemplateVo>();
 
   const columns = [
     columnHelper.accessor("id", {
@@ -94,18 +94,18 @@ const ReportsTemplates: FC<Props> = () => {
       header: "Updated at",
       cell: (props) => props.getValue(),
     }),
-  ] as ColumnDef<ReportTemplateVo>[];
+  ] as ColumnDef<TemplateVo>[];
 
   return (
     <HStack>
       <DataTable
         columns={columns}
-        data={reportTemplates?.items || []}
-        totalCount={reportTemplates?.count || 0}
+        data={templates?.items || []}
+        totalCount={templates?.count || 0}
         onChange={handleOnChange}
       />
     </HStack>
   );
 };
 
-export default ReportsTemplates;
+export default Templates;

@@ -17,18 +17,16 @@ import ReportVo from "../../../vos/ReportVo";
 import UseCaseFactory from "../../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../../states/Breadcrumbs";
 import { AuthorizedPath, ErrorsPath } from "../../paths";
-import ReportTemplateVo from "../../../vos/ReportTemplateVo";
+import TemplateVo from "../../../vos/TemplateVo";
 
 interface Props {}
 
 const ReportEdit: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [report, setReport] = useState<ReportVo | undefined>(undefined);
-  const [reportTemplates, setReportTemplates] = useState<ReportTemplateVo[]>(
-    []
-  );
+  const [templates, setTemplates] = useState<TemplateVo[]>([]);
   const [name, setName] = useState<string>("");
-  const [reportTemplateId, setReportTemplateId] = useState<string>("");
+  const [templateId, setTemplateId] = useState<string>("");
 
   const params = useParams();
   const breadcrumbs = useBreadcrumbs();
@@ -44,9 +42,9 @@ const ReportEdit: FC<Props> = () => {
         const _report = await reportsUseCase.report(id);
         setReport(_report);
       }
-      const reportTemplatesVo = await reportsUseCase.reportTemplates(0, -1);
+      const reportTemplatesVo = await reportsUseCase.templates(0, -1);
       if (reportTemplatesVo) {
-        setReportTemplates(reportTemplatesVo.items);
+        setTemplates(reportTemplatesVo.items);
       }
       breadcrumbs.set([
         {
@@ -65,16 +63,12 @@ const ReportEdit: FC<Props> = () => {
   useEffect(() => {
     if (report) {
       setName(report.name);
-      setReportTemplateId(report.reportTemplateId);
+      setTemplateId(report.templateId);
     }
   }, [report]);
 
   const handleUpdate = async () => {
-    const _report = await reportsUseCase.updateReport(
-      id,
-      name,
-      reportTemplateId
-    );
+    const _report = await reportsUseCase.updateReport(id, name, templateId);
     if (_report) {
       setReport(_report);
       toast({
@@ -145,10 +139,10 @@ const ReportEdit: FC<Props> = () => {
           </GridItem>
           <GridItem colSpan={3} h={50} display="flex" alignItems="center">
             <Select
-              onChange={(e) => setReportTemplateId(e.target.value)}
-              value={reportTemplateId}
+              onChange={(e) => setTemplateId(e.target.value)}
+              value={templateId}
             >
-              {reportTemplates.map((template) => {
+              {templates.map((template) => {
                 return (
                   <option key={template.id} value={template.id}>
                     {template.name}

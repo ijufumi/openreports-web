@@ -14,16 +14,14 @@ import {
 } from "@chakra-ui/react";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../states/Breadcrumbs";
-import ReportTemplateVo from "../../vos/ReportTemplateVo";
+import TemplateVo from "../../vos/TemplateVo";
 import { AuthorizedPath } from "../paths";
 
 interface Props {}
 
 const ReportNew: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [reportTemplates, setReportTemplates] = useState<ReportTemplateVo[]>(
-    []
-  );
+  const [reportTemplates, setReportTemplates] = useState<TemplateVo[]>([]);
   const [name, setName] = useState<string>("");
   const [reportTemplateId, setReportTemplateId] = useState<string>("");
 
@@ -36,7 +34,7 @@ const ReportNew: FC<Props> = () => {
 
   useEffect(() => {
     const initialize = async () => {
-      const reportTemplatesVo = await reportsUseCase.reportTemplates(0, -1);
+      const reportTemplatesVo = await reportsUseCase.templates(0, -1);
       if (reportTemplatesVo) {
         setReportTemplates(reportTemplatesVo.items);
       }

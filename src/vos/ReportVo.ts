@@ -5,8 +5,8 @@ export interface Props {
   name: string;
   createdAt: number;
   updatedAt: number;
-  reportTemplateId: string;
-  reportTemplateName: string;
+  templateId: string;
+  templateName: string;
 }
 
 export default class ReportVo {
@@ -14,16 +14,16 @@ export default class ReportVo {
   readonly name: string;
   readonly createdAt: number;
   readonly updatedAt: number;
-  readonly reportTemplateId: string;
-  readonly reportTemplateName: string;
+  readonly templateId: string;
+  readonly templateName: string;
 
   constructor(props: Props) {
     this.id = props.id;
     this.name = props.name;
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
-    this.reportTemplateId = props.reportTemplateId;
-    this.reportTemplateName = props.reportTemplateName;
+    this.templateId = props.templateId;
+    this.templateName = props.templateName;
   }
 
   get formattedCreatedAt() {

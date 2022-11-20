@@ -1,7 +1,7 @@
 import ReportsVo from "../vos/ReportsVo";
-import ReportTemplatesVo from "../vos/ReportTemplatesVo";
+import TemplatesVo from "../vos/TemplatesVo";
 import ReportVo from "../vos/ReportVo";
-import ReportTemplateVo from "../vos/ReportTemplateVo";
+import TemplateVo from "../vos/TemplateVo";
 
 export default interface ReportsUseCase {
   reports(page: number, limit: number): Promise<ReportsVo | undefined>;
@@ -18,10 +18,7 @@ export default interface ReportsUseCase {
 
   deleteReport(id: string): Promise<void>;
 
-  reportTemplates(
-    page: number,
-    limit: number
-  ): Promise<ReportTemplatesVo | undefined>;
+  templates(page: number, limit: number): Promise<TemplatesVo | undefined>;
 
-  reportTemplate(id: string): Promise<ReportTemplateVo | undefined>;
+  template(id: string): Promise<TemplateVo | undefined>;
 }

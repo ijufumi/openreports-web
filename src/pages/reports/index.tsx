@@ -109,7 +109,7 @@ const Reports: FC<Props> = () => {
       header: "Name",
       cell: (props) => props.getValue(),
     }),
-    columnHelper.accessor("reportTemplateName", {
+    columnHelper.accessor("templateName", {
       header: "Template name",
       cell: (props) => props.getValue(),
     }),

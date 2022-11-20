@@ -14,7 +14,7 @@ import { AuthorizedPath } from "../paths";
 
 interface Props {}
 
-const ReportTemplateNew: FC<Props> = () => {
+const TemplateNew: FC<Props> = () => {
   const [name, setName] = useState<string>("");
   const [templateFile, setTemplateFile] = useState<File | undefined>(undefined);
 
@@ -72,4 +72,4 @@ const ReportTemplateNew: FC<Props> = () => {
   );
 };
 
-export default ReportTemplateNew;
+export default TemplateNew;
