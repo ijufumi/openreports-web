@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import {
   Box,
   Grid,
@@ -27,11 +27,10 @@ const ReportNew: FC<Props> = () => {
   const [name, setName] = useState<string>("");
   const [reportTemplateId, setReportTemplateId] = useState<string>("");
 
-  const params = useParams();
   const breadcrumbs = useBreadcrumbs();
   const navigate = useNavigate();
   const toast = useToast();
-  const id = params.id || "";
+  const id = "";
 
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
 
