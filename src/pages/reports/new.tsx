@@ -15,6 +15,7 @@ import {
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import ReportTemplateVo from "../../vos/ReportTemplateVo";
+import { AuthorizedPath } from "../paths";
 
 interface Props {}
 
@@ -42,7 +43,7 @@ const ReportNew: FC<Props> = () => {
       }
       breadcrumbs.set([
         {
-          path: "/reports",
+          path: AuthorizedPath.reports,
           title: "Reports",
         },
         {
@@ -80,7 +81,7 @@ const ReportNew: FC<Props> = () => {
   };
 
   const handleCancel = () => {
-    navigate("/reports");
+    navigate(AuthorizedPath.reports);
   };
 
   if (!initialized) {
