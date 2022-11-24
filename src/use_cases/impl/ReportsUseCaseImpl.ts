@@ -83,4 +83,13 @@ export default class ReportsUseCaseImpl
       this.stopLoader();
     }
   };
+
+  registerTemplate = async (name: string, file: File) => {
+    try {
+      this.startLoader();
+      return await this.templatesRepository.register({ name, file });
+    } finally {
+      this.stopLoader();
+    }
+  };
 }

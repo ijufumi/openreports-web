@@ -21,4 +21,6 @@ export default interface ReportsUseCase {
   templates(page: number, limit: number): Promise<TemplatesVo | undefined>;
 
   template(id: string): Promise<TemplateVo | undefined>;
+
+  registerTemplate(name: string, file: File): Promise<TemplateVo | undefined>;
 }

@@ -101,14 +101,33 @@ abstract class BaseRepository {
     );
   };
 
+  _upload = async (args: {
+    path: string;
+    auth?: boolean;
+    headers?: Record<string, string>;
+    body: FormData;
+  }) => {
+    return await this._request(
+      Methods.Post,
+      this.apiEndpoint,
+      args.path,
+      args.auth,
+      args.body,
+      Object.assign({}, args.headers ? args.headers : {}),
+      false,
+      true
+    );
+  };
+
   _request = async (
     method: Methods,
     apiEndpoint: string,
     path: string,
     auth?: boolean,
-    body?: object,
+    body?: object | FormData,
     header?: Record<string, string>,
-    asBlob?: boolean
+    responseAsBlob?: boolean,
+    requestAsForm?: boolean
   ) => {
     let baseHeaders = {};
     if (auth || this.needsAuth) {
@@ -118,16 +137,20 @@ abstract class BaseRepository {
       };
     }
 
+    let bodyData = undefined;
+    if (body) {
+      bodyData = requestAsForm ? (body as FormData) : JSON.stringify(body);
+    }
     const response = await fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
       headers: Object.assign(baseHeaders, header ? header : {}),
-      body: body ? JSON.stringify(body) : undefined,
+      body: bodyData,
     }).catch((e) => {
       throw new UnexpectedError(`No response error with ${e}`);
     });
 
     if (response.ok) {
-      if (asBlob) {
+      if (responseAsBlob) {
         return response.blob();
       }
       return response.json();

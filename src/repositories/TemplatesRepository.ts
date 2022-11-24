@@ -8,4 +8,6 @@ export default interface TemplatesRepository {
   }): Promise<TemplatesVo | undefined>;
 
   getById(args: { id: string }): Promise<TemplateVo | undefined>;
+
+  register(args: { name: string; file: File }): Promise<TemplateVo | undefined>;
 }

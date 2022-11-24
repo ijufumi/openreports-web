@@ -17,4 +17,12 @@ export default class TemplatesRepositoryImpl
     const result = await this._get({ path: `/${args.id}` });
     return new TemplateVo(result);
   };
+
+  register = async (args: { name: string; file: File }) => {
+    const formData = new FormData();
+    formData.append("name", args.name);
+    formData.append("file", args.file);
+    const result = await this._upload({ path: "/", body: formData });
+    return new TemplateVo(result);
+  };
 }
