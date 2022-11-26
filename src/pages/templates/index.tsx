@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
-import { HStack, Link } from "@chakra-ui/react";
-import { useNavigate } from "react-router";
+import { VStack, Link, Flex, Button } from "@chakra-ui/react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import TemplatesVo from "../../vos/TemplatesVo";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import TemplateVo from "../../vos/TemplateVo";
 import DataTable from "../../components/data_table/DataTable";
+import useNavigator from "../navigator";
 
 interface Props {}
 
@@ -16,8 +16,8 @@ const Templates: FC<Props> = () => {
     undefined
   );
 
-  const navigate = useNavigate();
   const breadcrumbs = useBreadcrumbs();
+  const navigator = useNavigator();
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
 
   useEffect(() => {
@@ -40,17 +40,18 @@ const Templates: FC<Props> = () => {
   });
 
   const handleOnChange = async (pageIndex: number, pageSize: number) => {
-    const _reportTemplates = await reportsUseCase.templates(
-      pageIndex,
-      pageSize
-    );
-    if (_reportTemplates !== undefined) {
-      setTemplates(_reportTemplates);
+    const _templates = await reportsUseCase.templates(pageIndex, pageSize);
+    if (_templates !== undefined) {
+      setTemplates(_templates);
     }
   };
 
   const handleClick = (id: string) => {
-    navigate(`/report_templates/${id}`);
+    navigator.toReportEdit(id);
+  };
+
+  const handleClickNew = () => {
+    navigator.toReportNew();
   };
 
   if (!initialized) {
@@ -97,14 +98,17 @@ const Templates: FC<Props> = () => {
   ] as ColumnDef<TemplateVo>[];
 
   return (
-    <HStack>
+    <VStack>
+      <Flex w="100%" justifyContent="flex-end">
+        <Button onClick={handleClickNew}>Create</Button>
+      </Flex>
       <DataTable
         columns={columns}
         data={templates?.items || []}
         totalCount={templates?.count || 0}
         onChange={handleOnChange}
       />
-    </HStack>
+    </VStack>
   );
 };
 

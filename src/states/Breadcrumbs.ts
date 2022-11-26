@@ -1,9 +1,10 @@
 import { makeAutoObservable } from "mobx";
 
-export interface BreadcrumbsProps {
+export type BreadcrumbsProps = {
   path?: string;
+  func?: () => void;
   title: string;
-}
+};
 
 export type BreadcrumbsDataType = Array<BreadcrumbsProps>;
 

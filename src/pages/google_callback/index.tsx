@@ -1,13 +1,14 @@
 import React, { FC, useMemo, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import StringUtils from "../../components/utils/StringUtils";
+import useNavigator from "../navigator";
 
 interface Props {}
 
 const GoogleCallback: FC<Props> = () => {
   const { search } = useLocation();
-  const navigation = useNavigate();
+  const navigator = useNavigator();
   const [initialized, setInitialized] = useState<boolean>(false);
 
   const loginUseCase = UseCaseFactory.createLoginUseCase();
@@ -22,10 +23,10 @@ const GoogleCallback: FC<Props> = () => {
       if (!StringUtils.isBlank(code)) {
         const member = await loginUseCase.loginWithGoogle({ code });
         if (member) {
-          navigation("/top");
+          navigator.toTop();
           return;
         }
-        navigation("/error/google");
+        navigator.toGoogleError();
       }
       setInitialized(true);
     };

@@ -28,8 +28,9 @@ export enum AuthorizedPath {
   reports = "/reports",
   reportEdit = "/reports/edit/:id",
   reportNew = "/reports/new",
-  reportTemplates = "/report_templates",
-  reportTemplateNew = "/report_template/new",
+  templates = "/templates",
+  templateNew = "/templates/new",
+  templateEdit = "/templates/edit/:id",
 }
 
 export enum ErrorsPath {
@@ -73,11 +74,11 @@ export const useAuthorizedPath = () => {
       element: <ReportNew />,
     },
     {
-      path: AuthorizedPath.reportTemplates,
+      path: AuthorizedPath.templates,
       element: <Templates />,
     },
     {
-      path: AuthorizedPath.reportTemplateNew,
+      path: AuthorizedPath.templateNew,
       element: <TemplateNew />,
     },
   ];

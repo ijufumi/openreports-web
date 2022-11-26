@@ -8,9 +8,12 @@ import {
   Wrap,
   WrapItem,
   Button,
+  Tooltip,
+  IconButton,
+  Icon,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router";
-import { AuthorizedPath } from "../paths";
+import { GrFormUpload, GrTrash } from "react-icons/gr";
+import useNavigator from "../navigator";
 
 interface Props {}
 
@@ -18,10 +21,14 @@ const TemplateNew: FC<Props> = () => {
   const [name, setName] = useState<string>("");
   const [templateFile, setTemplateFile] = useState<File | undefined>(undefined);
 
-  const navigate = useNavigate();
+  const navigator = useNavigator();
 
   const handleCancel = () => {
-    navigate(AuthorizedPath.reportTemplates);
+    navigator.toTemplates();
+  };
+
+  const handleClearFile = () => {
+    setTemplateFile(undefined);
   };
 
   return (
@@ -54,6 +61,27 @@ const TemplateNew: FC<Props> = () => {
         </GridItem>
         <GridItem colSpan={3} h={50} display="flex" alignItems="center">
           <Text>{templateFile ? templateFile.name : "None"}</Text>
+          <Box ml={2}>
+            {templateFile ? (
+              <Tooltip label="Clear file">
+                <IconButton
+                  icon={<Icon as={GrTrash} />}
+                  variant="actions"
+                  aria-label="output"
+                  onClick={handleClearFile}
+                />
+              </Tooltip>
+            ) : (
+              <Tooltip label="Upload file">
+                <IconButton
+                  icon={<Icon as={GrFormUpload} />}
+                  variant="actions"
+                  aria-label="output"
+                  onClick={handleClearFile}
+                />
+              </Tooltip>
+            )}
+          </Box>
         </GridItem>
       </Grid>
       <Box mt={1} display="flex" justifyContent="flex-end">

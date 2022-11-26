@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 import {
   HStack,
   Box,
@@ -16,8 +16,8 @@ import {
 import ReportVo from "../../../vos/ReportVo";
 import UseCaseFactory from "../../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../../states/Breadcrumbs";
-import { AuthorizedPath, ErrorsPath } from "../../paths";
 import TemplateVo from "../../../vos/TemplateVo";
+import useNavigator from "../../navigator";
 
 interface Props {}
 
@@ -30,7 +30,7 @@ const ReportEdit: FC<Props> = () => {
 
   const params = useParams();
   const breadcrumbs = useBreadcrumbs();
-  const navigate = useNavigate();
+  const navigator = useNavigator();
   const toast = useToast();
   const id = params.id || "";
 
@@ -48,7 +48,7 @@ const ReportEdit: FC<Props> = () => {
       }
       breadcrumbs.set([
         {
-          path: AuthorizedPath.reports,
+          func: navigator.toReports,
           title: "Reports",
         },
         {
@@ -90,7 +90,7 @@ const ReportEdit: FC<Props> = () => {
   };
 
   const handleCancel = () => {
-    navigate(AuthorizedPath.reports);
+    navigator.toReports();
   };
 
   if (!initialized) {
@@ -98,7 +98,7 @@ const ReportEdit: FC<Props> = () => {
   }
 
   if (!report) {
-    navigate(ErrorsPath.notfound);
+    navigator.toNotfoundError();
     return null;
   }
 

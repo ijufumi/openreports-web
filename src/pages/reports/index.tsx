@@ -1,5 +1,4 @@
 import React, { FC, useState, useEffect } from "react";
-import { useNavigate } from "react-router";
 import {
   HStack,
   Link,
@@ -17,9 +16,9 @@ import ReportsVo from "../../vos/ReportsVo";
 import ReportVo from "../../vos/ReportVo";
 import DataTable from "../../components/data_table/DataTable";
 import useBreadcrumbs from "../../states/Breadcrumbs";
-import { AuthorizedPath } from "../paths";
 import DownloadUtils from "../../components/utils/DownloadUtils";
 import DateUtils from "../../components/utils/DateUtils";
+import useNavigator from "../navigator";
 
 interface Props {}
 
@@ -27,7 +26,7 @@ const Reports: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [reports, setReports] = useState<ReportsVo | undefined>(undefined);
 
-  const navigate = useNavigate();
+  const navigator = useNavigator();
   const breadcrumbs = useBreadcrumbs();
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
   const toast = useToast();
@@ -81,7 +80,7 @@ const Reports: FC<Props> = () => {
   };
 
   const handleClick = (id: string) => {
-    navigate(AuthorizedPath.reportEdit.replace(":id", id));
+    navigator.toReportEdit(id);
   };
 
   if (!initialized) {

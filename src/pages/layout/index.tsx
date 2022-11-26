@@ -1,5 +1,4 @@
 import React, { FC, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
 import {
   VStack,
@@ -26,7 +25,7 @@ import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import logoImg from "../../assets/logo.png";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import useLoginUser from "../../states/LoginUser";
-import { AuthorizedPath, PublicPath } from "../paths";
+import useNavigator from "../navigator";
 
 interface Props {
   children: React.ReactNode;
@@ -34,7 +33,7 @@ interface Props {
 
 const Layout: FC<Props> = observer(({ children }) => {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const navigate = useNavigate();
+  const navigator = useNavigator();
   const breadcrumbs = useBreadcrumbs().get();
   const loginUser = useLoginUser();
   const membersUseCase = UseCaseFactory.createMembersUseCase();
@@ -56,16 +55,12 @@ const Layout: FC<Props> = observer(({ children }) => {
 
   const handleLogout = async () => {
     await membersUseCase.logout();
-    navigate(PublicPath.login);
+    navigator.toLogin();
   };
 
   if (!initialized) {
     return null;
   }
-
-  const handleClick = (path: string) => {
-    navigate(path);
-  };
 
   return (
     <VStack spacing={"5px"} h={"100%"} w={"100%"}>
@@ -88,14 +83,8 @@ const Layout: FC<Props> = observer(({ children }) => {
             />
             <MenuList>
               <MenuGroup key="reporting" title={"Reports"}>
-                <MenuItem onClick={() => handleClick(AuthorizedPath.reports)}>
-                  Reports
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick(AuthorizedPath.reportTemplates)}
-                >
-                  Templates
-                </MenuItem>
+                <MenuItem onClick={navigator.toReports}>Reports</MenuItem>
+                <MenuItem onClick={navigator.toTemplates}>Templates</MenuItem>
                 <MenuItem>Parameters</MenuItem>
                 <MenuItem>Groups</MenuItem>
                 <MenuItem>Scheduling</MenuItem>
@@ -111,7 +100,7 @@ const Layout: FC<Props> = observer(({ children }) => {
           <Box>
             <Image
               minW={"250px"}
-              onClick={() => navigate(AuthorizedPath.top)}
+              onClick={navigator.toTop}
               src={logoImg}
               alt={"logo"}
               margin={"10px"}
@@ -143,7 +132,9 @@ const Layout: FC<Props> = observer(({ children }) => {
                     key={b.title}
                     isCurrentPage={breadcrumbs?.length - 1 === idx}
                   >
-                    <BreadcrumbLink href={b.path}>{b.title}</BreadcrumbLink>
+                    <BreadcrumbLink href={b.path} onClick={b.func}>
+                      {b.title}
+                    </BreadcrumbLink>
                   </BreadcrumbItem>
                 );
               })}

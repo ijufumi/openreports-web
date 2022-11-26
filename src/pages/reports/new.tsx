@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import {
   Box,
   Grid,
@@ -15,7 +14,7 @@ import {
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import TemplateVo from "../../vos/TemplateVo";
-import { AuthorizedPath } from "../paths";
+import useNavigator from "../navigator";
 
 interface Props {}
 
@@ -26,7 +25,7 @@ const ReportNew: FC<Props> = () => {
   const [reportTemplateId, setReportTemplateId] = useState<string>("");
 
   const breadcrumbs = useBreadcrumbs();
-  const navigate = useNavigate();
+  const navigator = useNavigator();
   const toast = useToast();
   const id = "";
 
@@ -40,7 +39,7 @@ const ReportNew: FC<Props> = () => {
       }
       breadcrumbs.set([
         {
-          path: AuthorizedPath.reports,
+          func: navigator.toReports,
           title: "Reports",
         },
         {
@@ -78,7 +77,7 @@ const ReportNew: FC<Props> = () => {
   };
 
   const handleCancel = () => {
-    navigate(AuthorizedPath.reports);
+    navigator.toReports();
   };
 
   if (!initialized) {

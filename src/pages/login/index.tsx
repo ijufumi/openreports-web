@@ -1,5 +1,4 @@
 import React, { FC, useState } from "react";
-import { useNavigate } from "react-router";
 import {
   Input,
   InputGroup,
@@ -21,11 +20,12 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import logoImg from "../../assets/logo.png";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
+import useNavigator from "../navigator";
 
 interface Props {}
 
 const Login: FC<Props> = () => {
-  const navigation = useNavigate();
+  const navigator = useNavigator();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -36,7 +36,7 @@ const Login: FC<Props> = () => {
   const handleLogin = async () => {
     const member = await loginUseCase.login({ email, password });
     if (member) {
-      navigation("/top");
+      navigator.toTop();
       return;
     } else {
       toast({
