@@ -53,6 +53,16 @@ const Layout: FC<Props> = observer(({ children }) => {
     initialize();
   });
 
+  useEffect(() => {
+    const checkIfLoggedIn = async () => {
+      const isLoggedIn = await membersUseCase.isLoggedIn();
+      if (!isLoggedIn) {
+        await handleLogout();
+      }
+    };
+    checkIfLoggedIn();
+  }, [breadcrumbs]);
+
   const handleLogout = async () => {
     await membersUseCase.logout();
     navigator.toLogin();

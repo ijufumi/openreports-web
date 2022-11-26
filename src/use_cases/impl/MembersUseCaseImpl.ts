@@ -17,22 +17,31 @@ class MembersUseCaseImpl extends UseCaseBase implements MembersUseCase {
   }
 
   logout = async () => {
-    await this.repository.logout();
+    try {
+      await this.repository.logout();
+    } catch (e) {
+      console.error(e);
+    }
     credentials.removeToken();
     credentials.removeWorkspaceId();
     this.loginUser.clear();
   };
 
   isLoggedIn = async () => {
-    if (!credentials.hasToken()) {
+    try {
+      if (!credentials.hasToken()) {
+        return false;
+      }
+      const user = await this.repository.status();
+      if (!user) {
+        return false;
+      }
+      this._updateCredential(user);
+      return true;
+    } catch (e) {
+      console.error(e);
       return false;
     }
-    const user = await this.repository.status();
-    if (!user) {
-      return false;
-    }
-    this._updateCredential(user);
-    return true;
   };
 
   _updateCredential = (user: UserVo | undefined) => {
