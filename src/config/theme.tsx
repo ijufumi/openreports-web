@@ -17,12 +17,15 @@ const theme = extendTheme({
         login: {
           bg: "blue.50 !important",
         },
+        action: {
+          bg: "blue.100",
+        },
         icon: {
           minWidth: "80px !important",
           borderWidth: "1px",
           borderRadius: "6px",
         },
-        actions: {
+        actionIcons: {
           minWidth: "30px !important",
           minHeight: "20px !important",
           borderRadius: "6px",

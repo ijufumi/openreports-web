@@ -100,7 +100,9 @@ const Templates: FC<Props> = () => {
   return (
     <VStack>
       <Flex w="100%" justifyContent="flex-end">
-        <Button onClick={handleClickNew}>Create</Button>
+        <Button onClick={handleClickNew} variant="action">
+          Create
+        </Button>
       </Flex>
       <DataTable
         columns={columns}

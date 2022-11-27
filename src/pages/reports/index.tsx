@@ -133,7 +133,7 @@ const Reports: FC<Props> = () => {
               <Tooltip label="Output report">
                 <IconButton
                   icon={<Icon as={GrDocumentPdf} />}
-                  variant="actions"
+                  variant="actionIcons"
                   aria-label="output"
                   onClick={() => handleOutput(reportId)}
                 />
@@ -143,7 +143,7 @@ const Reports: FC<Props> = () => {
               <Tooltip label="Delete report">
                 <IconButton
                   icon={<Icon as={GrTrash} />}
-                  variant="actions"
+                  variant="actionIcons"
                   aria-label="output"
                   onClick={() => handleDelete(reportId)}
                 />
