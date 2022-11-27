@@ -34,10 +34,7 @@ const TemplateNew: FC<Props> = () => {
   };
 
   const handleOpenFileWindow = () => {
-    if (!fileRef.current) {
-      return;
-    }
-    fileRef.current.click();
+    fileRef.current?.click();
   };
 
   const handleSelectFile = () => {
