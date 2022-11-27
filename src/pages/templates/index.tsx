@@ -51,7 +51,7 @@ const Templates: FC<Props> = () => {
   };
 
   const handleClickNew = () => {
-    navigator.toReportNew();
+    navigator.toTemplateNew();
   };
 
   if (!initialized) {
