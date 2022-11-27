@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useRef } from "react";
 import {
   Box,
   Grid,
@@ -21,6 +21,8 @@ const TemplateNew: FC<Props> = () => {
   const [name, setName] = useState<string>("");
   const [templateFile, setTemplateFile] = useState<File | undefined>(undefined);
 
+  const fileRef = useRef<HTMLInputElement>(null);
+
   const navigator = useNavigator();
 
   const handleCancel = () => {
@@ -29,6 +31,23 @@ const TemplateNew: FC<Props> = () => {
 
   const handleClearFile = () => {
     setTemplateFile(undefined);
+  };
+
+  const handleOpenFileWindow = () => {
+    if (!fileRef.current) {
+      return;
+    }
+    fileRef.current.click();
+  };
+
+  const handleSelectFile = () => {
+    const files = fileRef.current?.files;
+    if (!files || !files.length) {
+      setTemplateFile(undefined);
+    } else {
+      setTemplateFile(files[0]);
+      fileRef.current.value = "";
+    }
   };
 
   return (
@@ -61,23 +80,29 @@ const TemplateNew: FC<Props> = () => {
         </GridItem>
         <GridItem colSpan={3} h={50} display="flex" alignItems="center">
           <Text>{templateFile ? templateFile.name : "None"}</Text>
+          <Input
+            type="file"
+            sx={{ visibility: "hidden", width: 0 }}
+            ref={fileRef}
+            onChange={handleSelectFile}
+          />
           <Box ml={2}>
             {templateFile ? (
-              <Tooltip label="Clear file">
+              <Tooltip label="Clear file" aria-label="file">
                 <IconButton
                   icon={<Icon as={GrTrash} />}
-                  variant="actions"
+                  variant="actionIcons"
                   aria-label="output"
                   onClick={handleClearFile}
                 />
               </Tooltip>
             ) : (
-              <Tooltip label="Upload file">
+              <Tooltip label="Upload file" aria-label="file">
                 <IconButton
                   icon={<Icon as={GrFormUpload} />}
-                  variant="actions"
+                  variant="actionIcons"
                   aria-label="output"
-                  onClick={handleClearFile}
+                  onClick={handleOpenFileWindow}
                 />
               </Tooltip>
             )}
