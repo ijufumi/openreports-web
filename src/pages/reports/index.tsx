@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import {
-  HStack,
+  VStack,
   Link,
   Wrap,
   WrapItem,
@@ -8,6 +8,8 @@ import {
   IconButton,
   Tooltip,
   useToast,
+  Flex,
+  Button,
 } from "@chakra-ui/react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { GrDocumentPdf, GrTrash } from "react-icons/gr";
@@ -83,6 +85,10 @@ const Reports: FC<Props> = () => {
     navigator.toReportEdit(id);
   };
 
+  const handleClickNew = () => {
+    navigator.toReportNew();
+  };
+
   if (!initialized) {
     return null;
   }
@@ -156,14 +162,19 @@ const Reports: FC<Props> = () => {
   ] as ColumnDef<ReportVo>[];
 
   return (
-    <HStack>
+    <VStack>
+      <Flex w="100%" justifyContent="flex-end">
+        <Button onClick={handleClickNew} variant="action">
+          Create
+        </Button>
+      </Flex>
       <DataTable
         columns={columns}
         data={reports?.items || []}
         totalCount={reports?.count || 0}
         onChange={handleOnChange}
       />
-    </HStack>
+    </VStack>
   );
 };
 
