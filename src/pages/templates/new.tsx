@@ -142,7 +142,7 @@ const TemplateNew: FC<Props> = () => {
             </Button>
           </WrapItem>
           <WrapItem>
-            <Button>Create</Button>
+            <Button onClick={handleCreate}>Create</Button>
           </WrapItem>
         </Wrap>
       </Box>
