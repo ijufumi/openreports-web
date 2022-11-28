@@ -88,6 +88,9 @@ export default class ReportsUseCaseImpl
     try {
       this.startLoader();
       return await this.templatesRepository.register({ name, file });
+    } catch (e) {
+      console.error(e);
+      return undefined;
     } finally {
       this.stopLoader();
     }
