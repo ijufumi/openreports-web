@@ -11,9 +11,12 @@ import {
   Tooltip,
   IconButton,
   Icon,
+  useToast,
 } from "@chakra-ui/react";
 import { GrFormUpload, GrTrash } from "react-icons/gr";
 import useNavigator from "../navigator";
+import UseCaseFactory from "../../use_cases/UseCaseFactory";
+import templates from "./index";
 
 interface Props {}
 
@@ -23,7 +26,32 @@ const TemplateNew: FC<Props> = () => {
 
   const fileRef = useRef<HTMLInputElement>(null);
 
+  const toast = useToast();
   const navigator = useNavigator();
+  const reportUseCase = UseCaseFactory.createReportsUseCase();
+
+  const handleCreate = async () => {
+    if (name && templateFile) {
+      const result = await reportUseCase.registerTemplate(name, templateFile);
+      if (result) {
+        toast({
+          title: "Upload updated.",
+          description: "You've finished uploading template.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Upload failed.",
+          description: "You've failed uploading template.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    }
+  };
 
   const handleCancel = () => {
     navigator.toTemplates();
