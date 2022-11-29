@@ -41,6 +41,7 @@ const TemplateNew: FC<Props> = () => {
           duration: 3000,
           isClosable: true,
         });
+        navigator.toTemplates();
       } else {
         toast({
           title: "Upload failed.",
