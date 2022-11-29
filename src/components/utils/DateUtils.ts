@@ -1,11 +1,11 @@
-import moment from "moment";
+import dayjs from "dayjs";
 
 const DateUtils = {
   format: (timestampSec: number, format = "YYYY/MM/DD HH:mm:ss"): string => {
-    return moment(timestampSec * 1000).format(format);
+    return dayjs.unix(timestampSec).format(format);
   },
   nowAsString: (format = "YYYY/MM/DD HH:mm:ss"): string => {
-    return moment().format(format);
+    return dayjs().format(format);
   },
 };
 
