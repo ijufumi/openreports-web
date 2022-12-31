@@ -42,7 +42,7 @@ const Layout: FC<Props> = observer(({ children }) => {
     setInitialized(true);
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!initialized) {
       return;
     }
