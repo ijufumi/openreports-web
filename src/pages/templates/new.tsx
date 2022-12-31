@@ -78,7 +78,7 @@ const TemplateNew: FC<Props> = () => {
 
   return (
     <Box
-      sx={{ borderRadius: "10px", borderColor: "gray.50", bgColor: "white" }}
+      sx={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
       p={5}
       w="50%"
     >
@@ -86,6 +86,7 @@ const TemplateNew: FC<Props> = () => {
         <GridItem
           colSpan={2}
           h={50}
+          p={5}
           display="flex"
           alignItems="center"
           bgColor="gray.50"
@@ -99,9 +100,13 @@ const TemplateNew: FC<Props> = () => {
           alignItems="center"
           bgColor="gray.50"
         >
-          <Input value={name} onChange={(e) => setName(e.target.value)} />
+          <Input
+            variant="flushed"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
         </GridItem>
-        <GridItem colSpan={2} h={50} display="flex" alignItems="center">
+        <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
           <Text fontWeight={600}>File</Text>
         </GridItem>
         <GridItem colSpan={3} h={50} display="flex" alignItems="center">
