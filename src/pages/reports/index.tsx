@@ -50,7 +50,7 @@ const Reports: FC<Props> = () => {
       ]);
     };
     initialize();
-  });
+  }, []);
 
   const handleOnChange = async (pageIndex: number, pageSize: number) => {
     const reports = await reportsUseCase.reports(pageIndex, pageSize);

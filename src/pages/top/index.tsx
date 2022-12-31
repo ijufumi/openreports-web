@@ -9,7 +9,7 @@ const Top: FC<Props> = () => {
 
   useEffect(() => {
     breadcrumbs.set([]);
-  });
+  }, []);
 
   return (
     <Stack>

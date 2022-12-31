@@ -37,7 +37,7 @@ const Templates: FC<Props> = () => {
       ]);
     };
     initialize();
-  });
+  }, []);
 
   const handleOnChange = async (pageIndex: number, pageSize: number) => {
     const _templates = await reportsUseCase.templates(pageIndex, pageSize);
