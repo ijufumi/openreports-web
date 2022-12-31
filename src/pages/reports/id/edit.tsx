@@ -110,7 +110,7 @@ const ReportEdit: FC<Props> = () => {
         w="50%"
       >
         <Grid templateColumns="repeat(5, 1fr)" gap={0}>
-          <GridItem colSpan={2} h={50} display="flex" alignItems="center">
+          <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
             <Text fontWeight={600}>ID</Text>
           </GridItem>
           <GridItem colSpan={3} h={50} display="flex" alignItems="center">
@@ -119,6 +119,7 @@ const ReportEdit: FC<Props> = () => {
           <GridItem
             colSpan={2}
             h={50}
+            p={5}
             display="flex"
             alignItems="center"
             bgColor="gray.50"
@@ -134,7 +135,7 @@ const ReportEdit: FC<Props> = () => {
           >
             <Input value={name} onChange={(e) => setName(e.target.value)} />
           </GridItem>
-          <GridItem colSpan={2} h={50} display="flex" alignItems="center">
+          <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
             <Text fontWeight={600}>Template name</Text>
           </GridItem>
           <GridItem colSpan={3} h={50} display="flex" alignItems="center">
@@ -154,6 +155,7 @@ const ReportEdit: FC<Props> = () => {
           <GridItem
             colSpan={2}
             h={50}
+            p={5}
             display="flex"
             alignItems="center"
             bgColor="gray.50"
@@ -169,7 +171,7 @@ const ReportEdit: FC<Props> = () => {
           >
             <Text>{report.formattedCreatedAt}</Text>
           </GridItem>
-          <GridItem colSpan={2} h={50} display="flex" alignItems="center">
+          <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
             <Text fontWeight={600}>Updated at</Text>
           </GridItem>
           <GridItem colSpan={3} h={50} display="flex" alignItems="center">
