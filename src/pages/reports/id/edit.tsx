@@ -133,7 +133,11 @@ const ReportEdit: FC<Props> = () => {
             alignItems="center"
             bgColor="gray.50"
           >
-            <Input value={name} onChange={(e) => setName(e.target.value)} />
+            <Input
+              variant="flushed"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </GridItem>
           <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
             <Text fontWeight={600}>Template name</Text>
