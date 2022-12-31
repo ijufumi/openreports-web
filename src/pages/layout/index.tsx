@@ -32,26 +32,10 @@ interface Props {
 }
 
 const Layout: FC<Props> = observer(({ children }) => {
-  const [initialized, setInitialized] = useState<boolean>(false);
   const navigator = useNavigator();
   const breadcrumbs = useBreadcrumbs().get();
   const loginUser = useLoginUser();
   const membersUseCase = UseCaseFactory.createMembersUseCase();
-
-  useEffect(() => {
-    if (initialized) {
-      return;
-    }
-    const initialize = async () => {
-      const isLoggedIn = await membersUseCase.isLoggedIn();
-      if (!isLoggedIn) {
-        await handleLogout();
-      }
-      setInitialized(true);
-    };
-
-    initialize();
-  });
 
   useEffect(() => {
     const checkIfLoggedIn = async () => {
@@ -67,10 +51,6 @@ const Layout: FC<Props> = observer(({ children }) => {
     await membersUseCase.logout();
     navigator.toLogin();
   };
-
-  if (!initialized) {
-    return null;
-  }
 
   return (
     <VStack spacing={"5px"} h={"100%"} w={"100%"}>
