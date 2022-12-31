@@ -32,12 +32,20 @@ interface Props {
 }
 
 const Layout: FC<Props> = observer(({ children }) => {
+  const [initialized, setInitialized] = useState<boolean>(false);
   const navigator = useNavigator();
   const breadcrumbs = useBreadcrumbs().get();
   const loginUser = useLoginUser();
   const membersUseCase = UseCaseFactory.createMembersUseCase();
 
   useEffect(() => {
+    setInitialized(true);
+  });
+
+  useEffect(() => {
+    if (!initialized) {
+      return;
+    }
     const checkIfLoggedIn = async () => {
       const isLoggedIn = await membersUseCase.isLoggedIn();
       if (!isLoggedIn) {
