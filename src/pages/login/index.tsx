@@ -13,6 +13,7 @@ import {
   Image,
   Divider,
   useToast,
+  FormControl,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { MdOutlineEmail } from "react-icons/md";
@@ -86,56 +87,60 @@ const Login: FC<Props> = () => {
           <Image src={logoImg} alt={"logo"} margin={"10px"} />
           <Text fontSize="3xl">Login</Text>
           <VStack width={"90%"} spacing={"15px"}>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                children={
-                  <Icon
-                    as={MdOutlineEmail}
-                    color="gray.500"
-                    w={10}
-                    h={10}
-                    style={{ padding: "0 5px 0 5px" }}
-                  />
-                }
-              />
-              <Input
-                id="email"
-                value={formik.values.email}
-                placeholder={"Enter your email address"}
-                onChange={formik.handleChange}
-              />
-            </InputGroup>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                children={
-                  <Icon
-                    as={CgPassword}
-                    color="gray.500"
-                    w={10}
-                    h={10}
-                    style={{ padding: "0 5px 0 5px" }}
-                  />
-                }
-              />
-              <Input
-                id="password"
-                value={formik.values.password}
-                type={showPassword ? "text" : "password"}
-                placeholder={"Enter your password"}
-                onChange={formik.handleChange}
-              />
-              <InputRightElement width="4.5rem" cursor="pointer">
-                <Icon
-                  as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
-                  color="gray.500"
-                  w={8}
-                  h={8}
-                  onClick={() => setShowPassword(!showPassword)}
+            <FormControl>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={
+                    <Icon
+                      as={MdOutlineEmail}
+                      color="gray.500"
+                      w={10}
+                      h={10}
+                      style={{ padding: "0 5px 0 5px" }}
+                    />
+                  }
                 />
-              </InputRightElement>
-            </InputGroup>
+                <Input
+                  id="email"
+                  value={formik.values.email}
+                  placeholder={"Enter your email address"}
+                  onChange={formik.handleChange}
+                />
+              </InputGroup>
+            </FormControl>
+            <FormControl>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={
+                    <Icon
+                      as={CgPassword}
+                      color="gray.500"
+                      w={10}
+                      h={10}
+                      style={{ padding: "0 5px 0 5px" }}
+                    />
+                  }
+                />
+                <Input
+                  id="password"
+                  value={formik.values.password}
+                  type={showPassword ? "text" : "password"}
+                  placeholder={"Enter your password"}
+                  onChange={formik.handleChange}
+                />
+                <InputRightElement width="4.5rem" cursor="pointer">
+                  <Icon
+                    as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
+                    color="gray.500"
+                    w={8}
+                    h={8}
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
           </VStack>
           <Button onClick={handleLogin} variant="login">
             Login
