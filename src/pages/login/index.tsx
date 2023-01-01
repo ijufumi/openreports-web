@@ -14,6 +14,7 @@ import {
   Divider,
   useToast,
 } from "@chakra-ui/react";
+import { useFormik } from "formik";
 import { MdOutlineEmail } from "react-icons/md";
 import { CgPassword } from "react-icons/cg";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -26,14 +27,23 @@ interface Props {}
 
 const Login: FC<Props> = () => {
   const navigator = useNavigator();
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const toast = useToast();
   const loginUseCase = UseCaseFactory.createLoginUseCase();
 
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
   const handleLogin = async () => {
+    const { email, password } = formik.values;
     const member = await loginUseCase.login({ email, password });
     if (member) {
       navigator.toTop();
@@ -63,6 +73,7 @@ const Login: FC<Props> = () => {
       });
     }
   };
+
   return (
     <Flex
       minWidth="100%"
@@ -90,9 +101,9 @@ const Login: FC<Props> = () => {
               />
               <Input
                 id="email"
-                value={email}
+                value={formik.values.email}
                 placeholder={"Enter your email address"}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={formik.handleChange}
               />
             </InputGroup>
             <InputGroup>
@@ -110,10 +121,10 @@ const Login: FC<Props> = () => {
               />
               <Input
                 id="password"
-                value={password}
+                value={formik.values.password}
                 type={showPassword ? "text" : "password"}
                 placeholder={"Enter your password"}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={formik.handleChange}
               />
               <InputRightElement width="4.5rem" cursor="pointer">
                 <Icon
