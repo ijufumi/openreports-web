@@ -35,7 +35,7 @@ const Login: FC<Props> = () => {
   const toast = useToast();
   const loginUseCase = UseCaseFactory.createLoginUseCase();
 
-  const validator = z.object({
+  const formSchema = z.object({
     email: z.string().email("Invalid email address"),
     password: z.string().min(1, "Password is required"),
   });
@@ -47,7 +47,7 @@ const Login: FC<Props> = () => {
     },
     validateOnBlur: true,
     validate: async (values) => {
-      const result = validator.safeParse(values);
+      const result = formSchema.safeParse(values);
       const errors = {} as { [key: string]: string };
       if (!result.success) {
         result.error.issues.forEach((value: ZodIssue) => {
