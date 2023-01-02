@@ -22,6 +22,9 @@ class LoginUseCaseImpl extends UseCaseBase implements LoginUseCase {
       const user = await this.repository.login(args);
       this._updateCredential(user);
       return user;
+    } catch (e) {
+      console.error(e);
+      return undefined;
     } finally {
       this.stopLoader();
     }
