@@ -132,7 +132,9 @@ const Login: FC<Props> = () => {
                   />
                 </InputGroup>
               </FormControl>
-              <FormControl>
+              <FormControl
+                isInvalid={!!formik.errors.password && formik.touched.password}
+              >
                 <InputGroup>
                   <InputLeftElement
                     pointerEvents="none"
