@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useMemo } from "react";
 import {
   Input,
   InputGroup,
@@ -14,6 +14,7 @@ import {
   Divider,
   useToast,
   FormControl,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { FormikValues, FormikHelpers, useFormik } from "formik";
 import { z, ZodIssue } from "zod";
@@ -40,8 +41,8 @@ const Login: FC<Props> = () => {
   const loginUseCase = UseCaseFactory.createLoginUseCase();
 
   const validator = z.object({
-    email: z.string().email(),
-    password: z.string().min(1),
+    email: z.string().email("Invalid email address"),
+    password: z.string().min(1, "Password is required"),
   });
 
   const formik = useFormik({
@@ -95,6 +96,10 @@ const Login: FC<Props> = () => {
     }
   };
 
+  const canLogin = useMemo(() => {
+    return formik.isValid || formik.isSubmitting;
+  }, [formik]);
+
   return (
     <Flex
       minWidth="100%"
@@ -131,6 +136,7 @@ const Login: FC<Props> = () => {
                     onChange={formik.handleChange}
                   />
                 </InputGroup>
+                <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
               </FormControl>
               <FormControl
                 isInvalid={!!formik.errors.password && formik.touched.password}
@@ -165,9 +171,10 @@ const Login: FC<Props> = () => {
                     />
                   </InputRightElement>
                 </InputGroup>
+                <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
               </FormControl>
             </VStack>
-            <Button type="submit" variant="login">
+            <Button type="submit" variant="login" disabled={!canLogin}>
               Login
             </Button>
           </VStack>
