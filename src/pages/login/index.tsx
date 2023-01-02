@@ -28,11 +28,6 @@ import useNavigator from "../navigator";
 
 interface Props {}
 
-interface FormProps {
-  email: string;
-  password: string;
-}
-
 const Login: FC<Props> = () => {
   const navigator = useNavigator();
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -50,23 +45,23 @@ const Login: FC<Props> = () => {
       email: "",
       password: "",
     },
-    onSubmit: async (values, actions) => handleLogin(values, actions),
+    validateOnBlur: true,
+    validate: async (values) => {
+      const result = validator.safeParse(values);
+      const errors = {} as { [key: string]: string };
+      if (!result.success) {
+        result.error.issues.forEach((value: ZodIssue) => {
+          errors[value.path.join(".")] = value.message;
+        });
+      }
+      return errors;
+    },
+    onSubmit: async (values) => handleLogin(values),
   });
 
-  const handleLogin = async (
-    values: FormikValues,
-    actions: FormikHelpers<FormProps>
-  ) => {
-    const result = validator.safeParse(values);
-    if (!result.success) {
-      result.error.issues.forEach((value: ZodIssue) => {
-        actions.setFieldError(value.path.join("."), value.message);
-      });
-      return;
-    }
+  const handleLogin = async (values: FormikValues) => {
     const { email, password } = values;
     const member = await loginUseCase.login({ email, password });
-    actions.setSubmitting(false);
     if (member) {
       navigator.toTop();
       return;
@@ -97,7 +92,7 @@ const Login: FC<Props> = () => {
   };
 
   const canLogin = useMemo(() => {
-    return formik.isValid || formik.isSubmitting;
+    return formik.isValid && formik.touched && !formik.isSubmitting;
   }, [formik]);
 
   return (
@@ -134,6 +129,7 @@ const Login: FC<Props> = () => {
                     value={formik.values.email}
                     placeholder={"Enter your email address"}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
                 </InputGroup>
                 <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
@@ -160,6 +156,7 @@ const Login: FC<Props> = () => {
                     type={showPassword ? "text" : "password"}
                     placeholder={"Enter your password"}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
                   <InputRightElement width="4.5rem" cursor="pointer">
                     <Icon
