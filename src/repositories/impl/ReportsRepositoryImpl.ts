@@ -7,8 +7,16 @@ export default class ReportsRepositoryImpl
   extends BaseRepository
   implements ReportsRepository
 {
-  getAll = async (args: { page: number; limit: number }) => {
-    const path = `?page=${args.page}&limit=${args.limit}`;
+  getsByFilter = async (args: {
+    page: number;
+    limit: number;
+    templateId?: string;
+  }) => {
+    let path = `?page=${args.page}&limit=${args.limit}`;
+    if (args.templateId) {
+      path = `${path}&templateId=${args.templateId}`;
+    }
+
     const result = await this._get({ path });
     if (result) {
       return new ReportsVo(result);

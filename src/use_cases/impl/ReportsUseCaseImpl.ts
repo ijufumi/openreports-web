@@ -17,10 +17,14 @@ export default class ReportsUseCaseImpl
     this.templatesRepository = RepositoryFactory.createTemplateRepository();
   }
 
-  reports = async (page: number, limit: number) => {
+  reports = async (page: number, limit: number, templateId?: string) => {
     try {
       this.startLoader();
-      return await this.reportsRepository.getAll({ page, limit });
+      return await this.reportsRepository.getsByFilter({
+        page,
+        limit,
+        templateId,
+      });
     } finally {
       this.stopLoader();
     }

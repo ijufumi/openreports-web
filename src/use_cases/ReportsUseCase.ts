@@ -4,7 +4,11 @@ import ReportVo from "../vos/ReportVo";
 import TemplateVo from "../vos/TemplateVo";
 
 export default interface ReportsUseCase {
-  reports(page: number, limit: number): Promise<ReportsVo | undefined>;
+  reports(
+    page: number,
+    limit: number,
+    templateId?: string
+  ): Promise<ReportsVo | undefined>;
 
   report(id: string): Promise<ReportVo | undefined>;
 
