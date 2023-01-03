@@ -1,5 +1,58 @@
 # OpenReports Web Client
 
+## Features
+
+This application's features are here ( including not implemented )
+
+* [ ] Common
+  * [ ] Login
+    * [x] Login with ID
+    * [x] Login with Google
+    * [ ] Login with GitHub
+  * [x] Logout
+* [ ] Top
+* [ ] Reporting
+  * [x] Reports
+    * [x] list
+    * [x] create
+    * [x] update
+    * [x] delete
+  * [ ] Template
+    * [x] list
+    * [x] create
+    * [ ] update
+    * [ ] delete
+  * [ ] Groups
+    * [ ] list
+    * [ ] create
+    * [ ] update
+    * [ ] delete
+  * [ ] Parameter
+    * [ ] list
+    * [ ] create
+    * [ ] update
+    * [ ] delete
+  * [ ] Scheduling
+    * [ ] list
+    * [ ] create
+    * [ ] update
+    * [ ] delete
+* [ ] Setting
+  * [ ] Workspace
+    * [ ] update
+    * [ ] members
+      * [ ] list
+      * [ ] add
+      * [ ] update
+      * [ ] delete
+  * [ ] DataSource
+    * [ ] list
+    * [ ] create
+    * [ ] update
+    * [ ] delete
+  * [ ] Logs
+    * [ ] list
+
 ## Technical Stack
 
  | Name        | Version | Usage          |
