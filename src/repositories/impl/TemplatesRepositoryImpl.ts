@@ -25,4 +25,24 @@ export default class TemplatesRepositoryImpl
     const result = await this._upload({ path: "/", body: formData });
     return new TemplateVo(result);
   };
+
+  update = async (args: { id: string; name: string }) => {
+    const { id, name } = args;
+    const result = await this._put({
+      path: `/${id}`,
+      body: { name },
+    });
+    if (result) {
+      return new TemplateVo(result);
+    }
+    return undefined;
+  };
+
+  delete = async (args: { id: string }) => {
+    const { id } = args;
+
+    return await this._delete({
+      path: `/${id}`,
+    });
+  };
 }
