@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from "react";
+import React, { FC, useState, useRef, useEffect } from "react";
 import {
   Box,
   Grid,
@@ -16,7 +16,7 @@ import {
 import { GrFormUpload, GrTrash } from "react-icons/gr";
 import useNavigator from "../navigator";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import templates from "./index";
+import useBreadcrumbs from "../../states/Breadcrumbs";
 
 interface Props {}
 
@@ -28,7 +28,16 @@ const TemplateNew: FC<Props> = () => {
 
   const toast = useToast();
   const navigator = useNavigator();
+  const breadcrumbs = useBreadcrumbs();
   const reportUseCase = UseCaseFactory.createReportsUseCase();
+
+  useEffect(() => {
+    breadcrumbs.set([
+      {
+        title: "Templates",
+      },
+    ]);
+  }, []);
 
   const handleCreate = async () => {
     if (name && templateFile) {
