@@ -11,6 +11,7 @@ import ReportNew from "./reports/new";
 import ReportEdit from "./reports/id/edit";
 import Templates from "./templates";
 import TemplateNew from "./templates/new";
+import TemplateEdit from "./templates/id/edit";
 
 export interface Path {
   path: string;
@@ -80,6 +81,10 @@ export const useAuthorizedPath = () => {
     {
       path: AuthorizedPath.templateNew,
       element: <TemplateNew />,
+    },
+    {
+      path: AuthorizedPath.templateEdit,
+      element: <TemplateEdit />,
     },
   ];
 };
