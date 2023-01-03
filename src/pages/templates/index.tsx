@@ -1,5 +1,15 @@
 import React, { FC, useEffect, useState } from "react";
-import { VStack, Link, Flex, Button } from "@chakra-ui/react";
+import {
+  VStack,
+  Link,
+  Flex,
+  Button,
+  Wrap,
+  WrapItem,
+  Tooltip,
+  IconButton,
+  Icon,
+} from "@chakra-ui/react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import TemplatesVo from "../../vos/TemplatesVo";
 import useBreadcrumbs from "../../states/Breadcrumbs";
@@ -7,6 +17,7 @@ import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import TemplateVo from "../../vos/TemplateVo";
 import DataTable from "../../components/data_table/DataTable";
 import useNavigator from "../navigator";
+import { GrDocumentPdf, GrTrash } from "react-icons/gr";
 
 interface Props {}
 
@@ -54,6 +65,15 @@ const Templates: FC<Props> = () => {
     navigator.toTemplateNew();
   };
 
+  const handleDelete = async (templateId: string) => {
+    await reportsUseCase.deleteTemplate(templateId);
+  };
+
+  const canDeleteTemplate = async (templateId: string) => {
+    const reports = await reportsUseCase.reports(0, 10, templateId);
+    return reports?.count === 0;
+  };
+
   if (!initialized) {
     return null;
   }
@@ -94,6 +114,31 @@ const Templates: FC<Props> = () => {
     columnHelper.accessor("formattedUpdatedAt", {
       header: "Updated at",
       cell: (props) => props.getValue(),
+    }),
+    columnHelper.display({
+      header: "Actions",
+      cell: async (props) => {
+        const templateId = props.row.getValue("id") as string;
+        if (!templateId) {
+          return undefined;
+        }
+        const canDelete = await canDeleteTemplate(templateId);
+        return (
+          <Wrap spacing={5}>
+            <WrapItem>
+              <Tooltip label="Delete report">
+                <IconButton
+                  disabled={!canDelete}
+                  icon={<Icon as={GrTrash} />}
+                  variant="actionIcons"
+                  aria-label="output"
+                  onClick={() => handleDelete(templateId)}
+                />
+              </Tooltip>
+            </WrapItem>
+          </Wrap>
+        );
+      },
     }),
   ] as ColumnDef<TemplateVo>[];
 

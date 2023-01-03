@@ -99,4 +99,27 @@ export default class ReportsUseCaseImpl
       this.stopLoader();
     }
   };
+
+  updateTemplate = async (id: string, name: string) => {
+    try {
+      this.startLoader();
+      return await this.templatesRepository.update({ id, name });
+    } catch (e) {
+      console.error(e);
+      return undefined;
+    } finally {
+      this.stopLoader();
+    }
+  };
+
+  deleteTemplate = async (id: string) => {
+    try {
+      this.startLoader();
+      return await this.templatesRepository.delete({ id });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.stopLoader();
+    }
+  };
 }
