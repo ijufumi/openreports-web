@@ -47,7 +47,7 @@ const Templates: FC<Props> = () => {
   };
 
   const handleClick = (id: string) => {
-    navigator.toReportEdit(id);
+    navigator.toTemplateEdit(id);
   };
 
   const handleClickNew = () => {

@@ -39,7 +39,7 @@ class NavigatorWrapper {
   };
 
   toTemplateEdit = (id: string) => {
-    this.navigateFunction(AuthorizedPath.templateNew.replace(":id", id));
+    this.navigateFunction(AuthorizedPath.templateEdit.replace(":id", id));
   };
 
   // error path
