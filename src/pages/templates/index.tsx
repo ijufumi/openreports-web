@@ -9,6 +9,7 @@ import {
   Tooltip,
   IconButton,
   Icon,
+  useToast,
 } from "@chakra-ui/react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import TemplatesVo from "../../vos/TemplatesVo";
@@ -17,7 +18,7 @@ import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import TemplateVo from "../../vos/TemplateVo";
 import DataTable from "../../components/data_table/DataTable";
 import useNavigator from "../navigator";
-import { GrDocumentPdf, GrTrash } from "react-icons/gr";
+import { GrTrash } from "react-icons/gr";
 
 interface Props {}
 
@@ -27,6 +28,7 @@ const Templates: FC<Props> = () => {
     undefined
   );
 
+  const toast = useToast();
   const breadcrumbs = useBreadcrumbs();
   const navigator = useNavigator();
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
@@ -66,7 +68,25 @@ const Templates: FC<Props> = () => {
   };
 
   const handleDelete = async (templateId: string) => {
-    await reportsUseCase.deleteTemplate(templateId);
+    const result = await reportsUseCase.deleteTemplate(templateId);
+    if (result) {
+      toast({
+        title: "Delete succeeded.",
+        description: "You've finished deleting template.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+      navigator.toTemplates();
+    } else {
+      toast({
+        title: "Delete failed.",
+        description: "You've failed deleting template.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   const canDeleteTemplate = async (templateId: string) => {
