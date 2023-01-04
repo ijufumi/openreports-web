@@ -17,11 +17,11 @@ This application's features are here ( including not implemented )
     * [x] create
     * [x] update
     * [x] delete
-  * [ ] Template
+  * [x] Template
     * [x] list
     * [x] create
-    * [ ] update
-    * [ ] delete
+    * [x] update
+    * [x] delete
   * [ ] Groups
     * [ ] list
     * [ ] create
