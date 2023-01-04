@@ -57,10 +57,10 @@ This application's features are here ( including not implemented )
 
  | Name        | Version | Usage          |
  |---------|----------------|----------------|
- | Typescript  | 4.9.3  | Language       |
- | React       | 18      | All of them    |
- | Chakra UI   | 2.4.1   | UI             |
- | React Table | 8.5.28  | Headless table |
+ | Typescript  | 4.9.4   | Language       |
+ | React       | 18.2.0  | All of them    |
+ | Chakra UI   | 2.4.6   | UI             |
+ | React Table | 8.7.4   | Headless table |
 
 ## Package structure
 
