@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import {
   Box,
   Grid,
@@ -8,27 +8,18 @@ import {
   Wrap,
   WrapItem,
   Button,
-  Tooltip,
-  IconButton,
-  Icon,
   useToast,
 } from "@chakra-ui/react";
-import { GrFormUpload, GrTrash } from "react-icons/gr";
+import { useParams } from "react-router";
 import useNavigator from "../../navigator";
 import UseCaseFactory from "../../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../../states/Breadcrumbs";
-import { useParams } from "react-router";
-import TemplateVo from "../../../vos/TemplateVo";
 
 interface Props {}
 
 const TemplateEdit: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [template, setTemplate] = useState<TemplateVo | undefined>(undefined);
   const [name, setName] = useState<string>("");
-  const [templateFile, setTemplateFile] = useState<File | undefined>(undefined);
-
-  const fileRef = useRef<HTMLInputElement>(null);
 
   const toast = useToast();
   const params = useParams();
@@ -42,7 +33,12 @@ const TemplateEdit: FC<Props> = () => {
     const initialize = async () => {
       if (id) {
         const _template = await reportsUseCase.template(id);
-        setTemplate(_template);
+        if (_template) {
+          setName(_template.name);
+        } else {
+          navigator.toNotfoundError();
+          return;
+        }
       }
       breadcrumbs.set([
         {
@@ -58,13 +54,13 @@ const TemplateEdit: FC<Props> = () => {
     initialize();
   }, [id]);
 
-  const handleCreate = async () => {
-    if (name && templateFile) {
-      const result = await reportsUseCase.registerTemplate(name, templateFile);
+  const handleUpdate = async () => {
+    if (name) {
+      const result = await reportsUseCase.updateTemplate(id, name);
       if (result) {
         toast({
-          title: "Upload updated.",
-          description: "You've finished uploading template.",
+          title: "Update succeeded.",
+          description: "You've finished updating template.",
           status: "success",
           duration: 3000,
           isClosable: true,
@@ -72,8 +68,8 @@ const TemplateEdit: FC<Props> = () => {
         navigator.toTemplates();
       } else {
         toast({
-          title: "Upload failed.",
-          description: "You've failed uploading template.",
+          title: "Update failed.",
+          description: "You've failed updating template.",
           status: "error",
           duration: 3000,
           isClosable: true,
@@ -86,23 +82,9 @@ const TemplateEdit: FC<Props> = () => {
     navigator.toTemplates();
   };
 
-  const handleClearFile = () => {
-    setTemplateFile(undefined);
-  };
-
-  const handleOpenFileWindow = () => {
-    fileRef.current?.click();
-  };
-
-  const handleSelectFile = () => {
-    const files = fileRef.current?.files;
-    if (!files || !files.length) {
-      setTemplateFile(undefined);
-    } else {
-      setTemplateFile(files[0]);
-      fileRef.current.value = "";
-    }
-  };
+  if (!initialized) {
+    return null;
+  }
 
   return (
     <Box
@@ -134,39 +116,6 @@ const TemplateEdit: FC<Props> = () => {
             onChange={(e) => setName(e.target.value)}
           />
         </GridItem>
-        <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
-          <Text fontWeight={600}>File</Text>
-        </GridItem>
-        <GridItem colSpan={3} h={50} display="flex" alignItems="center">
-          <Text>{templateFile ? templateFile.name : "None"}</Text>
-          <Input
-            type="file"
-            sx={{ visibility: "hidden", width: 0 }}
-            ref={fileRef}
-            onChange={handleSelectFile}
-          />
-          <Box ml={2}>
-            {templateFile ? (
-              <Tooltip label="Clear file" aria-label="file">
-                <IconButton
-                  icon={<Icon as={GrTrash} />}
-                  variant="actionIcons"
-                  aria-label="output"
-                  onClick={handleClearFile}
-                />
-              </Tooltip>
-            ) : (
-              <Tooltip label="Upload file" aria-label="file">
-                <IconButton
-                  icon={<Icon as={GrFormUpload} />}
-                  variant="actionIcons"
-                  aria-label="output"
-                  onClick={handleOpenFileWindow}
-                />
-              </Tooltip>
-            )}
-          </Box>
-        </GridItem>
       </Grid>
       <Box mt={1} display="flex" justifyContent="flex-end">
         <Wrap spacingX={2}>
@@ -176,7 +125,7 @@ const TemplateEdit: FC<Props> = () => {
             </Button>
           </WrapItem>
           <WrapItem>
-            <Button onClick={handleCreate}>Create</Button>
+            <Button onClick={handleUpdate}>Update</Button>
           </WrapItem>
         </Wrap>
       </Box>
