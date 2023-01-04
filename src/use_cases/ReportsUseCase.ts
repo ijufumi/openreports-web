@@ -30,5 +30,5 @@ export default interface ReportsUseCase {
 
   updateTemplate(id: string, name: string): Promise<TemplateVo | undefined>;
 
-  deleteTemplate(id: string): Promise<void>;
+  deleteTemplate(id: string): Promise<boolean>;
 }

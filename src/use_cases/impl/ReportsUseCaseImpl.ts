@@ -115,9 +115,11 @@ export default class ReportsUseCaseImpl
   deleteTemplate = async (id: string) => {
     try {
       this.startLoader();
-      return await this.templatesRepository.delete({ id });
+      await this.templatesRepository.delete({ id });
+      return true;
     } catch (e) {
       console.error(e);
+      return false;
     } finally {
       this.stopLoader();
     }
