@@ -9,6 +9,10 @@ This application's features are here ( including not implemented )
     * [x] Login with ID
     * [x] Login with Google
     * [ ] Login with GitHub
+  * [ ] Sign up
+    * [ ] Sign up with ID
+    * [ ] Sign up with Google
+    * [ ] Sign up with GitHub
   * [x] Logout
 * [ ] Top
 * [ ] Reporting
