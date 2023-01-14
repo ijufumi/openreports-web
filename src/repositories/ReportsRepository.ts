@@ -1,20 +1,20 @@
-import ReportsVo from "../vos/ReportsVo";
-import ReportVo from "../vos/ReportVo";
+import Reports from "../vos/Reports";
+import Report from "../vos/Report";
 
 export default interface ReportsRepository {
   getsByFilter(args: {
     page: number;
     limit: number;
     templateId?: string;
-  }): Promise<ReportsVo | undefined>;
+  }): Promise<Reports | undefined>;
 
-  getById(args: { id: string }): Promise<ReportVo | undefined>;
+  getById(args: { id: string }): Promise<Report | undefined>;
 
   update(args: {
     id: string;
     name: string;
     reportTemplateId: string;
-  }): Promise<ReportVo | undefined>;
+  }): Promise<Report | undefined>;
 
   output(args: { id: string }): Promise<Blob | undefined>;
 

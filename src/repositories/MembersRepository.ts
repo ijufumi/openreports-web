@@ -1,10 +1,10 @@
-import UserVo from "../vos/UserVo";
-import GoogleAuthUrlVo from "../vos/GoogleAuthUrlVo";
+import User from "../vos/User";
+import GoogleAuthUrl from "../vos/GoogleAuthUrl";
 
 interface MembersRepository {
   logout(): Promise<undefined>;
 
-  status(): Promise<UserVo | undefined>;
+  status(): Promise<User | undefined>;
 }
 
 export default MembersRepository;

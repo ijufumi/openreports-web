@@ -13,14 +13,14 @@ import {
 } from "@chakra-ui/react";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../states/Breadcrumbs";
-import TemplateVo from "../../vos/TemplateVo";
+import Template from "../../vos/Template";
 import useNavigator from "../navigator";
 
 interface Props {}
 
 const ReportNew: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [reportTemplates, setReportTemplates] = useState<TemplateVo[]>([]);
+  const [reportTemplates, setReportTemplates] = useState<Template[]>([]);
   const [name, setName] = useState<string>("");
   const [reportTemplateId, setReportTemplateId] = useState<string>("");
 

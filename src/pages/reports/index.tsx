@@ -14,8 +14,8 @@ import {
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { GrDocumentPdf, GrTrash } from "react-icons/gr";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import ReportsVo from "../../vos/ReportsVo";
-import ReportVo from "../../vos/ReportVo";
+import Reports from "../../vos/Reports";
+import Report from "../../vos/Report";
 import DataTable from "../../components/data_table/DataTable";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import DownloadUtils from "../../components/utils/DownloadUtils";
@@ -26,7 +26,7 @@ interface Props {}
 
 const Reports: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [reports, setReports] = useState<ReportsVo | undefined>(undefined);
+  const [reports, setReports] = useState<Reports | undefined>(undefined);
 
   const navigator = useNavigator();
   const breadcrumbs = useBreadcrumbs();
@@ -93,7 +93,7 @@ const Reports: FC<Props> = () => {
     return null;
   }
 
-  const columnHelper = createColumnHelper<ReportVo>();
+  const columnHelper = createColumnHelper<Report>();
 
   const columns = [
     columnHelper.accessor("id", {
@@ -159,7 +159,7 @@ const Reports: FC<Props> = () => {
         );
       },
     }),
-  ] as ColumnDef<ReportVo>[];
+  ] as ColumnDef<Report>[];
 
   return (
     <VStack>

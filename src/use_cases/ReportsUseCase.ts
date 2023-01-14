@@ -1,16 +1,16 @@
-import ReportsVo from "../vos/ReportsVo";
-import TemplatesVo from "../vos/TemplatesVo";
-import ReportVo from "../vos/ReportVo";
-import TemplateVo from "../vos/TemplateVo";
+import Reports from "../vos/Reports";
+import Templates from "../vos/Templates";
+import Report from "../vos/Report";
+import Template from "../vos/Template";
 
 export default interface ReportsUseCase {
   reports(
     page: number,
     limit: number,
     templateId?: string
-  ): Promise<ReportsVo | undefined>;
+  ): Promise<Reports | undefined>;
 
-  report(id: string): Promise<ReportVo | undefined>;
+  report(id: string): Promise<Report | undefined>;
 
   outputReport(id: string): Promise<Blob | undefined>;
 
@@ -18,17 +18,17 @@ export default interface ReportsUseCase {
     id: string,
     name: string,
     reportTemplateId: string
-  ): Promise<ReportVo | undefined>;
+  ): Promise<Report | undefined>;
 
   deleteReport(id: string): Promise<void>;
 
-  templates(page: number, limit: number): Promise<TemplatesVo | undefined>;
+  templates(page: number, limit: number): Promise<Templates | undefined>;
 
-  template(id: string): Promise<TemplateVo | undefined>;
+  template(id: string): Promise<Template | undefined>;
 
-  registerTemplate(name: string, file: File): Promise<TemplateVo | undefined>;
+  registerTemplate(name: string, file: File): Promise<Template | undefined>;
 
-  updateTemplate(id: string, name: string): Promise<TemplateVo | undefined>;
+  updateTemplate(id: string, name: string): Promise<Template | undefined>;
 
   deleteTemplate(id: string): Promise<boolean>;
 }

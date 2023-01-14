@@ -3,7 +3,7 @@ export interface Props {
   name: string;
 }
 
-export default class WorkspaceVo {
+export default class Workspace {
   readonly id: string;
   readonly name: string;
 

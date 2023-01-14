@@ -12,10 +12,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
-import TemplatesVo from "../../vos/TemplatesVo";
+import Templates from "../../vos/Templates";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import TemplateVo from "../../vos/TemplateVo";
+import Template from "../../vos/Template";
 import DataTable from "../../components/data_table/DataTable";
 import useNavigator from "../navigator";
 import { GrTrash } from "react-icons/gr";
@@ -24,9 +24,7 @@ interface Props {}
 
 const Templates: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [templates, setTemplates] = useState<TemplatesVo | undefined>(
-    undefined
-  );
+  const [templates, setTemplates] = useState<Templates | undefined>(undefined);
 
   const toast = useToast();
   const breadcrumbs = useBreadcrumbs();
@@ -98,7 +96,7 @@ const Templates: FC<Props> = () => {
     return null;
   }
 
-  const columnHelper = createColumnHelper<TemplateVo>();
+  const columnHelper = createColumnHelper<Template>();
 
   const columns = [
     columnHelper.accessor("id", {
@@ -160,7 +158,7 @@ const Templates: FC<Props> = () => {
         );
       },
     }),
-  ] as ColumnDef<TemplateVo>[];
+  ] as ColumnDef<Template>[];
 
   return (
     <VStack>
