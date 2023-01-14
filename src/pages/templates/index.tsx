@@ -12,7 +12,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
-import Templates from "../../vos/Templates";
+import TemplatesVo from "../../vos/TemplatesVo";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import TemplateVo from "../../vos/TemplateVo";
@@ -24,7 +24,9 @@ interface Props {}
 
 const Templates: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [templates, setTemplates] = useState<Templates | undefined>(undefined);
+  const [templates, setTemplates] = useState<TemplatesVo | undefined>(
+    undefined
+  );
 
   const toast = useToast();
   const breadcrumbs = useBreadcrumbs();
