@@ -3,7 +3,7 @@ import LoginRepository from "../../repositories/LoginRepository";
 import RepositoryFactory from "../../repositories/RepositoryFactory";
 import credentials from "../../states/Credentials";
 import useLoginUser from "../../states/LoginUser";
-import User from "../../vos/User";
+import UserVo from "../../vos/UserVo";
 import UseCaseBase from "./UseCaseBase";
 
 class LoginUseCaseImpl extends UseCaseBase implements LoginUseCase {
@@ -50,7 +50,7 @@ class LoginUseCaseImpl extends UseCaseBase implements LoginUseCase {
     }
   };
 
-  _updateCredential = (user: User | undefined) => {
+  _updateCredential = (user: UserVo | undefined) => {
     if (user) {
       credentials.setToken(user.apiToken);
       credentials.setWorkspaceId(user.workspaces[0].id);

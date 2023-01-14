@@ -1,7 +1,7 @@
 import BaseRepository from "../BaseRepository";
 import TemplatesRepository from "../TemplatesRepository";
 import Templates from "../../vos/Templates";
-import Template from "../../vos/Template";
+import TemplateVo from "../../vos/TemplateVo";
 
 export default class TemplatesRepositoryImpl
   extends BaseRepository
@@ -15,7 +15,7 @@ export default class TemplatesRepositoryImpl
 
   getById = async (args: { id: string }) => {
     const result = await this._get({ path: `/${args.id}` });
-    return new Template(result);
+    return new TemplateVo(result);
   };
 
   register = async (args: { name: string; file: File }) => {
@@ -23,7 +23,7 @@ export default class TemplatesRepositoryImpl
     formData.append("name", args.name);
     formData.append("file", args.file);
     const result = await this._upload({ path: "/", body: formData });
-    return new Template(result);
+    return new TemplateVo(result);
   };
 
   update = async (args: { id: string; name: string }) => {
@@ -33,7 +33,7 @@ export default class TemplatesRepositoryImpl
       body: { name },
     });
     if (result) {
-      return new Template(result);
+      return new TemplateVo(result);
     }
     return undefined;
   };

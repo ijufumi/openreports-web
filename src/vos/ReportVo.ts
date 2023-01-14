@@ -3,30 +3,27 @@ import DateUtils from "../components/utils/DateUtils";
 export interface Props {
   id: string;
   name: string;
-  filePath: string;
-  storageType: string;
-  fileSize: number;
   createdAt: number;
   updatedAt: number;
+  templateId: string;
+  templateName: string;
 }
 
-export default class Template {
+export default class ReportVo {
   readonly id: string;
   readonly name: string;
-  readonly filePath: string;
-  readonly storageType: string;
-  readonly fileSize: number;
   readonly createdAt: number;
   readonly updatedAt: number;
+  readonly templateId: string;
+  readonly templateName: string;
 
   constructor(props: Props) {
     this.id = props.id;
     this.name = props.name;
-    this.filePath = props.filePath;
-    this.storageType = props.storageType;
-    this.fileSize = props.fileSize;
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
+    this.templateId = props.templateId;
+    this.templateName = props.templateName;
   }
 
   get formattedCreatedAt() {

@@ -1,8 +1,8 @@
 import { makeAutoObservable } from "mobx";
-import User from "../vos/User";
+import UserVo from "../vos/UserVo";
 
 class LoginUser {
-  private userVo: User | undefined = undefined;
+  private userVo: UserVo | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
@@ -12,7 +12,7 @@ class LoginUser {
     return this.userVo;
   };
 
-  set = (userVo: User) => {
+  set = (userVo: UserVo) => {
     this.userVo = userVo;
   };
 

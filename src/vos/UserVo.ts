@@ -1,4 +1,4 @@
-import Workspace, { Props as WorkspaceProps } from "./Workspace";
+import WorkspaceVo, { Props as WorkspaceProps } from "./WorkspaceVo";
 
 interface Props {
   id: string;
@@ -8,12 +8,12 @@ interface Props {
   workspaces: Array<WorkspaceProps>;
 }
 
-export default class User {
+export default class UserVo {
   readonly id: string;
   readonly name: string;
   readonly email: string;
   readonly apiToken: string;
-  readonly workspaces: Array<Workspace>;
+  readonly workspaces: Array<WorkspaceVo>;
 
   constructor(props: Props) {
     this.id = props.id;
@@ -21,7 +21,7 @@ export default class User {
     this.email = props.email;
     this.apiToken = props.apiToken;
     if (props.workspaces) {
-      this.workspaces = props.workspaces.map((w) => new Workspace(w));
+      this.workspaces = props.workspaces.map((w) => new WorkspaceVo(w));
     } else {
       this.workspaces = [];
     }

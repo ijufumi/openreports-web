@@ -1,7 +1,7 @@
 import BaseRepository from "../BaseRepository";
 import ReportsRepository from "../ReportsRepository";
-import Reports from "../../vos/Reports";
-import Report from "../../vos/Report";
+import ReportsVo from "../../vos/ReportsVo";
+import ReportVo from "../../vos/ReportVo";
 
 export default class ReportsRepositoryImpl
   extends BaseRepository
@@ -19,7 +19,7 @@ export default class ReportsRepositoryImpl
 
     const result = await this._get({ path });
     if (result) {
-      return new Reports(result);
+      return new ReportsVo(result);
     }
     return undefined;
   };
@@ -27,7 +27,7 @@ export default class ReportsRepositoryImpl
   getById = async (args: { id: string }) => {
     const result = await this._get({ path: `/${args.id}` });
     if (result) {
-      return new Report(result);
+      return new ReportVo(result);
     }
     return undefined;
   };
@@ -43,7 +43,7 @@ export default class ReportsRepositoryImpl
       body: { name, reportTemplateId },
     });
     if (result) {
-      return new Report(result);
+      return new ReportVo(result);
     }
     return undefined;
   };

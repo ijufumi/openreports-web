@@ -1,4 +1,4 @@
-import Template, { Props as ReportTemplateProps } from "./Template";
+import TemplateVo, { Props as ReportTemplateProps } from "./TemplateVo";
 import { ListProps, ListVo } from "./base";
 
 interface Props extends ListProps {
@@ -6,16 +6,16 @@ interface Props extends ListProps {
 }
 
 export default class Templates extends ListVo {
-  readonly items: Array<Template> = [];
+  readonly items: Array<TemplateVo> = [];
 
   constructor(props: Props) {
     super(props);
     this.items = this.getItems(props);
   }
 
-  getItems(props: Props): Array<Template> {
+  getItems(props: Props): Array<TemplateVo> {
     if (props.items) {
-      return props.items.map((item) => new Template(item));
+      return props.items.map((item) => new TemplateVo(item));
     }
     return [];
   }

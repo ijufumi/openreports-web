@@ -15,7 +15,7 @@ import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import Templates from "../../vos/Templates";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import Template from "../../vos/Template";
+import TemplateVo from "../../vos/TemplateVo";
 import DataTable from "../../components/data_table/DataTable";
 import useNavigator from "../navigator";
 import { GrTrash } from "react-icons/gr";
@@ -96,7 +96,7 @@ const Templates: FC<Props> = () => {
     return null;
   }
 
-  const columnHelper = createColumnHelper<Template>();
+  const columnHelper = createColumnHelper<TemplateVo>();
 
   const columns = [
     columnHelper.accessor("id", {
@@ -158,7 +158,7 @@ const Templates: FC<Props> = () => {
         );
       },
     }),
-  ] as ColumnDef<Template>[];
+  ] as ColumnDef<TemplateVo>[];
 
   return (
     <VStack>

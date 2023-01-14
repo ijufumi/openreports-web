@@ -2,7 +2,7 @@ interface Props {
   url: string;
 }
 
-export default class GoogleAuthUrl {
+export default class GoogleAuthUrlVo {
   readonly url: string;
 
   constructor(props: Props) {

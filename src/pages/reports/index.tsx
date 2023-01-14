@@ -14,8 +14,8 @@ import {
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { GrDocumentPdf, GrTrash } from "react-icons/gr";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import Reports from "../../vos/Reports";
-import Report from "../../vos/Report";
+import ReportsVo from "../../vos/ReportsVo";
+import ReportVo from "../../vos/ReportVo";
 import DataTable from "../../components/data_table/DataTable";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import DownloadUtils from "../../components/utils/DownloadUtils";
@@ -26,7 +26,7 @@ interface Props {}
 
 const Reports: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [reports, setReports] = useState<Reports | undefined>(undefined);
+  const [reports, setReports] = useState<ReportsVo | undefined>(undefined);
 
   const navigator = useNavigator();
   const breadcrumbs = useBreadcrumbs();
@@ -45,7 +45,7 @@ const Reports: FC<Props> = () => {
       setInitialized(true);
       breadcrumbs.set([
         {
-          title: "Reports",
+          title: "ReportsVo",
         },
       ]);
     };
@@ -93,7 +93,7 @@ const Reports: FC<Props> = () => {
     return null;
   }
 
-  const columnHelper = createColumnHelper<Report>();
+  const columnHelper = createColumnHelper<ReportVo>();
 
   const columns = [
     columnHelper.accessor("id", {
@@ -115,7 +115,7 @@ const Reports: FC<Props> = () => {
       cell: (props) => props.getValue(),
     }),
     columnHelper.accessor("templateName", {
-      header: "Template name",
+      header: "TemplateVo name",
       cell: (props) => props.getValue(),
     }),
     columnHelper.accessor("formattedCreatedAt", {
@@ -159,7 +159,7 @@ const Reports: FC<Props> = () => {
         );
       },
     }),
-  ] as ColumnDef<Report>[];
+  ] as ColumnDef<ReportVo>[];
 
   return (
     <VStack>

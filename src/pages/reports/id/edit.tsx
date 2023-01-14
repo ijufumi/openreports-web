@@ -13,18 +13,18 @@ import {
   WrapItem,
   useToast,
 } from "@chakra-ui/react";
-import Report from "../../../vos/Report";
+import ReportVo from "../../../vos/ReportVo";
 import UseCaseFactory from "../../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../../states/Breadcrumbs";
-import Template from "../../../vos/Template";
+import TemplateVo from "../../../vos/TemplateVo";
 import useNavigator from "../../navigator";
 
 interface Props {}
 
 const ReportEdit: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [report, setReport] = useState<Report | undefined>(undefined);
-  const [templates, setTemplates] = useState<Template[]>([]);
+  const [report, setReport] = useState<ReportVo | undefined>(undefined);
+  const [templates, setTemplates] = useState<TemplateVo[]>([]);
   const [name, setName] = useState<string>("");
   const [templateId, setTemplateId] = useState<string>("");
 

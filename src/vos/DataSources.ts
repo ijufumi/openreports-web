@@ -1,5 +1,5 @@
 import { ListVo, ListProps } from "./base";
-import DataSourceVo, { Props as DataSourceProps } from "./DataSource";
+import DataSourceVo, { Props as DataSourceProps } from "./DataSourceVo";
 
 interface Props extends ListProps {
   items: Array<DataSourceProps>;
