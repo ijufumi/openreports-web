@@ -5,7 +5,7 @@ interface Props extends ListProps {
   items: Array<ReportTemplateProps>;
 }
 
-export default class Templates extends ListVo {
+export default class TemplatesVo extends ListVo {
   readonly items: Array<TemplateVo> = [];
 
   constructor(props: Props) {

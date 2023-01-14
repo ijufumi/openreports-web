@@ -1,6 +1,6 @@
 import BaseRepository from "../BaseRepository";
 import TemplatesRepository from "../TemplatesRepository";
-import Templates from "../../vos/Templates";
+import TemplatesVo from "../../vos/TemplatesVo";
 import TemplateVo from "../../vos/TemplateVo";
 
 export default class TemplatesRepositoryImpl
@@ -10,7 +10,7 @@ export default class TemplatesRepositoryImpl
   getAll = async (args: { page: number; limit: number }) => {
     const path = `?page=${args.page}&limit=${args.limit}`;
     const result = await this._get({ path });
-    return new Templates(result);
+    return new TemplatesVo(result);
   };
 
   getById = async (args: { id: string }) => {

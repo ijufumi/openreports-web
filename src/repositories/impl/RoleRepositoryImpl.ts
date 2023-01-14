@@ -1,6 +1,6 @@
 import BaseRepository from "../BaseRepository";
 import RoleRepository from "../RoleRepository";
-import Role from "../../vos/Role";
+import RoleVo from "../../vos/RoleVo";
 
 export default class RoleRepositoryImpl
   extends BaseRepository
@@ -9,7 +9,7 @@ export default class RoleRepositoryImpl
   roles = async () => {
     const result = await this._get({ path: "/" });
     if (result) {
-      return result.map((v: any) => new Role(v));
+      return result.map((v: any) => new RoleVo(v));
     }
     return undefined;
   };

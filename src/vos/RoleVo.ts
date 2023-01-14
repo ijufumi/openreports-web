@@ -9,7 +9,7 @@ interface Props {
   roleType: string;
 }
 
-export default class Role {
+export default class RoleVo {
   readonly id: string;
   private readonly _roleType: string;
 
