@@ -7,6 +7,10 @@ import LoginRepository from "./LoginRepository";
 import MembersRepository from "./MembersRepository";
 import ReportsRepository from "./ReportsRepository";
 import TemplatesRepository from "./TemplatesRepository";
+import RoleRepository from "./RoleRepository";
+import RoleRepositoryImpl from "./impl/RoleRepositoryImpl";
+import WorkspaceMemberRepository from "./WorkspaceMemberRepository";
+import WorkspaceMemberRepositoryImpl from "./impl/WorkspaceMemberRepositoryImpl";
 
 class RepositoryFactory {
   static createLoginRepository(): LoginRepository {
@@ -20,6 +24,15 @@ class RepositoryFactory {
   }
   static createTemplateRepository(): TemplatesRepository {
     return new TemplatesRepositoryImpl(`${API_ENDPOINT}/templates`, true);
+  }
+  static createRoleRepository(): RoleRepository {
+    return new RoleRepositoryImpl(`${API_ENDPOINT}/roles`);
+  }
+  static createWorkspaceMemberRepository(): WorkspaceMemberRepository {
+    return new WorkspaceMemberRepositoryImpl(
+      `${API_ENDPOINT}/workspace_members`,
+      true
+    );
   }
 }
 
