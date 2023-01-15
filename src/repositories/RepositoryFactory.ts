@@ -11,6 +11,8 @@ import RoleRepository from "./RoleRepository";
 import RoleRepositoryImpl from "./impl/RoleRepositoryImpl";
 import WorkspaceMemberRepository from "./WorkspaceMemberRepository";
 import WorkspaceMemberRepositoryImpl from "./impl/WorkspaceMemberRepositoryImpl";
+import WorkspaceRepository from "./WorkspaceRepository";
+import WorkspaceRepositoryImpl from "./impl/WorkspaceRepositoryImpl";
 
 class RepositoryFactory {
   static createLoginRepository(): LoginRepository {
@@ -33,6 +35,9 @@ class RepositoryFactory {
       `${API_ENDPOINT}/workspace_members`,
       true
     );
+  }
+  static createWorkspaceRepository(): WorkspaceRepository {
+    return new WorkspaceRepositoryImpl(`${API_ENDPOINT}/workspaces`, true);
   }
 }
 

@@ -13,6 +13,7 @@ const loginRepository = RepositoryFactory.createLoginRepository();
 const memberRepository = RepositoryFactory.createMemberRepository();
 const reportRepository = RepositoryFactory.createReportRepository();
 const templateRepository = RepositoryFactory.createTemplateRepository();
+const workspaceRepository = RepositoryFactory.createWorkspaceRepository();
 const workspaceMemberRepository =
   RepositoryFactory.createWorkspaceMemberRepository();
 const roleRepository = RepositoryFactory.createRoleRepository();
@@ -30,7 +31,11 @@ class UseCaseFactory {
   }
 
   static createWorkspaceUseCase(): WorkspaceUseCase {
-    return new WorkspaceUseCaseImpl(roleRepository, workspaceMemberRepository);
+    return new WorkspaceUseCaseImpl(
+      roleRepository,
+      workspaceRepository,
+      workspaceMemberRepository
+    );
   }
 }
 

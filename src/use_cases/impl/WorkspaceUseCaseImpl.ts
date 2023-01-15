@@ -2,20 +2,24 @@ import WorkspaceUseCase from "../WorkspaceUseCase";
 import UseCaseBase from "./UseCaseBase";
 import RoleRepository from "../../repositories/RoleRepository";
 import WorkspaceMemberRepository from "../../repositories/WorkspaceMemberRepository";
+import WorkspaceRepository from "../../repositories/WorkspaceRepository";
 
 export default class WorkspaceUseCaseImpl
   extends UseCaseBase
   implements WorkspaceUseCase
 {
   private readonly roleRepository: RoleRepository;
+  private readonly workspaceRepository: WorkspaceRepository;
   private readonly workspaceMemberRepository: WorkspaceMemberRepository;
 
   constructor(
     roleRepository: RoleRepository,
+    workspaceRepository: WorkspaceRepository,
     workspaceMemberRepository: WorkspaceMemberRepository
   ) {
     super();
     this.roleRepository = roleRepository;
+    this.workspaceRepository = workspaceRepository;
     this.workspaceMemberRepository = workspaceMemberRepository;
   }
 
