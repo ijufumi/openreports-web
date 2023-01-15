@@ -1,19 +1,18 @@
 import MembersUseCase from "../MembersUseCase";
 import MembersRepository from "../../repositories/MembersRepository";
-import RepositoryFactory from "../../repositories/RepositoryFactory";
 import credentials from "../../states/Credentials";
-import useLoginUser from "../../states/LoginUser";
+import { LoginUser } from "../../states/LoginUser";
 import UserVo from "../../vos/UserVo";
 import UseCaseBase from "./UseCaseBase";
 
 class MembersUseCaseImpl extends UseCaseBase implements MembersUseCase {
-  private repository: MembersRepository;
-  private loginUser;
+  private readonly repository: MembersRepository;
+  private readonly loginUser: LoginUser;
 
-  constructor() {
+  constructor(repository: MembersRepository, loginUser: LoginUser) {
     super();
-    this.repository = RepositoryFactory.createMemberRepository();
-    this.loginUser = useLoginUser();
+    this.repository = repository;
+    this.loginUser = loginUser;
   }
 
   logout = async () => {

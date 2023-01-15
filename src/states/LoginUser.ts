@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import UserVo from "../vos/UserVo";
 
-class LoginUser {
+export class LoginUser {
   private userVo: UserVo | undefined = undefined;
 
   constructor() {

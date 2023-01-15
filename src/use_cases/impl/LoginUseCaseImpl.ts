@@ -1,19 +1,18 @@
 import LoginUseCase from "../LoginUseCase";
 import LoginRepository from "../../repositories/LoginRepository";
-import RepositoryFactory from "../../repositories/RepositoryFactory";
 import credentials from "../../states/Credentials";
-import useLoginUser from "../../states/LoginUser";
 import UserVo from "../../vos/UserVo";
 import UseCaseBase from "./UseCaseBase";
+import { LoginUser } from "../../states/LoginUser";
 
 class LoginUseCaseImpl extends UseCaseBase implements LoginUseCase {
-  private repository: LoginRepository;
-  private loginUser;
+  private readonly repository: LoginRepository;
+  private readonly loginUser: LoginUser;
 
-  constructor() {
+  constructor(repository: LoginRepository, loginUser: LoginUser) {
     super();
-    this.repository = RepositoryFactory.createLoginRepository();
-    this.loginUser = useLoginUser();
+    this.repository = repository;
+    this.loginUser = loginUser;
   }
 
   login = async (args: { email: string; password: string }) => {

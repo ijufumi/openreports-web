@@ -1,5 +1,4 @@
 import ReportsUseCase from "../ReportsUseCase";
-import RepositoryFactory from "../../repositories/RepositoryFactory";
 import ReportsRepository from "../../repositories/ReportsRepository";
 import TemplatesRepository from "../../repositories/TemplatesRepository";
 import UseCaseBase from "./UseCaseBase";
@@ -8,13 +7,16 @@ export default class ReportsUseCaseImpl
   extends UseCaseBase
   implements ReportsUseCase
 {
-  private reportsRepository: ReportsRepository;
-  private templatesRepository: TemplatesRepository;
+  private readonly reportsRepository: ReportsRepository;
+  private readonly templatesRepository: TemplatesRepository;
 
-  constructor() {
+  constructor(
+    reportsRepository: ReportsRepository,
+    templatesRepository: TemplatesRepository
+  ) {
     super();
-    this.reportsRepository = RepositoryFactory.createReportRepository();
-    this.templatesRepository = RepositoryFactory.createTemplateRepository();
+    this.reportsRepository = reportsRepository;
+    this.templatesRepository = templatesRepository;
   }
 
   reports = async (page: number, limit: number, templateId?: string) => {
