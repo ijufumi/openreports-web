@@ -1,5 +1,5 @@
 import LoginRepository from "../LoginRepository";
-import BaseRepository from "../BaseRepository";
+import BaseRepository from "./BaseRepository";
 
 export default class LoginRepositoryImpl
   extends BaseRepository

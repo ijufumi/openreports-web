@@ -1,4 +1,4 @@
-import BaseRepository from "../BaseRepository";
+import BaseRepository from "./BaseRepository";
 import WorkspaceMemberRepository from "../WorkspaceMemberRepository";
 import WorkspaceMembersVo from "../../vos/WorkspaceMembersVo";
 import WorkspaceMemberVo from "../../vos/WorkspaceMemberVo";

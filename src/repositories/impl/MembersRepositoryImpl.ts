@@ -1,5 +1,5 @@
 import MembersRepository from "../MembersRepository";
-import BaseRepository from "../BaseRepository";
+import BaseRepository from "./BaseRepository";
 
 export default class MembersRepositoryImpl
   extends BaseRepository

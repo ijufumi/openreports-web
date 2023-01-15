@@ -1,4 +1,4 @@
-import BaseRepository from "../BaseRepository";
+import BaseRepository from "./BaseRepository";
 import ReportsRepository from "../ReportsRepository";
 import ReportsVo from "../../vos/ReportsVo";
 import ReportVo from "../../vos/ReportVo";

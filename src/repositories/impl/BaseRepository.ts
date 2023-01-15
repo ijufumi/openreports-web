@@ -1,9 +1,9 @@
-import credentials from "../states/Credentials";
+import credentials from "../../states/Credentials";
 import {
   UnexpectedError,
   ClientError,
   ServerError,
-} from "../components/errors";
+} from "../../components/errors";
 
 enum Methods {
   Get = "GET",

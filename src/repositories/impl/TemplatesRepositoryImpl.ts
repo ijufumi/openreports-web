@@ -1,4 +1,4 @@
-import BaseRepository from "../BaseRepository";
+import BaseRepository from "./BaseRepository";
 import TemplatesRepository from "../TemplatesRepository";
 import TemplatesVo from "../../vos/TemplatesVo";
 import TemplateVo from "../../vos/TemplateVo";
