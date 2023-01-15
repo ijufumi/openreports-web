@@ -2,7 +2,7 @@ import WorkspaceMembersVo from "../vos/WorkspaceMembersVo";
 import WorkspaceMemberVo from "../vos/WorkspaceMemberVo";
 
 export default interface WorkspaceMemberRepository {
-  getAll(): Promise<WorkspaceMembersVo>;
+  gets(args: { limit: number; page: number }): Promise<WorkspaceMembersVo>;
 
   getByMemberId(args: {
     memberId: string;

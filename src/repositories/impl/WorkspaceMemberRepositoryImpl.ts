@@ -7,8 +7,9 @@ export default class WorkspaceMemberRepositoryImpl
   extends BaseRepository
   implements WorkspaceMemberRepository
 {
-  getAll = async () => {
-    const result = await this._get({ path: "/" });
+  gets = async (args: { limit: number; page: number }) => {
+    const path = `?page=${args.page}&limit=${args.limit}`;
+    const result = await this._get({ path });
     return new WorkspaceMembersVo(result);
   };
 

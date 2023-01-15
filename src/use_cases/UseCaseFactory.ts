@@ -6,11 +6,16 @@ import MembersUseCase from "./MembersUseCase";
 import LoginUseCase from "./LoginUseCase";
 import useLoginUser from "../states/LoginUser";
 import RepositoryFactory from "../repositories/RepositoryFactory";
+import WorkspaceUseCase from "./WorkspaceUseCase";
+import WorkspaceUseCaseImpl from "./impl/WorkspaceUseCaseImpl";
 
 const loginRepository = RepositoryFactory.createLoginRepository();
 const memberRepository = RepositoryFactory.createMemberRepository();
 const reportRepository = RepositoryFactory.createReportRepository();
 const templateRepository = RepositoryFactory.createTemplateRepository();
+const workspaceMemberRepository =
+  RepositoryFactory.createWorkspaceMemberRepository();
+const roleRepository = RepositoryFactory.createRoleRepository();
 const loginUser = useLoginUser();
 
 class UseCaseFactory {
@@ -22,6 +27,10 @@ class UseCaseFactory {
   }
   static createReportsUseCase(): ReportsUseCase {
     return new ReportsUseCaseImpl(reportRepository, templateRepository);
+  }
+
+  static createWorkspaceUseCase(): WorkspaceUseCase {
+    return new WorkspaceUseCaseImpl(roleRepository, workspaceMemberRepository);
   }
 }
 
