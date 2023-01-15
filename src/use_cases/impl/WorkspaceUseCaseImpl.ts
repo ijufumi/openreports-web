@@ -1,8 +1,8 @@
-import WorkspaceUseCase from "../WorkspaceUseCase";
-import UseCaseBase from "./UseCaseBase";
-import RoleRepository from "../../repositories/RoleRepository";
-import WorkspaceMemberRepository from "../../repositories/WorkspaceMemberRepository";
-import WorkspaceRepository from "../../repositories/WorkspaceRepository";
+import WorkspaceUseCase from "use_cases/WorkspaceUseCase";
+import UseCaseBase from "use_cases/impl/UseCaseBase";
+import RoleRepository from "repositories/RoleRepository";
+import WorkspaceMemberRepository from "repositories/WorkspaceMemberRepository";
+import WorkspaceRepository from "repositories/WorkspaceRepository";
 
 export default class WorkspaceUseCaseImpl
   extends UseCaseBase
@@ -32,7 +32,7 @@ export default class WorkspaceUseCaseImpl
   };
 
   getWorkspace = async (args: { id: string }) => {
-    return undefined;
+    return this.workspaceRepository.getById(args);
   };
 
   getWorkspaceMember = async (args: { memberId: string }) => {
@@ -46,7 +46,7 @@ export default class WorkspaceUseCaseImpl
   };
 
   updateWorkspace = async (args: { id: string; name: string }) => {
-    return undefined;
+    return this.workspaceRepository.update(args);
   };
 
   updateWorkspaceMember = async (args: {
