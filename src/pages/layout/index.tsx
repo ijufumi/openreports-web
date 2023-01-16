@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useLayoutEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { observer } from "mobx-react";
 import {
   VStack,
