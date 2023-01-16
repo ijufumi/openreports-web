@@ -7,6 +7,10 @@
     "module": "es2022",
     "jsx": "react",
     "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["*"]
+    },
     "lib": [
       "ES2021",
       "DOM"

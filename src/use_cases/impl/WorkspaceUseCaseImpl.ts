@@ -1,8 +1,8 @@
-import WorkspaceUseCase from "../WorkspaceUseCase";
+import WorkspaceUseCase from "src/use_cases/WorkspaceUseCase";
 import UseCaseBase from "./UseCaseBase";
-import RoleRepository from "../../repositories/RoleRepository";
-import WorkspaceMemberRepository from "../../repositories/WorkspaceMemberRepository";
-import WorkspaceRepository from "../../repositories/WorkspaceRepository";
+import RoleRepository from "src/repositories/RoleRepository";
+import WorkspaceMemberRepository from "src/repositories/WorkspaceMemberRepository";
+import WorkspaceRepository from "src/repositories/WorkspaceRepository";
 
 export default class WorkspaceUseCaseImpl
   extends UseCaseBase
