@@ -1,9 +1,9 @@
-import LoginUseCase from "../LoginUseCase";
-import LoginRepository from "../../repositories/LoginRepository";
-import credentials from "../../states/Credentials";
-import UserVo from "../../vos/UserVo";
+import LoginUseCase from "src/use_cases/LoginUseCase";
+import LoginRepository from "src/repositories/LoginRepository";
+import Credentials from "../../states/Credentials";
+import UserVo from "src/vos/UserVo";
 import UseCaseBase from "./UseCaseBase";
-import { LoginUser } from "../../states/LoginUser";
+import { LoginUser } from "src/states/LoginUser";
 
 class LoginUseCaseImpl extends UseCaseBase implements LoginUseCase {
   private readonly repository: LoginRepository;
@@ -51,8 +51,8 @@ class LoginUseCaseImpl extends UseCaseBase implements LoginUseCase {
 
   _updateCredential = (user: UserVo | undefined) => {
     if (user) {
-      credentials.setToken(user.apiToken);
-      credentials.setWorkspaceId(user.workspaces[0].id);
+      Credentials.setToken(user.apiToken);
+      Credentials.setWorkspaceId(user.workspaces[0].id);
       this.loginUser.set(user);
     }
   };

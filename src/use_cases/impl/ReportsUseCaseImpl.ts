@@ -1,6 +1,6 @@
-import ReportsUseCase from "../ReportsUseCase";
-import ReportsRepository from "../../repositories/ReportsRepository";
-import TemplatesRepository from "../../repositories/TemplatesRepository";
+import ReportsUseCase from "src/use_cases/ReportsUseCase";
+import ReportsRepository from "src/repositories/ReportsRepository";
+import TemplatesRepository from "src/repositories/TemplatesRepository";
 import UseCaseBase from "./UseCaseBase";
 
 export default class ReportsUseCaseImpl
