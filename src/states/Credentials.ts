@@ -3,52 +3,50 @@ enum Keys {
   WORKSPACE_ID = "workspace_id",
 }
 
-class Credentials {
-  hasToken = () => {
-    return this.has(Keys.API_TOKEN);
-  };
+export const Credentials = {
+  hasToken() {
+    return Credentials.has(Keys.API_TOKEN);
+  },
 
-  setToken = (token: string) => {
-    this.set(Keys.API_TOKEN, token);
-  };
+  setToken(token: string) {
+    Credentials.set(Keys.API_TOKEN, token);
+  },
 
-  getToken = () => {
-    return this.get(Keys.API_TOKEN);
-  };
+  getToken() {
+    return Credentials.get(Keys.API_TOKEN);
+  },
 
-  removeToken = () => {
-    this.remove(Keys.API_TOKEN);
-  };
+  removeToken() {
+    Credentials.remove(Keys.API_TOKEN);
+  },
 
-  setWorkspaceId = (id: string) => {
-    this.set(Keys.WORKSPACE_ID, id);
-  };
+  setWorkspaceId(id: string) {
+    Credentials.set(Keys.WORKSPACE_ID, id);
+  },
 
-  getWorkspaceId = () => {
-    return this.get(Keys.WORKSPACE_ID);
-  };
+  getWorkspaceId() {
+    return Credentials.get(Keys.WORKSPACE_ID);
+  },
 
-  removeWorkspaceId = () => {
-    this.remove(Keys.WORKSPACE_ID);
-  };
+  removeWorkspaceId() {
+    Credentials.remove(Keys.WORKSPACE_ID);
+  },
 
-  set = (key: Keys, value: string) => {
+  set(key: Keys, value: string) {
     sessionStorage.setItem(key, value);
-  };
+  },
 
-  get = (key: Keys) => {
+  get(key: Keys) {
     return sessionStorage.getItem(key);
-  };
+  },
 
-  has = (key: Keys) => {
-    return this.get(key) !== undefined;
-  };
+  has(key: Keys) {
+    return Credentials.get(key) !== undefined;
+  },
 
-  remove = (key: Keys) => {
+  remove(key: Keys) {
     sessionStorage.removeItem(key);
-  };
-}
+  },
+};
 
-const credentials = new Credentials();
-
-export default credentials;
+export default Credentials;
