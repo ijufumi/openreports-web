@@ -9,11 +9,13 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "~/*": ["*"]
+      "~/": ["*"]
     },
     "lib": [
       "ES2021",
       "DOM"
     ]
-  }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
