@@ -13,6 +13,8 @@ import WorkspaceMemberRepository from "./WorkspaceMemberRepository";
 import WorkspaceMemberRepositoryImpl from "./impl/WorkspaceMemberRepositoryImpl";
 import WorkspaceRepository from "./WorkspaceRepository";
 import WorkspaceRepositoryImpl from "./impl/WorkspaceRepositoryImpl";
+import DataSourceRepository from "./DataSourceRepository";
+import DataSourceRepositoryImpl from "./impl/DataSourceRepositoryImpl";
 
 class RepositoryFactory {
   static createLoginRepository(): LoginRepository {
@@ -38,6 +40,9 @@ class RepositoryFactory {
   }
   static createWorkspaceRepository(): WorkspaceRepository {
     return new WorkspaceRepositoryImpl(`${API_ENDPOINT}/workspaces`, true);
+  }
+  static createDataSourceRepository(): DataSourceRepository {
+    return new DataSourceRepositoryImpl(`${API_ENDPOINT}/data_sources`, true);
   }
 }
 
