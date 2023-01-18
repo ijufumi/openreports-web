@@ -8,6 +8,8 @@ import useLoginUser from "../states/LoginUser";
 import RepositoryFactory from "../repositories/RepositoryFactory";
 import WorkspaceUseCase from "./WorkspaceUseCase";
 import WorkspaceUseCaseImpl from "./impl/WorkspaceUseCaseImpl";
+import DataSourceUseCase from "./DataSourceUseCase";
+import DataSourceUseCaseImpl from "./impl/DataSourceUseCaseImpl";
 
 const loginRepository = RepositoryFactory.createLoginRepository();
 const memberRepository = RepositoryFactory.createMemberRepository();
@@ -17,15 +19,18 @@ const workspaceRepository = RepositoryFactory.createWorkspaceRepository();
 const workspaceMemberRepository =
   RepositoryFactory.createWorkspaceMemberRepository();
 const roleRepository = RepositoryFactory.createRoleRepository();
+const dataSourceRepository = RepositoryFactory.createDataSourceRepository();
 const loginUser = useLoginUser();
 
 class UseCaseFactory {
   static createLoginUseCase(): LoginUseCase {
     return new LoginUseCaseImpl(loginRepository, loginUser);
   }
+
   static createMembersUseCase(): MembersUseCase {
     return new MembersUseCaseImpl(memberRepository, loginUser);
   }
+
   static createReportsUseCase(): ReportsUseCase {
     return new ReportsUseCaseImpl(reportRepository, templateRepository);
   }
@@ -36,6 +41,10 @@ class UseCaseFactory {
       workspaceRepository,
       workspaceMemberRepository
     );
+  }
+
+  static createDataSourceUseCase(): DataSourceUseCase {
+    return new DataSourceUseCaseImpl(dataSourceRepository);
   }
 }
 
