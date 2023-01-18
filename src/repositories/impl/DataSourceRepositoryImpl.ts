@@ -8,7 +8,8 @@ export default class DataSourceRepositoryImpl
   implements DataSourceRepository
 {
   delete = async (args: { id: string }) => {
-    return Promise.resolve(undefined);
+    const path = `/${args.id}`;
+    await this._delete({ path });
   };
 
   getById = async (args: { id: string }) => {
