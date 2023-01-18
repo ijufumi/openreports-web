@@ -1,6 +1,6 @@
 import useLoader from "../../states/Loader";
 
-abstract class UseCaseBase {
+abstract class BaseUseCase {
   private loader = useLoader();
 
   protected startLoader = () => {
@@ -12,4 +12,4 @@ abstract class UseCaseBase {
   };
 }
 
-export default UseCaseBase;
+export default BaseUseCase;

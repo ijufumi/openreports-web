@@ -1,11 +1,11 @@
 import WorkspaceUseCase from "src/use_cases/WorkspaceUseCase";
-import UseCaseBase from "./UseCaseBase";
+import BaseUseCase from "./BaseUseCase";
 import RoleRepository from "src/repositories/RoleRepository";
 import WorkspaceMemberRepository from "src/repositories/WorkspaceMemberRepository";
 import WorkspaceRepository from "src/repositories/WorkspaceRepository";
 
 export default class WorkspaceUseCaseImpl
-  extends UseCaseBase
+  extends BaseUseCase
   implements WorkspaceUseCase
 {
   private readonly roleRepository: RoleRepository;

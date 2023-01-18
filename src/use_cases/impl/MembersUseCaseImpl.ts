@@ -3,9 +3,9 @@ import MembersRepository from "../../repositories/MembersRepository";
 import credentials from "../../states/Credentials";
 import { LoginUser } from "../../states/LoginUser";
 import UserVo from "../../vos/UserVo";
-import UseCaseBase from "./UseCaseBase";
+import BaseUseCase from "./BaseUseCase";
 
-class MembersUseCaseImpl extends UseCaseBase implements MembersUseCase {
+class MembersUseCaseImpl extends BaseUseCase implements MembersUseCase {
   private readonly repository: MembersRepository;
   private readonly loginUser: LoginUser;
 

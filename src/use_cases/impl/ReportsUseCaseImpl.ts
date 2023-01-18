@@ -1,10 +1,10 @@
 import ReportsUseCase from "src/use_cases/ReportsUseCase";
 import ReportsRepository from "src/repositories/ReportsRepository";
 import TemplatesRepository from "src/repositories/TemplatesRepository";
-import UseCaseBase from "./UseCaseBase";
+import BaseUseCase from "./BaseUseCase";
 
 export default class ReportsUseCaseImpl
-  extends UseCaseBase
+  extends BaseUseCase
   implements ReportsUseCase
 {
   private readonly reportsRepository: ReportsRepository;

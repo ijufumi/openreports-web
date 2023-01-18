@@ -1,10 +1,10 @@
-import UseCaseBase from "./UseCaseBase";
+import BaseUseCase from "./BaseUseCase";
 import DataSourceUseCase from "../DataSourceUseCase";
 import DataSourceRepository from "../../repositories/DataSourceRepository";
 import WorkspaceVo from "../../vos/WorkspaceVo";
 
 export default class DataSourceUseCaseImpl
-  extends UseCaseBase
+  extends BaseUseCase
   implements DataSourceUseCase
 {
   private readonly repository: DataSourceRepository;

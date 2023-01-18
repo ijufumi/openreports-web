@@ -2,10 +2,10 @@ import LoginUseCase from "src/use_cases/LoginUseCase";
 import LoginRepository from "src/repositories/LoginRepository";
 import Credentials from "../../states/Credentials";
 import UserVo from "src/vos/UserVo";
-import UseCaseBase from "./UseCaseBase";
+import BaseUseCase from "./BaseUseCase";
 import { LoginUser } from "src/states/LoginUser";
 
-class LoginUseCaseImpl extends UseCaseBase implements LoginUseCase {
+class LoginUseCaseImpl extends BaseUseCase implements LoginUseCase {
   private readonly repository: LoginRepository;
   private readonly loginUser: LoginUser;
 
