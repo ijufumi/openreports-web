@@ -15,10 +15,7 @@ export default class WorkspaceMemberRepositoryImpl
 
   getByMemberId = async (args: { memberId: string }) => {
     const result = await this._get({ path: `/${args.memberId}` });
-    if (result) {
-      return new WorkspaceMemberVo(result);
-    }
-    return undefined;
+    return new WorkspaceMemberVo(result);
   };
 
   update = async (args: { memberId: string; roleId: string }) => {

@@ -8,9 +8,6 @@ export default class RoleRepositoryImpl
 {
   roles = async () => {
     const result = await this._get({ path: "/" });
-    if (result) {
-      return result.map((v: any) => new RoleVo(v));
-    }
-    return undefined;
+    return result.map((v: any) => new RoleVo(v));
   };
 }

@@ -6,17 +6,17 @@ export default interface ReportsRepository {
     page: number;
     limit: number;
     templateId?: string;
-  }): Promise<ReportsVo | undefined>;
+  }): Promise<ReportsVo>;
 
-  getById(args: { id: string }): Promise<ReportVo | undefined>;
+  getById(args: { id: string }): Promise<ReportVo>;
 
   update(args: {
     id: string;
     name: string;
     reportTemplateId: string;
-  }): Promise<ReportVo | undefined>;
+  }): Promise<ReportVo>;
 
-  output(args: { id: string }): Promise<Blob | undefined>;
+  output(args: { id: string }): Promise<Blob>;
 
   delete(args: { id: string }): Promise<void>;
 }

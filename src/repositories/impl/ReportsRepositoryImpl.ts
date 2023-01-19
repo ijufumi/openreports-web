@@ -18,18 +18,12 @@ export default class ReportsRepositoryImpl
     }
 
     const result = await this._get({ path });
-    if (result) {
-      return new ReportsVo(result);
-    }
-    return undefined;
+    return new ReportsVo(result);
   };
 
   getById = async (args: { id: string }) => {
     const result = await this._get({ path: `/${args.id}` });
-    if (result) {
-      return new ReportVo(result);
-    }
-    return undefined;
+    return new ReportVo(result);
   };
 
   update = async (args: {
@@ -42,10 +36,7 @@ export default class ReportsRepositoryImpl
       path: `/${args.id}`,
       body: { name, reportTemplateId },
     });
-    if (result) {
-      return new ReportVo(result);
-    }
-    return undefined;
+    return new ReportVo(result);
   };
 
   output = async (args: { id: string }) => {

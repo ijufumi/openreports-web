@@ -32,10 +32,7 @@ export default class TemplatesRepositoryImpl
       path: `/${id}`,
       body: { name },
     });
-    if (result) {
-      return new TemplateVo(result);
-    }
-    return undefined;
+    return new TemplateVo(result);
   };
 
   delete = async (args: { id: string }) => {
