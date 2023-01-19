@@ -13,12 +13,6 @@ export default class WorkspaceRepositoryImpl
     return new WorkspaceVo(result);
   };
 
-  getByMemberId = async (args: { memberId: string }) => {
-    const path = `/?memberId=${args.memberId}`;
-    const result = await this._get({ path });
-    return new WorkspacesVo(result);
-  };
-
   update = async (args: { id: string; name: string }) => {
     const path = `/${args.id}`;
     const body = { name: args.name };
