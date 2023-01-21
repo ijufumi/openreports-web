@@ -1,7 +1,6 @@
 import BaseUseCase from "./BaseUseCase";
 import DataSourceUseCase from "../DataSourceUseCase";
 import DataSourceRepository from "../../repositories/DataSourceRepository";
-import WorkspaceVo from "../../vos/WorkspaceVo";
 
 export default class DataSourceUseCaseImpl
   extends BaseUseCase

@@ -42,6 +42,10 @@ class NavigatorWrapper {
     this.navigateFunction(AuthorizedPath.templateEdit.replace(":id", id));
   };
 
+  toDataSources = () => {
+    this.navigateFunction(AuthorizedPath.dataSources);
+  };
+
   // error path
   toGoogleError = () => {
     this.navigateFunction(ErrorsPath.google);

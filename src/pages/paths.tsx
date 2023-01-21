@@ -12,6 +12,7 @@ import ReportEdit from "./reports/id/edit";
 import Templates from "./templates";
 import TemplateNew from "./templates/new";
 import TemplateEdit from "./templates/id/edit";
+import DataSources from "./data_sources";
 
 export interface Path {
   path: string;
@@ -32,6 +33,7 @@ export enum AuthorizedPath {
   templates = "/templates",
   templateNew = "/templates/new",
   templateEdit = "/templates/edit/:id",
+  dataSources = "/data_sources",
 }
 
 export enum ErrorsPath {
@@ -85,6 +87,10 @@ export const useAuthorizedPath = () => {
     {
       path: AuthorizedPath.templateEdit,
       element: <TemplateEdit />,
+    },
+    {
+      path: AuthorizedPath.dataSources,
+      element: <DataSources />,
     },
   ];
 };

@@ -1,13 +1,13 @@
-import WorkspacesVo from "../vos/WorkspacesVo";
-import WorkspaceVo from "../vos/WorkspaceVo";
+import DataSourcesVo from "../vos/DataSources";
+import DataSourceVo from "../vos/DataSourceVo";
 
 export default interface DataSourceUseCase {
   gets(args: {
     page: number;
     limit: number;
-  }): Promise<WorkspacesVo | undefined>;
+  }): Promise<DataSourcesVo | undefined>;
 
-  getById(args: { id: string }): Promise<WorkspaceVo | undefined>;
+  getById(args: { id: string }): Promise<DataSourceVo | undefined>;
 
   register(args: {
     name: string;
@@ -15,7 +15,7 @@ export default interface DataSourceUseCase {
     username: string;
     password: string;
     driverTypeId: string;
-  }): Promise<WorkspaceVo | undefined>;
+  }): Promise<DataSourceVo | undefined>;
 
   update(args: {
     id: string;
@@ -24,7 +24,7 @@ export default interface DataSourceUseCase {
     username: string;
     password: string;
     driverTypeId: string;
-  }): Promise<WorkspaceVo | undefined>;
+  }): Promise<DataSourceVo | undefined>;
 
   delete(args: { id: string }): Promise<boolean>;
 }
