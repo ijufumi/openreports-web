@@ -19,81 +19,81 @@ export default class ReportsUseCaseImpl
     this.templatesRepository = templatesRepository;
   }
 
-  reports = async (page: number, limit: number, templateId?: string) => {
+  reports = async (args: {
+    page: number;
+    limit: number;
+    templateId?: string;
+  }) => {
     try {
       this.startLoader();
-      return await this.reportsRepository.getsByFilter({
-        page,
-        limit,
-        templateId,
-      });
+      return await this.reportsRepository.getsByFilter(args);
     } finally {
       this.stopLoader();
     }
   };
 
-  report = async (id: string) => {
+  report = async (args: { id: string }) => {
     try {
       this.startLoader();
-      return await this.reportsRepository.getById({ id });
+      return await this.reportsRepository.getById(args);
     } finally {
       this.stopLoader();
     }
   };
 
-  outputReport = async (id: string) => {
+  outputReport = async (args: { id: string }) => {
     try {
       this.startLoader();
-      return await this.reportsRepository.output({ id });
+      return await this.reportsRepository.output(args);
     } finally {
       this.stopLoader();
     }
   };
 
-  deleteReport = async (id: string) => {
+  deleteReport = async (args: { id: string }) => {
     try {
       this.startLoader();
-      return await this.reportsRepository.delete({ id });
+      return await this.reportsRepository.delete(args);
     } finally {
       this.stopLoader();
     }
   };
 
-  updateReport = async (id: string, name: string, reportTemplateId: string) => {
+  updateReport = async (args: {
+    id: string;
+    name: string;
+    templateId: string;
+  }) => {
     try {
       this.startLoader();
-      return await this.reportsRepository.update({
-        id,
-        name,
-        reportTemplateId,
-      });
+      return await this.reportsRepository.update(args);
     } finally {
       this.stopLoader();
     }
   };
 
-  templates = async (page: number, limit: number) => {
+  templates = async (args: { page: number; limit: number }) => {
     try {
       this.startLoader();
-      return await this.templatesRepository.getAll({ page, limit });
+      return await this.templatesRepository.getAll(args);
     } finally {
       this.stopLoader();
     }
   };
 
-  template = async (id: string) => {
+  template = async (args: { id: string }) => {
     try {
       this.startLoader();
-      return await this.templatesRepository.getById({ id });
+      return await this.templatesRepository.getById(args);
     } finally {
       this.stopLoader();
     }
   };
 
-  registerTemplate = async (name: string, file: File) => {
+  registerTemplate = async (args: { name: string; file: File }) => {
     try {
       this.startLoader();
-      return await this.templatesRepository.register({ name, file });
+      return await this.templatesRepository.register(args);
     } catch (e) {
       console.error(e);
       return undefined;
@@ -102,10 +102,10 @@ export default class ReportsUseCaseImpl
     }
   };
 
-  updateTemplate = async (id: string, name: string) => {
+  updateTemplate = async (args: { id: string; name: string }) => {
     try {
       this.startLoader();
-      return await this.templatesRepository.update({ id, name });
+      return await this.templatesRepository.update(args);
     } catch (e) {
       console.error(e);
       return undefined;
@@ -114,10 +114,10 @@ export default class ReportsUseCaseImpl
     }
   };
 
-  deleteTemplate = async (id: string) => {
+  deleteTemplate = async (args: { id: string }) => {
     try {
       this.startLoader();
-      await this.templatesRepository.delete({ id });
+      await this.templatesRepository.delete(args);
       return true;
     } catch (e) {
       console.error(e);

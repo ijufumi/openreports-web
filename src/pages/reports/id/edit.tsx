@@ -39,10 +39,13 @@ const ReportEdit: FC<Props> = () => {
   useEffect(() => {
     const initialize = async () => {
       if (id) {
-        const _report = await reportsUseCase.report(id);
+        const _report = await reportsUseCase.report({ id });
         setReport(_report);
       }
-      const reportTemplatesVo = await reportsUseCase.templates(0, -1);
+      const reportTemplatesVo = await reportsUseCase.templates({
+        page: 0,
+        limit: -1,
+      });
       if (reportTemplatesVo) {
         setTemplates(reportTemplatesVo.items);
       }
@@ -68,7 +71,7 @@ const ReportEdit: FC<Props> = () => {
   }, [report]);
 
   const handleUpdate = async () => {
-    const _report = await reportsUseCase.updateReport(id, name, templateId);
+    const _report = await reportsUseCase.updateReport({ id, name, templateId });
     if (_report) {
       setReport(_report);
       toast({

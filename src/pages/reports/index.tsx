@@ -38,7 +38,7 @@ const Reports: FC<Props> = () => {
       return;
     }
     const initialize = async () => {
-      const reports = await reportsUseCase.reports(0, 10);
+      const reports = await reportsUseCase.reports({ page: 0, limit: 10 });
       if (reports !== undefined) {
         setReports(reports);
       }
@@ -52,15 +52,15 @@ const Reports: FC<Props> = () => {
     initialize();
   }, []);
 
-  const handleOnChange = async (pageIndex: number, pageSize: number) => {
-    const reports = await reportsUseCase.reports(pageIndex, pageSize);
+  const handleOnChange = async (page: number, limit: number) => {
+    const reports = await reportsUseCase.reports({ page, limit });
     if (reports !== undefined) {
       setReports(reports);
     }
   };
 
   const handleOutput = async (id: string) => {
-    const data = await reportsUseCase.outputReport(id);
+    const data = await reportsUseCase.outputReport({ id });
     if (data) {
       const fileName = `sample-${DateUtils.nowAsString(
         "YYYYMMDD-HHmmss"
@@ -78,7 +78,7 @@ const Reports: FC<Props> = () => {
   };
 
   const handleDelete = async (id: string) => {
-    await reportsUseCase.deleteReport(id);
+    await reportsUseCase.deleteReport({ id });
   };
 
   const handleClick = (id: string) => {

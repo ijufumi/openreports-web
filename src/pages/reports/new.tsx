@@ -22,7 +22,7 @@ const ReportNew: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [reportTemplates, setReportTemplates] = useState<TemplateVo[]>([]);
   const [name, setName] = useState<string>("");
-  const [reportTemplateId, setReportTemplateId] = useState<string>("");
+  const [templateId, setTemplateId] = useState<string>("");
 
   const breadcrumbs = useBreadcrumbs();
   const navigator = useNavigator();
@@ -33,7 +33,10 @@ const ReportNew: FC<Props> = () => {
 
   useEffect(() => {
     const initialize = async () => {
-      const reportTemplatesVo = await reportsUseCase.templates(0, -1);
+      const reportTemplatesVo = await reportsUseCase.templates({
+        page: 0,
+        limit: -1,
+      });
       if (reportTemplatesVo) {
         setReportTemplates(reportTemplatesVo.items);
       }
@@ -52,11 +55,11 @@ const ReportNew: FC<Props> = () => {
   }, [id]);
 
   const handleUpdate = async () => {
-    const _report = await reportsUseCase.updateReport(
+    const _report = await reportsUseCase.updateReport({
       id,
       name,
-      reportTemplateId
-    );
+      templateId,
+    });
     if (_report) {
       toast({
         title: "Edit updated.",
@@ -119,8 +122,8 @@ const ReportNew: FC<Props> = () => {
         </GridItem>
         <GridItem colSpan={3} h={50} display="flex" alignItems="center">
           <Select
-            onChange={(e) => setReportTemplateId(e.target.value)}
-            value={reportTemplateId}
+            onChange={(e) => setTemplateId(e.target.value)}
+            value={templateId}
           >
             {reportTemplates.map((template) => {
               return (

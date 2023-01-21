@@ -26,15 +26,11 @@ export default class ReportsRepositoryImpl
     return new ReportVo(result);
   };
 
-  update = async (args: {
-    id: string;
-    name: string;
-    reportTemplateId: string;
-  }) => {
-    const { name, reportTemplateId } = args;
+  update = async (args: { id: string; name: string; templateId: string }) => {
+    const { name, templateId } = args;
     const result = await this._put({
       path: `/${args.id}`,
-      body: { name, reportTemplateId },
+      body: { name, templateId },
     });
     return new ReportVo(result);
   };

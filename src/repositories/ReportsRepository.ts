@@ -13,7 +13,7 @@ export default interface ReportsRepository {
   update(args: {
     id: string;
     name: string;
-    reportTemplateId: string;
+    templateId: string;
   }): Promise<ReportVo>;
 
   output(args: { id: string }): Promise<Blob>;

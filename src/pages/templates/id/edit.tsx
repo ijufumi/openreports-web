@@ -32,7 +32,7 @@ const TemplateEdit: FC<Props> = () => {
   useEffect(() => {
     const initialize = async () => {
       if (id) {
-        const _template = await reportsUseCase.template(id);
+        const _template = await reportsUseCase.template({ id });
         if (_template) {
           setName(_template.name);
         } else {
@@ -56,7 +56,7 @@ const TemplateEdit: FC<Props> = () => {
 
   const handleUpdate = async () => {
     if (name) {
-      const result = await reportsUseCase.updateTemplate(id, name);
+      const result = await reportsUseCase.updateTemplate({ id, name });
       if (result) {
         toast({
           title: "Update succeeded.",

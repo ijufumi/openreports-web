@@ -4,31 +4,40 @@ import ReportVo from "../vos/ReportVo";
 import TemplateVo from "../vos/TemplateVo";
 
 export default interface ReportsUseCase {
-  reports(
-    page: number,
-    limit: number,
-    templateId?: string
-  ): Promise<ReportsVo | undefined>;
+  reports(args: {
+    page: number;
+    limit: number;
+    templateId?: string;
+  }): Promise<ReportsVo | undefined>;
 
-  report(id: string): Promise<ReportVo | undefined>;
+  report(args: { id: string }): Promise<ReportVo | undefined>;
 
-  outputReport(id: string): Promise<Blob | undefined>;
+  outputReport(args: { id: string }): Promise<Blob | undefined>;
 
-  updateReport(
-    id: string,
-    name: string,
-    reportTemplateId: string
-  ): Promise<ReportVo | undefined>;
+  updateReport(args: {
+    id: string;
+    name: string;
+    templateId: string;
+  }): Promise<ReportVo | undefined>;
 
-  deleteReport(id: string): Promise<void>;
+  deleteReport(args: { id: string }): Promise<void>;
 
-  templates(page: number, limit: number): Promise<TemplatesVo | undefined>;
+  templates(args: {
+    page: number;
+    limit: number;
+  }): Promise<TemplatesVo | undefined>;
 
-  template(id: string): Promise<TemplateVo | undefined>;
+  template(args: { id: string }): Promise<TemplateVo | undefined>;
 
-  registerTemplate(name: string, file: File): Promise<TemplateVo | undefined>;
+  registerTemplate(args: {
+    name: string;
+    file: File;
+  }): Promise<TemplateVo | undefined>;
 
-  updateTemplate(id: string, name: string): Promise<TemplateVo | undefined>;
+  updateTemplate(args: {
+    id: string;
+    name: string;
+  }): Promise<TemplateVo | undefined>;
 
-  deleteTemplate(id: string): Promise<boolean>;
+  deleteTemplate(args: { id: string }): Promise<boolean>;
 }

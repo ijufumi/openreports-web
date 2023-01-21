@@ -22,7 +22,7 @@ interface Props {}
 
 const TemplateNew: FC<Props> = () => {
   const [name, setName] = useState<string>("");
-  const [templateFile, setTemplateFile] = useState<File | undefined>(undefined);
+  const [file, setFile] = useState<File | undefined>(undefined);
 
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -40,8 +40,8 @@ const TemplateNew: FC<Props> = () => {
   }, []);
 
   const handleCreate = async () => {
-    if (name && templateFile) {
-      const result = await reportUseCase.registerTemplate(name, templateFile);
+    if (name && file) {
+      const result = await reportUseCase.registerTemplate({ name, file });
       if (result) {
         toast({
           title: "Upload updated.",
@@ -68,7 +68,7 @@ const TemplateNew: FC<Props> = () => {
   };
 
   const handleClearFile = () => {
-    setTemplateFile(undefined);
+    setFile(undefined);
   };
 
   const handleOpenFileWindow = () => {
@@ -78,9 +78,9 @@ const TemplateNew: FC<Props> = () => {
   const handleSelectFile = () => {
     const files = fileRef.current?.files;
     if (!files || !files.length) {
-      setTemplateFile(undefined);
+      setFile(undefined);
     } else {
-      setTemplateFile(files[0]);
+      setFile(files[0]);
       fileRef.current.value = "";
     }
   };
@@ -119,7 +119,7 @@ const TemplateNew: FC<Props> = () => {
           <Text fontWeight={600}>File</Text>
         </GridItem>
         <GridItem colSpan={3} h={50} display="flex" alignItems="center">
-          <Text>{templateFile ? templateFile.name : "None"}</Text>
+          <Text>{file ? file.name : "None"}</Text>
           <Input
             type="file"
             sx={{ visibility: "hidden", width: 0 }}
@@ -127,7 +127,7 @@ const TemplateNew: FC<Props> = () => {
             onChange={handleSelectFile}
           />
           <Box ml={2}>
-            {templateFile ? (
+            {file ? (
               <Tooltip label="Clear file" aria-label="file">
                 <IconButton
                   icon={<Icon as={GrTrash} />}

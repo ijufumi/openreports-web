@@ -38,7 +38,10 @@ const Templates: FC<Props> = () => {
       return;
     }
     const initialize = async () => {
-      const _reportTemplates = await reportsUseCase.templates(0, 10);
+      const _reportTemplates = await reportsUseCase.templates({
+        page: 0,
+        limit: 10,
+      });
       if (_reportTemplates !== undefined) {
         setTemplates(_reportTemplates);
       }
@@ -52,8 +55,8 @@ const Templates: FC<Props> = () => {
     initialize();
   }, []);
 
-  const handleOnChange = async (pageIndex: number, pageSize: number) => {
-    const _templates = await reportsUseCase.templates(pageIndex, pageSize);
+  const handleOnChange = async (page: number, limit: number) => {
+    const _templates = await reportsUseCase.templates({ page, limit });
     if (_templates !== undefined) {
       setTemplates(_templates);
     }
@@ -67,8 +70,8 @@ const Templates: FC<Props> = () => {
     navigator.toTemplateNew();
   };
 
-  const handleDelete = async (templateId: string) => {
-    const result = await reportsUseCase.deleteTemplate(templateId);
+  const handleDelete = async (id: string) => {
+    const result = await reportsUseCase.deleteTemplate({ id });
     if (result) {
       toast({
         title: "Delete succeeded.",
@@ -90,7 +93,9 @@ const Templates: FC<Props> = () => {
   };
 
   const canDeleteTemplate = async (templateId: string) => {
-    const reports = await reportsUseCase.reports(0, 10, templateId);
+    const page = 0;
+    const limit = 1;
+    const reports = await reportsUseCase.reports({ page, limit, templateId });
     return reports?.count === 0;
   };
 
