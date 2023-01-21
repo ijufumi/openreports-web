@@ -22,11 +22,18 @@ import { GrTrash } from "react-icons/gr";
 
 interface Props {}
 
+class ExTemplateVo extends TemplateVo {
+  readonly canDelete: boolean = false;
+  constructor(original: TemplateVo, canDelete: boolean) {
+    super(original);
+    this.canDelete = canDelete;
+  }
+}
+
 const Templates: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [templates, setTemplates] = useState<TemplatesVo | undefined>(
-    undefined
-  );
+  const [templates, setTemplates] = useState<Array<ExTemplateVo>>([]);
+  const [totalCount, setTotalCount] = useState(0);
 
   const toast = useToast();
   const breadcrumbs = useBreadcrumbs();
@@ -38,12 +45,13 @@ const Templates: FC<Props> = () => {
       return;
     }
     const initialize = async () => {
-      const _reportTemplates = await reportsUseCase.templates({
+      const _templates = await reportsUseCase.templates({
         page: 0,
         limit: 10,
       });
-      if (_reportTemplates !== undefined) {
-        setTemplates(_reportTemplates);
+      if (_templates !== undefined) {
+        setTemplates(await convertToExTemplateVo(_templates.items));
+        setTotalCount(_templates.count);
       }
       setInitialized(true);
       breadcrumbs.set([
@@ -55,10 +63,25 @@ const Templates: FC<Props> = () => {
     initialize();
   }, []);
 
+  const convertToExTemplateVo = async (data: Array<TemplateVo>) => {
+    if (!data || !data.length) {
+      return [];
+    }
+
+    const converted: Array<ExTemplateVo> = [];
+    for (let i = 0; i < data.length; i++) {
+      const v = data[i];
+      const canDelete = await canDeleteTemplate(v.id);
+      converted.push(new ExTemplateVo(v, canDelete));
+    }
+    return converted;
+  };
+
   const handleOnChange = async (page: number, limit: number) => {
     const _templates = await reportsUseCase.templates({ page, limit });
     if (_templates !== undefined) {
-      setTemplates(_templates);
+      setTemplates(await convertToExTemplateVo(_templates.items));
+      setTotalCount(_templates.count);
     }
   };
 
@@ -103,7 +126,7 @@ const Templates: FC<Props> = () => {
     return null;
   }
 
-  const columnHelper = createColumnHelper<TemplateVo>();
+  const columnHelper = createColumnHelper<ExTemplateVo>();
 
   const columns = [
     columnHelper.accessor("id", {
@@ -140,20 +163,23 @@ const Templates: FC<Props> = () => {
       header: "Updated at",
       cell: (props) => props.getValue(),
     }),
-    columnHelper.display({
+    columnHelper.accessor("canDelete", {
       header: "Actions",
-      cell: async (props) => {
+      cell: (props) => {
+        if (!props || !props.row) {
+          return undefined;
+        }
         const templateId = props.row.getValue("id") as string;
         if (!templateId) {
           return undefined;
         }
-        const canDelete = await canDeleteTemplate(templateId);
+        console.log(props.getValue());
         return (
-          <Wrap spacing={5}>
+          <Wrap spacing={5} display="flex" justifyContent="center">
             <WrapItem>
               <Tooltip label="Delete report">
                 <IconButton
-                  disabled={!canDelete}
+                  disabled={!props.getValue()}
                   icon={<Icon as={GrTrash} />}
                   variant="actionIcons"
                   aria-label="output"
@@ -165,7 +191,7 @@ const Templates: FC<Props> = () => {
         );
       },
     }),
-  ] as ColumnDef<TemplateVo>[];
+  ] as ColumnDef<ExTemplateVo>[];
 
   return (
     <VStack>
@@ -176,8 +202,8 @@ const Templates: FC<Props> = () => {
       </Flex>
       <DataTable
         columns={columns}
-        data={templates?.items || []}
-        totalCount={templates?.count || 0}
+        data={templates}
+        totalCount={totalCount}
         onChange={handleOnChange}
       />
     </VStack>

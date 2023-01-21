@@ -19,7 +19,7 @@ export default class TemplateVo {
   readonly createdAt: number;
   readonly updatedAt: number;
 
-  constructor(props: Props) {
+  constructor(props: Props | TemplateVo) {
     this.id = props.id;
     this.name = props.name;
     this.filePath = props.filePath;
