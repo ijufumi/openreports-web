@@ -18,8 +18,8 @@ import ReportsVo from "../../vos/ReportsVo";
 import ReportVo from "../../vos/ReportVo";
 import DataTable from "../../components/data_table/DataTable";
 import useBreadcrumbs from "../../states/Breadcrumbs";
-import DownloadUtils from "../../components/utils/DownloadUtils";
-import DateUtils from "../../components/utils/DateUtils";
+import DownloadUtils from "../../components/utils/download/DownloadUtils";
+import DateUtils from "../../components/utils/date/DateUtils";
 import useNavigator from "../navigator";
 
 interface Props {}

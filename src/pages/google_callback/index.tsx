@@ -1,7 +1,7 @@
 import React, { FC, useMemo, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import StringUtils from "../../components/utils/StringUtils";
+import StringUtils from "../../components/utils/string/StringUtils";
 import useNavigator from "../navigator";
 
 interface Props {}
