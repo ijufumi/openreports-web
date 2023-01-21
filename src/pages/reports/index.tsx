@@ -45,7 +45,7 @@ const Reports: FC<Props> = () => {
       setInitialized(true);
       breadcrumbs.set([
         {
-          title: "ReportsVo",
+          title: "Reports",
         },
       ]);
     };
