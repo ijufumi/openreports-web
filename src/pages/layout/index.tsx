@@ -17,6 +17,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Select,
+  useToast,
 } from "@chakra-ui/react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdKeyboardArrowRight } from "react-icons/md";
@@ -26,6 +27,7 @@ import logoImg from "../../assets/logo.png";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import useLoginUser from "../../states/LoginUser";
 import useNavigator from "../navigator";
+import useToastMessageState from "../../states/ToastMessage";
 
 interface Props {
   children: React.ReactNode;
@@ -34,6 +36,13 @@ interface Props {
 const Layout: FC<Props> = observer(({ children }) => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const navigator = useNavigator();
+  const toastState = useToastMessageState();
+  const toast = useToast({
+    position: "top-left",
+    duration: 3000,
+    onCloseComplete: toastState.clear,
+    isClosable: true,
+  });
   const breadcrumbs = useBreadcrumbs().get();
   const loginUser = useLoginUser();
   const membersUseCase = UseCaseFactory.createMembersUseCase();
@@ -41,6 +50,16 @@ const Layout: FC<Props> = observer(({ children }) => {
   useEffect(() => {
     setInitialized(true);
   }, []);
+
+  useEffect(() => {
+    if (toastState.message) {
+      toast({
+        title: toastState.message.getTitle(),
+        description: toastState.message.getDescription(),
+        status: toastState.message.getStatus(),
+      });
+    }
+  }, [toastState.message]);
 
   useEffect(() => {
     if (!initialized) {
@@ -90,7 +109,9 @@ const Layout: FC<Props> = observer(({ children }) => {
               <MenuDivider />
               <MenuGroup key="setting" title={"Settings"}>
                 <MenuItem>Workspace</MenuItem>
-                <MenuItem>DataSources</MenuItem>
+                <MenuItem onClick={navigator.toDataSources}>
+                  DataSources
+                </MenuItem>
                 <MenuItem>Logs</MenuItem>
               </MenuGroup>
             </MenuList>
