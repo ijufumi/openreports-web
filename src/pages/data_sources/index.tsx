@@ -16,7 +16,7 @@ import useBreadcrumbs from "../../states/Breadcrumbs";
 import { GrTrash } from "react-icons/gr";
 import useNavigator from "../navigator";
 import DataSourceVo from "src/vos/DataSourceVo";
-import DataSourcesVo from "src/vos/DataSources";
+import DataSourcesVo from "src/vos/DataSourcesVo";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import useToastMessageState from "../../states/ToastMessage";
 

@@ -1,4 +1,4 @@
-import DataSourcesVo from "../vos/DataSources";
+import DataSourcesVo from "../vos/DataSourcesVo";
 import DataSourceVo from "../vos/DataSourceVo";
 
 export default interface DataSourceRepository {
