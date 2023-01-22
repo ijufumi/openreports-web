@@ -12,7 +12,6 @@ import {
   Text,
   Image,
   Divider,
-  useToast,
   FormControl,
   FormErrorMessage,
 } from "@chakra-ui/react";
@@ -25,6 +24,7 @@ import { FcGoogle } from "react-icons/fc";
 import logoImg from "../../assets/logo.png";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import useNavigator from "../navigator";
+import useToastMessageState from "../../states/ToastMessage";
 
 interface Props {}
 
@@ -32,7 +32,7 @@ const Login: FC<Props> = () => {
   const navigator = useNavigator();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const toast = useToast();
+  const toastState = useToastMessageState();
   const loginUseCase = UseCaseFactory.createLoginUseCase();
 
   const formSchema = z.object({
@@ -66,12 +66,9 @@ const Login: FC<Props> = () => {
       navigator.toTop();
       return;
     } else {
-      toast({
+      toastState.errorMessage({
         title: "Login failed.",
         description: "You couldn't logged in report because of some errors.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
       });
     }
   };
@@ -81,12 +78,9 @@ const Login: FC<Props> = () => {
     if (googleUrl != undefined) {
       window.location.replace(googleUrl.url);
     } else {
-      toast({
+      toastState.errorMessage({
         title: "Google login failed.",
         description: "You couldn't logged in report because of some errors.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
       });
     }
   };

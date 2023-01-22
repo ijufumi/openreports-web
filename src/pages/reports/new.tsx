@@ -9,12 +9,12 @@ import {
   Button,
   Wrap,
   WrapItem,
-  useToast,
 } from "@chakra-ui/react";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import TemplateVo from "../../vos/TemplateVo";
 import useNavigator from "../navigator";
+import useToastMessageState from "../../states/ToastMessage";
 
 interface Props {}
 
@@ -26,7 +26,7 @@ const ReportNew: FC<Props> = () => {
 
   const breadcrumbs = useBreadcrumbs();
   const navigator = useNavigator();
-  const toast = useToast();
+  const toastState = useToastMessageState();
   const id = "";
 
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
@@ -61,20 +61,14 @@ const ReportNew: FC<Props> = () => {
       templateId,
     });
     if (_report) {
-      toast({
+      toastState.successMessage({
         title: "Edit updated.",
         description: "You've finished updating report well.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
       });
     } else {
-      toast({
+      toastState.errorMessage({
         title: "Edit didn't updated.",
         description: "You couldn't update report because of errors.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
       });
     }
   };

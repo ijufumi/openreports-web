@@ -14,6 +14,7 @@ import { useParams } from "react-router";
 import useNavigator from "../../navigator";
 import UseCaseFactory from "../../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../../states/Breadcrumbs";
+import useToastMessageState from "../../../states/ToastMessage";
 
 interface Props {}
 
@@ -22,6 +23,7 @@ const TemplateEdit: FC<Props> = () => {
   const [name, setName] = useState<string>("");
 
   const toast = useToast();
+  const toastState = useToastMessageState();
   const params = useParams();
   const navigator = useNavigator();
   const breadcrumbs = useBreadcrumbs();
@@ -58,21 +60,15 @@ const TemplateEdit: FC<Props> = () => {
     if (name) {
       const result = await reportsUseCase.updateTemplate({ id, name });
       if (result) {
-        toast({
+        toastState.successMessage({
           title: "Update succeeded.",
           description: "You've finished updating template.",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
         });
         navigator.toTemplates();
       } else {
-        toast({
+        toastState.errorMessage({
           title: "Update failed.",
           description: "You've failed updating template.",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
         });
       }
     }
