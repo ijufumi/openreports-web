@@ -104,6 +104,10 @@ const DataSources: FC<Props> = () => {
       header: "Name",
       cell: (props) => props.getValue(),
     }),
+    columnHelper.accessor("driverTypeName", {
+      header: "Driver Type",
+      cell: (props) => props.getValue(),
+    }),
     columnHelper.accessor("formattedCreatedAt", {
       header: "Created at",
       cell: (props) => props.getValue(),

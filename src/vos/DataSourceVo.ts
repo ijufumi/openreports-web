@@ -7,6 +7,7 @@ export interface Props {
   username: string;
   password: string;
   driverTypeId: string;
+  driverTypeName: string;
   createdAt: number;
   updatedAt: number;
 }
@@ -18,6 +19,7 @@ export default class DataSourceVo {
   readonly username: string;
   readonly password: string;
   readonly driverTypeId: string;
+  readonly driverTypeName: string;
   readonly createdAt: number;
   readonly updatedAt: number;
 
@@ -28,6 +30,7 @@ export default class DataSourceVo {
     this.username = prop.username;
     this.password = prop.password;
     this.driverTypeId = prop.driverTypeId;
+    this.driverTypeName = prop.driverTypeName;
     this.createdAt = prop.createdAt;
     this.updatedAt = prop.updatedAt;
   }
