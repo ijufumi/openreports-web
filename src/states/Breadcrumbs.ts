@@ -28,10 +28,12 @@ class Breadcrumbs {
   };
 }
 
-const breadcrumbs = new Breadcrumbs();
+const localBreadcrumbs = new Breadcrumbs();
 
-const useBreadcrumbs = () => {
-  return breadcrumbs;
+export const setBreadcrumbs = (breadcrumbs: BreadcrumbsDataType) => {
+  localBreadcrumbs.set(breadcrumbs);
 };
 
-export default useBreadcrumbs;
+export const useBreadcrumbsState = () => {
+  return localBreadcrumbs.get();
+};

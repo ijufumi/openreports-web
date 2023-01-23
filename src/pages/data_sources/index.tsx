@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import DataTable from "../../components/data_table/DataTable";
-import useBreadcrumbs from "../../states/Breadcrumbs";
+import { setBreadcrumbs } from "../../states/Breadcrumbs";
 import { GrTrash } from "react-icons/gr";
 import useNavigator from "../navigator";
 import DataSourceVo from "src/vos/DataSourceVo";
@@ -28,7 +28,6 @@ const DataSources: FC<Props> = () => {
     undefined
   );
   const navigator = useNavigator();
-  const breadcrumbs = useBreadcrumbs();
 
   const dataSourceUseCase = UseCaseFactory.createDataSourceUseCase();
 
@@ -39,7 +38,7 @@ const DataSources: FC<Props> = () => {
         setDataSources(_dataSources);
       }
       setInitialized(true);
-      breadcrumbs.set([
+      setBreadcrumbs([
         {
           title: "DataSources",
         },

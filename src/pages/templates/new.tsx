@@ -15,7 +15,7 @@ import {
 import { GrFormUpload, GrTrash } from "react-icons/gr";
 import useNavigator from "../navigator";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import useBreadcrumbs from "../../states/Breadcrumbs";
+import { setBreadcrumbs } from "../../states/Breadcrumbs";
 import { successToast, errorToast } from "../../states/Toast";
 
 interface Props {}
@@ -27,11 +27,10 @@ const TemplateNew: FC<Props> = () => {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const navigator = useNavigator();
-  const breadcrumbs = useBreadcrumbs();
   const reportUseCase = UseCaseFactory.createReportsUseCase();
 
   useEffect(() => {
-    breadcrumbs.set([
+    setBreadcrumbs([
       {
         title: "Templates",
       },

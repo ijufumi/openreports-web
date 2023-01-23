@@ -13,7 +13,7 @@ import {
 import { useParams } from "react-router";
 import useNavigator from "../../navigator";
 import UseCaseFactory from "../../../use_cases/UseCaseFactory";
-import useBreadcrumbs from "../../../states/Breadcrumbs";
+import { setBreadcrumbs } from "../../../states/Breadcrumbs";
 import { successToast, errorToast } from "../../../states/Toast";
 
 interface Props {}
@@ -24,7 +24,6 @@ const TemplateEdit: FC<Props> = () => {
 
   const params = useParams();
   const navigator = useNavigator();
-  const breadcrumbs = useBreadcrumbs();
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
 
   const id = params.id || "";
@@ -40,7 +39,7 @@ const TemplateEdit: FC<Props> = () => {
           return;
         }
       }
-      breadcrumbs.set([
+      setBreadcrumbs([
         {
           func: navigator.toTemplates,
           title: "Templates",

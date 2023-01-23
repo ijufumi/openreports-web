@@ -11,7 +11,7 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import useBreadcrumbs from "../../states/Breadcrumbs";
+import { setBreadcrumbs } from "../../states/Breadcrumbs";
 import TemplateVo from "../../vos/TemplateVo";
 import useNavigator from "../navigator";
 import { successToast, errorToast } from "../../states/Toast";
@@ -24,7 +24,6 @@ const ReportNew: FC<Props> = () => {
   const [name, setName] = useState<string>("");
   const [templateId, setTemplateId] = useState<string>("");
 
-  const breadcrumbs = useBreadcrumbs();
   const navigator = useNavigator();
   const id = "";
 
@@ -39,7 +38,7 @@ const ReportNew: FC<Props> = () => {
       if (reportTemplatesVo) {
         setReportTemplates(reportTemplatesVo.items);
       }
-      breadcrumbs.set([
+      setBreadcrumbs([
         {
           func: navigator.toReports,
           title: "Reports",

@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import TemplatesVo from "../../vos/TemplatesVo";
-import useBreadcrumbs from "../../states/Breadcrumbs";
+import { setBreadcrumbs } from "../../states/Breadcrumbs";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import TemplateVo from "../../vos/TemplateVo";
 import DataTable from "../../components/data_table/DataTable";
@@ -35,7 +35,6 @@ const Templates: FC<Props> = () => {
   const [templates, setTemplates] = useState<Array<ExTemplateVo>>([]);
   const [totalCount, setTotalCount] = useState(0);
 
-  const breadcrumbs = useBreadcrumbs();
   const navigator = useNavigator();
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
 
@@ -53,7 +52,7 @@ const Templates: FC<Props> = () => {
         setTotalCount(_templates.count);
       }
       setInitialized(true);
-      breadcrumbs.set([
+      setBreadcrumbs([
         {
           title: "Templates",
         },

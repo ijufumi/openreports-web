@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import ReportVo from "../../../vos/ReportVo";
 import UseCaseFactory from "../../../use_cases/UseCaseFactory";
-import useBreadcrumbs from "../../../states/Breadcrumbs";
+import { setBreadcrumbs } from "../../../states/Breadcrumbs";
 import TemplateVo from "../../../vos/TemplateVo";
 import useNavigator from "../../navigator";
 import { successToast, errorToast } from "../../../states/Toast";
@@ -29,7 +29,6 @@ const ReportEdit: FC<Props> = () => {
   const [templateId, setTemplateId] = useState<string>("");
 
   const params = useParams();
-  const breadcrumbs = useBreadcrumbs();
   const navigator = useNavigator();
   const id = params.id || "";
 
@@ -48,7 +47,7 @@ const ReportEdit: FC<Props> = () => {
       if (reportTemplatesVo) {
         setTemplates(reportTemplatesVo.items);
       }
-      breadcrumbs.set([
+      setBreadcrumbs([
         {
           func: navigator.toReports,
           title: "Reports",

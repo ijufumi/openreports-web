@@ -16,7 +16,7 @@ import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import ReportsVo from "../../vos/ReportsVo";
 import ReportVo from "../../vos/ReportVo";
 import DataTable from "../../components/data_table/DataTable";
-import useBreadcrumbs from "../../states/Breadcrumbs";
+import { setBreadcrumbs } from "../../states/Breadcrumbs";
 import DownloadUtils from "../../components/utils/download/DownloadUtils";
 import DateUtils from "../../components/utils/date/DateUtils";
 import useNavigator from "../navigator";
@@ -29,7 +29,6 @@ const Reports: FC<Props> = () => {
   const [reports, setReports] = useState<ReportsVo | undefined>(undefined);
 
   const navigator = useNavigator();
-  const breadcrumbs = useBreadcrumbs();
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const Reports: FC<Props> = () => {
         setReports(reports);
       }
       setInitialized(true);
-      breadcrumbs.set([
+      setBreadcrumbs([
         {
           title: "Reports",
         },

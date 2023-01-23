@@ -24,7 +24,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { CgMenu } from "react-icons/cg";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import logoImg from "../../assets/logo.png";
-import useBreadcrumbs from "../../states/Breadcrumbs";
+import { useBreadcrumbsState } from "../../states/Breadcrumbs";
 import useLoginUser from "../../states/LoginUser";
 import useNavigator from "../navigator";
 import { useToastState } from "../../states/Toast";
@@ -43,7 +43,7 @@ const Layout: FC<Props> = observer(({ children }) => {
     onCloseComplete: toastState.clear,
     isClosable: true,
   });
-  const breadcrumbs = useBreadcrumbs().get();
+  const breadcrumbs = useBreadcrumbsState();
   const loginUser = useLoginUser();
   const membersUseCase = UseCaseFactory.createMembersUseCase();
 
