@@ -17,7 +17,7 @@ import UseCaseFactory from "../../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../../states/Breadcrumbs";
 import TemplateVo from "../../../vos/TemplateVo";
 import useNavigator from "../../navigator";
-import useToastMessageState from "../../../states/ToastMessage";
+import { successToast, errorToast } from "../../../states/Toast";
 
 interface Props {}
 
@@ -31,7 +31,6 @@ const ReportEdit: FC<Props> = () => {
   const params = useParams();
   const breadcrumbs = useBreadcrumbs();
   const navigator = useNavigator();
-  const toastState = useToastMessageState();
   const id = params.id || "";
 
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
@@ -74,12 +73,12 @@ const ReportEdit: FC<Props> = () => {
     const _report = await reportsUseCase.updateReport({ id, name, templateId });
     if (_report) {
       setReport(_report);
-      toastState.successMessage({
+      successToast({
         title: "Edit updated.",
         description: "You've finished updating report well.",
       });
     } else {
-      toastState.errorMessage({
+      errorToast({
         title: "Edit didn't updated.",
         description: "You couldn't update report because of errors.",
       });

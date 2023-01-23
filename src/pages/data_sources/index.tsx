@@ -18,7 +18,7 @@ import useNavigator from "../navigator";
 import DataSourceVo from "src/vos/DataSourceVo";
 import DataSourcesVo from "src/vos/DataSourcesVo";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import useToastMessageState from "../../states/ToastMessage";
+import { successToast, errorToast } from "../../states/Toast";
 
 interface Props {}
 
@@ -29,7 +29,6 @@ const DataSources: FC<Props> = () => {
   );
   const navigator = useNavigator();
   const breadcrumbs = useBreadcrumbs();
-  const toastState = useToastMessageState();
 
   const dataSourceUseCase = UseCaseFactory.createDataSourceUseCase();
 
@@ -59,12 +58,12 @@ const DataSources: FC<Props> = () => {
   const handleDelete = async (id: string) => {
     const result = await dataSourceUseCase.delete({ id });
     if (result) {
-      toastState.successMessage({
+      successToast({
         title: "Delete succeeded.",
         description: "You've finished deleting data source.",
       });
     } else {
-      toastState.successMessage({
+      errorToast({
         title: "Delete failed.",
         description: "You've failed deleting data source.",
       });

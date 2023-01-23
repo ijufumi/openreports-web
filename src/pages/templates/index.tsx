@@ -17,7 +17,7 @@ import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import TemplateVo from "../../vos/TemplateVo";
 import DataTable from "../../components/data_table/DataTable";
 import useNavigator from "../navigator";
-import useToastMessageState from "../../states/ToastMessage";
+import { successToast, errorToast } from "../../states/Toast";
 import { GrTrash } from "react-icons/gr";
 
 interface Props {}
@@ -35,7 +35,6 @@ const Templates: FC<Props> = () => {
   const [templates, setTemplates] = useState<Array<ExTemplateVo>>([]);
   const [totalCount, setTotalCount] = useState(0);
 
-  const toastState = useToastMessageState();
   const breadcrumbs = useBreadcrumbs();
   const navigator = useNavigator();
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
@@ -96,13 +95,13 @@ const Templates: FC<Props> = () => {
   const handleDelete = async (id: string) => {
     const result = await reportsUseCase.deleteTemplate({ id });
     if (result) {
-      toastState.successMessage({
+      successToast({
         title: "Delete succeeded.",
         description: "You've finished deleting template.",
       });
       navigator.toTemplates();
     } else {
-      toastState.errorMessage({
+      errorToast({
         title: "Delete failed.",
         description: "You've failed deleting template.",
       });

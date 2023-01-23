@@ -16,7 +16,7 @@ import { GrFormUpload, GrTrash } from "react-icons/gr";
 import useNavigator from "../navigator";
 import UseCaseFactory from "../../use_cases/UseCaseFactory";
 import useBreadcrumbs from "../../states/Breadcrumbs";
-import useToastMessageState from "../../states/ToastMessage";
+import { successToast, errorToast } from "../../states/Toast";
 
 interface Props {}
 
@@ -26,7 +26,6 @@ const TemplateNew: FC<Props> = () => {
 
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const toastState = useToastMessageState();
   const navigator = useNavigator();
   const breadcrumbs = useBreadcrumbs();
   const reportUseCase = UseCaseFactory.createReportsUseCase();
@@ -43,13 +42,13 @@ const TemplateNew: FC<Props> = () => {
     if (name && file) {
       const result = await reportUseCase.registerTemplate({ name, file });
       if (result) {
-        toastState.successMessage({
+        successToast({
           title: "Upload updated.",
           description: "You've finished uploading template.",
         });
         navigator.toTemplates();
       } else {
-        toastState.errorMessage({
+        errorToast({
           title: "Upload failed.",
           description: "You've failed uploading template.",
         });

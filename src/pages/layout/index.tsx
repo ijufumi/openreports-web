@@ -27,7 +27,7 @@ import logoImg from "../../assets/logo.png";
 import useBreadcrumbs from "../../states/Breadcrumbs";
 import useLoginUser from "../../states/LoginUser";
 import useNavigator from "../navigator";
-import useToastMessageState from "../../states/ToastMessage";
+import { useToastState } from "../../states/Toast";
 
 interface Props {
   children: React.ReactNode;
@@ -36,7 +36,7 @@ interface Props {
 const Layout: FC<Props> = observer(({ children }) => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const navigator = useNavigator();
-  const toastState = useToastMessageState();
+  const toastState = useToastState();
   const toast = useToast({
     position: "top-left",
     duration: 3000,

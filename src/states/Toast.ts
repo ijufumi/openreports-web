@@ -1,27 +1,32 @@
 import { makeAutoObservable } from "mobx";
 import { AlertStatus } from "@chakra-ui/react";
 
-class ToastMessageState {
-  message: ToastMessage | undefined = undefined;
+interface Message {
+  title: string;
+  description: string;
+}
+
+class ToastState {
+  message: Toast | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  successMessage = (args: { title: string; description: string }) => {
+  successMessage = (args: Message) => {
     const status = "success";
     const { title, description } = args;
-    this.message = new ToastMessage({
+    this.message = new Toast({
       title,
       description,
       status,
     });
   };
 
-  errorMessage = (args: { title: string; description: string }) => {
+  errorMessage = (args: Message) => {
     const status = "error";
     const { title, description } = args;
-    this.message = new ToastMessage({
+    this.message = new Toast({
       title,
       description,
       status,
@@ -33,7 +38,7 @@ class ToastMessageState {
   };
 }
 
-class ToastMessage {
+class Toast {
   private readonly title: string = "";
   private readonly description: string = "";
   private readonly status: AlertStatus = "success";
@@ -61,10 +66,16 @@ class ToastMessage {
   };
 }
 
-const toastMessageState = new ToastMessageState();
+const toastState = new ToastState();
 
-const useToastMessageState = () => {
-  return toastMessageState;
+export const successToast = (args: Message) => {
+  toastState.successMessage(args);
 };
 
-export default useToastMessageState;
+export const errorToast = (args: Message) => {
+  toastState.errorMessage(args);
+};
+
+export const useToastState = () => {
+  return toastState;
+};

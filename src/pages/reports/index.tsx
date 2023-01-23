@@ -20,7 +20,7 @@ import useBreadcrumbs from "../../states/Breadcrumbs";
 import DownloadUtils from "../../components/utils/download/DownloadUtils";
 import DateUtils from "../../components/utils/date/DateUtils";
 import useNavigator from "../navigator";
-import useToastMessageState from "../../states/ToastMessage";
+import { successToast, errorToast } from "../../states/Toast";
 
 interface Props {}
 
@@ -31,7 +31,6 @@ const Reports: FC<Props> = () => {
   const navigator = useNavigator();
   const breadcrumbs = useBreadcrumbs();
   const reportsUseCase = UseCaseFactory.createReportsUseCase();
-  const toastState = useToastMessageState();
 
   useEffect(() => {
     if (initialized) {
@@ -67,7 +66,7 @@ const Reports: FC<Props> = () => {
       )}.xlsx`;
       DownloadUtils.download(data, fileName);
     } else {
-      toastState.errorMessage({
+      errorToast({
         title: "Edit didn't output.",
         description: "You couldn't output report because of errors.",
       });
