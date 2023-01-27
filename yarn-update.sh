@@ -3,11 +3,16 @@
 ## This script is for updating all libraries to the latest automatically.
 ##
 
-declare depList
-depList=$(cat package.json | jq '.dependencies' | jq 'keys')
-depList=$(echo $depList | sed -E 's/[,"]//g' | sed -E 's/\[//g' | sed -E 's/\]//g')
+function getListName {
+  declare key=$1
+  declare localDepList
+  localDepList=$(cat package.json | jq $key | jq 'keys')
+  localDepList=$(echo $localDepList | sed -E 's/[,"]//g' | sed -E 's/\[//g' | sed -E 's/\]//g')
+  echo -n $localDepList
+}
+
+depList=$(getListName '.dependencies')
 yarn add $depList
 
-depList=$(cat package.json | jq '.devDependencies' | jq 'keys')
-depList=$(echo $depList | sed -E 's/[,"]//g' | sed -E 's/\[//g' | sed -E 's/\]//g')
+depList=$(getListName '.devDependencies')
 yarn -D add $depList
