@@ -10,7 +10,6 @@ import WorkspaceUseCase from "./WorkspaceUseCase"
 import WorkspaceUseCaseImpl from "./impl/WorkspaceUseCaseImpl"
 import DataSourceUseCase from "./DataSourceUseCase"
 import DataSourceUseCaseImpl from "./impl/DataSourceUseCaseImpl"
-import DriverTypeRepository from "../repositories/DriverTypeRepository"
 
 const loginRepository = RepositoryFactory.createLoginRepository()
 const memberRepository = RepositoryFactory.createMemberRepository()
