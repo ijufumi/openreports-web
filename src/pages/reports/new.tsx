@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react"
 import {
   Box,
   Grid,
@@ -9,34 +9,34 @@ import {
   Button,
   Wrap,
   WrapItem,
-} from "@chakra-ui/react";
-import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import { setBreadcrumbs } from "../../states/Breadcrumbs";
-import TemplateVo from "../../vos/TemplateVo";
-import useNavigator from "../navigator";
-import { successToast, errorToast } from "../../states/Toast";
+} from "@chakra-ui/react"
+import UseCaseFactory from "../../use_cases/UseCaseFactory"
+import { setBreadcrumbs } from "../../states/Breadcrumbs"
+import TemplateVo from "../../vos/TemplateVo"
+import useNavigator from "../navigator"
+import { successToast, errorToast } from "../../states/Toast"
 
 interface Props {}
 
 const ReportNew: FC<Props> = () => {
-  const [initialized, setInitialized] = useState<boolean>(false);
-  const [reportTemplates, setReportTemplates] = useState<TemplateVo[]>([]);
-  const [name, setName] = useState<string>("");
-  const [templateId, setTemplateId] = useState<string>("");
+  const [initialized, setInitialized] = useState<boolean>(false)
+  const [reportTemplates, setReportTemplates] = useState<TemplateVo[]>([])
+  const [name, setName] = useState<string>("")
+  const [templateId, setTemplateId] = useState<string>("")
 
-  const navigator = useNavigator();
-  const id = "";
+  const navigator = useNavigator()
+  const id = ""
 
-  const reportsUseCase = UseCaseFactory.createReportsUseCase();
+  const reportsUseCase = UseCaseFactory.createReportsUseCase()
 
   useEffect(() => {
     const initialize = async () => {
       const reportTemplatesVo = await reportsUseCase.templates({
         page: 0,
         limit: -1,
-      });
+      })
       if (reportTemplatesVo) {
-        setReportTemplates(reportTemplatesVo.items);
+        setReportTemplates(reportTemplatesVo.items)
       }
       setBreadcrumbs([
         {
@@ -46,37 +46,37 @@ const ReportNew: FC<Props> = () => {
         {
           title: "new",
         },
-      ]);
-      setInitialized(true);
-    };
-    initialize();
-  }, [id]);
+      ])
+      setInitialized(true)
+    }
+    initialize()
+  }, [id])
 
   const handleUpdate = async () => {
     const _report = await reportsUseCase.updateReport({
       id,
       name,
       templateId,
-    });
+    })
     if (_report) {
       successToast({
-        title: "Edit updated.",
+        title: "Creation succeeded.",
         description: "You've finished updating report well.",
-      });
+      })
     } else {
       errorToast({
-        title: "Edit didn't updated.",
-        description: "You couldn't update report because of errors.",
-      });
+        title: "Creation failed.",
+        description: "You couldn't create report because of errors.",
+      })
     }
-  };
+  }
 
   const handleCancel = () => {
-    navigator.toReports();
-  };
+    navigator.toReports()
+  }
 
   if (!initialized) {
-    return null;
+    return null
   }
 
   return (
@@ -122,7 +122,7 @@ const ReportNew: FC<Props> = () => {
                 <option key={template.id} value={template.id}>
                   {template.name}
                 </option>
-              );
+              )
             })}
           </Select>
         </GridItem>
@@ -140,7 +140,7 @@ const ReportNew: FC<Props> = () => {
         </Wrap>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default ReportNew;
+export default ReportNew
