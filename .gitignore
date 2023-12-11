@@ -2,6 +2,7 @@
 node_modules
 dist/
 yarn-error.log
+!.node-version
 
 # for IDEA
 .idea/

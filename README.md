@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Node >= 18.19.0
+- Node >= 21.4.0
 
 ## Features
 
