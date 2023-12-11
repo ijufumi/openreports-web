@@ -1,5 +1,9 @@
 # OpenReports Web Client
 
+## Requirements
+
+- Node >= 18.19.0
+
 ## Features
 
 This application's features are here ( including not implemented )
