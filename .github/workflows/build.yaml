@@ -6,6 +6,7 @@ on:
       - 'package.json'
       - 'yarn.lock'
       - 'eslint.config.mjs'
+      - '.node-version'
       - '.github/workflows/build.yaml'
 
 jobs:
