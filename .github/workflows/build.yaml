@@ -5,6 +5,7 @@ on:
       - '**/*.tsx'
       - 'package.json'
       - 'yarn.lock'
+      - 'eslint.config.mjs'
       - '.github/workflows/build.yaml'
 
 jobs:
