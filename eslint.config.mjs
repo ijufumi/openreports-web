@@ -5,7 +5,7 @@ import eslintPlugin from "@typescript-eslint/eslint-plugin";
 export default [
   {
     files: ['**/*.{ts,tsx}'],
-    ignores: ["*.config.js", "**/*.config.js"],
+    ignores: ["src/**/*.test.ts", "src/frontend/generated/*", "*.config.js"],
     rules: {
       "@typescript-eslint/no-var-requires": "off",
       "@typescript-eslint/strict-boolean-expressions": "warn",
@@ -19,7 +19,7 @@ export default [
         parser: parser,
         parserOptions: {
           project: "./tsconfig.json",
-        }
+        },
       },
     },
 ];
