@@ -155,7 +155,7 @@ abstract class BaseRepository {
     if (auth || this.needsAuth) {
       baseHeaders = {
         Authorization: `Bearer ${credentials.getToken()}`,
-        WorkspaceId: credentials.getWorkspaceId(),
+        "X-Workspace-Id": credentials.getWorkspaceId(),
       }
     }
 
