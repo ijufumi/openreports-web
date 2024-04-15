@@ -25,7 +25,6 @@ abstract class BaseRepository {
     path: string
     auth?: boolean
     headers?: Record<string, string>
-    afterCb?: (response: Response) => void
   }) => {
     return await this._request(
       Methods.Get,
@@ -35,8 +34,7 @@ abstract class BaseRepository {
       undefined,
       args.headers,
       false,
-      true,
-      args.afterCb
+      true
     )
   }
 
@@ -44,7 +42,6 @@ abstract class BaseRepository {
     path: string
     auth?: boolean
     headers?: Record<string, string>
-    afterCb?: (response: Response) => void
   }) => {
     return await this._request(
       Methods.Delete,
@@ -54,8 +51,7 @@ abstract class BaseRepository {
       undefined,
       args.headers,
       false,
-      true,
-      args.afterCb
+      true
     )
   }
 
@@ -64,7 +60,6 @@ abstract class BaseRepository {
     auth?: boolean
     headers?: Record<string, string>
     body?: object
-    afterCb?: (response: Response) => void
   }) => {
     const baseHeaders = { "Content-Type": "application/json;charset=utf-8" }
     return await this._request(
@@ -75,8 +70,7 @@ abstract class BaseRepository {
       args.body,
       Object.assign(baseHeaders, args.headers ? args.headers : {}),
       false,
-      true,
-      args.afterCb
+      true
     )
   }
 
@@ -85,7 +79,6 @@ abstract class BaseRepository {
     auth?: boolean
     headers?: Record<string, string>
     body?: object
-    afterCb?: (response: Response) => void
   }) => {
     const baseHeaders = { "Content-Type": "application/json;charset=utf-8" }
     return await this._request(
@@ -96,8 +89,7 @@ abstract class BaseRepository {
       args.body,
       Object.assign(baseHeaders, args.headers ? args.headers : {}),
       false,
-      true,
-      args.afterCb
+      true
     )
   }
 
@@ -105,7 +97,6 @@ abstract class BaseRepository {
     path: string
     auth?: boolean
     headers?: Record<string, string>
-    afterCb?: (response: Response) => void
   }) => {
     return await this._request(
       Methods.Get,
@@ -115,8 +106,7 @@ abstract class BaseRepository {
       undefined,
       args.headers,
       true,
-      false,
-      args.afterCb
+      false
     )
   }
 
@@ -125,7 +115,6 @@ abstract class BaseRepository {
     auth?: boolean
     headers?: Record<string, string>
     body: FormData
-    afterCb?: (response: Response) => void
   }) => {
     return await this._request(
       Methods.Post,
@@ -135,8 +124,7 @@ abstract class BaseRepository {
       args.body,
       Object.assign({}, args.headers ? args.headers : {}),
       false,
-      true,
-      args.afterCb
+      true
     )
   }
 
@@ -148,8 +136,7 @@ abstract class BaseRepository {
     body?: object | FormData,
     header?: Record<string, string>,
     responseAsBlob?: boolean,
-    requestAsForm?: boolean,
-    afterCb?: (response: Response) => void
+    requestAsForm?: boolean
   ) => {
     let baseHeaders = {}
     if (auth || this.needsAuth) {
@@ -178,9 +165,6 @@ abstract class BaseRepository {
       }
       if (responseAsBlob) {
         return response.blob()
-      }
-      if (afterCb) {
-        afterCb(response)
       }
       return response.json()
     }
