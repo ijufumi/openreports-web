@@ -1,4 +1,4 @@
-import credentials from "../../states/Credentials"
+import Credentials from "../../states/Credentials"
 import {
   UnexpectedError,
   ClientError,
@@ -154,8 +154,8 @@ abstract class BaseRepository {
     let baseHeaders = {}
     if (auth || this.needsAuth) {
       baseHeaders = {
-        Authorization: `Bearer ${credentials.getToken()}`,
-        "X-Workspace-Id": credentials.getWorkspaceId(),
+        Authorization: `Bearer ${Credentials.getToken()}`,
+        "X-Workspace-Id": Credentials.getWorkspaceId(),
       }
     }
 
@@ -172,6 +172,10 @@ abstract class BaseRepository {
     })
 
     if (response.ok) {
+      const apiToken = response.headers.get("x-api-token")
+      if (apiToken) {
+        Credentials.setToken(apiToken)
+      }
       if (responseAsBlob) {
         return response.blob()
       }
