@@ -70,7 +70,7 @@ abstract class BaseRepository {
       args.body,
       Object.assign(baseHeaders, args.headers ? args.headers : {}),
       false,
-      true
+      false
     )
   }
 
