@@ -33,8 +33,7 @@ abstract class BaseRepository {
       args.auth,
       undefined,
       args.headers,
-      false,
-      true
+      false
     )
   }
 
@@ -50,8 +49,7 @@ abstract class BaseRepository {
       args.auth,
       undefined,
       args.headers,
-      false,
-      true
+      false
     )
   }
 
@@ -60,6 +58,7 @@ abstract class BaseRepository {
     auth?: boolean
     headers?: Record<string, string>
     body?: object
+    form?: boolean
   }) => {
     const baseHeaders = { "Content-Type": "application/json;charset=utf-8" }
     return await this._request(
@@ -69,7 +68,6 @@ abstract class BaseRepository {
       args.auth,
       args.body,
       Object.assign(baseHeaders, args.headers ? args.headers : {}),
-      false,
       false
     )
   }
@@ -88,8 +86,7 @@ abstract class BaseRepository {
       args.auth,
       args.body,
       Object.assign(baseHeaders, args.headers ? args.headers : {}),
-      false,
-      true
+      false
     )
   }
 
@@ -105,8 +102,7 @@ abstract class BaseRepository {
       args.auth,
       undefined,
       args.headers,
-      true,
-      false
+      true
     )
   }
 
@@ -123,8 +119,7 @@ abstract class BaseRepository {
       args.auth,
       args.body,
       Object.assign({}, args.headers ? args.headers : {}),
-      false,
-      true
+      false
     )
   }
 
@@ -135,8 +130,7 @@ abstract class BaseRepository {
     auth?: boolean,
     body?: object | FormData,
     header?: Record<string, string>,
-    responseAsBlob?: boolean,
-    requestAsForm?: boolean
+    responseAsBlob?: boolean
   ) => {
     let baseHeaders = {}
     if (auth || this.needsAuth) {
@@ -148,7 +142,9 @@ abstract class BaseRepository {
 
     let bodyData = undefined
     if (body) {
-      bodyData = requestAsForm ? (body as FormData) : JSON.stringify(body)
+      bodyData = body.isPrototypeOf(FormData)
+        ? (body as FormData)
+        : JSON.stringify(body)
     }
     const response = await fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
