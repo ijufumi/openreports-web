@@ -146,31 +146,39 @@ abstract class BaseRepository {
         ? (body as FormData)
         : JSON.stringify(body)
     }
-    const response = await fetch(`${apiEndpoint}${path}`, {
+    return await fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
       headers: Object.assign(baseHeaders, header ? header : {}),
       mode: "cors",
       cache: "no-cache",
       keepalive: true,
       body: bodyData,
-    }).catch((e) => {
-      throw new UnexpectedError(`No response error with ${e}`)
     })
+      .catch((e) => {
+        throw new UnexpectedError(`No response error with ${e}`)
+      })
+      .then((response) => {
+        if (response.ok) {
+          let apiToken = null
+          response.headers.forEach((v, k) => {
+            if (k === "x-api-token") {
+              apiToken = v
+            }
+          })
 
-    if (response.ok) {
-      const apiToken = response.headers.get("X-Api-Token")
-      if (apiToken) {
-        Credentials.setToken(apiToken)
-      }
-      if (responseAsBlob) {
-        return response.blob()
-      }
-      return response.json()
-    }
-    if (response.status < 500) {
-      throw new ClientError(`ClientError with ${response}`)
-    }
-    throw new ServerError(`ServerError with ${response}`)
+          if (apiToken) {
+            Credentials.setToken(apiToken)
+          }
+          if (responseAsBlob) {
+            return response.blob()
+          }
+          return response.json()
+        }
+        if (response.status < 500) {
+          throw new ClientError(`ClientError with ${response}`)
+        }
+        throw new ServerError(`ServerError with ${response}`)
+      })
   }
 }
 
