@@ -140,7 +140,7 @@ abstract class BaseRepository {
       }
     }
 
-    let bodyData = undefined
+    let bodyData = null
     if (body) {
       bodyData = body.isPrototypeOf(FormData)
         ? (body as FormData)
@@ -149,13 +149,16 @@ abstract class BaseRepository {
     const response = await fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
       headers: Object.assign(baseHeaders, header ? header : {}),
+      mode: "cors",
+      cache: "no-cache",
+      keepalive: true,
       body: bodyData,
     }).catch((e) => {
       throw new UnexpectedError(`No response error with ${e}`)
     })
 
     if (response.ok) {
-      const apiToken = response.headers.get("x-api-token")
+      const apiToken = response.headers.get("X-Api-Token")
       if (apiToken) {
         Credentials.setToken(apiToken)
       }
