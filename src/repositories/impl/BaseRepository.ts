@@ -149,9 +149,7 @@ abstract class BaseRepository {
     return await fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
       headers: Object.assign(baseHeaders, header ? header : {}),
-      mode: "cors",
       cache: "no-cache",
-      keepalive: true,
       body: bodyData,
     })
       .catch((e) => {
