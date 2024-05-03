@@ -7,19 +7,17 @@ import { LoginUser } from "src/states/LoginUser"
 
 class LoginUseCaseImpl extends BaseUseCase implements LoginUseCase {
   private readonly repository: LoginRepository
-  private readonly loginUser: LoginUser
 
   constructor(repository: LoginRepository, loginUser: LoginUser) {
-    super()
+    super(loginUser)
     this.repository = repository
-    this.loginUser = loginUser
   }
 
   login = async (args: { email: string; password: string }) => {
     try {
       this.startLoader()
       const user = await this.repository.login(args)
-      this._updateCredential(user)
+      this.updateCredential(user, true)
       return user
     } catch (e) {
       console.error(e)
@@ -42,17 +40,10 @@ class LoginUseCaseImpl extends BaseUseCase implements LoginUseCase {
     try {
       this.startLoader()
       const user = await this.repository.loginWithGoogle(args)
-      this._updateCredential(user)
+      this.updateCredential(user, true)
       return user
     } finally {
       this.stopLoader()
-    }
-  }
-
-  _updateCredential = (user: UserVo | undefined) => {
-    if (user) {
-      Credentials.setWorkspaceId(user.workspaces[0].id)
-      this.loginUser.set(user)
     }
   }
 }

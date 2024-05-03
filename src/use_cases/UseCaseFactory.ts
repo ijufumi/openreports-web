@@ -34,19 +34,28 @@ class UseCaseFactory {
   }
 
   static createReportsUseCase(): ReportsUseCase {
-    return new ReportsUseCaseImpl(reportRepository, templateRepository)
+    return new ReportsUseCaseImpl(
+      reportRepository,
+      templateRepository,
+      loginUser
+    )
   }
 
   static createWorkspaceUseCase(): WorkspaceUseCase {
     return new WorkspaceUseCaseImpl(
       roleRepository,
       workspaceRepository,
-      workspaceMemberRepository
+      workspaceMemberRepository,
+      loginUser
     )
   }
 
   static createDataSourceUseCase(): DataSourceUseCase {
-    return new DataSourceUseCaseImpl(dataSourceRepository, driverTypeRepository)
+    return new DataSourceUseCaseImpl(
+      dataSourceRepository,
+      driverTypeRepository,
+      loginUser
+    )
   }
 }
 
