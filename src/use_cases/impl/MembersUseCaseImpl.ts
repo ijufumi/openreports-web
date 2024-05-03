@@ -7,12 +7,10 @@ import BaseUseCase from "./BaseUseCase"
 
 class MembersUseCaseImpl extends BaseUseCase implements MembersUseCase {
   private readonly repository: MembersRepository
-  private readonly loginUser: LoginUser
 
   constructor(repository: MembersRepository, loginUser: LoginUser) {
-    super()
+    super(loginUser)
     this.repository = repository
-    this.loginUser = loginUser
   }
 
   logout = async () => {
@@ -35,18 +33,11 @@ class MembersUseCaseImpl extends BaseUseCase implements MembersUseCase {
       if (!user) {
         return false
       }
-      this._updateCredential(user)
+      this.updateCredential(user)
       return true
     } catch (e) {
       console.error(e)
       return false
-    }
-  }
-
-  _updateCredential = (user: UserVo | undefined) => {
-    if (user) {
-      credentials.setWorkspaceId(user.workspaces[0].id)
-      this.loginUser.set(user)
     }
   }
 }

@@ -3,6 +3,7 @@ import DataSourceUseCase from "../DataSourceUseCase"
 import DataSourceRepository from "../../repositories/DataSourceRepository"
 import DriverTypeRepository from "../../repositories/DriverTypeRepository"
 import DriverTypeVo from "../../vos/DriverTypeVo"
+import { LoginUser } from "../../states/LoginUser"
 
 export default class DataSourceUseCaseImpl
   extends BaseUseCase
@@ -13,9 +14,10 @@ export default class DataSourceUseCaseImpl
 
   constructor(
     repository: DataSourceRepository,
-    driverTypeRepository: DriverTypeRepository
+    driverTypeRepository: DriverTypeRepository,
+    loginUser: LoginUser
   ) {
-    super()
+    super(loginUser)
     this.repository = repository
     this.driverTypeRepository = driverTypeRepository
   }
