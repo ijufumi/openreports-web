@@ -21,7 +21,7 @@ class MembersUseCaseImpl extends BaseUseCase implements MembersUseCase {
     }
     credentials.removeToken()
     credentials.removeWorkspaceId()
-    this.loginUser.clear()
+    this.loginUser?.clear()
   }
 
   isLoggedIn = async () => {

@@ -14,10 +14,9 @@ export default class DataSourceUseCaseImpl
 
   constructor(
     repository: DataSourceRepository,
-    driverTypeRepository: DriverTypeRepository,
-    loginUser: LoginUser
+    driverTypeRepository: DriverTypeRepository
   ) {
-    super(loginUser)
+    super(null)
     this.repository = repository
     this.driverTypeRepository = driverTypeRepository
   }

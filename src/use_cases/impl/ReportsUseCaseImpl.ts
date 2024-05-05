@@ -13,10 +13,9 @@ export default class ReportsUseCaseImpl
 
   constructor(
     reportsRepository: ReportsRepository,
-    templatesRepository: TemplatesRepository,
-    loginUser: LoginUser
+    templatesRepository: TemplatesRepository
   ) {
-    super(loginUser)
+    super(null)
     this.reportsRepository = reportsRepository
     this.templatesRepository = templatesRepository
   }
