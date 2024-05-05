@@ -5,9 +5,9 @@ import { LoginUser } from "../../states/LoginUser"
 
 abstract class BaseUseCase {
   private loader = useLoader()
-  protected readonly loginUser: LoginUser
+  protected readonly loginUser: LoginUser | null
 
-  protected constructor(loginUser: LoginUser) {
+  protected constructor(loginUser: LoginUser | null) {
     this.loginUser = loginUser
   }
 
@@ -27,7 +27,7 @@ abstract class BaseUseCase {
       if (updateWorkspace && user.workspaces?.length > 0) {
         credentials.setWorkspaceId(user.workspaces[0].id)
       }
-      this.loginUser.set(user)
+      this.loginUser?.set(user)
     }
   }
 }

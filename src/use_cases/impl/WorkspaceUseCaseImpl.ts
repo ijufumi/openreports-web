@@ -16,10 +16,9 @@ export default class WorkspaceUseCaseImpl
   constructor(
     roleRepository: RoleRepository,
     workspaceRepository: WorkspaceRepository,
-    workspaceMemberRepository: WorkspaceMemberRepository,
-    loginUser: LoginUser
+    workspaceMemberRepository: WorkspaceMemberRepository
   ) {
-    super(loginUser)
+    super(null)
     this.roleRepository = roleRepository
     this.workspaceRepository = workspaceRepository
     this.workspaceMemberRepository = workspaceMemberRepository
