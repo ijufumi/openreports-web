@@ -26,7 +26,7 @@ export default class ReportsRepositoryImpl
     return new ReportVo(result)
   }
 
-  create = async (args: {
+  register = async (args: {
     name: string
     templateId: string
     dataSourceId?: string

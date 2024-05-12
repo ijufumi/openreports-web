@@ -10,7 +10,7 @@ export default interface ReportsRepository {
 
   getById(args: { id: string }): Promise<ReportVo>
 
-  create(args: {
+  register(args: {
     name: string
     templateId: string
     dataSourceId?: string
