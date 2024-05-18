@@ -6,6 +6,8 @@ import TemplatesRepositoryImpl from "./impl/TemplatesRepositoryImpl"
 import LoginRepository from "./LoginRepository"
 import MembersRepository from "./MembersRepository"
 import ReportsRepository from "./ReportsRepository"
+import ReportGroupRepository from "./ReportGroupRepository"
+import ReportGroupRepositoryImpl from "./impl/ReportGroupRepositoryImpl"
 import TemplatesRepository from "./TemplatesRepository"
 import RoleRepository from "./RoleRepository"
 import RoleRepositoryImpl from "./impl/RoleRepositoryImpl"
@@ -27,6 +29,9 @@ class RepositoryFactory {
   }
   static createReportRepository(): ReportsRepository {
     return new ReportsRepositoryImpl(`${API_ENDPOINT}/reports`, true)
+  }
+  static createReportGroupRepository(): ReportGroupRepository {
+    return new ReportGroupRepositoryImpl(`${API_ENDPOINT}/report-groups`, true)
   }
   static createTemplateRepository(): TemplatesRepository {
     return new TemplatesRepositoryImpl(`${API_ENDPOINT}/templates`, true)
