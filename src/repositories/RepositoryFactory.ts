@@ -1,11 +1,11 @@
 import LoginRepositoryImpl from "./impl/LoginRepositoryImpl"
 import MembersRepositoryImpl from "./impl/MembersRepositoryImpl"
 import { API_ENDPOINT } from "../config/const"
-import ReportsRepositoryImpl from "./impl/ReportsRepositoryImpl"
+import ReportRepositoryImpl from "./impl/ReportRepositoryImpl"
 import TemplatesRepositoryImpl from "./impl/TemplatesRepositoryImpl"
 import LoginRepository from "./LoginRepository"
 import MembersRepository from "./MembersRepository"
-import ReportsRepository from "./ReportsRepository"
+import ReportRepository from "./ReportRepository"
 import ReportGroupRepository from "./ReportGroupRepository"
 import ReportGroupRepositoryImpl from "./impl/ReportGroupRepositoryImpl"
 import TemplatesRepository from "./TemplatesRepository"
@@ -27,8 +27,8 @@ class RepositoryFactory {
   static createMemberRepository(): MembersRepository {
     return new MembersRepositoryImpl(`${API_ENDPOINT}/members`, true)
   }
-  static createReportRepository(): ReportsRepository {
-    return new ReportsRepositoryImpl(`${API_ENDPOINT}/reports`, true)
+  static createReportRepository(): ReportRepository {
+    return new ReportRepositoryImpl(`${API_ENDPOINT}/reports`, true)
   }
   static createReportGroupRepository(): ReportGroupRepository {
     return new ReportGroupRepositoryImpl(`${API_ENDPOINT}/report-groups`, true)

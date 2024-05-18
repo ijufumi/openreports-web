@@ -1,7 +1,7 @@
 import ReportsVo from "../vos/ReportsVo"
 import ReportVo from "../vos/ReportVo"
 
-export default interface ReportsRepository {
+export default interface ReportRepository {
   getsByFilter(args: {
     page: number
     limit: number
