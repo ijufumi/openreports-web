@@ -1,5 +1,5 @@
 import ReportsUseCase from "src/use_cases/ReportsUseCase"
-import ReportsRepository from "src/repositories/ReportsRepository"
+import ReportRepository from "../../repositories/ReportRepository"
 import TemplatesRepository from "src/repositories/TemplatesRepository"
 import BaseUseCase from "./BaseUseCase"
 import { LoginUser } from "../../states/LoginUser"
@@ -8,11 +8,11 @@ export default class ReportsUseCaseImpl
   extends BaseUseCase
   implements ReportsUseCase
 {
-  private readonly reportsRepository: ReportsRepository
+  private readonly reportsRepository: ReportRepository
   private readonly templatesRepository: TemplatesRepository
 
   constructor(
-    reportsRepository: ReportsRepository,
+    reportsRepository: ReportRepository,
     templatesRepository: TemplatesRepository
   ) {
     super(null)

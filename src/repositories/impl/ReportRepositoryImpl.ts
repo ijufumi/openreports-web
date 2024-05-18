@@ -1,11 +1,11 @@
 import BaseRepository from "./BaseRepository"
-import ReportsRepository from "../ReportsRepository"
+import ReportRepository from "../ReportRepository"
 import ReportsVo from "../../vos/ReportsVo"
 import ReportVo from "../../vos/ReportVo"
 
-export default class ReportsRepositoryImpl
+export default class ReportRepositoryImpl
   extends BaseRepository
-  implements ReportsRepository
+  implements ReportRepository
 {
   getsByFilter = async (args: {
     page: number
