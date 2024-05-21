@@ -42,7 +42,7 @@ class RepositoryFactory {
   }
   static createWorkspaceMemberRepository(): WorkspaceMemberRepository {
     return new WorkspaceMemberRepositoryImpl(
-      `${API_ENDPOINT}/workspace_members`,
+      `${API_ENDPOINT}/workspace-members`,
       true
     )
   }
@@ -50,10 +50,10 @@ class RepositoryFactory {
     return new WorkspaceRepositoryImpl(`${API_ENDPOINT}/workspaces`, true)
   }
   static createDataSourceRepository(): DataSourceRepository {
-    return new DataSourceRepositoryImpl(`${API_ENDPOINT}/data_sources`, true)
+    return new DataSourceRepositoryImpl(`${API_ENDPOINT}/data-sources`, true)
   }
   static createDriverTypeRepository(): DriverTypeRepository {
-    return new DriverTypeRepositoryImpl(`${API_ENDPOINT}/driver_types`)
+    return new DriverTypeRepositoryImpl(`${API_ENDPOINT}/driver-types`)
   }
 }
 
