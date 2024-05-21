@@ -1,22 +1,22 @@
-import React, { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
+import React, { ReactNode } from "react"
+import { Navigate } from "react-router-dom"
 
-import Login from "./login";
-import GoogleCallback from "./google_callback";
-import Top from "./top";
-import GoogleAuthError from "./errors/google_auth_error";
-import NotfoundError from "./errors/notfound_error";
-import Reports from "./reports";
-import ReportNew from "./reports/new";
-import ReportEdit from "./reports/id/edit";
-import Templates from "./templates";
-import TemplateNew from "./templates/new";
-import TemplateEdit from "./templates/id/edit";
-import DataSources from "./data_sources";
+import Login from "./login"
+import GoogleCallback from "./google_callback"
+import Top from "./top"
+import GoogleAuthError from "./errors/google_auth_error"
+import NotfoundError from "./errors/notfound_error"
+import Reports from "./reports"
+import ReportNew from "./reports/new"
+import ReportEdit from "./reports/id/edit"
+import Templates from "./templates"
+import TemplateNew from "./templates/new"
+import TemplateEdit from "./templates/id/edit"
+import DataSources from "./data_sources"
 
 export interface Path {
-  path: string;
-  element: ReactNode;
+  path: string
+  element: ReactNode
 }
 
 export enum PublicPath {
@@ -33,7 +33,7 @@ export enum AuthorizedPath {
   templates = "/templates",
   templateNew = "/templates/new",
   templateEdit = "/templates/edit/:id",
-  dataSources = "/data_sources",
+  dataSources = "/data-sources",
 }
 
 export enum ErrorsPath {
@@ -55,8 +55,8 @@ export const usePublicPath = () => {
       path: PublicPath.googleCallback,
       element: <GoogleCallback />,
     },
-  ];
-};
+  ]
+}
 
 export const useAuthorizedPath = () => {
   return [
@@ -92,8 +92,8 @@ export const useAuthorizedPath = () => {
       path: AuthorizedPath.dataSources,
       element: <DataSources />,
     },
-  ];
-};
+  ]
+}
 
 export const useErrorsPath = () => {
   return [
@@ -105,5 +105,5 @@ export const useErrorsPath = () => {
       path: ErrorsPath.notfound,
       element: <NotfoundError />,
     },
-  ];
-};
+  ]
+}
