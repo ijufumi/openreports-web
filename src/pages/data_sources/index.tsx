@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react"
 import {
   Button,
   Flex,
@@ -9,92 +9,92 @@ import {
   VStack,
   Wrap,
   WrapItem,
-} from "@chakra-ui/react";
-import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
-import DataTable from "../../components/data_table/DataTable";
-import { setBreadcrumbs } from "../../states/Breadcrumbs";
-import { GrTrash } from "react-icons/gr";
-import useNavigator from "../navigator";
-import DataSourceVo from "src/vos/DataSourceVo";
-import DataSourcesVo from "src/vos/DataSourcesVo";
-import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import { successToast, errorToast } from "../../states/Toast";
+} from "@chakra-ui/react"
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
+import DataTable from "../../components/data_table/DataTable"
+import { setBreadcrumbs } from "../../states/Breadcrumbs"
+import { GrTrash } from "react-icons/gr"
+import useNavigator from "../navigator"
+import DataSourceVo from "src/vos/DataSourceVo"
+import DataSourcesVo from "src/vos/DataSourcesVo"
+import UseCaseFactory from "../../use_cases/UseCaseFactory"
+import { successToast, errorToast } from "../../states/Toast"
 
 interface Props {}
 
 const DataSources: FC<Props> = () => {
-  const [initialized, setInitialized] = useState<boolean>(false);
+  const [initialized, setInitialized] = useState<boolean>(false)
   const [dataSources, setDataSources] = useState<DataSourcesVo | undefined>(
     undefined
-  );
-  const navigator = useNavigator();
+  )
+  const navigator = useNavigator()
 
-  const dataSourceUseCase = UseCaseFactory.createDataSourceUseCase();
+  const dataSourceUseCase = UseCaseFactory.createDataSourceUseCase()
 
   useEffect(() => {
     const initialize = async () => {
-      const _dataSources = await dataSourceUseCase.gets({ page: 0, limit: 10 });
+      const _dataSources = await dataSourceUseCase.gets({ page: 0, limit: 10 })
       if (_dataSources) {
-        setDataSources(_dataSources);
+        setDataSources(_dataSources)
       }
-      setInitialized(true);
+      setInitialized(true)
       setBreadcrumbs([
         {
           title: "DataSources",
         },
-      ]);
-    };
-    initialize();
-  }, []);
+      ])
+    }
+    initialize()
+  }, [])
 
   const handleOnChange = async (page: number, limit: number) => {
-    const _dataSources = await dataSourceUseCase.gets({ page, limit });
+    const _dataSources = await dataSourceUseCase.gets({ page, limit })
     if (_dataSources) {
-      setDataSources(_dataSources);
+      setDataSources(_dataSources)
     }
-  };
+  }
 
   const handleDelete = async (id: string) => {
-    const result = await dataSourceUseCase.delete({ id });
+    const result = await dataSourceUseCase.delete({ id })
     if (result) {
       successToast({
         title: "Delete succeeded.",
         description: "You've finished deleting data source.",
-      });
+      })
     } else {
       errorToast({
         title: "Delete failed.",
         description: "You've failed deleting data source.",
-      });
+      })
     }
-  };
-
-  const handleClick = (id: string) => {
-    navigator.toReportEdit(id);
-  };
-
-  const handleClickNew = () => {
-    navigator.toReportNew();
-  };
-
-  if (!initialized) {
-    return null;
   }
 
-  const columnHelper = createColumnHelper<DataSourceVo>();
+  const handleClick = (id: string) => {
+    navigator.toReportEdit(id)
+  }
+
+  const handleClickNew = () => {
+    navigator.toDataSourceNew()
+  }
+
+  if (!initialized) {
+    return null
+  }
+
+  const columnHelper = createColumnHelper<DataSourceVo>()
 
   const columns = [
     columnHelper.accessor("id", {
       header: "ID",
       cell: (props) => {
         if (!props.getValue()) {
-          return "";
+          return ""
         }
         return (
           <Link onClick={() => handleClick(props.getValue())}>
             {props.getValue()}
           </Link>
-        );
+        )
       },
       size: 100,
     }),
@@ -117,9 +117,9 @@ const DataSources: FC<Props> = () => {
     columnHelper.display({
       header: "Actions",
       cell: (props) => {
-        const reportId = props.row.getValue("id") as string;
+        const reportId = props.row.getValue("id") as string
         if (!reportId) {
-          return undefined;
+          return undefined
         }
         return (
           <Wrap spacing={5}>
@@ -134,10 +134,10 @@ const DataSources: FC<Props> = () => {
               </Tooltip>
             </WrapItem>
           </Wrap>
-        );
+        )
       },
     }),
-  ] as ColumnDef<DataSourceVo>[];
+  ] as ColumnDef<DataSourceVo>[]
 
   return (
     <VStack>
@@ -153,7 +153,7 @@ const DataSources: FC<Props> = () => {
         onChange={handleOnChange}
       />
     </VStack>
-  );
-};
+  )
+}
 
-export default DataSources;
+export default DataSources
