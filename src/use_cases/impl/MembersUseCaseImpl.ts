@@ -21,6 +21,7 @@ class MembersUseCaseImpl extends BaseUseCase implements MembersUseCase {
     }
     credentials.removeToken()
     credentials.removeWorkspaceId()
+    credentials.removeRefreshToken()
     this.loginUser?.clear()
   }
 
@@ -29,9 +30,15 @@ class MembersUseCaseImpl extends BaseUseCase implements MembersUseCase {
       if (!credentials.hasToken()) {
         return false
       }
-      const user = await this.repository.status()
+      let user = await this.repository.status()
       if (!user) {
-        return false
+        if (credentials.hasRefreshToken()) {
+          await this.repository.accessToken()
+          user = await this.repository.status()
+        }
+        if (!user) {
+          return false
+        }
       }
       this.updateCredential(user)
       return true
