@@ -137,6 +137,7 @@ abstract class BaseRepository {
       baseHeaders = {
         Authorization: `Bearer ${Credentials.getToken()}`,
         "X-Workspace-Id": Credentials.getWorkspaceId(),
+        "X-Refresh-Token": Credentials.getRefreshToken(),
       }
     }
 
@@ -158,14 +159,20 @@ abstract class BaseRepository {
       .then((response) => {
         if (response.ok) {
           let apiToken = null
+          let refreshToken = null
           response.headers.forEach((v, k) => {
             if (k === "x-api-token") {
               apiToken = v
+            } else if (k === "x-refresh-token") {
+              refreshToken = v
             }
           })
 
           if (apiToken) {
             Credentials.setToken(apiToken)
+          }
+          if (refreshToken) {
+            Credentials.setRefreshToken(refreshToken)
           }
           if (responseAsBlob) {
             return response.blob()
