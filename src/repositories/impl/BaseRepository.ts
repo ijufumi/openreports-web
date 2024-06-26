@@ -25,6 +25,7 @@ abstract class BaseRepository {
     path: string
     auth?: boolean
     headers?: Record<string, string>
+    hasResponse?: boolean
   }) => {
     return await this._request(
       Methods.Get,
@@ -33,7 +34,8 @@ abstract class BaseRepository {
       args.auth,
       undefined,
       args.headers,
-      false
+      false,
+      args.hasResponse
     )
   }
 
@@ -49,7 +51,8 @@ abstract class BaseRepository {
       args.auth,
       undefined,
       args.headers,
-      false
+      false,
+      true
     )
   }
 
@@ -68,7 +71,8 @@ abstract class BaseRepository {
       args.auth,
       args.body,
       Object.assign(baseHeaders, args.headers ? args.headers : {}),
-      false
+      false,
+      true
     )
   }
 
@@ -86,7 +90,8 @@ abstract class BaseRepository {
       args.auth,
       args.body,
       Object.assign(baseHeaders, args.headers ? args.headers : {}),
-      false
+      false,
+      true
     )
   }
 
@@ -102,7 +107,8 @@ abstract class BaseRepository {
       args.auth,
       undefined,
       args.headers,
-      true
+      true,
+      false
     )
   }
 
@@ -119,6 +125,7 @@ abstract class BaseRepository {
       args.auth,
       args.body,
       Object.assign({}, args.headers ? args.headers : {}),
+      false,
       false
     )
   }
@@ -130,7 +137,8 @@ abstract class BaseRepository {
     auth?: boolean,
     body?: object | FormData,
     header?: Record<string, string>,
-    responseAsBlob?: boolean
+    responseAsBlob?: boolean,
+    responseAsJson?: boolean
   ) => {
     let baseHeaders = {}
     if (auth || this.needsAuth) {
@@ -141,7 +149,7 @@ abstract class BaseRepository {
       }
     }
 
-    let bodyData = null
+    let bodyData = undefined
     if (body) {
       bodyData = body.isPrototypeOf(FormData)
         ? (body as FormData)
@@ -174,10 +182,15 @@ abstract class BaseRepository {
           if (refreshToken) {
             Credentials.setRefreshToken(refreshToken)
           }
+
           if (responseAsBlob) {
             return response.blob()
           }
-          return response.json()
+
+          if (responseAsJson) {
+            return response.json()
+          }
+          return undefined
         }
         if (response.status < 500) {
           throw new ClientError(`ClientError with ${response}`)
