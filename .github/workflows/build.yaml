@@ -12,12 +12,20 @@ on:
 jobs:
   integrate:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['20.x', '22.x']
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Cache CDK Dependency
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache_cdk_dependency_id
         env:
           cache-name: cache-cdk-dependency
