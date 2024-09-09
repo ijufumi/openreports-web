@@ -63,13 +63,13 @@ This application's features are here ( including not implemented )
 
 ## Technical Stack
 
- | Name        | Version   | Usage          |
- |-------------|-----------|----------------|
- | Node        | over 20.x | Javascript     |
- | Typescript  | 4.9.4     | Language       |
- | React       | 18.2.0    | All of them    |
- | Chakra UI   | 2.4.6     | UI             |
- | React Table | 8.7.4     | Headless table |
+ | Name        | Version | Usage          |
+ |-------------|---------|----------------|
+ | Node        | >= 20.x | Javascript     |
+ | Typescript  | 4.9.4   | Language       |
+ | React       | 18.2.0  | All of them    |
+ | Chakra UI   | 2.4.6   | UI             |
+ | React Table | 8.7.4   | Headless table |
 
 ## Package structure
 
