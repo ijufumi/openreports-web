@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Node >= 21.4.0
+- Node >= 20.x
 
 ## Features
 
@@ -64,7 +64,8 @@ This application's features are here ( including not implemented )
 ## Technical Stack
 
  | Name        | Version | Usage          |
- |---------|----------------|----------------|
+ |-------------|---------|----------------|
+ | Node        | >= 20.x | Javascript     |
  | Typescript  | 4.9.4   | Language       |
  | React       | 18.2.0  | All of them    |
  | Chakra UI   | 2.4.6   | UI             |
