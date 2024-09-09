@@ -11,6 +11,11 @@ function getListName {
   echo -n $localDepList
 }
 
+if [ -e yarn.lock ]; then
+  echo "delete old lock file"
+  rm -f yarn.lock
+fi
+
 depList=$(getListName '.dependencies')
 yarn add $depList
 
