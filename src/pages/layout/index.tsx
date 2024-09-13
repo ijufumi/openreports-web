@@ -1,5 +1,5 @@
-import React, { FC, useState, useEffect } from "react";
-import { observer } from "mobx-react";
+import React, { FC, useState, useEffect } from "react"
+import { observer } from "mobx-react"
 import {
   VStack,
   HStack,
@@ -18,38 +18,38 @@ import {
   BreadcrumbLink,
   Select,
   useToast,
-} from "@chakra-ui/react";
-import { FaRegUserCircle } from "react-icons/fa";
-import { MdKeyboardArrowRight } from "react-icons/md";
-import { CgMenu } from "react-icons/cg";
-import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import logoImg from "../../assets/logo.png";
-import { useBreadcrumbsState } from "../../states/Breadcrumbs";
-import useLoginUser from "../../states/LoginUser";
-import useNavigator from "../navigator";
-import { useToastState } from "../../states/Toast";
+} from "@chakra-ui/react"
+import { FaRegUserCircle } from "react-icons/fa"
+import { MdKeyboardArrowRight } from "react-icons/md"
+import { CgMenu } from "react-icons/cg"
+import UseCaseFactory from "../../use_cases/UseCaseFactory"
+import logoImg from "../../assets/logo.png"
+import { useBreadcrumbsState } from "../../states/Breadcrumbs"
+import useLoginUser from "../../states/LoginUser"
+import useNavigator from "../navigator"
+import { useToastState } from "../../states/Toast"
 
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const Layout: FC<Props> = observer(({ children }) => {
-  const [initialized, setInitialized] = useState<boolean>(false);
-  const navigator = useNavigator();
-  const toastState = useToastState();
+  const [initialized, setInitialized] = useState<boolean>(false)
+  const navigator = useNavigator()
+  const toastState = useToastState()
   const toast = useToast({
     position: "top-left",
     duration: 3000,
     onCloseComplete: toastState.clear,
     isClosable: true,
-  });
-  const breadcrumbs = useBreadcrumbsState();
-  const loginUser = useLoginUser();
-  const membersUseCase = UseCaseFactory.createMembersUseCase();
+  })
+  const breadcrumbs = useBreadcrumbsState()
+  const loginUser = useLoginUser()
+  const membersUseCase = UseCaseFactory.createMembersUseCase()
 
   useEffect(() => {
-    setInitialized(true);
-  }, []);
+    setInitialized(true)
+  }, [])
 
   useEffect(() => {
     if (toastState.message) {
@@ -57,27 +57,27 @@ const Layout: FC<Props> = observer(({ children }) => {
         title: toastState.message.getTitle(),
         description: toastState.message.getDescription(),
         status: toastState.message.getStatus(),
-      });
+      })
     }
-  }, [toastState.message]);
+  }, [toastState.message])
 
   useEffect(() => {
     if (!initialized) {
-      return;
+      return
     }
     const checkIfLoggedIn = async () => {
-      const isLoggedIn = await membersUseCase.isLoggedIn();
+      const isLoggedIn = await membersUseCase.isLoggedIn()
       if (!isLoggedIn) {
-        await handleLogout();
+        await handleLogout()
       }
-    };
-    checkIfLoggedIn();
-  }, [breadcrumbs]);
+    }
+    checkIfLoggedIn()
+  }, [breadcrumbs])
 
   const handleLogout = async () => {
-    await membersUseCase.logout();
-    navigator.toLogin();
-  };
+    await membersUseCase.logout()
+    navigator.toLogin()
+  }
 
   return (
     <VStack spacing={"5px"} h={"100%"} w={"100%"}>
@@ -102,17 +102,17 @@ const Layout: FC<Props> = observer(({ children }) => {
               <MenuGroup key="reporting" title={"Reports"}>
                 <MenuItem onClick={navigator.toReports}>Reports</MenuItem>
                 <MenuItem onClick={navigator.toTemplates}>Templates</MenuItem>
-                <MenuItem>Parameters</MenuItem>
-                <MenuItem>Groups</MenuItem>
-                <MenuItem>Scheduling</MenuItem>
+                <MenuItem isDisabled={true}>Parameters</MenuItem>
+                <MenuItem isDisabled={true}>Groups</MenuItem>
+                <MenuItem isDisabled={true}>Scheduling</MenuItem>
               </MenuGroup>
               <MenuDivider />
               <MenuGroup key="setting" title={"Settings"}>
-                <MenuItem>Workspace</MenuItem>
+                <MenuItem isDisabled={true}>Workspace</MenuItem>
                 <MenuItem onClick={navigator.toDataSources}>
                   DataSources
                 </MenuItem>
-                <MenuItem>Logs</MenuItem>
+                <MenuItem isDisabled={true}>Logs</MenuItem>
               </MenuGroup>
             </MenuList>
           </Menu>
@@ -136,7 +136,7 @@ const Layout: FC<Props> = observer(({ children }) => {
                   <option key={w.id} value={w.id}>
                     {w.name}
                   </option>
-                );
+                )
               })}
             </Select>
           </Box>
@@ -155,7 +155,7 @@ const Layout: FC<Props> = observer(({ children }) => {
                       {b.title}
                     </BreadcrumbLink>
                   </BreadcrumbItem>
-                );
+                )
               })}
             </Breadcrumb>
           )}
@@ -178,7 +178,7 @@ const Layout: FC<Props> = observer(({ children }) => {
         {children}
       </Box>
     </VStack>
-  );
-});
+  )
+})
 
-export default Layout;
+export default Layout
