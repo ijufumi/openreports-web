@@ -11,11 +11,11 @@ export default class MembersRepositoryImpl
   }
 
   status = async () => {
-    return await this._get({ path: "/status" })
+    return await this._get({ path: "/status", hasResponse: true })
   }
 
   permissions = async () => {
-    return await this._get({ path: "/permissions" })
+    return await this._get({ path: "/permissions", hasResponse: true })
   }
 
   accessToken = async () => {

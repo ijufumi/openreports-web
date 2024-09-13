@@ -17,12 +17,12 @@ export default class ReportRepositoryImpl
       path = `${path}&templateId=${args.templateId}`
     }
 
-    const result = await this._get({ path })
+    const result = await this._get({ path, hasResponse: true })
     return new ReportsVo(result)
   }
 
   getById = async (args: { id: string }) => {
-    const result = await this._get({ path: `/${args.id}` })
+    const result = await this._get({ path: `/${args.id}`, hasResponse: true })
     return new ReportVo(result)
   }
 

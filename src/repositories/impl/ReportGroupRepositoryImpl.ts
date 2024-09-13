@@ -10,12 +10,12 @@ export default class ReportGroupRepositoryImpl
   getsByFilter = async (args: { page: number; limit: number }) => {
     const path = `?page=${args.page}&limit=${args.limit}`
 
-    const result = await this._get({ path })
+    const result = await this._get({ path, hasResponse: true })
     return new ReportGroupsVo(result)
   }
 
   getById = async (args: { id: string }) => {
-    const result = await this._get({ path: `/${args.id}` })
+    const result = await this._get({ path: `/${args.id}`, hasResponse: true })
     return new ReportGroupVo(result)
   }
 
