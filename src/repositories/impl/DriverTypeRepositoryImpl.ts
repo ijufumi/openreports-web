@@ -7,7 +7,7 @@ export default class DriverTypeRepositoryImpl
   implements DriverTypeRepository
 {
   getAll = async () => {
-    const result = await this._get({ path: "/" })
+    const result = await this._get({ path: "/", hasResponse: true })
     return result.map((v: any) => new DriverTypeVo(v))
   }
 }

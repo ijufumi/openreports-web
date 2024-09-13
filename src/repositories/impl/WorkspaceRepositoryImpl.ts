@@ -8,7 +8,7 @@ export default class WorkspaceRepositoryImpl
 {
   getById = async (args: { id: string }) => {
     const path = `/${args.id}`
-    const result = await this._get({ path })
+    const result = await this._get({ path, hasResponse: true })
     return new WorkspaceVo(result)
   }
 
