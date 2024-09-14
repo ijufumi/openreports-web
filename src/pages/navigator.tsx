@@ -65,7 +65,7 @@ class NavigatorWrapper {
   }
 
   private navigate = (to: string) => {
-    this.navigateFunction(to, { state: nanoid() })
+    this.navigateFunction(to, { state: { key: nanoid() } })
   }
 }
 

@@ -1,4 +1,5 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react"
+import { useLocation } from "react-router"
 import {
   VStack,
   Link,
@@ -9,99 +10,95 @@ import {
   Tooltip,
   Flex,
   Button,
-} from "@chakra-ui/react";
-import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
-import { GrDocumentPdf, GrTrash } from "react-icons/gr";
-import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import ReportsVo from "../../vos/ReportsVo";
-import ReportVo from "../../vos/ReportVo";
-import DataTable from "../../components/data_table/DataTable";
-import { setBreadcrumbs } from "../../states/Breadcrumbs";
-import DownloadUtils from "../../components/utils/download/DownloadUtils";
-import DateUtils from "../../components/utils/date/DateUtils";
-import useNavigator from "../navigator";
-import { successToast, errorToast } from "../../states/Toast";
+} from "@chakra-ui/react"
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
+import { GrDocumentPdf, GrTrash } from "react-icons/gr"
+import UseCaseFactory from "../../use_cases/UseCaseFactory"
+import ReportsVo from "../../vos/ReportsVo"
+import ReportVo from "../../vos/ReportVo"
+import DataTable from "../../components/data_table/DataTable"
+import { setBreadcrumbs } from "../../states/Breadcrumbs"
+import DownloadUtils from "../../components/utils/download/DownloadUtils"
+import DateUtils from "../../components/utils/date/DateUtils"
+import useNavigator from "../navigator"
+import { successToast, errorToast } from "../../states/Toast"
 
 interface Props {}
 
 const Reports: FC<Props> = () => {
-  const [initialized, setInitialized] = useState<boolean>(false);
-  const [reports, setReports] = useState<ReportsVo | undefined>(undefined);
+  const [initialized, setInitialized] = useState<boolean>(false)
+  const [reports, setReports] = useState<ReportsVo | undefined>(undefined)
 
-  const navigator = useNavigator();
-  const reportsUseCase = UseCaseFactory.createReportsUseCase();
+  const navigator = useNavigator()
+  const { state } = useLocation()
+  const reportsUseCase = UseCaseFactory.createReportsUseCase()
 
   useEffect(() => {
-    if (initialized) {
-      return;
-    }
     const initialize = async () => {
-      const reports = await reportsUseCase.reports({ page: 0, limit: 10 });
+      const reports = await reportsUseCase.reports({ page: 0, limit: 10 })
       if (reports !== undefined) {
-        setReports(reports);
+        setReports(reports)
       }
-      setInitialized(true);
+      setInitialized(true)
       setBreadcrumbs([
         {
           title: "Reports",
         },
-      ]);
-    };
-    initialize();
-  }, []);
+      ])
+    }
+    initialize()
+  }, [state])
 
   const handleOnChange = async (page: number, limit: number) => {
-    const reports = await reportsUseCase.reports({ page, limit });
+    const reports = await reportsUseCase.reports({ page, limit })
     if (reports !== undefined) {
-      setReports(reports);
+      setReports(reports)
     }
-  };
+  }
 
   const handleOutput = async (id: string) => {
-    const data = await reportsUseCase.outputReport({ id });
+    const data = await reportsUseCase.outputReport({ id })
     if (data) {
-      const fileName = `sample-${DateUtils.nowAsString(
-        "YYYYMMDD-HHmmss"
-      )}.xlsx`;
-      DownloadUtils.download(data, fileName);
+      const fileName = `sample-${DateUtils.nowAsString("YYYYMMDD-HHmmss")}.xlsx`
+      DownloadUtils.download(data, fileName)
     } else {
       errorToast({
         title: "Edit didn't output.",
         description: "You couldn't output report because of errors.",
-      });
+      })
     }
-  };
-
-  const handleDelete = async (id: string) => {
-    await reportsUseCase.deleteReport({ id });
-  };
-
-  const handleClick = (id: string) => {
-    navigator.toReportEdit(id);
-  };
-
-  const handleClickNew = () => {
-    navigator.toReportNew();
-  };
-
-  if (!initialized) {
-    return null;
   }
 
-  const columnHelper = createColumnHelper<ReportVo>();
+  const handleDelete = async (id: string) => {
+    await reportsUseCase.deleteReport({ id })
+  }
+
+  const handleClick = (id: string) => {
+    navigator.toReportEdit(id)
+  }
+
+  const handleClickNew = () => {
+    navigator.toReportNew()
+  }
+
+  if (!initialized) {
+    return null
+  }
+
+  const columnHelper = createColumnHelper<ReportVo>()
 
   const columns = [
     columnHelper.accessor("id", {
       header: "ID",
       cell: (props) => {
         if (!props.getValue()) {
-          return "";
+          return ""
         }
         return (
           <Link onClick={() => handleClick(props.getValue())}>
             {props.getValue()}
           </Link>
-        );
+        )
       },
       size: 100,
     }),
@@ -124,9 +121,9 @@ const Reports: FC<Props> = () => {
     columnHelper.display({
       header: "Actions",
       cell: (props) => {
-        const reportId = props.row.getValue("id") as string;
+        const reportId = props.row.getValue("id") as string
         if (!reportId) {
-          return undefined;
+          return undefined
         }
         return (
           <Wrap spacing={5}>
@@ -151,10 +148,10 @@ const Reports: FC<Props> = () => {
               </Tooltip>
             </WrapItem>
           </Wrap>
-        );
+        )
       },
     }),
-  ] as ColumnDef<ReportVo>[];
+  ] as ColumnDef<ReportVo>[]
 
   return (
     <VStack>
@@ -170,7 +167,7 @@ const Reports: FC<Props> = () => {
         onChange={handleOnChange}
       />
     </VStack>
-  );
-};
+  )
+}
 
-export default Reports;
+export default Reports
