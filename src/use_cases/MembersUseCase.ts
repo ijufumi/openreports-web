@@ -1,7 +1,7 @@
 interface MembersUseCase {
-  logout(): void;
+  logout(): Promise<void>
 
-  isLoggedIn(): Promise<boolean>;
+  isLoggedIn(): Promise<boolean>
 }
 
-export default MembersUseCase;
+export default MembersUseCase
