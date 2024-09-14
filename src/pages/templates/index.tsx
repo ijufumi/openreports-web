@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react"
 import {
   VStack,
   Link,
@@ -9,129 +9,128 @@ import {
   Tooltip,
   IconButton,
   Icon,
-} from "@chakra-ui/react";
-import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
-import TemplatesVo from "../../vos/TemplatesVo";
-import { setBreadcrumbs } from "../../states/Breadcrumbs";
-import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import TemplateVo from "../../vos/TemplateVo";
-import DataTable from "../../components/data_table/DataTable";
-import useNavigator from "../navigator";
-import { successToast, errorToast } from "../../states/Toast";
-import { GrTrash } from "react-icons/gr";
+} from "@chakra-ui/react"
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
+import TemplatesVo from "../../vos/TemplatesVo"
+import { setBreadcrumbs } from "../../states/Breadcrumbs"
+import UseCaseFactory from "../../use_cases/UseCaseFactory"
+import TemplateVo from "../../vos/TemplateVo"
+import DataTable from "../../components/data_table/DataTable"
+import useNavigator from "../navigator"
+import { successToast, errorToast } from "../../states/Toast"
+import { GrTrash } from "react-icons/gr"
+import { useLocation } from "react-router"
 
 interface Props {}
 
 class ExTemplateVo extends TemplateVo {
-  readonly canDelete: boolean = false;
+  readonly canDelete: boolean = false
   constructor(original: TemplateVo, canDelete: boolean) {
-    super(original);
-    this.canDelete = canDelete;
+    super(original)
+    this.canDelete = canDelete
   }
 }
 
 const Templates: FC<Props> = () => {
-  const [initialized, setInitialized] = useState<boolean>(false);
-  const [templates, setTemplates] = useState<Array<ExTemplateVo>>([]);
-  const [totalCount, setTotalCount] = useState(0);
+  const [initialized, setInitialized] = useState<boolean>(false)
+  const [templates, setTemplates] = useState<Array<ExTemplateVo>>([])
+  const [totalCount, setTotalCount] = useState(0)
 
-  const navigator = useNavigator();
-  const reportsUseCase = UseCaseFactory.createReportsUseCase();
+  const navigator = useNavigator()
+  const { state } = useLocation()
+  const reportsUseCase = UseCaseFactory.createReportsUseCase()
 
   useEffect(() => {
-    if (initialized) {
-      return;
-    }
     const initialize = async () => {
       const _templates = await reportsUseCase.templates({
         page: 0,
         limit: 10,
-      });
+      })
       if (_templates !== undefined) {
-        setTemplates(await convertToExTemplateVo(_templates.items));
-        setTotalCount(_templates.count);
+        setTemplates(await convertToExTemplateVo(_templates.items))
+        setTotalCount(_templates.count)
       }
-      setInitialized(true);
+      setInitialized(true)
       setBreadcrumbs([
         {
           title: "Templates",
         },
-      ]);
-    };
-    initialize();
-  }, []);
+      ])
+    }
+    initialize()
+  }, [state])
 
   const convertToExTemplateVo = async (data: Array<TemplateVo>) => {
     if (!data || !data.length) {
-      return [];
+      return []
     }
 
-    const converted: Array<ExTemplateVo> = [];
+    const converted: Array<ExTemplateVo> = []
     for (let i = 0; i < data.length; i++) {
-      const v = data[i];
-      const canDelete = await canDeleteTemplate(v.id);
-      converted.push(new ExTemplateVo(v, canDelete));
+      const v = data[i]
+      const canDelete = await canDeleteTemplate(v.id)
+      converted.push(new ExTemplateVo(v, canDelete))
     }
-    return converted;
-  };
+    return converted
+  }
 
   const handleOnChange = async (page: number, limit: number) => {
-    const _templates = await reportsUseCase.templates({ page, limit });
+    const _templates = await reportsUseCase.templates({ page, limit })
     if (_templates !== undefined) {
-      setTemplates(await convertToExTemplateVo(_templates.items));
-      setTotalCount(_templates.count);
+      setTemplates(await convertToExTemplateVo(_templates.items))
+      setTotalCount(_templates.count)
     }
-  };
+  }
 
   const handleClick = (id: string) => {
-    navigator.toTemplateEdit(id);
-  };
+    navigator.toTemplateEdit(id)
+  }
 
   const handleClickNew = () => {
-    navigator.toTemplateNew();
-  };
+    navigator.toTemplateNew()
+  }
 
   const handleDelete = async (id: string) => {
-    const result = await reportsUseCase.deleteTemplate({ id });
+    const result = await reportsUseCase.deleteTemplate({ id })
     if (result) {
       successToast({
         title: "Delete succeeded.",
         description: "You've finished deleting template.",
-      });
-      navigator.toTemplates();
+      })
+      navigator.toTemplates()
     } else {
       errorToast({
         title: "Delete failed.",
         description: "You've failed deleting template.",
-      });
+      })
     }
-  };
-
-  const canDeleteTemplate = async (templateId: string) => {
-    const page = 0;
-    const limit = 1;
-    const reports = await reportsUseCase.reports({ page, limit, templateId });
-    return reports?.count === 0;
-  };
-
-  if (!initialized) {
-    return null;
   }
 
-  const columnHelper = createColumnHelper<ExTemplateVo>();
+  const canDeleteTemplate = async (templateId: string) => {
+    const page = 0
+    const limit = 1
+    const reports = await reportsUseCase.reports({ page, limit, templateId })
+    return reports?.count === 0
+  }
+
+  if (!initialized) {
+    return null
+  }
+
+  const columnHelper = createColumnHelper<ExTemplateVo>()
 
   const columns = [
     columnHelper.accessor("id", {
       header: "ID",
       cell: (props) => {
         if (!props.getValue()) {
-          return "";
+          return ""
         }
         return (
           <Link onClick={() => handleClick(props.getValue())}>
             {props.getValue()}
           </Link>
-        );
+        )
       },
       size: 100,
     }),
@@ -159,13 +158,13 @@ const Templates: FC<Props> = () => {
       header: "Actions",
       cell: (props) => {
         if (!props || !props.row) {
-          return undefined;
+          return undefined
         }
-        const templateId = props.row.getValue("id") as string;
+        const templateId = props.row.getValue("id") as string
         if (!templateId) {
-          return undefined;
+          return undefined
         }
-        console.log(props.getValue());
+        console.log(props.getValue())
         return (
           <Wrap spacing={5} display="flex" justifyContent="center">
             <WrapItem>
@@ -180,10 +179,10 @@ const Templates: FC<Props> = () => {
               </Tooltip>
             </WrapItem>
           </Wrap>
-        );
+        )
       },
     }),
-  ] as ColumnDef<ExTemplateVo>[];
+  ] as ColumnDef<ExTemplateVo>[]
 
   return (
     <VStack>
@@ -199,7 +198,7 @@ const Templates: FC<Props> = () => {
         onChange={handleOnChange}
       />
     </VStack>
-  );
-};
+  )
+}
 
-export default Templates;
+export default Templates

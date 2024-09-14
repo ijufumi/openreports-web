@@ -19,6 +19,7 @@ import DataSourceVo from "src/vos/DataSourceVo"
 import DataSourcesVo from "src/vos/DataSourcesVo"
 import UseCaseFactory from "../../use_cases/UseCaseFactory"
 import { successToast, errorToast } from "../../states/Toast"
+import { useLocation } from "react-router"
 
 interface Props {}
 
@@ -28,6 +29,7 @@ const DataSources: FC<Props> = () => {
     undefined
   )
   const navigator = useNavigator()
+  const { state } = useLocation()
 
   const dataSourceUseCase = UseCaseFactory.createDataSourceUseCase()
 
@@ -45,7 +47,7 @@ const DataSources: FC<Props> = () => {
       ])
     }
     initialize()
-  }, [])
+  }, [state])
 
   const handleOnChange = async (page: number, limit: number) => {
     const _dataSources = await dataSourceUseCase.gets({ page, limit })
