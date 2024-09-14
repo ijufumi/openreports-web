@@ -1,4 +1,5 @@
 import { useNavigate, NavigateFunction } from "react-router"
+import { nanoid } from "nanoid"
 import { AuthorizedPath, PublicPath, ErrorsPath } from "./paths"
 
 class NavigatorWrapper {
@@ -10,57 +11,61 @@ class NavigatorWrapper {
 
   // public path
   toLogin = () => {
-    this.navigateFunction(PublicPath.login)
+    this.navigate(PublicPath.login)
   }
 
   // authorized path
   toTop = () => {
-    this.navigateFunction(AuthorizedPath.top)
+    this.navigate(AuthorizedPath.top)
   }
 
   toReports = () => {
-    this.navigateFunction(AuthorizedPath.reports)
+    this.navigate(AuthorizedPath.reports)
   }
 
   toReportNew = () => {
-    this.navigateFunction(AuthorizedPath.reportNew)
+    this.navigate(AuthorizedPath.reportNew)
   }
 
   toReportEdit = (id: string) => {
-    this.navigateFunction(AuthorizedPath.reportEdit.replace(":id", id))
+    this.navigate(AuthorizedPath.reportEdit.replace(":id", id))
   }
 
   toTemplates = () => {
-    this.navigateFunction(AuthorizedPath.templates)
+    this.navigate(AuthorizedPath.templates)
   }
 
   toTemplateNew = () => {
-    this.navigateFunction(AuthorizedPath.templateNew)
+    this.navigate(AuthorizedPath.templateNew)
   }
 
   toTemplateEdit = (id: string) => {
-    this.navigateFunction(AuthorizedPath.templateEdit.replace(":id", id))
+    this.navigate(AuthorizedPath.templateEdit.replace(":id", id))
   }
 
   toDataSources = () => {
-    this.navigateFunction(AuthorizedPath.dataSources)
+    this.navigate(AuthorizedPath.dataSources)
   }
 
   toDataSourceNew = () => {
-    this.navigateFunction(AuthorizedPath.dataSourceNew)
+    this.navigate(AuthorizedPath.dataSourceNew)
   }
 
   toDataSourceEdit = (id: string) => {
-    this.navigateFunction(AuthorizedPath.dataSources.replace(":id", id))
+    this.navigate(AuthorizedPath.dataSources.replace(":id", id))
   }
 
   // error path
   toGoogleError = () => {
-    this.navigateFunction(ErrorsPath.google)
+    this.navigate(ErrorsPath.google)
   }
 
   toNotfoundError = () => {
-    this.navigateFunction(ErrorsPath.notfound)
+    this.navigate(ErrorsPath.notfound)
+  }
+
+  private navigate = (to: string) => {
+    this.navigateFunction(to, { state: nanoid() })
   }
 }
 
