@@ -1,6 +1,6 @@
 import BaseRepository from "./BaseRepository"
 import WorkspaceRepository from "../WorkspaceRepository"
-import WorkspaceVo from "../../vos/WorkspaceVo"
+import WorkspaceVo from "../../vos/responses/WorkspaceVo"
 
 export default class WorkspaceRepositoryImpl
   extends BaseRepository

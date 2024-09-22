@@ -1,5 +1,5 @@
-import RoleVo from "../vos/RoleVo";
+import RoleVo from "../vos/responses/RoleVo"
 
 export default interface RoleRepository {
-  roles(): Promise<Array<RoleVo>>;
+  roles(): Promise<Array<RoleVo>>
 }

@@ -1,5 +1,5 @@
 import useLoader from "../../states/Loader"
-import UserVo from "../../vos/UserVo"
+import UserVo from "../../vos/responses/UserVo"
 import credentials from "../../states/Credentials"
 import { LoginUser } from "../../states/LoginUser"
 

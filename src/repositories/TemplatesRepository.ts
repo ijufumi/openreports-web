@@ -1,14 +1,14 @@
-import TemplatesVo from "../vos/TemplatesVo";
-import TemplateVo from "../vos/TemplateVo";
+import TemplatesVo from "../vos/responses/TemplatesVo"
+import TemplateVo from "../vos/responses/TemplateVo"
 
 export default interface TemplatesRepository {
-  getAll(args: { page: number; limit: number }): Promise<TemplatesVo>;
+  getAll(args: { page: number; limit: number }): Promise<TemplatesVo>
 
-  getById(args: { id: string }): Promise<TemplateVo>;
+  getById(args: { id: string }): Promise<TemplateVo>
 
-  register(args: { name: string; file: File }): Promise<TemplateVo>;
+  register(args: { name: string; file: File }): Promise<TemplateVo>
 
-  update(args: { id: string; name: string }): Promise<TemplateVo>;
+  update(args: { id: string; name: string }): Promise<TemplateVo>
 
-  delete(args: { id: string }): Promise<void>;
+  delete(args: { id: string }): Promise<void>
 }

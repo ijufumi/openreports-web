@@ -1,12 +1,12 @@
-import UserVo from "../vos/UserVo";
-import GoogleAuthUrlVo from "../vos/GoogleAuthUrlVo";
+import UserVo from "../vos/responses/UserVo"
+import GoogleAuthUrlVo from "../vos/responses/GoogleAuthUrlVo"
 
 interface LoginUseCase {
-  login(args: { email: string; password: string }): Promise<UserVo | undefined>;
+  login(args: { email: string; password: string }): Promise<UserVo | undefined>
 
-  getGoogleLoginUrl(): Promise<GoogleAuthUrlVo | undefined>;
+  getGoogleLoginUrl(): Promise<GoogleAuthUrlVo | undefined>
 
-  loginWithGoogle(args: { code: string }): Promise<UserVo | undefined>;
+  loginWithGoogle(args: { code: string }): Promise<UserVo | undefined>
 }
 
-export default LoginUseCase;
+export default LoginUseCase

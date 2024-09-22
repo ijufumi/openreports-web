@@ -1,6 +1,6 @@
-import UserVo from "../vos/UserVo"
-import GoogleAuthUrlVo from "../vos/GoogleAuthUrlVo"
-import FunctionVo from "../vos/FunctionVo"
+import UserVo from "../vos/responses/UserVo"
+import GoogleAuthUrlVo from "../vos/responses/GoogleAuthUrlVo"
+import FunctionVo from "../vos/responses/FunctionVo"
 
 interface MembersRepository {
   logout(): Promise<void>

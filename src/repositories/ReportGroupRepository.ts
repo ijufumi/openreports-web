@@ -1,5 +1,5 @@
-import ReportGroupsVo from "../vos/ReportGroupsVo"
-import ReportGroupVo from "../vos/ReportGroupVo"
+import ReportGroupsVo from "../vos/responses/ReportGroupsVo"
+import ReportGroupVo from "../vos/responses/ReportGroupVo"
 
 export default interface ReportGroupRepository {
   getsByFilter(args: { page: number; limit: number }): Promise<ReportGroupsVo>

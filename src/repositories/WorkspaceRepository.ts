@@ -1,4 +1,4 @@
-import WorkspaceVo from "../vos/WorkspaceVo"
+import WorkspaceVo from "../vos/responses/WorkspaceVo"
 
 export default interface WorkspaceRepository {
   getById(args: { id: string }): Promise<WorkspaceVo>

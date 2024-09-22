@@ -1,6 +1,6 @@
 import DriverTypeRepository from "../DriverTypeRepository"
 import BaseRepository from "./BaseRepository"
-import DriverTypeVo from "../../vos/DriverTypeVo"
+import DriverTypeVo from "../../vos/responses/DriverTypeVo"
 
 export default class DriverTypeRepositoryImpl
   extends BaseRepository

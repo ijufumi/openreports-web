@@ -1,6 +1,6 @@
 import BaseRepository from "./BaseRepository"
 import RoleRepository from "../RoleRepository"
-import RoleVo from "../../vos/RoleVo"
+import RoleVo from "../../vos/responses/RoleVo"
 
 export default class RoleRepositoryImpl
   extends BaseRepository
