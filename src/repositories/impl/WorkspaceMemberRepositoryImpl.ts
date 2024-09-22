@@ -1,7 +1,7 @@
 import BaseRepository from "./BaseRepository"
 import WorkspaceMemberRepository from "../WorkspaceMemberRepository"
-import WorkspaceMembersVo from "../../vos/WorkspaceMembersVo"
-import WorkspaceMemberVo from "../../vos/WorkspaceMemberVo"
+import WorkspaceMembersVo from "../../vos/responses/WorkspaceMembersVo"
+import WorkspaceMemberVo from "../../vos/responses/WorkspaceMemberVo"
 
 export default class WorkspaceMemberRepositoryImpl
   extends BaseRepository

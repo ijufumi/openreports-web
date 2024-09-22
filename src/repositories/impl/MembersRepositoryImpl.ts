@@ -1,6 +1,6 @@
 import MembersRepository from "../MembersRepository"
 import BaseRepository from "./BaseRepository"
-import FunctionVo from "../../vos/FunctionVo"
+import FunctionVo from "../../vos/responses/FunctionVo"
 
 export default class MembersRepositoryImpl
   extends BaseRepository

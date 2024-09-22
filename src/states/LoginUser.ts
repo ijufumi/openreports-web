@@ -1,30 +1,30 @@
-import { makeAutoObservable } from "mobx";
-import UserVo from "../vos/UserVo";
+import { makeAutoObservable } from "mobx"
+import UserVo from "../vos/responses/UserVo"
 
 export class LoginUser {
-  private userVo: UserVo | undefined = undefined;
+  private userVo: UserVo | undefined = undefined
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this)
   }
 
   get = () => {
-    return this.userVo;
-  };
+    return this.userVo
+  }
 
   set = (userVo: UserVo) => {
-    this.userVo = userVo;
-  };
+    this.userVo = userVo
+  }
 
   clear = () => {
-    this.userVo = undefined;
-  };
+    this.userVo = undefined
+  }
 }
 
-const loginUser = new LoginUser();
+const loginUser = new LoginUser()
 
 const useLoginUser = () => {
-  return loginUser;
-};
+  return loginUser
+}
 
-export default useLoginUser;
+export default useLoginUser

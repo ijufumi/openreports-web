@@ -2,7 +2,7 @@ import BaseUseCase from "./BaseUseCase"
 import DataSourceUseCase from "../DataSourceUseCase"
 import DataSourceRepository from "../../repositories/DataSourceRepository"
 import DriverTypeRepository from "../../repositories/DriverTypeRepository"
-import DriverTypeVo from "../../vos/DriverTypeVo"
+import DriverTypeVo from "../../vos/responses/DriverTypeVo"
 import { LoginUser } from "../../states/LoginUser"
 
 export default class DataSourceUseCaseImpl

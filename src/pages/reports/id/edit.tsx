@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import React, { FC, useEffect, useState } from "react"
+import { useParams } from "react-router"
 import {
   HStack,
   Box,
@@ -11,41 +11,41 @@ import {
   Button,
   Wrap,
   WrapItem,
-} from "@chakra-ui/react";
-import ReportVo from "../../../vos/ReportVo";
-import UseCaseFactory from "../../../use_cases/UseCaseFactory";
-import { setBreadcrumbs } from "../../../states/Breadcrumbs";
-import TemplateVo from "../../../vos/TemplateVo";
-import useNavigator from "../../navigator";
-import { successToast, errorToast } from "../../../states/Toast";
+} from "@chakra-ui/react"
+import ReportVo from "../../../vos/responses/ReportVo"
+import UseCaseFactory from "../../../use_cases/UseCaseFactory"
+import { setBreadcrumbs } from "../../../states/Breadcrumbs"
+import TemplateVo from "../../../vos/responses/TemplateVo"
+import useNavigator from "../../navigator"
+import { successToast, errorToast } from "../../../states/Toast"
 
 interface Props {}
 
 const ReportEdit: FC<Props> = () => {
-  const [initialized, setInitialized] = useState<boolean>(false);
-  const [report, setReport] = useState<ReportVo | undefined>(undefined);
-  const [templates, setTemplates] = useState<TemplateVo[]>([]);
-  const [name, setName] = useState<string>("");
-  const [templateId, setTemplateId] = useState<string>("");
+  const [initialized, setInitialized] = useState<boolean>(false)
+  const [report, setReport] = useState<ReportVo | undefined>(undefined)
+  const [templates, setTemplates] = useState<TemplateVo[]>([])
+  const [name, setName] = useState<string>("")
+  const [templateId, setTemplateId] = useState<string>("")
 
-  const params = useParams();
-  const navigator = useNavigator();
-  const id = params.id || "";
+  const params = useParams()
+  const navigator = useNavigator()
+  const id = params.id || ""
 
-  const reportsUseCase = UseCaseFactory.createReportsUseCase();
+  const reportsUseCase = UseCaseFactory.createReportsUseCase()
 
   useEffect(() => {
     const initialize = async () => {
       if (id) {
-        const _report = await reportsUseCase.report({ id });
-        setReport(_report);
+        const _report = await reportsUseCase.report({ id })
+        setReport(_report)
       }
       const reportTemplatesVo = await reportsUseCase.templates({
         page: 0,
         limit: -1,
-      });
+      })
       if (reportTemplatesVo) {
-        setTemplates(reportTemplatesVo.items);
+        setTemplates(reportTemplatesVo.items)
       }
       setBreadcrumbs([
         {
@@ -55,46 +55,46 @@ const ReportEdit: FC<Props> = () => {
         {
           title: id,
         },
-      ]);
-      setInitialized(true);
-    };
-    initialize();
-  }, [id]);
+      ])
+      setInitialized(true)
+    }
+    initialize()
+  }, [id])
 
   useEffect(() => {
     if (report) {
-      setName(report.name);
-      setTemplateId(report.templateId);
+      setName(report.name)
+      setTemplateId(report.templateId)
     }
-  }, [report]);
+  }, [report])
 
   const handleUpdate = async () => {
-    const _report = await reportsUseCase.updateReport({ id, name, templateId });
+    const _report = await reportsUseCase.updateReport({ id, name, templateId })
     if (_report) {
-      setReport(_report);
+      setReport(_report)
       successToast({
         title: "Edit updated.",
         description: "You've finished updating report well.",
-      });
+      })
     } else {
       errorToast({
         title: "Edit didn't updated.",
         description: "You couldn't update report because of errors.",
-      });
+      })
     }
-  };
+  }
 
   const handleCancel = () => {
-    navigator.toReports();
-  };
+    navigator.toReports()
+  }
 
   if (!initialized) {
-    return null;
+    return null
   }
 
   if (!report) {
-    navigator.toNotfoundError();
-    return null;
+    navigator.toNotfoundError()
+    return null
   }
 
   return (
@@ -147,7 +147,7 @@ const ReportEdit: FC<Props> = () => {
                   <option key={template.id} value={template.id}>
                     {template.name}
                   </option>
-                );
+                )
               })}
             </Select>
           </GridItem>
@@ -191,7 +191,7 @@ const ReportEdit: FC<Props> = () => {
         </Box>
       </Box>
     </HStack>
-  );
-};
+  )
+}
 
-export default ReportEdit;
+export default ReportEdit

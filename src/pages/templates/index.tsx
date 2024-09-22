@@ -11,10 +11,10 @@ import {
   Icon,
 } from "@chakra-ui/react"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
-import TemplatesVo from "../../vos/TemplatesVo"
+import TemplatesVo from "../../vos/responses/TemplatesVo"
 import { setBreadcrumbs } from "../../states/Breadcrumbs"
 import UseCaseFactory from "../../use_cases/UseCaseFactory"
-import TemplateVo from "../../vos/TemplateVo"
+import TemplateVo from "../../vos/responses/TemplateVo"
 import DataTable from "../../components/data_table/DataTable"
 import useNavigator from "../navigator"
 import { successToast, errorToast } from "../../states/Toast"

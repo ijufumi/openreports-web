@@ -1,7 +1,7 @@
 import LoginUseCase from "src/use_cases/LoginUseCase"
 import LoginRepository from "src/repositories/LoginRepository"
 import Credentials from "../../states/Credentials"
-import UserVo from "src/vos/UserVo"
+import UserVo from "../../vos/responses/UserVo"
 import BaseUseCase from "./BaseUseCase"
 import { LoginUser } from "src/states/LoginUser"
 

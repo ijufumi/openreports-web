@@ -1,6 +1,6 @@
-import DataSourcesVo from "../vos/DataSourcesVo"
-import DataSourceVo from "../vos/DataSourceVo"
-import DriverTypeVo from "../vos/DriverTypeVo"
+import DataSourcesVo from "../vos/responses/DataSourcesVo"
+import DataSourceVo from "../vos/responses/DataSourceVo"
+import DriverTypeVo from "../vos/responses/DriverTypeVo"
 
 export default interface DataSourceUseCase {
   gets(args: {

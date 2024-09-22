@@ -1,7 +1,7 @@
 import BaseRepository from "./BaseRepository"
 import TemplatesRepository from "../TemplatesRepository"
-import TemplatesVo from "../../vos/TemplatesVo"
-import TemplateVo from "../../vos/TemplateVo"
+import TemplatesVo from "../../vos/responses/TemplatesVo"
+import TemplateVo from "../../vos/responses/TemplateVo"
 
 export default class TemplatesRepositoryImpl
   extends BaseRepository

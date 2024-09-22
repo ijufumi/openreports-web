@@ -1,11 +1,11 @@
 interface Props {
-  url: string;
+  url: string
 }
 
 export default class GoogleAuthUrlVo {
-  readonly url: string;
+  readonly url: string
 
   constructor(props: Props) {
-    this.url = props.url;
+    this.url = props.url
   }
 }

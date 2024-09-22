@@ -14,7 +14,7 @@ import useNavigator from "../../navigator"
 import UseCaseFactory from "../../../use_cases/UseCaseFactory"
 import { setBreadcrumbs } from "../../../states/Breadcrumbs"
 import { successToast, errorToast } from "../../../states/Toast"
-import DriverTypeVo from "../../../vos/DriverTypeVo"
+import DriverTypeVo from "../../../vos/responses/DriverTypeVo"
 import { useParams } from "react-router"
 
 interface Props {}

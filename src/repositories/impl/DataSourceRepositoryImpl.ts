@@ -1,7 +1,7 @@
 import BaseRepository from "./BaseRepository"
 import DataSourceRepository from "../DataSourceRepository"
-import DataSourceVo from "../../vos/DataSourceVo"
-import DataSourcesVo from "../../vos/DataSourcesVo"
+import DataSourceVo from "../../vos/responses/DataSourceVo"
+import DataSourcesVo from "../../vos/responses/DataSourcesVo"
 
 export default class DataSourceRepositoryImpl
   extends BaseRepository

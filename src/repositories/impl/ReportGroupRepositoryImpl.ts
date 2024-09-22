@@ -1,7 +1,7 @@
 import BaseRepository from "./BaseRepository"
 import ReportGroupRepository from "../ReportGroupRepository"
-import ReportGroupsVo from "../../vos/ReportGroupsVo"
-import ReportGroupVo from "../../vos/ReportGroupVo"
+import ReportGroupsVo from "../../vos/responses/ReportGroupsVo"
+import ReportGroupVo from "../../vos/responses/ReportGroupVo"
 
 export default class ReportGroupRepositoryImpl
   extends BaseRepository
