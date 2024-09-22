@@ -2,6 +2,8 @@ import BaseRepository from "./BaseRepository"
 import DataSourceRepository from "../DataSourceRepository"
 import DataSourceVo from "../../vos/responses/DataSourceVo"
 import DataSourcesVo from "../../vos/responses/DataSourcesVo"
+import CreateDataSourceVo from "../../vos/requests/CreateDataSourceVo"
+import UpdateDataSourceVo from "../../vos/requests/UpdateDataSourceVo"
 
 export default class DataSourceRepositoryImpl
   extends BaseRepository
@@ -24,25 +26,12 @@ export default class DataSourceRepositoryImpl
     return new DataSourcesVo(result)
   }
 
-  register = async (args: {
-    name: string
-    url: string
-    username: string
-    password: string
-    driverTypeId: string
-  }) => {
+  register = async (args: CreateDataSourceVo) => {
     const result = await this._post({ path: "/", body: args })
     return new DataSourceVo(result)
   }
 
-  update = async (args: {
-    id: string
-    name: string
-    url: string
-    username: string
-    password: string
-    driverTypeId: string
-  }) => {
+  update = async (args: UpdateDataSourceVo) => {
     const path = `/${args.id}`
     const result = await this._put({ path, body: args })
     return new DataSourceVo(result)

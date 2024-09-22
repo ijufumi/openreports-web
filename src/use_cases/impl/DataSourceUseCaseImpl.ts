@@ -4,6 +4,8 @@ import DataSourceRepository from "../../repositories/DataSourceRepository"
 import DriverTypeRepository from "../../repositories/DriverTypeRepository"
 import DriverTypeVo from "../../vos/responses/DriverTypeVo"
 import { LoginUser } from "../../states/LoginUser"
+import CreateDataSourceVo from "../../vos/requests/CreateDataSourceVo"
+import UpdateDataSourceVo from "../../vos/requests/UpdateDataSourceVo"
 
 export default class DataSourceUseCaseImpl
   extends BaseUseCase
@@ -52,13 +54,7 @@ export default class DataSourceUseCaseImpl
     return undefined
   }
 
-  register = async (args: {
-    name: string
-    url: string
-    username: string
-    password: string
-    driverTypeId: string
-  }) => {
+  register = async (args: CreateDataSourceVo) => {
     try {
       return this.repository.register(args)
     } catch (e) {
@@ -67,14 +63,7 @@ export default class DataSourceUseCaseImpl
     return undefined
   }
 
-  update = async (args: {
-    id: string
-    name: string
-    url: string
-    username: string
-    password: string
-    driverTypeId: string
-  }) => {
+  update = async (args: UpdateDataSourceVo) => {
     try {
       return this.repository.update(args)
     } catch (e) {
