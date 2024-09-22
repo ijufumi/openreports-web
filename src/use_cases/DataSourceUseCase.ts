@@ -1,6 +1,7 @@
 import DataSourcesVo from "../vos/responses/DataSourcesVo"
 import DataSourceVo from "../vos/responses/DataSourceVo"
 import DriverTypeVo from "../vos/responses/DriverTypeVo"
+import CreateDataSourceVo from "../vos/requests/CreateDataSourceVo"
 
 export default interface DataSourceUseCase {
   gets(args: {
@@ -10,13 +11,7 @@ export default interface DataSourceUseCase {
 
   getById(args: { id: string }): Promise<DataSourceVo | undefined>
 
-  register(args: {
-    name: string
-    url: string
-    username: string
-    password: string
-    driverTypeId: string
-  }): Promise<DataSourceVo | undefined>
+  register(args: CreateDataSourceVo): Promise<DataSourceVo | undefined>
 
   update(args: {
     id: string
