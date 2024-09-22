@@ -6,6 +6,8 @@ import DriverTypeVo from "../../vos/responses/DriverTypeVo"
 import { LoginUser } from "../../states/LoginUser"
 import CreateDataSourceVo from "../../vos/requests/CreateDataSourceVo"
 import UpdateDataSourceVo from "../../vos/requests/UpdateDataSourceVo"
+import GetDataSourcesVo from "../../vos/requests/GetDataSourcesVo"
+import IdVo from "../../vos/requests/IdVo"
 
 export default class DataSourceUseCaseImpl
   extends BaseUseCase
@@ -23,7 +25,7 @@ export default class DataSourceUseCaseImpl
     this.driverTypeRepository = driverTypeRepository
   }
 
-  delete = async (args: { id: string }) => {
+  delete = async (args: IdVo) => {
     try {
       await this.repository.delete(args)
       return true
@@ -33,7 +35,7 @@ export default class DataSourceUseCaseImpl
     return false
   }
 
-  getById = async (args: { id: string }) => {
+  getById = async (args: IdVo) => {
     try {
       return this.repository.getById(args)
     } catch (e) {
@@ -42,7 +44,7 @@ export default class DataSourceUseCaseImpl
     return undefined
   }
 
-  gets = async (args: { page: number; limit: number }) => {
+  gets = async (args: GetDataSourcesVo) => {
     try {
       this.startLoader()
       return this.repository.gets(args)
