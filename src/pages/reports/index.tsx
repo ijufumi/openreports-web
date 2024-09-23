@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
 import { GrDocumentPdf, GrTrash } from "react-icons/gr"
-import UseCaseFactory from "../../use_cases/UseCaseFactory"
+import UseCaseFactory from "../../usecases/UseCaseFactory"
 import ReportsVo from "../../vos/responses/ReportsVo"
 import ReportVo from "../../vos/responses/ReportVo"
 import DataTable from "../../components/data_table/DataTable"

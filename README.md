@@ -83,7 +83,7 @@ This application's features are here ( including not implemented )
 │   ├── pages          # Page component
 │   ├── repositories   # Connecting to external systems
 │   ├── states         # Manage state
-│   ├── use_cases      # Use case pattern for pages
+│   ├── usecases       # Use case pattern for pages
 │   └── vos            # Value Object
 ├── .eslintrc.json
 ├── .prettierrc.json

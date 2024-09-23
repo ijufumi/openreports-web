@@ -1,4 +1,4 @@
-import React, { FC, useState, useMemo } from "react";
+import React, { FC, useState, useMemo } from "react"
 import {
   Input,
   InputGroup,
@@ -14,30 +14,30 @@ import {
   Divider,
   FormControl,
   FormErrorMessage,
-} from "@chakra-ui/react";
-import { FormikValues, FormikHelpers, useFormik } from "formik";
-import { z, ZodIssue } from "zod";
-import { MdOutlineEmail } from "react-icons/md";
-import { CgPassword } from "react-icons/cg";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { FcGoogle } from "react-icons/fc";
-import logoImg from "../../assets/logo.png";
-import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import useNavigator from "../navigator";
-import { errorToast } from "../../states/Toast";
+} from "@chakra-ui/react"
+import { FormikValues, FormikHelpers, useFormik } from "formik"
+import { z, ZodIssue } from "zod"
+import { MdOutlineEmail } from "react-icons/md"
+import { CgPassword } from "react-icons/cg"
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import { FcGoogle } from "react-icons/fc"
+import logoImg from "../../assets/logo.png"
+import UseCaseFactory from "../../usecases/UseCaseFactory"
+import useNavigator from "../navigator"
+import { errorToast } from "../../states/Toast"
 
 interface Props {}
 
 const Login: FC<Props> = () => {
-  const navigator = useNavigator();
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const navigator = useNavigator()
+  const [showPassword, setShowPassword] = useState<boolean>(false)
 
-  const loginUseCase = UseCaseFactory.createLoginUseCase();
+  const loginUseCase = UseCaseFactory.createLoginUseCase()
 
   const formSchema = z.object({
     email: z.string().email("Invalid email address"),
     password: z.string().min(1, "Password is required"),
-  });
+  })
 
   const formik = useFormik({
     initialValues: {
@@ -46,47 +46,47 @@ const Login: FC<Props> = () => {
     },
     validateOnBlur: true,
     validate: async (values) => {
-      const result = formSchema.safeParse(values);
-      const errors = {} as { [key: string]: string };
+      const result = formSchema.safeParse(values)
+      const errors = {} as { [key: string]: string }
       if (!result.success) {
         result.error.issues.forEach((value: ZodIssue) => {
-          errors[value.path.join(".")] = value.message;
-        });
+          errors[value.path.join(".")] = value.message
+        })
       }
-      return errors;
+      return errors
     },
     onSubmit: async (values) => handleLogin(values),
-  });
+  })
 
   const handleLogin = async (values: FormikValues) => {
-    const { email, password } = values;
-    const member = await loginUseCase.login({ email, password });
+    const { email, password } = values
+    const member = await loginUseCase.login({ email, password })
     if (member) {
-      navigator.toTop();
-      return;
+      navigator.toTop()
+      return
     } else {
       errorToast({
         title: "Login failed.",
         description: "You couldn't logged in report because of some errors.",
-      });
+      })
     }
-  };
+  }
 
   const handleGoogleLogin = async () => {
-    const googleUrl = await loginUseCase.getGoogleLoginUrl();
+    const googleUrl = await loginUseCase.getGoogleLoginUrl()
     if (googleUrl != undefined) {
-      window.location.replace(googleUrl.url);
+      window.location.replace(googleUrl.url)
     } else {
       errorToast({
         title: "Google login failed.",
         description: "You couldn't logged in report because of some errors.",
-      });
+      })
     }
-  };
+  }
 
   const canLogin = useMemo(() => {
-    return formik.isValid && formik.touched && !formik.isSubmitting;
-  }, [formik]);
+    return formik.isValid && formik.touched && !formik.isSubmitting
+  }, [formik])
 
   return (
     <Flex
@@ -189,7 +189,7 @@ const Login: FC<Props> = () => {
         </VStack>
       </Box>
     </Flex>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

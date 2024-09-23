@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, useEffect } from "react";
+import React, { FC, useState, useRef, useEffect } from "react"
 import {
   Box,
   Grid,
@@ -11,71 +11,71 @@ import {
   Tooltip,
   IconButton,
   Icon,
-} from "@chakra-ui/react";
-import { GrFormUpload, GrTrash } from "react-icons/gr";
-import useNavigator from "../navigator";
-import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import { setBreadcrumbs } from "../../states/Breadcrumbs";
-import { successToast, errorToast } from "../../states/Toast";
+} from "@chakra-ui/react"
+import { GrFormUpload, GrTrash } from "react-icons/gr"
+import useNavigator from "../navigator"
+import UseCaseFactory from "../../usecases/UseCaseFactory"
+import { setBreadcrumbs } from "../../states/Breadcrumbs"
+import { successToast, errorToast } from "../../states/Toast"
 
 interface Props {}
 
 const TemplateNew: FC<Props> = () => {
-  const [name, setName] = useState<string>("");
-  const [file, setFile] = useState<File | undefined>(undefined);
+  const [name, setName] = useState<string>("")
+  const [file, setFile] = useState<File | undefined>(undefined)
 
-  const fileRef = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null)
 
-  const navigator = useNavigator();
-  const reportUseCase = UseCaseFactory.createReportsUseCase();
+  const navigator = useNavigator()
+  const reportUseCase = UseCaseFactory.createReportsUseCase()
 
   useEffect(() => {
     setBreadcrumbs([
       {
         title: "Templates",
       },
-    ]);
-  }, []);
+    ])
+  }, [])
 
   const handleCreate = async () => {
     if (name && file) {
-      const result = await reportUseCase.registerTemplate({ name, file });
+      const result = await reportUseCase.registerTemplate({ name, file })
       if (result) {
         successToast({
           title: "Upload updated.",
           description: "You've finished uploading template.",
-        });
-        navigator.toTemplates();
+        })
+        navigator.toTemplates()
       } else {
         errorToast({
           title: "Upload failed.",
           description: "You've failed uploading template.",
-        });
+        })
       }
     }
-  };
+  }
 
   const handleCancel = () => {
-    navigator.toTemplates();
-  };
+    navigator.toTemplates()
+  }
 
   const handleClearFile = () => {
-    setFile(undefined);
-  };
+    setFile(undefined)
+  }
 
   const handleOpenFileWindow = () => {
-    fileRef.current?.click();
-  };
+    fileRef.current?.click()
+  }
 
   const handleSelectFile = () => {
-    const files = fileRef.current?.files;
+    const files = fileRef.current?.files
     if (!files || !files.length) {
-      setFile(undefined);
+      setFile(undefined)
     } else {
-      setFile(files[0]);
-      fileRef.current.value = "";
+      setFile(files[0])
+      fileRef.current.value = ""
     }
-  };
+  }
 
   return (
     <Box
@@ -154,7 +154,7 @@ const TemplateNew: FC<Props> = () => {
         </Wrap>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default TemplateNew;
+export default TemplateNew

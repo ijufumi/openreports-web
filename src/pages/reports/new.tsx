@@ -10,7 +10,7 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react"
-import UseCaseFactory from "../../use_cases/UseCaseFactory"
+import UseCaseFactory from "../../usecases/UseCaseFactory"
 import { setBreadcrumbs } from "../../states/Breadcrumbs"
 import TemplateVo from "../../vos/responses/TemplateVo"
 import useNavigator from "../navigator"

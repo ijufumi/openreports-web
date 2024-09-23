@@ -13,7 +13,7 @@ import {
   WrapItem,
 } from "@chakra-ui/react"
 import ReportVo from "../../../vos/responses/ReportVo"
-import UseCaseFactory from "../../../use_cases/UseCaseFactory"
+import UseCaseFactory from "../../../usecases/UseCaseFactory"
 import { setBreadcrumbs } from "../../../states/Breadcrumbs"
 import TemplateVo from "../../../vos/responses/TemplateVo"
 import useNavigator from "../../navigator"

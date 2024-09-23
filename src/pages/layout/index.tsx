@@ -22,7 +22,7 @@ import {
 import { FaRegUserCircle } from "react-icons/fa"
 import { MdKeyboardArrowRight } from "react-icons/md"
 import { CgMenu } from "react-icons/cg"
-import UseCaseFactory from "../../use_cases/UseCaseFactory"
+import UseCaseFactory from "../../usecases/UseCaseFactory"
 import logoImg from "../../assets/logo.png"
 import { useBreadcrumbsState } from "../../states/Breadcrumbs"
 import useLoginUser from "../../states/LoginUser"

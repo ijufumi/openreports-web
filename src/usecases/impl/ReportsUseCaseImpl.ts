@@ -1,4 +1,4 @@
-import ReportsUseCase from "src/use_cases/ReportsUseCase"
+import ReportsUseCase from "../ReportsUseCase"
 import ReportRepository from "../../repositories/ReportRepository"
 import TemplatesRepository from "src/repositories/TemplatesRepository"
 import BaseUseCase from "./BaseUseCase"

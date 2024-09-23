@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react"
 import {
   Box,
   Grid,
@@ -9,34 +9,34 @@ import {
   WrapItem,
   Button,
   useToast,
-} from "@chakra-ui/react";
-import { useParams } from "react-router";
-import useNavigator from "../../navigator";
-import UseCaseFactory from "../../../use_cases/UseCaseFactory";
-import { setBreadcrumbs } from "../../../states/Breadcrumbs";
-import { successToast, errorToast } from "../../../states/Toast";
+} from "@chakra-ui/react"
+import { useParams } from "react-router"
+import useNavigator from "../../navigator"
+import UseCaseFactory from "../../../usecases/UseCaseFactory"
+import { setBreadcrumbs } from "../../../states/Breadcrumbs"
+import { successToast, errorToast } from "../../../states/Toast"
 
 interface Props {}
 
 const TemplateEdit: FC<Props> = () => {
-  const [initialized, setInitialized] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
+  const [initialized, setInitialized] = useState<boolean>(false)
+  const [name, setName] = useState<string>("")
 
-  const params = useParams();
-  const navigator = useNavigator();
-  const reportsUseCase = UseCaseFactory.createReportsUseCase();
+  const params = useParams()
+  const navigator = useNavigator()
+  const reportsUseCase = UseCaseFactory.createReportsUseCase()
 
-  const id = params.id || "";
+  const id = params.id || ""
 
   useEffect(() => {
     const initialize = async () => {
       if (id) {
-        const _template = await reportsUseCase.template({ id });
+        const _template = await reportsUseCase.template({ id })
         if (_template) {
-          setName(_template.name);
+          setName(_template.name)
         } else {
-          navigator.toNotfoundError();
-          return;
+          navigator.toNotfoundError()
+          return
         }
       }
       setBreadcrumbs([
@@ -47,36 +47,36 @@ const TemplateEdit: FC<Props> = () => {
         {
           title: id,
         },
-      ]);
-      setInitialized(true);
-    };
-    initialize();
-  }, [id]);
+      ])
+      setInitialized(true)
+    }
+    initialize()
+  }, [id])
 
   const handleUpdate = async () => {
     if (name) {
-      const result = await reportsUseCase.updateTemplate({ id, name });
+      const result = await reportsUseCase.updateTemplate({ id, name })
       if (result) {
         successToast({
           title: "Update succeeded.",
           description: "You've finished updating template.",
-        });
-        navigator.toTemplates();
+        })
+        navigator.toTemplates()
       } else {
         errorToast({
           title: "Update failed.",
           description: "You've failed updating template.",
-        });
+        })
       }
     }
-  };
+  }
 
   const handleCancel = () => {
-    navigator.toTemplates();
-  };
+    navigator.toTemplates()
+  }
 
   if (!initialized) {
-    return null;
+    return null
   }
 
   return (
@@ -123,7 +123,7 @@ const TemplateEdit: FC<Props> = () => {
         </Wrap>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default TemplateEdit;
+export default TemplateEdit
