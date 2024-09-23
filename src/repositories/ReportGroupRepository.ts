@@ -1,14 +1,18 @@
 import ReportGroupsVo from "../vos/responses/ReportGroupsVo"
 import ReportGroupVo from "../vos/responses/ReportGroupVo"
+import IdVo from "../vos/requests/IdVo"
+import GetReportGroupsVo from "../vos/requests/GetReportGroupsVo"
+import CreateReportGroupVo from "../vos/requests/CreateReportGroupVo"
+import UpdateReportGroupVo from "../vos/requests/UpdateReportGroupVo"
 
 export default interface ReportGroupRepository {
-  getsByFilter(args: { page: number; limit: number }): Promise<ReportGroupsVo>
+  getsByFilter(args: GetReportGroupsVo): Promise<ReportGroupsVo>
 
-  getById(args: { id: string }): Promise<ReportGroupVo>
+  getById(args: IdVo): Promise<ReportGroupVo>
 
-  register(args: { name: string }): Promise<ReportGroupVo>
+  register(args: CreateReportGroupVo): Promise<ReportGroupVo>
 
-  update(args: { id: string; name: string }): Promise<ReportGroupVo>
+  update(args: UpdateReportGroupVo): Promise<ReportGroupVo>
 
-  delete(args: { id: string }): Promise<void>
+  delete(args: IdVo): Promise<void>
 }
