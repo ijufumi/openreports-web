@@ -17,7 +17,7 @@ import { GrTrash } from "react-icons/gr"
 import useNavigator from "../navigator"
 import DataSourceVo from "../../vos/responses/DataSourceVo"
 import DataSourcesVo from "../../vos/responses/DataSourcesVo"
-import UseCaseFactory from "../../use_cases/UseCaseFactory"
+import UseCaseFactory from "../../usecases/UseCaseFactory"
 import { successToast, errorToast } from "../../states/Toast"
 import { useLocation } from "react-router"
 

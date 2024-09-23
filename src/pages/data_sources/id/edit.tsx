@@ -11,7 +11,7 @@ import {
   Select,
 } from "@chakra-ui/react"
 import useNavigator from "../../navigator"
-import UseCaseFactory from "../../../use_cases/UseCaseFactory"
+import UseCaseFactory from "../../../usecases/UseCaseFactory"
 import { setBreadcrumbs } from "../../../states/Breadcrumbs"
 import { successToast, errorToast } from "../../../states/Toast"
 import DriverTypeVo from "../../../vos/responses/DriverTypeVo"

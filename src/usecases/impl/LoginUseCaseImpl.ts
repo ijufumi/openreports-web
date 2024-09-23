@@ -1,4 +1,4 @@
-import LoginUseCase from "src/use_cases/LoginUseCase"
+import LoginUseCase from "../LoginUseCase"
 import LoginRepository from "src/repositories/LoginRepository"
 import Credentials from "../../states/Credentials"
 import UserVo from "../../vos/responses/UserVo"

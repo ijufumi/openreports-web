@@ -1,4 +1,4 @@
-import WorkspaceUseCase from "src/use_cases/WorkspaceUseCase"
+import WorkspaceUseCase from "../WorkspaceUseCase"
 import BaseUseCase from "./BaseUseCase"
 import RoleRepository from "src/repositories/RoleRepository"
 import WorkspaceMemberRepository from "src/repositories/WorkspaceMemberRepository"

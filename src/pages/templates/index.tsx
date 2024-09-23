@@ -13,7 +13,7 @@ import {
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
 import TemplatesVo from "../../vos/responses/TemplatesVo"
 import { setBreadcrumbs } from "../../states/Breadcrumbs"
-import UseCaseFactory from "../../use_cases/UseCaseFactory"
+import UseCaseFactory from "../../usecases/UseCaseFactory"
 import TemplateVo from "../../vos/responses/TemplateVo"
 import DataTable from "../../components/data_table/DataTable"
 import useNavigator from "../navigator"

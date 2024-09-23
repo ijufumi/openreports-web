@@ -1,44 +1,44 @@
-import React, { FC, useMemo, useEffect, useState } from "react";
-import { useLocation } from "react-router";
-import UseCaseFactory from "../../use_cases/UseCaseFactory";
-import StringUtils from "../../components/utils/string/StringUtils";
-import useNavigator from "../navigator";
+import React, { FC, useMemo, useEffect, useState } from "react"
+import { useLocation } from "react-router"
+import UseCaseFactory from "../../usecases/UseCaseFactory"
+import StringUtils from "../../components/utils/string/StringUtils"
+import useNavigator from "../navigator"
 
 interface Props {}
 
 const GoogleCallback: FC<Props> = () => {
-  const { search } = useLocation();
-  const navigator = useNavigator();
-  const [initialized, setInitialized] = useState<boolean>(false);
+  const { search } = useLocation()
+  const navigator = useNavigator()
+  const [initialized, setInitialized] = useState<boolean>(false)
 
-  const loginUseCase = UseCaseFactory.createLoginUseCase();
+  const loginUseCase = UseCaseFactory.createLoginUseCase()
 
   const params = useMemo(() => {
-    return new URLSearchParams(search);
-  }, [search]);
+    return new URLSearchParams(search)
+  }, [search])
 
   useEffect(() => {
     const initialize = async () => {
-      const code = params.get("code") || "";
+      const code = params.get("code") || ""
       if (!StringUtils.isBlank(code)) {
-        const member = await loginUseCase.loginWithGoogle({ code });
+        const member = await loginUseCase.loginWithGoogle({ code })
         if (member) {
-          navigator.toTop();
-          return;
+          navigator.toTop()
+          return
         }
-        navigator.toGoogleError();
+        navigator.toGoogleError()
       }
-      setInitialized(true);
-    };
+      setInitialized(true)
+    }
 
-    initialize();
-  }, [params]);
+    initialize()
+  }, [params])
 
   if (!initialized) {
-    return null;
+    return null
   }
 
-  return <div />;
-};
+  return <div />
+}
 
-export default GoogleCallback;
+export default GoogleCallback
