@@ -1,30 +1,20 @@
 import ReportsVo from "../vos/responses/ReportsVo"
 import ReportVo from "../vos/responses/ReportVo"
+import GetReportsVo from "../vos/requests/GetReportsVo"
+import IdVo from "../vos/requests/IdVo"
+import CreateReportVo from "../vos/requests/CreateReportVo"
+import UpdateReportVo from "../vos/requests/UpdateReportVo"
 
 export default interface ReportRepository {
-  getsByFilter(args: {
-    page: number
-    limit: number
-    templateId?: string
-  }): Promise<ReportsVo>
+  getsByFilter(args: GetReportsVo): Promise<ReportsVo>
 
-  getById(args: { id: string }): Promise<ReportVo>
+  getById(args: IdVo): Promise<ReportVo>
 
-  register(args: {
-    name: string
-    templateId: string
-    dataSourceId?: string
-    parameterIds: String[]
-  }): Promise<ReportVo>
+  register(args: CreateReportVo): Promise<ReportVo>
 
-  update(args: {
-    id: string
-    name: string
-    templateId: string
-    dataSourceId?: string
-  }): Promise<ReportVo>
+  update(args: UpdateReportVo): Promise<ReportVo>
 
-  output(args: { id: string }): Promise<Blob>
+  output(args: IdVo): Promise<Blob>
 
-  delete(args: { id: string }): Promise<void>
+  delete(args: IdVo): Promise<void>
 }

@@ -2,25 +2,20 @@ import ReportsVo from "../vos/responses/ReportsVo"
 import TemplatesVo from "../vos/responses/TemplatesVo"
 import ReportVo from "../vos/responses/ReportVo"
 import TemplateVo from "../vos/responses/TemplateVo"
+import GetReportsVo from "../vos/requests/GetReportsVo"
+import IdVo from "../vos/requests/IdVo"
+import UpdateReportVo from "../vos/requests/UpdateReportVo"
 
 export default interface ReportsUseCase {
-  reports(args: {
-    page: number
-    limit: number
-    templateId?: string
-  }): Promise<ReportsVo | undefined>
+  reports(args: GetReportsVo): Promise<ReportsVo | undefined>
 
-  report(args: { id: string }): Promise<ReportVo | undefined>
+  report(args: IdVo): Promise<ReportVo | undefined>
 
-  outputReport(args: { id: string }): Promise<Blob | undefined>
+  outputReport(args: IdVo): Promise<Blob | undefined>
 
-  updateReport(args: {
-    id: string
-    name: string
-    templateId: string
-  }): Promise<ReportVo | undefined>
+  updateReport(args: UpdateReportVo): Promise<ReportVo | undefined>
 
-  deleteReport(args: { id: string }): Promise<void>
+  deleteReport(args: IdVo): Promise<void>
 
   templates(args: {
     page: number
