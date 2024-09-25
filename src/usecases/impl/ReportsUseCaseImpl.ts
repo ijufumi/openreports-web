@@ -6,6 +6,9 @@ import { LoginUser } from "../../states/LoginUser"
 import GetReportsVo from "../../vos/requests/GetReportsVo"
 import IdVo from "../../vos/requests/IdVo"
 import UpdateReportVo from "../../vos/requests/UpdateReportVo"
+import GetTemplatesVo from "../../vos/requests/GetTemplatesVo"
+import CreateTemplateVo from "../../vos/requests/CreateTemplateVo"
+import UpdateTemplateVo from "../../vos/requests/UpdateTemplateVo"
 
 export default class ReportsUseCaseImpl
   extends BaseUseCase
@@ -68,7 +71,7 @@ export default class ReportsUseCaseImpl
     }
   }
 
-  templates = async (args: { page: number; limit: number }) => {
+  templates = async (args: GetTemplatesVo) => {
     try {
       this.startLoader()
       return await this.templatesRepository.getAll(args)
@@ -77,7 +80,7 @@ export default class ReportsUseCaseImpl
     }
   }
 
-  template = async (args: { id: string }) => {
+  template = async (args: IdVo) => {
     try {
       this.startLoader()
       return await this.templatesRepository.getById(args)
@@ -86,7 +89,7 @@ export default class ReportsUseCaseImpl
     }
   }
 
-  registerTemplate = async (args: { name: string; file: File }) => {
+  registerTemplate = async (args: CreateTemplateVo) => {
     try {
       this.startLoader()
       return await this.templatesRepository.register(args)
@@ -98,7 +101,7 @@ export default class ReportsUseCaseImpl
     }
   }
 
-  updateTemplate = async (args: { id: string; name: string }) => {
+  updateTemplate = async (args: UpdateTemplateVo) => {
     try {
       this.startLoader()
       return await this.templatesRepository.update(args)
@@ -110,7 +113,7 @@ export default class ReportsUseCaseImpl
     }
   }
 
-  deleteTemplate = async (args: { id: string }) => {
+  deleteTemplate = async (args: IdVo) => {
     try {
       this.startLoader()
       await this.templatesRepository.delete(args)

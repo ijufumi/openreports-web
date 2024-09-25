@@ -1,14 +1,18 @@
 import TemplatesVo from "../vos/responses/TemplatesVo"
 import TemplateVo from "../vos/responses/TemplateVo"
+import IdVo from "../vos/requests/IdVo"
+import GetTemplatesVo from "../vos/requests/GetTemplatesVo"
+import UpdateTemplateVo from "../vos/requests/UpdateTemplateVo"
+import CreateTemplateVo from "../vos/requests/CreateTemplateVo"
 
 export default interface TemplatesRepository {
-  getAll(args: { page: number; limit: number }): Promise<TemplatesVo>
+  getAll(args: GetTemplatesVo): Promise<TemplatesVo>
 
-  getById(args: { id: string }): Promise<TemplateVo>
+  getById(args: IdVo): Promise<TemplateVo>
 
-  register(args: { name: string; file: File }): Promise<TemplateVo>
+  register(args: CreateTemplateVo): Promise<TemplateVo>
 
-  update(args: { id: string; name: string }): Promise<TemplateVo>
+  update(args: UpdateTemplateVo): Promise<TemplateVo>
 
-  delete(args: { id: string }): Promise<void>
+  delete(args: IdVo): Promise<void>
 }
