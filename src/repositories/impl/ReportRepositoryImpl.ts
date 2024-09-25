@@ -2,16 +2,15 @@ import BaseRepository from "./BaseRepository"
 import ReportRepository from "../ReportRepository"
 import ReportsVo from "../../vos/responses/ReportsVo"
 import ReportVo from "../../vos/responses/ReportVo"
+import GetReportsVo from "../../vos/requests/GetReportsVo"
+import IdVo from "../../vos/requests/IdVo"
+import UpdateReportVo from "../../vos/requests/UpdateReportVo"
 
 export default class ReportRepositoryImpl
   extends BaseRepository
   implements ReportRepository
 {
-  getsByFilter = async (args: {
-    page: number
-    limit: number
-    templateId?: string
-  }) => {
+  getsByFilter = async (args: GetReportsVo) => {
     let path = `?page=${args.page}&limit=${args.limit}`
     if (args.templateId) {
       path = `${path}&templateId=${args.templateId}`
@@ -21,7 +20,7 @@ export default class ReportRepositoryImpl
     return new ReportsVo(result)
   }
 
-  getById = async (args: { id: string }) => {
+  getById = async (args: IdVo) => {
     const result = await this._get({ path: `/${args.id}`, hasResponse: true })
     return new ReportVo(result)
   }
@@ -40,7 +39,7 @@ export default class ReportRepositoryImpl
     return new ReportVo(result)
   }
 
-  update = async (args: { id: string; name: string; templateId: string }) => {
+  update = async (args: UpdateReportVo) => {
     const { name, templateId } = args
     const result = await this._put({
       path: `/${args.id}`,
@@ -49,11 +48,11 @@ export default class ReportRepositoryImpl
     return new ReportVo(result)
   }
 
-  output = async (args: { id: string }) => {
+  output = async (args: IdVo) => {
     return await this._download({ path: `/outputs/${args.id}` })
   }
 
-  delete = async (args: { id: string }) => {
+  delete = async (args: IdVo) => {
     return await this._delete({ path: `/${args.id}` })
   }
 }

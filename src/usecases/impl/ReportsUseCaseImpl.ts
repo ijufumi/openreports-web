@@ -3,6 +3,9 @@ import ReportRepository from "../../repositories/ReportRepository"
 import TemplatesRepository from "src/repositories/TemplatesRepository"
 import BaseUseCase from "./BaseUseCase"
 import { LoginUser } from "../../states/LoginUser"
+import GetReportsVo from "../../vos/requests/GetReportsVo"
+import IdVo from "../../vos/requests/IdVo"
+import UpdateReportVo from "../../vos/requests/UpdateReportVo"
 
 export default class ReportsUseCaseImpl
   extends BaseUseCase
@@ -20,11 +23,7 @@ export default class ReportsUseCaseImpl
     this.templatesRepository = templatesRepository
   }
 
-  reports = async (args: {
-    page: number
-    limit: number
-    templateId?: string
-  }) => {
+  reports = async (args: GetReportsVo) => {
     try {
       this.startLoader()
       return await this.reportsRepository.getsByFilter(args)
@@ -33,7 +32,7 @@ export default class ReportsUseCaseImpl
     }
   }
 
-  report = async (args: { id: string }) => {
+  report = async (args: IdVo) => {
     try {
       this.startLoader()
       return await this.reportsRepository.getById(args)
@@ -42,7 +41,7 @@ export default class ReportsUseCaseImpl
     }
   }
 
-  outputReport = async (args: { id: string }) => {
+  outputReport = async (args: IdVo) => {
     try {
       this.startLoader()
       return await this.reportsRepository.output(args)
@@ -51,7 +50,7 @@ export default class ReportsUseCaseImpl
     }
   }
 
-  deleteReport = async (args: { id: string }) => {
+  deleteReport = async (args: IdVo) => {
     try {
       this.startLoader()
       return await this.reportsRepository.delete(args)
@@ -60,11 +59,7 @@ export default class ReportsUseCaseImpl
     }
   }
 
-  updateReport = async (args: {
-    id: string
-    name: string
-    templateId: string
-  }) => {
+  updateReport = async (args: UpdateReportVo) => {
     try {
       this.startLoader()
       return await this.reportsRepository.update(args)
