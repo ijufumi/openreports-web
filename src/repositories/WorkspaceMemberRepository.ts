@@ -1,10 +1,15 @@
 import WorkspaceMembersVo from "../vos/responses/WorkspaceMembersVo"
 import WorkspaceMemberVo from "../vos/responses/WorkspaceMemberVo"
+import GetWorkspaceMembersVo from "../vos/requests/GetWorkspaceMembersVo"
+import UpdateWorkspaceMemberVo from "../vos/requests/UpdateWorkspaceMemberVo"
+import GetWorkspaceMemberByMemberIdVo from "../vos/requests/GetWorkspaceMemberByMemberIdVo"
 
 export default interface WorkspaceMemberRepository {
-  gets(args: { limit: number; page: number }): Promise<WorkspaceMembersVo>
+  gets(args: GetWorkspaceMembersVo): Promise<WorkspaceMembersVo>
 
-  getByMemberId(args: { memberId: string }): Promise<WorkspaceMemberVo>
+  getByMemberId(
+    args: GetWorkspaceMemberByMemberIdVo
+  ): Promise<WorkspaceMemberVo>
 
-  update(args: { memberId: string; roleId: string }): Promise<WorkspaceMemberVo>
+  update(args: UpdateWorkspaceMemberVo): Promise<WorkspaceMemberVo>
 }

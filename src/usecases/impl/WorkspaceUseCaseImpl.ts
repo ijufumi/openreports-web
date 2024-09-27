@@ -4,6 +4,9 @@ import RoleRepository from "src/repositories/RoleRepository"
 import WorkspaceMemberRepository from "src/repositories/WorkspaceMemberRepository"
 import WorkspaceRepository from "src/repositories/WorkspaceRepository"
 import { LoginUser } from "../../states/LoginUser"
+import GetWorkspaceMemberByMemberIdVo from "../../vos/requests/GetWorkspaceMemberByMemberIdVo"
+import GetWorkspaceMembersVo from "../../vos/requests/GetWorkspaceMembersVo"
+import UpdateWorkspaceMemberVo from "../../vos/requests/UpdateWorkspaceMemberVo"
 
 export default class WorkspaceUseCaseImpl
   extends BaseUseCase
@@ -36,12 +39,12 @@ export default class WorkspaceUseCaseImpl
     return this.workspaceRepository.getById(args)
   }
 
-  getWorkspaceMember = async (args: { memberId: string }) => {
+  getWorkspaceMember = async (args: GetWorkspaceMemberByMemberIdVo) => {
     const { memberId } = args
     return this.workspaceMemberRepository.getByMemberId({ memberId })
   }
 
-  getWorkspaceMembers = async (args: { limit: number; page: number }) => {
+  getWorkspaceMembers = async (args: GetWorkspaceMembersVo) => {
     const { limit, page } = args
     return this.workspaceMemberRepository.gets({ limit, page })
   }
@@ -50,10 +53,7 @@ export default class WorkspaceUseCaseImpl
     return this.workspaceRepository.update(args)
   }
 
-  updateWorkspaceMember = async (args: {
-    memberId: string
-    roleId: string
-  }) => {
+  updateWorkspaceMember = async (args: UpdateWorkspaceMemberVo) => {
     const { memberId, roleId } = args
     return this.workspaceMemberRepository.update({ memberId, roleId })
   }
