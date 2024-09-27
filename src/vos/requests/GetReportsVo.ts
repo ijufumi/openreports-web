@@ -1,5 +1,5 @@
 import GetsByPagingVo from "./GetsByPagingVo"
 
-export default class GetReportsVo extends GetsByPagingVo {
+export default interface GetReportsVo extends GetsByPagingVo {
   templateId?: string
 }

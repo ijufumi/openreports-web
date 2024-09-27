@@ -1,3 +1,3 @@
-export default class CreateWorkspaceVo {
-  name: string = ""
+export default interface CreateWorkspaceVo {
+  name: string
 }

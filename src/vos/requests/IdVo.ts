@@ -1,3 +1,3 @@
-export default class IdVo {
-  id: string = ""
+export default interface IdVo {
+  id: string
 }

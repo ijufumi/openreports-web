@@ -1,7 +1,7 @@
-export default class UpdateReportVo {
-  id: string = ""
-  name: string = ""
-  templateId: string = ""
-  dataSourceId?: string = undefined
-  parameterIds?: String[] = []
+export default interface UpdateReportVo {
+  id: string
+  name: string
+  templateId: string
+  dataSourceId?: string
+  parameterIds?: String[]
 }
