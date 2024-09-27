@@ -1,3 +1,3 @@
-export default class GetWorkspaceMemberByMemberIdVo {
-  memberId: string = ""
+export default interface GetWorkspaceMemberByMemberIdVo {
+  memberId: string
 }

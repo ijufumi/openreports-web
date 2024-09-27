@@ -1,3 +1,3 @@
 import GetsByPagingVo from "./GetsByPagingVo"
 
-export default class GetWorkspaceMembersVo extends GetsByPagingVo {}
+export default interface GetWorkspaceMembersVo extends GetsByPagingVo {}

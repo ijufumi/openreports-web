@@ -1,3 +1,3 @@
-export default class CreateReportGroupVo {
-  name: string = ""
+export default interface CreateReportGroupVo {
+  name: string
 }

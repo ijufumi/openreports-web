@@ -1,4 +1,4 @@
-export default class GetsByPagingVo {
-  page: number = 0
-  limit: number = 0
+export default interface GetsByPagingVo {
+  page: number
+  limit: number
 }

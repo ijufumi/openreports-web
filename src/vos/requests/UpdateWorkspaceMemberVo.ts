@@ -1,4 +1,4 @@
-export default class UpdateWorkspaceMemberVo {
-  memberId: string = ""
-  roleId: string = ""
+export default interface UpdateWorkspaceMemberVo {
+  memberId: string
+  roleId: string
 }

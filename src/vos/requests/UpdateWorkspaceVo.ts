@@ -1,4 +1,4 @@
-export default class UpdateWorkspaceVo {
-  id: string = ""
-  name: string = ""
+export default interface UpdateWorkspaceVo {
+  id: string
+  name: string
 }

@@ -1,4 +1,4 @@
-export default class UpdateReportGroupVo {
-  id: string = ""
-  name: string = ""
+export default interface UpdateReportGroupVo {
+  id: string
+  name: string
 }

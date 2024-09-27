@@ -1,4 +1,4 @@
-export default class UpdateTemplateVo {
-  id: string = ""
-  name: string = ""
+export default interface UpdateTemplateVo {
+  id: string
+  name: string
 }

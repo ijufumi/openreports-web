@@ -1,3 +1,3 @@
 import GetsByPagingVo from "./GetsByPagingVo"
 
-export default class GetDataSourcesVo extends GetsByPagingVo {}
+export default interface GetDataSourcesVo extends GetsByPagingVo {}
