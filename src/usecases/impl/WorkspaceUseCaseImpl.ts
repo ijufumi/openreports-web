@@ -7,6 +7,8 @@ import { LoginUser } from "../../states/LoginUser"
 import GetWorkspaceMemberByMemberIdVo from "../../vos/requests/GetWorkspaceMemberByMemberIdVo"
 import GetWorkspaceMembersVo from "../../vos/requests/GetWorkspaceMembersVo"
 import UpdateWorkspaceMemberVo from "../../vos/requests/UpdateWorkspaceMemberVo"
+import IdVo from "../../vos/requests/IdVo"
+import UpdateWorkspaceVo from "../../vos/requests/UpdateWorkspaceVo"
 
 export default class WorkspaceUseCaseImpl
   extends BaseUseCase
@@ -35,7 +37,7 @@ export default class WorkspaceUseCaseImpl
     return await this.roleRepository.roles()
   }
 
-  getWorkspace = async (args: { id: string }) => {
+  getWorkspace = async (args: IdVo) => {
     return this.workspaceRepository.getById(args)
   }
 
@@ -49,7 +51,7 @@ export default class WorkspaceUseCaseImpl
     return this.workspaceMemberRepository.gets({ limit, page })
   }
 
-  updateWorkspace = async (args: { id: string; name: string }) => {
+  updateWorkspace = async (args: UpdateWorkspaceVo) => {
     return this.workspaceRepository.update(args)
   }
 
