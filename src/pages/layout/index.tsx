@@ -169,6 +169,8 @@ const Layout: FC<Props> = observer(({ children }) => {
               icon={<FaRegUserCircle size="30" style={{ color: "gray" }} />}
             />
             <MenuList>
+              <MenuItem onClick={navigator.toProfile}>Profile</MenuItem>
+              <MenuDivider />
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </MenuList>
           </Menu>

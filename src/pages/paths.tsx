@@ -14,6 +14,7 @@ import TemplateNew from "./templates/new"
 import TemplateEdit from "./templates/id/edit"
 import DataSources from "./data_sources"
 import DataSourceNew from "./data_sources/new"
+import Profile from "./members/profile"
 
 export interface Path {
   path: string
@@ -37,6 +38,7 @@ export enum AuthorizedPath {
   dataSources = "/data-sources",
   dataSourceNew = "/data-sources/new",
   dataSourceEdit = "/data-sources/edit/:id",
+  profileEdit = "/member/profile",
 }
 
 export enum ErrorsPath {
@@ -102,6 +104,10 @@ export const useAuthorizedPath = () => {
     {
       path: AuthorizedPath.dataSourceEdit,
       element: <DataSources />,
+    },
+    {
+      path: AuthorizedPath.profileEdit,
+      element: <Profile />,
     },
   ]
 }
