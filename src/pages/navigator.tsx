@@ -55,6 +55,10 @@ class NavigatorWrapper {
     this.navigate(AuthorizedPath.dataSources.replace(":id", id))
   }
 
+  toProfile = () => {
+    this.navigate(AuthorizedPath.profileEdit)
+  }
+
   // error path
   toGoogleError = () => {
     this.navigate(ErrorsPath.google)

@@ -4,6 +4,7 @@ import credentials from "../../states/Credentials"
 import { LoginUser } from "../../states/LoginUser"
 import UserVo from "../../vos/responses/UserVo"
 import BaseUseCase from "./BaseUseCase"
+import UpdateMemberVo from "../../vos/requests/UpdateMemberVo"
 
 class MembersUseCaseImpl extends BaseUseCase implements MembersUseCase {
   private readonly repository: MembersRepository
@@ -45,6 +46,18 @@ class MembersUseCaseImpl extends BaseUseCase implements MembersUseCase {
     } catch (e) {
       console.error(e)
       return false
+    }
+  }
+
+  update = async (args: UpdateMemberVo) => {
+    try {
+      this.startLoader()
+      return this.repository.update(args)
+    } catch (e) {
+      console.error(e)
+      return undefined
+    } finally {
+      this.stopLoader()
     }
   }
 }
