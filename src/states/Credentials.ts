@@ -49,20 +49,20 @@ export const Credentials = {
     Credentials.remove(Keys.WORKSPACE_ID)
   },
 
-  set(key: Keys, value: string) {
-    sessionStorage.setItem(key, value)
-  },
-
-  get(key: Keys) {
-    return sessionStorage.getItem(key)
-  },
-
   has(key: Keys) {
     return Credentials.get(key) !== undefined
   },
 
+  set(key: Keys, value: string) {
+    localStorage.setItem(key, value)
+  },
+
+  get(key: Keys) {
+    return localStorage.getItem(key)
+  },
+
   remove(key: Keys) {
-    sessionStorage.removeItem(key)
+    localStorage.removeItem(key)
   },
 }
 
