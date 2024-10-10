@@ -47,7 +47,15 @@ const Layout: FC<Props> = observer(({ children }) => {
   const loginUser = useLoginUser()
   const membersUseCase = UseCaseFactory.createMembersUseCase()
 
+  const checkIfLoggedIn = async () => {
+    const isLoggedIn = await membersUseCase.isLoggedIn()
+    if (!isLoggedIn) {
+      await handleLogout()
+    }
+  }
+
   useEffect(() => {
+    checkIfLoggedIn()
     setInitialized(true)
   }, [])
 
@@ -60,19 +68,6 @@ const Layout: FC<Props> = observer(({ children }) => {
       })
     }
   }, [toastState.message])
-
-  useEffect(() => {
-    if (!initialized) {
-      return
-    }
-    const checkIfLoggedIn = async () => {
-      const isLoggedIn = await membersUseCase.isLoggedIn()
-      if (!isLoggedIn) {
-        await handleLogout()
-      }
-    }
-    checkIfLoggedIn()
-  }, [breadcrumbs])
 
   const handleLogout = async () => {
     await membersUseCase.logout()
