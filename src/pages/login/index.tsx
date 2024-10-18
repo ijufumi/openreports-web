@@ -1,4 +1,4 @@
-import React, { FC, useState, useMemo } from "react"
+import React, { FC, useState, useMemo, useEffect } from "react"
 import {
   Input,
   InputGroup,
@@ -14,6 +14,7 @@ import {
   Divider,
   FormControl,
   FormErrorMessage,
+  useToast,
 } from "@chakra-ui/react"
 import { FormikValues, FormikHelpers, useFormik } from "formik"
 import { z, ZodIssue } from "zod"
@@ -24,7 +25,7 @@ import { FcGoogle } from "react-icons/fc"
 import logoImg from "../../assets/logo.png"
 import UseCaseFactory from "../../usecases/UseCaseFactory"
 import useNavigator from "../navigator"
-import { errorToast } from "../../states/Toast"
+import { errorToast, useToastState } from "../../states/Toast"
 
 interface Props {}
 
@@ -33,6 +34,13 @@ const Login: FC<Props> = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const loginUseCase = UseCaseFactory.createLoginUseCase()
+  const toastState = useToastState()
+  const toast = useToast({
+    position: "top-left",
+    duration: 3000,
+    onCloseComplete: toastState.clear,
+    isClosable: true,
+  })
 
   const formSchema = z.object({
     email: z.string().email("Invalid email address"),
@@ -57,6 +65,16 @@ const Login: FC<Props> = () => {
     },
     onSubmit: async (values) => handleLogin(values),
   })
+
+  useEffect(() => {
+    if (toastState.message) {
+      toast({
+        title: toastState.message.getTitle(),
+        description: toastState.message.getDescription(),
+        status: toastState.message.getStatus(),
+      })
+    }
+  }, [toastState.message])
 
   const handleLogin = async (values: FormikValues) => {
     const { email, password } = values
