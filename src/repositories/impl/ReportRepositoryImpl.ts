@@ -32,7 +32,7 @@ export default class ReportRepositoryImpl
     parameterIds: String[]
   }) => {
     const { name, templateId, dataSourceId, parameterIds } = args
-    const result = await this._put({
+    const result = await this._post({
       path: `/`,
       body: { name, templateId, dataSourceId, parameterIds },
     })

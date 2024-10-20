@@ -25,7 +25,7 @@ export default class ReportGroupRepositoryImpl
 
   register = async (args: CreateReportGroupVo) => {
     const { name } = args
-    const result = await this._put({
+    const result = await this._post({
       path: `/`,
       body: { name },
     })

@@ -25,7 +25,6 @@ const ReportNew: FC<Props> = () => {
   const [templateId, setTemplateId] = useState<string>("")
 
   const navigator = useNavigator()
-  const id = ""
 
   const reportsUseCase = UseCaseFactory.createReportsUseCase()
 
@@ -50,11 +49,10 @@ const ReportNew: FC<Props> = () => {
       setInitialized(true)
     }
     initialize()
-  }, [id])
+  }, [])
 
-  const handleUpdate = async () => {
-    const _report = await reportsUseCase.updateReport({
-      id,
+  const handleCreate = async () => {
+    const _report = await reportsUseCase.registerReport({
       name,
       templateId,
     })
@@ -135,7 +133,7 @@ const ReportNew: FC<Props> = () => {
             </Button>
           </WrapItem>
           <WrapItem>
-            <Button onClick={handleUpdate}>Update</Button>
+            <Button onClick={handleCreate}>Create</Button>
           </WrapItem>
         </Wrap>
       </Box>
