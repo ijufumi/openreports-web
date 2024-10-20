@@ -9,6 +9,8 @@ import UpdateReportVo from "../../vos/requests/UpdateReportVo"
 import GetTemplatesVo from "../../vos/requests/GetTemplatesVo"
 import CreateTemplateVo from "../../vos/requests/CreateTemplateVo"
 import UpdateTemplateVo from "../../vos/requests/UpdateTemplateVo"
+import CreateReportVo from "../../vos/requests/CreateReportVo"
+import ReportVo from "../../vos/responses/ReportVo"
 
 export default class ReportsUseCaseImpl
   extends BaseUseCase
@@ -44,19 +46,13 @@ export default class ReportsUseCaseImpl
     }
   }
 
-  outputReport = async (args: IdVo) => {
+  registerReport = async (args: CreateReportVo) => {
     try {
       this.startLoader()
-      return await this.reportsRepository.output(args)
-    } finally {
-      this.stopLoader()
-    }
-  }
-
-  deleteReport = async (args: IdVo) => {
-    try {
-      this.startLoader()
-      return await this.reportsRepository.delete(args)
+      return await this.reportsRepository.register(args)
+    } catch (e) {
+      console.error(e)
+      return undefined
     } finally {
       this.stopLoader()
     }
@@ -66,6 +62,15 @@ export default class ReportsUseCaseImpl
     try {
       this.startLoader()
       return await this.reportsRepository.update(args)
+    } finally {
+      this.stopLoader()
+    }
+  }
+
+  deleteReport = async (args: IdVo) => {
+    try {
+      this.startLoader()
+      return await this.reportsRepository.delete(args)
     } finally {
       this.stopLoader()
     }
@@ -121,6 +126,15 @@ export default class ReportsUseCaseImpl
     } catch (e) {
       console.error(e)
       return false
+    } finally {
+      this.stopLoader()
+    }
+  }
+
+  outputReport = async (args: IdVo) => {
+    try {
+      this.startLoader()
+      return await this.reportsRepository.output(args)
     } finally {
       this.stopLoader()
     }

@@ -5,13 +5,14 @@ import TemplateVo from "../vos/responses/TemplateVo"
 import GetReportsVo from "../vos/requests/GetReportsVo"
 import IdVo from "../vos/requests/IdVo"
 import UpdateReportVo from "../vos/requests/UpdateReportVo"
+import CreateReportVo from "../vos/requests/CreateReportVo"
 
 export default interface ReportsUseCase {
   reports(args: GetReportsVo): Promise<ReportsVo | undefined>
 
   report(args: IdVo): Promise<ReportVo | undefined>
 
-  outputReport(args: IdVo): Promise<Blob | undefined>
+  registerReport(args: CreateReportVo): Promise<ReportVo | undefined>
 
   updateReport(args: UpdateReportVo): Promise<ReportVo | undefined>
 
@@ -35,4 +36,6 @@ export default interface ReportsUseCase {
   }): Promise<TemplateVo | undefined>
 
   deleteTemplate(args: { id: string }): Promise<boolean>
+
+  outputReport(args: IdVo): Promise<Blob | undefined>
 }
