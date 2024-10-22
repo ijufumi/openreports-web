@@ -193,9 +193,9 @@ abstract class BaseRepository {
           return undefined
         }
         if (response.status < 500) {
-          throw new ClientError(`ClientError with ${response}`)
+          throw new ClientError(`ClientError with ${response.statusText}`)
         }
-        throw new ServerError(`ServerError with ${response}`)
+        throw new ServerError(`ServerError with ${response.statusText}`)
       })
   }
 }
