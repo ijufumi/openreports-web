@@ -5,10 +5,14 @@ import {
   Grid,
   GridItem,
   Input,
+  InputRightElement,
+  InputGroup,
   Text,
   Wrap,
   WrapItem,
+  Icon,
 } from "@chakra-ui/react"
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import useNavigator from "../navigator"
 import { errorToast, successToast } from "../../states/Toast"
 import UseCaseFactory from "../../usecases/UseCaseFactory"
@@ -21,6 +25,7 @@ const Profile: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false)
   const [name, setName] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+  const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const navigator = useNavigator()
 
@@ -54,6 +59,8 @@ const Profile: FC<Props> = () => {
         title: "Edit updated.",
         description: "You've finished updating profile well.",
       })
+      setPassword("")
+      setShowPassword(false)
     } else {
       errorToast({
         title: "Edit didn't updated.",
@@ -61,6 +68,11 @@ const Profile: FC<Props> = () => {
       })
     }
   }
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
+
   if (!initialized) {
     return null
   }
@@ -99,11 +111,24 @@ const Profile: FC<Props> = () => {
           <Text fontWeight={600}>Password</Text>
         </GridItem>
         <GridItem colSpan={3} h={50} display="flex" alignItems="center">
-          <Input
-            variant="flushed"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <InputGroup>
+            <Input
+              variant="flushed"
+              value={password}
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <InputRightElement width="4.5rem" cursor="pointer">
+              <Icon
+                as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
+                color="gray.500"
+                w={8}
+                h={8}
+                onClick={handleShowPassword}
+              />
+            </InputRightElement>
+          </InputGroup>
         </GridItem>
       </Grid>
       <Box mt={1} display="flex" justifyContent="flex-end">
