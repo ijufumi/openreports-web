@@ -11,8 +11,12 @@ import {
   Wrap,
   WrapItem,
   Icon,
+  FormErrorMessage,
+  FormControl,
 } from "@chakra-ui/react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import { useFormik } from "formik"
+import { z, ZodIssue } from "zod"
 import useNavigator from "../navigator"
 import { errorToast, successToast } from "../../states/Toast"
 import UseCaseFactory from "../../usecases/UseCaseFactory"
@@ -23,8 +27,6 @@ interface Props {}
 
 const Profile: FC<Props> = () => {
   const [initialized, setInitialized] = useState<boolean>(false)
-  const [name, setName] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const navigator = useNavigator()
@@ -32,11 +34,58 @@ const Profile: FC<Props> = () => {
   const memberUseCase = UseCaseFactory.createMembersUseCase()
   const loginUser = useLoginUser()
 
+  const formSchema = z.object({
+    name: z.string().max(100, "Name length is too long"),
+    password: z
+      .string()
+      .refine((password) => password.length > 0 && /[A-Z]/.test(password), {
+        message: "Should include a uppercase Alphabet at least",
+      })
+      .refine((password) => password.length > 0 && /[a-z]/.test(password), {
+        message: "Should include a lower Alphabet at least",
+      })
+      .refine((password) => password.length > 0 && /[0-9]/.test(password), {
+        message: "Should include a number at least",
+      })
+      .refine(
+        (password) => password.length > 0 && /[!@#$%^&*]/.test(password),
+        {
+          message: "Should include a special character at least",
+        }
+      ),
+  })
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      password: "",
+    },
+    validateOnBlur: true,
+    validate: async (values) => {
+      const result = formSchema.safeParse(values)
+      const errors = {} as { [key: string]: string }
+      const allErrors = {} as { [key: string]: string[] }
+      if (!result.success) {
+        result.error.issues.forEach((value: ZodIssue) => {
+          const key = value.path.join(".")
+          if (!(key in allErrors)) {
+            allErrors[key] = []
+          }
+          allErrors[key].push(value.message)
+        })
+      }
+      for (const key in allErrors) {
+        errors[key] = allErrors[key].join(",")
+      }
+      return errors
+    },
+    onSubmit: async (values) => handleUpdate(values),
+  })
+
   useEffect(() => {
     const initialize = async () => {
       const user = loginUser.get()
       if (user) {
-        setName(user.name)
+        await formik.setFieldValue("name", user.name)
       }
       setBreadcrumbs([
         {
@@ -52,14 +101,14 @@ const Profile: FC<Props> = () => {
     navigator.toTop()
   }
 
-  const handleUpdate = async () => {
-    const member = await memberUseCase.update({ name, password })
+  const handleUpdate = async (args: { name: string; password: string }) => {
+    const member = await memberUseCase.update(args)
     if (member) {
       successToast({
         title: "Edit updated.",
         description: "You've finished updating profile well.",
       })
-      setPassword("")
+      await formik.setFieldValue("password", "")
       setShowPassword(false)
     } else {
       errorToast({
@@ -83,66 +132,82 @@ const Profile: FC<Props> = () => {
       p={5}
       w="50%"
     >
-      <Grid templateColumns="repeat(5, 1fr)" gap={0}>
-        <GridItem
-          colSpan={2}
-          h={50}
-          p={5}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
-        >
-          <Text fontWeight={600}>Name</Text>
-        </GridItem>
-        <GridItem
-          colSpan={3}
-          h={50}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
-        >
-          <Input
-            variant="flushed"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </GridItem>
-        <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
-          <Text fontWeight={600}>Password</Text>
-        </GridItem>
-        <GridItem colSpan={3} h={50} display="flex" alignItems="center">
-          <InputGroup>
-            <Input
-              variant="flushed"
-              value={password}
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <InputRightElement width="4.5rem" cursor="pointer">
-              <Icon
-                as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
-                color="gray.500"
-                w={8}
-                h={8}
-                onClick={handleShowPassword}
+      <form onSubmit={formik.handleSubmit}>
+        <Grid templateColumns="repeat(5, 1fr)" gap={0}>
+          <GridItem
+            colSpan={2}
+            h={50}
+            p={5}
+            display="flex"
+            alignItems="center"
+            bgColor="gray.50"
+          >
+            <Text fontWeight={600}>Name</Text>
+          </GridItem>
+          <GridItem
+            colSpan={3}
+            minH={50}
+            display="flex"
+            alignItems="center"
+            bgColor="gray.50"
+          >
+            <FormControl
+              isInvalid={!!formik.errors.name && formik.touched.name}
+            >
+              <Input
+                variant="flushed"
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
-            </InputRightElement>
-          </InputGroup>
-        </GridItem>
-      </Grid>
-      <Box mt={1} display="flex" justifyContent="flex-end">
-        <Wrap spacingX={2}>
-          <WrapItem>
-            <Button onClick={handleCancel} variant="outline">
-              Cancel
-            </Button>
-          </WrapItem>
-          <WrapItem>
-            <Button onClick={handleUpdate}>Update</Button>
-          </WrapItem>
-        </Wrap>
-      </Box>
+              <FormErrorMessage>{formik.errors.name}</FormErrorMessage>
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
+            <Text fontWeight={600}>Password</Text>
+          </GridItem>
+          <GridItem colSpan={3} minH={50} display="flex" alignItems="center">
+            <FormControl
+              isInvalid={!!formik.errors.password && formik.touched.password}
+            >
+              <InputGroup>
+                <Input
+                  variant="flushed"
+                  value={formik.values.password}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                <InputRightElement width="4.5rem" cursor="pointer">
+                  <Icon
+                    as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
+                    color="gray.500"
+                    w={8}
+                    h={8}
+                    onClick={handleShowPassword}
+                  />
+                </InputRightElement>
+              </InputGroup>
+              {formik.errors.password
+                ?.split(",")
+                .map((e: string) => <FormErrorMessage>{e}</FormErrorMessage>)}
+            </FormControl>
+          </GridItem>
+        </Grid>
+        <Box mt={1} display="flex" justifyContent="flex-end">
+          <Wrap spacingX={2}>
+            <WrapItem>
+              <Button onClick={handleCancel} variant="outline">
+                Cancel
+              </Button>
+            </WrapItem>
+            <WrapItem>
+              <Button type="submit">Update</Button>
+            </WrapItem>
+          </Wrap>
+        </Box>
+      </form>
     </Box>
   )
 }
