@@ -83,7 +83,14 @@ const Profile: FC<Props> = () => {
 
   useEffect(() => {
     const initialize = async () => {
-      const user = loginUser.get()
+      let user = loginUser.get()
+      if (!user) {
+        const loggedIn = await memberUseCase.isLoggedIn()
+        if (loggedIn) {
+          user = loginUser.get()
+        }
+      }
+      console.info(user)
       if (user) {
         await formik.setFieldValue("name", user.name)
       }
@@ -135,6 +142,7 @@ const Profile: FC<Props> = () => {
       <form onSubmit={formik.handleSubmit}>
         <Grid templateColumns="repeat(5, 1fr)" gap={0}>
           <GridItem
+            key="name-label"
             colSpan={2}
             h={50}
             p={5}
@@ -145,6 +153,7 @@ const Profile: FC<Props> = () => {
             <Text fontWeight={600}>Name</Text>
           </GridItem>
           <GridItem
+            key="name-value"
             colSpan={3}
             minH={50}
             display="flex"
@@ -163,10 +172,23 @@ const Profile: FC<Props> = () => {
               <FormErrorMessage>{formik.errors.name}</FormErrorMessage>
             </FormControl>
           </GridItem>
-          <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
+          <GridItem
+            key="password-label"
+            colSpan={2}
+            h={50}
+            p={5}
+            display="flex"
+            alignItems="center"
+          >
             <Text fontWeight={600}>Password</Text>
           </GridItem>
-          <GridItem colSpan={3} minH={50} display="flex" alignItems="center">
+          <GridItem
+            key="password-value"
+            colSpan={3}
+            minH={50}
+            display="flex"
+            alignItems="center"
+          >
             <FormControl
               isInvalid={!!formik.errors.password && formik.touched.password}
             >
@@ -191,18 +213,20 @@ const Profile: FC<Props> = () => {
               </InputGroup>
               {formik.errors.password
                 ?.split(",")
-                .map((e: string) => <FormErrorMessage>{e}</FormErrorMessage>)}
+                .map((e: string) => (
+                  <FormErrorMessage key={e}>{e}</FormErrorMessage>
+                ))}
             </FormControl>
           </GridItem>
         </Grid>
         <Box mt={1} display="flex" justifyContent="flex-end">
           <Wrap spacingX={2}>
-            <WrapItem>
+            <WrapItem key="cancel-button">
               <Button onClick={handleCancel} variant="outline">
                 Cancel
               </Button>
             </WrapItem>
-            <WrapItem>
+            <WrapItem key="submit-button">
               <Button type="submit">Update</Button>
             </WrapItem>
           </Wrap>
