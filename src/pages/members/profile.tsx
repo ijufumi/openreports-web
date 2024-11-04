@@ -20,7 +20,6 @@ import { z, ZodIssue } from "zod"
 import useNavigator from "../navigator"
 import { errorToast, successToast } from "../../states/Toast"
 import UseCaseFactory from "../../usecases/UseCaseFactory"
-import useLoginUser from "../../states/LoginUser"
 import { setBreadcrumbs } from "../../states/Breadcrumbs"
 
 interface Props {}
@@ -32,7 +31,6 @@ const Profile: FC<Props> = () => {
   const navigator = useNavigator()
 
   const memberUseCase = UseCaseFactory.createMembersUseCase()
-  const loginUser = useLoginUser()
 
   const formSchema = z.object({
     name: z.string().max(100, "Name length is too long"),
@@ -83,14 +81,7 @@ const Profile: FC<Props> = () => {
 
   useEffect(() => {
     const initialize = async () => {
-      let user = loginUser.get()
-      if (!user) {
-        const loggedIn = await memberUseCase.isLoggedIn()
-        if (loggedIn) {
-          user = loginUser.get()
-        }
-      }
-      console.info(user)
+      const user = await memberUseCase.user()
       if (user) {
         await formik.setFieldValue("name", user.name)
       }

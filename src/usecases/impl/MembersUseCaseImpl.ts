@@ -60,6 +60,13 @@ class MembersUseCaseImpl extends BaseUseCase implements MembersUseCase {
       this.stopLoader()
     }
   }
+
+  user = async () => {
+    if (await this.isLoggedIn()) {
+      return this.loginUser?.get()
+    }
+    return undefined
+  }
 }
 
 export default MembersUseCaseImpl
