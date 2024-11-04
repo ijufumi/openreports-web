@@ -7,6 +7,8 @@ interface MembersUseCase {
   isLoggedIn(): Promise<boolean>
 
   update(args: UpdateMemberVo): Promise<UserVo | undefined>
+
+  user(): Promise<UserVo | undefined>
 }
 
 export default MembersUseCase
