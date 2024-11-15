@@ -36,17 +36,17 @@ const Profile: FC<Props> = () => {
     name: z.string().max(100, "Name length is too long"),
     password: z
       .string()
-      .refine((password) => password.length > 0 && /[A-Z]/.test(password), {
+      .refine((password) => password.length < 1 || /[A-Z]/.test(password), {
         message: "Should include a uppercase Alphabet at least",
       })
-      .refine((password) => password.length > 0 && /[a-z]/.test(password), {
+      .refine((password) => password.length < 1 || /[a-z]/.test(password), {
         message: "Should include a lower Alphabet at least",
       })
-      .refine((password) => password.length > 0 && /[0-9]/.test(password), {
+      .refine((password) => password.length < 1 || /[0-9]/.test(password), {
         message: "Should include a number at least",
       })
       .refine(
-        (password) => password.length > 0 && /[!@#$%^&*]/.test(password),
+        (password) => password.length < 1 || /[!@#$%^&*]/.test(password),
         {
           message: "Should include a special character at least",
         }
