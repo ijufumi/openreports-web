@@ -159,6 +159,7 @@ abstract class BaseRepository {
       method: method.toString(),
       headers: Object.assign(baseHeaders, header ? header : {}),
       cache: "no-cache",
+      mode: "cors",
       body: bodyData,
     })
       .catch((e) => {
