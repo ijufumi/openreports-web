@@ -75,7 +75,7 @@ const Layout: FC<Props> = observer(({ children }) => {
   }
 
   return (
-    <VStack spacing={"5px"} h={"100%"} w={"100%"}>
+    <VStack spacing={"5px"} h={"100%"} w={"100%"} overflowY={"auto"}>
       <Box
         h={"70px"}
         w={"100%"}
@@ -171,7 +171,7 @@ const Layout: FC<Props> = observer(({ children }) => {
           </Menu>
         </HStack>
       </Box>
-      <Box w={"100%"} h={"100%"} padding={"10px"}>
+      <Box w={"100%"} h={"100%"} padding={"10px"} overflowY={"scroll"}>
         {children}
       </Box>
     </VStack>
