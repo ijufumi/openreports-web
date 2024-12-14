@@ -1,4 +1,4 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react"
 
 const theme = extendTheme({
   styles: {
@@ -30,9 +30,12 @@ const theme = extendTheme({
           minHeight: "20px !important",
           borderRadius: "6px",
         },
+        pager: {
+          bg: "gray.300",
+        },
       },
     },
   },
-});
+})
 
-export default theme;
+export default theme

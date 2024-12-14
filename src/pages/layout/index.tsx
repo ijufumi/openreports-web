@@ -28,6 +28,7 @@ import { useBreadcrumbsState } from "../../states/Breadcrumbs"
 import useLoginUser from "../../states/LoginUser"
 import useNavigator from "../navigator"
 import { useToastState } from "../../states/Toast"
+import { HEADER_HEIGHT } from "../consts"
 
 interface Props {
   children: React.ReactNode
@@ -77,7 +78,7 @@ const Layout: FC<Props> = observer(({ children }) => {
   return (
     <VStack spacing={"5px"} h={"100%"} w={"100%"} overflowY={"auto"}>
       <Box
-        h={"70px"}
+        h={`${HEADER_HEIGHT}px`}
         w={"100%"}
         bg={"white"}
         display={"flex"}
@@ -171,7 +172,7 @@ const Layout: FC<Props> = observer(({ children }) => {
           </Menu>
         </HStack>
       </Box>
-      <Box w={"100%"} h={"100%"} padding={"10px"} overflowY={"scroll"}>
+      <Box w={"100%"} h={"100%"} padding={"10px"}>
         {children}
       </Box>
     </VStack>

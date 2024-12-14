@@ -35,6 +35,12 @@ import {
   BsChevronLeft,
 } from "react-icons/bs"
 
+import { HEADER_HEIGHT, ACTIONS_HEIGHT } from "../../pages/consts"
+
+const PAGER_HEIGHT = 70
+
+const SPACE_HEIGHT = HEADER_HEIGHT + ACTIONS_HEIGHT + PAGER_HEIGHT + 30
+
 type OnChangeType = (pageIndex: number, pageSize: number) => void
 
 interface Props {
@@ -107,51 +113,68 @@ const DataTable: FC<Props> = ({
   return (
     <Box sx={{ bgColor: "#FFFFFF", width: "100%", borderRadius: "6px" }}>
       <TableContainer>
-        <Table variant="simple">
-          <Thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <Tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <Th key={header.id} colSpan={header.colSpan}>
-                      {header.isPlaceholder ? null : (
-                        <div>
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                        </div>
-                      )}
-                    </Th>
-                  )
-                })}
-              </Tr>
-            ))}
-          </Thead>
-          <Tbody>
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <Tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
+        <Box
+          sx={{
+            maxHeight: `calc(100vh - ${SPACE_HEIGHT}px)`,
+            overflowY: "auto",
+          }}
+        >
+          <Table variant="simple">
+            <Thead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <Tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
                     return (
-                      <Td key={cell.id} width={cell.column.columnDef.size}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
+                      <Th
+                        key={header.id}
+                        colSpan={header.colSpan}
+                        sx={{ position: "sticky", top: 0, zIndex: 10 }}
+                        bg="gray.300"
+                      >
+                        {header.isPlaceholder ? null : (
+                          <div>
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                          </div>
                         )}
-                      </Td>
+                      </Th>
                     )
                   })}
                 </Tr>
-              )
-            })}
-          </Tbody>
-        </Table>
+              ))}
+            </Thead>
+            <Tbody>
+              {table.getRowModel().rows.map((row) => {
+                return (
+                  <Tr key={row.id}>
+                    {row.getVisibleCells().map((cell) => {
+                      return (
+                        <Td key={cell.id} width={cell.column.columnDef.size}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </Td>
+                      )
+                    })}
+                  </Tr>
+                )
+              })}
+            </Tbody>
+          </Table>
+        </Box>
         {totalCount > 0 && (
-          <Flex justifyContent="space-between" m={4} alignItems="center">
+          <Flex
+            justifyContent="space-between"
+            alignItems="center"
+            height={PAGER_HEIGHT}
+          >
             <Flex>
               <Tooltip label="First Page">
                 <IconButton
+                  variant="pager"
                   onClick={() => table.setPageIndex(0)}
                   disabled={!table.getCanPreviousPage()}
                   icon={<Icon as={BsChevronDoubleLeft} />}
@@ -161,6 +184,7 @@ const DataTable: FC<Props> = ({
               </Tooltip>
               <Tooltip label="Previous Page">
                 <IconButton
+                  variant="pager"
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
                   icon={<Icon as={BsChevronLeft} />}
@@ -217,6 +241,7 @@ const DataTable: FC<Props> = ({
             <Flex>
               <Tooltip label="Next Page">
                 <IconButton
+                  variant="pager"
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
                   icon={<Icon as={BsChevronRight} />}
@@ -225,6 +250,7 @@ const DataTable: FC<Props> = ({
               </Tooltip>
               <Tooltip label="Last Page">
                 <IconButton
+                  variant="pager"
                   onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                   disabled={!table.getCanNextPage()}
                   icon={<Icon as={BsChevronDoubleRight} />}

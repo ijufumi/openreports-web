@@ -22,6 +22,7 @@ import DownloadUtils from "../../components/utils/download/DownloadUtils"
 import DateUtils from "../../components/utils/date/DateUtils"
 import useNavigator from "../navigator"
 import { successToast, errorToast } from "../../states/Toast"
+import { ACTIONS_HEIGHT } from "../consts"
 
 interface Props {}
 
@@ -155,7 +156,7 @@ const Reports: FC<Props> = () => {
 
   return (
     <VStack>
-      <Flex w="100%" justifyContent="flex-end">
+      <Flex w="100%" justifyContent="flex-end" maxHeight={ACTIONS_HEIGHT}>
         <Button onClick={handleClickNew} variant="action">
           Create
         </Button>
