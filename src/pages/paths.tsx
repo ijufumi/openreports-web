@@ -14,6 +14,7 @@ import TemplateNew from "./templates/new"
 import TemplateEdit from "./templates/id/edit"
 import DataSources from "./data_sources"
 import DataSourceNew from "./data_sources/new"
+import DataSourceEdit from "./data_sources/id/edit"
 import Profile from "./members/profile"
 
 export interface Path {
@@ -103,7 +104,7 @@ export const useAuthorizedPath = () => {
     },
     {
       path: AuthorizedPath.dataSourceEdit,
-      element: <DataSources />,
+      element: <DataSourceEdit />,
     },
     {
       path: AuthorizedPath.profileEdit,

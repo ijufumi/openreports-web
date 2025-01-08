@@ -72,7 +72,7 @@ const DataSources: FC<Props> = () => {
   }
 
   const handleClick = (id: string) => {
-    navigator.toReportEdit(id)
+    navigator.toDataSourceEdit(id)
   }
 
   const handleClickNew = () => {
