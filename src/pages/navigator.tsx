@@ -52,7 +52,7 @@ class NavigatorWrapper {
   }
 
   toDataSourceEdit = (id: string) => {
-    this.navigate(AuthorizedPath.dataSources.replace(":id", id))
+    this.navigate(AuthorizedPath.dataSourceEdit.replace(":id", id))
   }
 
   toProfile = () => {
