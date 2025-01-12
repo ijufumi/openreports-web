@@ -1,4 +1,5 @@
 import DateUtils from "../../components/utils/date/DateUtils"
+import DriverTypeVo from "./DriverTypeVo"
 
 export interface Props {
   id: string
@@ -8,6 +9,7 @@ export interface Props {
   password: string
   driverTypeId: string
   driverTypeName: string
+  driverType: DriverTypeVo
   createdAt: number
   updatedAt: number
 }
@@ -30,7 +32,7 @@ export default class DataSourceVo {
     this.username = prop.username
     this.password = prop.password
     this.driverTypeId = prop.driverTypeId
-    this.driverTypeName = prop.driverTypeName
+    this.driverTypeName = prop.driverType?.name
     this.createdAt = prop.createdAt
     this.updatedAt = prop.updatedAt
   }
