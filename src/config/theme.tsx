@@ -35,6 +35,12 @@ const theme = extendTheme({
         },
       },
     },
+    Link: {
+      baseStyle: {
+        color: "blue.600",
+        textDecoration: "underline",
+      },
+    },
   },
 })
 
