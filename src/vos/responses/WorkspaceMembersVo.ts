@@ -3,11 +3,14 @@ import WorkspaceMemberVo, {
   Props as WorkspaceMemberProps,
 } from "./WorkspaceMemberVo"
 
-interface Props extends ListProps {
+interface Props extends ListProps<WorkspaceMemberProps> {
   items: Array<WorkspaceMemberProps>
 }
 
-export default class WorkspaceMembersVo extends ListVo {
+export default class WorkspaceMembersVo extends ListVo<
+  WorkspaceMemberProps,
+  WorkspaceMemberVo
+> {
   readonly items: Array<WorkspaceMemberVo> = []
 
   constructor(props: Props) {

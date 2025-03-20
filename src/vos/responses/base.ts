@@ -1,5 +1,5 @@
-export interface ListProps {
-  items: Array<any>
+export interface ListProps<T> {
+  items: Array<T>
 
   offset: number
 
@@ -8,8 +8,8 @@ export interface ListProps {
   count: number
 }
 
-export abstract class ListVo {
-  abstract items: Array<any>
+export abstract class ListVo<P, C> {
+  abstract items: Array<C>
 
   offset: number
 
@@ -17,11 +17,11 @@ export abstract class ListVo {
 
   count: number
 
-  protected constructor(props: ListProps) {
+  protected constructor(props: ListProps<P>) {
     this.offset = props.offset
     this.limit = props.limit
     this.count = props.count
   }
 
-  abstract getItems(props: ListProps): Array<any>
+  abstract getItems(props: ListProps<P>): Array<C>
 }

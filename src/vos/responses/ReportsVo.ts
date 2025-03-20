@@ -1,11 +1,11 @@
 import ReportVo, { Props as ReportProps } from "./ReportVo"
 import { ListProps, ListVo } from "./base"
 
-interface Props extends ListProps {
+interface Props extends ListProps<ReportProps> {
   items: Array<ReportProps>
 }
 
-export default class ReportsVo extends ListVo {
+export default class ReportsVo extends ListVo<ReportProps, ReportVo> {
   readonly items: Array<ReportVo> = []
 
   constructor(props: Props) {

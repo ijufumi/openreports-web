@@ -1,11 +1,14 @@
 import { ListVo, ListProps } from "./base"
 import DataSourceVo, { Props as DataSourceProps } from "./DataSourceVo"
 
-interface Props extends ListProps {
+interface Props extends ListProps<DataSourceProps> {
   items: Array<DataSourceProps>
 }
 
-export default class DataSourcesVo extends ListVo {
+export default class DataSourcesVo extends ListVo<
+  DataSourceProps,
+  DataSourceVo
+> {
   readonly items: Array<DataSourceVo> = []
 
   constructor(props: Props) {
