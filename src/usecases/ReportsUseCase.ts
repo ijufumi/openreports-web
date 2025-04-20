@@ -37,5 +37,5 @@ export default interface ReportsUseCase {
 
   deleteTemplate(args: { id: string }): Promise<boolean>
 
-  outputReport(args: IdVo): Promise<Blob | undefined>
+  outputReport(args: {id: string, asPDF?: boolean}): Promise<Blob | undefined>
 }

@@ -14,7 +14,7 @@ export default interface ReportRepository {
 
   update(args: UpdateReportVo): Promise<ReportVo>
 
-  output(args: IdVo): Promise<Blob>
+  output(args: { id: string, asPDF?: boolean }): Promise<Blob>
 
   delete(args: IdVo): Promise<void>
 }

@@ -131,7 +131,7 @@ export default class ReportsUseCaseImpl
     }
   }
 
-  outputReport = async (args: IdVo) => {
+  outputReport = async (args: { id: string, asPDF?: boolean }) => {
     try {
       this.startLoader()
       return await this.reportsRepository.output(args)

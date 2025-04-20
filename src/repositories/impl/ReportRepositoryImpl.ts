@@ -48,8 +48,9 @@ export default class ReportRepositoryImpl
     return new ReportVo(result)
   }
 
-  output = async (args: IdVo) => {
-    return await this._download({ path: `/outputs/${args.id}` })
+  output = async (args: {id: string, asPDF?: boolean}) => {
+    const path = args.asPDF ? `/outputs/${args.id}/pdf` : `/outputs/${args.id}`
+    return await this._download({ path })
   }
 
   delete = async (args: IdVo) => {

@@ -65,7 +65,7 @@ const Reports: FC<Props> = () => {
     } else {
       errorToast({
         title: "Edit didn't output.",
-        description: "You couldn't output report because of errors.",
+        description: "You couldn't output the report because of errors.",
       })
     }
   }
