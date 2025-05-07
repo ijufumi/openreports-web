@@ -31,8 +31,8 @@ jobs:
           cache-name: cache-cdk-dependency-${{ matrix.node-version }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
 
       - name: Install Dependency
         if: ${{ steps.cache_cdk_dependency_id.outputs.cache-hit != 'true' }}
