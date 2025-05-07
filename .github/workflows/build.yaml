@@ -28,11 +28,11 @@ jobs:
         uses: actions/cache@v4
         id: cache_cdk_dependency_id
         env:
-          cache-name: cache-cdk-dependency
+          cache-name: cache-cdk-dependency-${{ matrix.node-version }}
         with:
           path: node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-
+          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
 
       - name: Install Dependency
         if: ${{ steps.cache_cdk_dependency_id.outputs.cache-hit != 'true' }}
