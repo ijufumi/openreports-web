@@ -2,7 +2,6 @@ import MembersUseCase from "../MembersUseCase"
 import MembersRepository from "../../repositories/MembersRepository"
 import credentials from "../../states/Credentials"
 import { LoginUser } from "../../states/LoginUser"
-import UserVo from "../../vos/responses/UserVo"
 import BaseUseCase from "./BaseUseCase"
 import UpdateMemberVo from "../../vos/requests/UpdateMemberVo"
 
@@ -32,12 +31,12 @@ class MembersUseCaseImpl extends BaseUseCase implements MembersUseCase {
         return false
       }
       let user = await this.repository.status()
-      if (!user) {
+      if (!!!user) {
         if (credentials.hasRefreshToken()) {
           await this.repository.accessToken()
           user = await this.repository.status()
         }
-        if (!user) {
+        if (!!!user) {
           return false
         }
       }

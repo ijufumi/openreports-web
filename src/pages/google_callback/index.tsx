@@ -19,7 +19,7 @@ const GoogleCallback: FC<Props> = () => {
 
   useEffect(() => {
     const initialize = async () => {
-      const code = params.get("code") || ""
+      const code = !!params?.get("code") ? params.get("code") : ""
       if (!StringUtils.isBlank(code)) {
         const member = await loginUseCase.loginWithGoogle({ code })
         if (member) {

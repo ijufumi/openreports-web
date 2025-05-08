@@ -12,7 +12,7 @@ export default class ReportRepositoryImpl
 {
   getsByFilter = async (args: GetReportsVo) => {
     let path = `?page=${args.page}&limit=${args.limit}`
-    if (args.templateId) {
+    if (!!args.templateId) {
       path = `${path}&templateId=${args.templateId}`
     }
 

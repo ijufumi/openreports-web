@@ -141,7 +141,7 @@ abstract class BaseRepository {
     responseAsJson?: boolean
   ) => {
     let baseHeaders = {}
-    if (auth || this.needsAuth) {
+    if (!!auth || this.needsAuth) {
       baseHeaders = {
         Authorization: `Bearer ${Credentials.getToken()}`,
         "X-Workspace-Id": Credentials.getWorkspaceId(),

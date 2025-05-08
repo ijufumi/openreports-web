@@ -14,7 +14,7 @@ export default class WorkspacesVo extends ListVo<WorkspaceProps, WorkspaceVo> {
   }
 
   getItems(props: Props): Array<WorkspaceVo> {
-    if (props.items) {
+    if (props.items.length > 0) {
       return props.items.map((item) => new WorkspaceVo(item))
     }
     return []

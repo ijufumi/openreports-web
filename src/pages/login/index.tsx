@@ -103,7 +103,7 @@ const Login: FC<Props> = () => {
   }
 
   const canLogin = useMemo(() => {
-    return formik.isValid && formik.touched && !formik.isSubmitting
+    return formik.isValid && !!formik.touched && !formik.isSubmitting
   }, [formik])
 
   return (
@@ -120,7 +120,7 @@ const Login: FC<Props> = () => {
             <Text fontSize="3xl">Login</Text>
             <VStack width={"90%"} spacing={"15px"}>
               <FormControl
-                isInvalid={!!formik.errors.email && formik.touched.email}
+                isInvalid={!!formik.errors.email && !!formik.touched.email}
               >
                 <InputGroup>
                   <InputLeftElement
@@ -146,7 +146,7 @@ const Login: FC<Props> = () => {
                 <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
               </FormControl>
               <FormControl
-                isInvalid={!!formik.errors.password && formik.touched.password}
+                isInvalid={!!formik.errors.password && !!formik.touched.password}
               >
                 <InputGroup>
                   <InputLeftElement
