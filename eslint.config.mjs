@@ -8,7 +8,7 @@ export default [
     ignores: ["src/**/*.test.ts", "src/frontend/generated/*", "*.config.js"],
     rules: {
       "@typescript-eslint/no-var-requires": "off",
-      "@typescript-eslint/strict-boolean-expressions": "warn",
+      "@typescript-eslint/strict-boolean-expressions": "off",
       "@typescript-eslint/no-empty-interface": 0
     },
     plugins:{
