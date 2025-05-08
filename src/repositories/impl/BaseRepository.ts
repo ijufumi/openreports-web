@@ -177,18 +177,18 @@ abstract class BaseRepository {
             }
           })
 
-          if (apiToken) {
+          if (!!apiToken) {
             Credentials.setToken(apiToken)
           }
-          if (refreshToken) {
+          if (!!refreshToken) {
             Credentials.setRefreshToken(refreshToken)
           }
 
-          if (responseAsBlob) {
+          if (!!responseAsBlob) {
             return response.blob()
           }
 
-          if (responseAsJson) {
+          if (!!responseAsJson) {
             return response.json()
           }
           return undefined
