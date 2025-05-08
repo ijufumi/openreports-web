@@ -151,7 +151,7 @@ const DataSources: FC<Props> = () => {
       <DataTable
         columns={columns}
         data={dataSources?.items || []}
-        totalCount={dataSources?.count || 0}
+        totalCount={!!dataSources?.count ? dataSources.count : 0}
         onChange={handleOnChange}
       />
     </VStack>

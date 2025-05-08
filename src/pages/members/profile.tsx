@@ -152,7 +152,7 @@ const Profile: FC<Props> = () => {
             bgColor="gray.50"
           >
             <FormControl
-              isInvalid={!!formik.errors.name && formik.touched.name}
+              isInvalid={!!formik.errors.name && !!formik.touched.name}
             >
               <Input
                 variant="flushed"
@@ -181,7 +181,7 @@ const Profile: FC<Props> = () => {
             alignItems="center"
           >
             <FormControl
-              isInvalid={!!formik.errors.password && formik.touched.password}
+              isInvalid={!!formik.errors.password && !!formik.touched.password}
             >
               <InputGroup>
                 <Input

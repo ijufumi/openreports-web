@@ -25,7 +25,7 @@ export default class TemplatesRepositoryImpl
   register = async (args: CreateTemplateVo) => {
     const formData = new FormData()
     formData.append("name", args.name)
-    if (args.file) {
+    if (!!args.file) {
       formData.append("file", args.file)
     }
     const result = await this._upload({ path: "/", body: formData })

@@ -17,7 +17,7 @@ export default class TemplatesVo extends ListVo<
   }
 
   getItems(props: Props): Array<TemplateVo> {
-    if (props.items) {
+    if (props.items.length > 0) {
       return props.items.map((item) => new TemplateVo(item))
     }
     return []

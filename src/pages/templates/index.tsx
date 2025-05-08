@@ -61,7 +61,7 @@ const Templates: FC<Props> = () => {
   }, [state])
 
   const convertToExTemplateVo = async (data: Array<TemplateVo>) => {
-    if (!data || !data.length) {
+    if (!data || data.length == 0) {
       return []
     }
 
@@ -157,7 +157,7 @@ const Templates: FC<Props> = () => {
     columnHelper.accessor("canDelete", {
       header: "Actions",
       cell: (props) => {
-        if (!props || !props.row) {
+        if (!!!props || !!!props.row) {
           return undefined
         }
         const templateId = props.row.getValue("id") as string
