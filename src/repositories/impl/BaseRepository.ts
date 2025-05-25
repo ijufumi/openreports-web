@@ -4,6 +4,7 @@ import {
   ClientError,
   ServerError,
 } from "../../components/errors"
+import FileVo from "../../vos/responses/FileVo"
 
 enum Methods {
   Get = "GET",
@@ -155,7 +156,8 @@ abstract class BaseRepository {
         ? (body as FormData)
         : JSON.stringify(body)
     }
-    return await fetch(`${apiEndpoint}${path}`, {
+    let filename = ""
+    const responseData = await fetch(`${apiEndpoint}${path}`, {
       method: method.toString(),
       headers: Object.assign(baseHeaders, header ? header : {}),
       cache: "no-cache",
@@ -174,6 +176,11 @@ abstract class BaseRepository {
               apiToken = v
             } else if (k === "x-refresh-token") {
               refreshToken = v
+            } else if (k === "content-disposition") {
+              const disposition = v.split(";")
+              if (disposition.length > 1) {
+                filename = disposition[1].split("=")[1]
+              }
             }
           })
 
@@ -198,6 +205,14 @@ abstract class BaseRepository {
         }
         throw new ServerError(`ServerError with ${response.statusText}`)
       })
+
+    if (!!responseAsBlob) {
+      return {
+        blob: responseData as Blob,
+        filename,
+      } as FileVo
+    }
+    return responseData
   }
 }
 
