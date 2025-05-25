@@ -6,6 +6,7 @@ import GetReportsVo from "../vos/requests/GetReportsVo"
 import IdVo from "../vos/requests/IdVo"
 import UpdateReportVo from "../vos/requests/UpdateReportVo"
 import CreateReportVo from "../vos/requests/CreateReportVo"
+import FileVo from "../vos/responses/FileVo"
 
 export default interface ReportsUseCase {
   reports(args: GetReportsVo): Promise<ReportsVo | undefined>
@@ -37,5 +38,5 @@ export default interface ReportsUseCase {
 
   deleteTemplate(args: { id: string }): Promise<boolean>
 
-  outputReport(args: {id: string, asPDF?: boolean}): Promise<Blob | undefined>
+  outputReport(args: {id: string, asPDF?: boolean}): Promise<FileVo | undefined>
 }

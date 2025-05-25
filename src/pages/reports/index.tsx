@@ -60,8 +60,7 @@ const Reports: FC<Props> = () => {
   const handleOutput = async (id: string, asPDF: boolean = false) => {
     const data = await reportsUseCase.outputReport({ id, asPDF })
     if (data) {
-      const fileName = `sample-${DateUtils.nowAsString("YYYYMMDD-HHmmss")}.xlsx`
-      DownloadUtils.download(data, fileName)
+      DownloadUtils.download(data.blob, data.filename)
     } else {
       errorToast({
         title: "Edit didn't output.",
