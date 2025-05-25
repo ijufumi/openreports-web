@@ -136,7 +136,7 @@ const Layout: FC<Props> = observer(({ children }) => {
               })}
             </Select>
           </Box>
-          {breadcrumbs && breadcrumbs.length && (
+          {breadcrumbs && breadcrumbs.length > 0 && (
             <Breadcrumb
               separator={<Icon color="gray.500" as={MdKeyboardArrowRight} />}
             >

@@ -164,7 +164,7 @@ const Reports: FC<Props> = () => {
       <DataTable
         columns={columns}
         data={reports?.items || []}
-        totalCount={reports?.count || 0}
+        totalCount={!!reports?.count ? reports.count : 0}
         onChange={handleOnChange}
       />
     </VStack>

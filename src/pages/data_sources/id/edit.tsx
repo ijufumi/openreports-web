@@ -32,7 +32,7 @@ const DataSourceEdit: FC<Props> = () => {
   const navigator = useNavigator()
   const dataSourceUseCase = UseCaseFactory.createDataSourceUseCase()
 
-  const id = params.id || ""
+  const id = !!params?.id ? params.id : ""
 
   useEffect(() => {
     const initialize = async () => {

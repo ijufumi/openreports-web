@@ -17,7 +17,7 @@ export default class DataSourcesVo extends ListVo<
   }
 
   getItems(props: Props): Array<DataSourceVo> {
-    if (props.items) {
+    if (props.items.length > 0) {
       return props.items.map((item) => new DataSourceVo(item))
     }
     return []

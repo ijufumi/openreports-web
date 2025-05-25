@@ -30,7 +30,7 @@ const ReportEdit: FC<Props> = () => {
 
   const params = useParams()
   const navigator = useNavigator()
-  const id = params.id || ""
+  const id = !!params.id ? params.id : ""
 
   const reportsUseCase = UseCaseFactory.createReportsUseCase()
 

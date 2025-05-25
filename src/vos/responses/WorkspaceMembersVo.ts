@@ -19,7 +19,7 @@ export default class WorkspaceMembersVo extends ListVo<
   }
 
   getItems(props: Props): Array<WorkspaceMemberVo> {
-    if (props.items) {
+    if (props.items.length > 0) {
       return props.items.map((item) => new WorkspaceMemberVo(item))
     }
     return []

@@ -26,7 +26,7 @@ const TemplateEdit: FC<Props> = () => {
   const navigator = useNavigator()
   const reportsUseCase = UseCaseFactory.createReportsUseCase()
 
-  const id = params.id || ""
+  const id = !!params.id ? params.id : ""
 
   useEffect(() => {
     const initialize = async () => {

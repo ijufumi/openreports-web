@@ -17,7 +17,7 @@ export default class ReportGroupsVo extends ListVo<
   }
 
   getItems(props: Props): Array<ReportGroupVo> {
-    if (props.items) {
+    if (props.items.length > 0) {
       return props.items.map((item) => new ReportGroupVo(item))
     }
     return []
