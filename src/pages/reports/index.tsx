@@ -57,8 +57,8 @@ const Reports: FC<Props> = () => {
     }
   }
 
-  const handleOutput = async (id: string) => {
-    const data = await reportsUseCase.outputReport({ id })
+  const handleOutput = async (id: string, asPDF: boolean = false) => {
+    const data = await reportsUseCase.outputReport({ id, asPDF })
     if (data) {
       const fileName = `sample-${DateUtils.nowAsString("YYYYMMDD-HHmmss")}.xlsx`
       DownloadUtils.download(data, fileName)
@@ -134,7 +134,7 @@ const Reports: FC<Props> = () => {
                   icon={<Icon as={GrDocumentPdf} />}
                   variant="actionIcons"
                   aria-label="output"
-                  onClick={() => handleOutput(reportId)}
+                  onClick={() => handleOutput(reportId, true)}
                 />
               </Tooltip>
             </WrapItem>
