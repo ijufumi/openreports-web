@@ -1,4 +1,4 @@
-import DateUtils from "../../../infrastructure/utils/date/DateUtils"
+import DateUtils from "../../../../infrastructure/utils/date/DateUtils"
 
 export interface Props {
   id: string

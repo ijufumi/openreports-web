@@ -12,12 +12,12 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react"
-import ReportVo from "../../../application/dto/vos/responses/ReportVo"
-import UseCaseFactory from "../../../di/UseCaseFactory"
-import { setBreadcrumbs } from "../../../infrastructure/state/Breadcrumbs"
-import TemplateVo from "../../../application/dto/vos/responses/TemplateVo"
+import ReportVo from "../../../../application/dto/vos/responses/ReportVo"
+import UseCaseFactory from "../../../../di/UseCaseFactory"
+import { setBreadcrumbs } from "../../../../infrastructure/state/Breadcrumbs"
+import TemplateVo from "../../../../application/dto/vos/responses/TemplateVo"
 import useNavigator from "../../navigator"
-import { successToast, errorToast } from "../../../infrastructure/state/Toast"
+import { successToast, errorToast } from "../../../../infrastructure/state/Toast"
 
 interface Props {}
 

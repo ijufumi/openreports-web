@@ -11,10 +11,10 @@ import {
   Select,
 } from "@chakra-ui/react"
 import useNavigator from "../../navigator"
-import UseCaseFactory from "../../../di/UseCaseFactory"
-import { setBreadcrumbs } from "../../../infrastructure/state/Breadcrumbs"
-import { successToast, errorToast } from "../../../infrastructure/state/Toast"
-import DriverTypeVo from "../../../application/dto/vos/responses/DriverTypeVo"
+import UseCaseFactory from "../../../../di/UseCaseFactory"
+import { setBreadcrumbs } from "../../../../infrastructure/state/Breadcrumbs"
+import { successToast, errorToast } from "../../../../infrastructure/state/Toast"
+import DriverTypeVo from "../../../../application/dto/vos/responses/DriverTypeVo"
 import { useParams } from "react-router"
 
 interface Props {}
