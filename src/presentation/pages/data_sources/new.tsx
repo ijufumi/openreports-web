@@ -8,7 +8,7 @@ import {
   Wrap,
   WrapItem,
   Button,
-  Select,
+  NativeSelect,
 } from "@chakra-ui/react"
 import useNavigator from "../navigator"
 import UseCaseFactory from "../../../di/UseCaseFactory"
@@ -75,7 +75,7 @@ const DataSourceNew: FC<Props> = () => {
 
   return (
     <Box
-      sx={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
+      css={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
       p={5}
       w="50%"
     >
@@ -189,22 +189,24 @@ const DataSourceNew: FC<Props> = () => {
           alignItems="center"
           bgColor="gray.50"
         >
-          <Select
-            onChange={(e) => setDriverTypeId(e.target.value)}
-            value={driverTypeId}
-          >
-            {driverTypes.map((driverType) => {
-              return (
-                <option key={driverType.id} value={driverType.id}>
-                  {driverType.name}
-                </option>
-              )
-            })}
-          </Select>
+          <NativeSelect.Root>
+            <NativeSelect.Field
+              onChange={(e) => setDriverTypeId(e.target.value)}
+              value={driverTypeId}
+            >
+              {driverTypes.map((driverType) => {
+                return (
+                  <option key={driverType.id} value={driverType.id}>
+                    {driverType.name}
+                  </option>
+                )
+              })}
+            </NativeSelect.Field>
+          </NativeSelect.Root>
         </GridItem>
       </Grid>
       <Box mt={1} display="flex" justifyContent="flex-end">
-        <Wrap spacingX={2}>
+        <Wrap gap={2}>
           <WrapItem>
             <Button onClick={handleCancel} variant="outline">
               Cancel

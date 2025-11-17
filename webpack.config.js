@@ -13,6 +13,7 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js", ".png"],
     alias: {
       "~": path.resolve(__dirname, "/*"),
+      "@": path.resolve(__dirname, "src"),
     },
   },
   module: {

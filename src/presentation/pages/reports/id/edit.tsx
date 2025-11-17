@@ -7,7 +7,7 @@ import {
   GridItem,
   Text,
   Input,
-  Select,
+  NativeSelect,
   Button,
   Wrap,
   WrapItem,
@@ -100,7 +100,7 @@ const ReportEdit: FC<Props> = () => {
   return (
     <HStack>
       <Box
-        sx={{ borderRadius: "10px", borderColor: "gray.50", bgColor: "white" }}
+        css={{ borderRadius: "10px", borderColor: "gray.50", bgColor: "white" }}
         p={5}
         w="50%"
       >
@@ -138,18 +138,20 @@ const ReportEdit: FC<Props> = () => {
             <Text fontWeight={600}>Template name</Text>
           </GridItem>
           <GridItem colSpan={3} h={50} display="flex" alignItems="center">
-            <Select
-              onChange={(e) => setTemplateId(e.target.value)}
-              value={templateId}
-            >
-              {templates.map((template) => {
-                return (
-                  <option key={template.id} value={template.id}>
-                    {template.name}
-                  </option>
-                )
-              })}
-            </Select>
+            <NativeSelect.Root>
+              <NativeSelect.Field
+                onChange={(e) => setTemplateId(e.target.value)}
+                value={templateId}
+              >
+                {templates.map((template) => {
+                  return (
+                    <option key={template.id} value={template.id}>
+                      {template.name}
+                    </option>
+                  )
+                })}
+              </NativeSelect.Field>
+            </NativeSelect.Root>
           </GridItem>
           <GridItem
             colSpan={2}
@@ -178,7 +180,7 @@ const ReportEdit: FC<Props> = () => {
           </GridItem>
         </Grid>
         <Box mt={1} display="flex" justifyContent="flex-end">
-          <Wrap spacingX={2}>
+          <Wrap gap={2}>
             <WrapItem>
               <Button onClick={handleCancel} variant="outline">
                 Cancel

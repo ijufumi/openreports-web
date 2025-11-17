@@ -8,7 +8,6 @@ import {
   Wrap,
   WrapItem,
   Button,
-  useToast,
 } from "@chakra-ui/react"
 import { useParams } from "react-router"
 import useNavigator from "../../navigator"
@@ -81,7 +80,7 @@ const TemplateEdit: FC<Props> = () => {
 
   return (
     <Box
-      sx={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
+      css={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
       p={5}
       w="50%"
     >
@@ -111,7 +110,7 @@ const TemplateEdit: FC<Props> = () => {
         </GridItem>
       </Grid>
       <Box mt={1} display="flex" justifyContent="flex-end">
-        <Wrap spacingX={2}>
+        <Wrap gap={2}>
           <WrapItem>
             <Button onClick={handleCancel} variant="outline">
               Cancel

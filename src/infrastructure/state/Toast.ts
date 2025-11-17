@@ -1,5 +1,7 @@
 import { makeAutoObservable } from "mobx";
-import { AlertStatus } from "@chakra-ui/react";
+
+// Chakra UI v3 toast types
+type ToastType = "success" | "error" | "warning" | "info" | "loading";
 
 interface Message {
   title: string;
@@ -14,22 +16,22 @@ class ToastState {
   }
 
   successMessage = (args: Message) => {
-    const status = "success";
+    const type = "success";
     const { title, description } = args;
     this.message = new Toast({
       title,
       description,
-      status,
+      type,
     });
   };
 
   errorMessage = (args: Message) => {
-    const status = "error";
+    const type = "error";
     const { title, description } = args;
     this.message = new Toast({
       title,
       description,
-      status,
+      type,
     });
   };
 
@@ -41,16 +43,16 @@ class ToastState {
 class Toast {
   private readonly title: string = "";
   private readonly description: string = "";
-  private readonly status: AlertStatus = "success";
+  private readonly type: ToastType = "success";
 
   constructor(args: {
     title: string;
     description: string;
-    status: AlertStatus;
+    type: ToastType;
   }) {
     this.title = args.title;
     this.description = args.description;
-    this.status = args.status;
+    this.type = args.type;
   }
 
   getTitle = () => {
@@ -61,8 +63,13 @@ class Toast {
     return this.description;
   };
 
+  getType = () => {
+    return this.type;
+  };
+
+  // Keep getStatus for backward compatibility
   getStatus = () => {
-    return this.status;
+    return this.type;
   };
 }
 

@@ -6,10 +6,10 @@ import {
   Button,
   Wrap,
   WrapItem,
-  Tooltip,
   IconButton,
   Icon,
 } from "@chakra-ui/react"
+import { Tooltip } from "@/components/ui/tooltip"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
 import TemplatesVo from "../../../application/dto/vos/responses/TemplatesVo"
 import { setBreadcrumbs } from "../../../infrastructure/state/Breadcrumbs"
@@ -166,16 +166,17 @@ const Templates: FC<Props> = () => {
         }
         console.log(props.getValue())
         return (
-          <Wrap spacing={5} display="flex" justifyContent="center">
+          <Wrap gap={5} display="flex" justifyContent="center">
             <WrapItem>
-              <Tooltip label="Delete report">
+              <Tooltip content="Delete report">
                 <IconButton
                   disabled={!props.getValue()}
-                  icon={<Icon as={GrTrash} />}
-                  variant="actionIcons"
+                  variant={"actionIcons" as any}
                   aria-label="output"
                   onClick={() => handleDelete(templateId)}
-                />
+                >
+                  <Icon as={GrTrash} />
+                </IconButton>
               </Tooltip>
             </WrapItem>
           </Wrap>
@@ -187,7 +188,7 @@ const Templates: FC<Props> = () => {
   return (
     <VStack>
       <Flex w="100%" justifyContent="flex-end">
-        <Button onClick={handleClickNew} variant="action">
+        <Button onClick={handleClickNew} variant={"action" as any}>
           Create
         </Button>
       </Flex>

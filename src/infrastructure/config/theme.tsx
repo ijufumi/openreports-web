@@ -1,47 +1,52 @@
-import { extendTheme } from "@chakra-ui/react"
+import { createSystem, defaultConfig, defineConfig, mergeConfigs } from "@chakra-ui/react"
 
-const theme = extendTheme({
-  styles: {
-    global: {
-      body: {
-        bg: "gray.100",
-      },
-      button: {
-        minWidth: "200px !important",
-      },
+const customConfig = defineConfig({
+  globalCss: {
+    body: {
+      bg: "gray.100",
+    },
+    button: {
+      minWidth: "200px !important",
     },
   },
-  components: {
-    Button: {
-      variants: {
-        login: {
-          bg: "blue.50 !important",
-        },
-        action: {
-          bg: "blue.100",
-        },
-        icon: {
-          minWidth: "80px !important",
-          borderWidth: "1px",
-          borderRadius: "6px",
-        },
-        actionIcons: {
-          minWidth: "30px !important",
-          minHeight: "20px !important",
-          borderRadius: "6px",
-        },
-        pager: {
-          bg: "gray.300",
+  theme: {
+    recipes: {
+      Button: {
+        variants: {
+          variant: {
+            login: {
+              bg: "blue.50 !important",
+            },
+            action: {
+              bg: "blue.100",
+            },
+            icon: {
+              minWidth: "80px !important",
+              borderWidth: "1px",
+              borderRadius: "6px",
+            },
+            actionIcons: {
+              minWidth: "30px !important",
+              minHeight: "20px !important",
+              borderRadius: "6px",
+            },
+            pager: {
+              bg: "gray.300",
+            },
+          },
         },
       },
-    },
-    Link: {
-      baseStyle: {
-        color: "blue.600",
-        textDecoration: "underline",
+      Link: {
+        base: {
+          color: "blue.600",
+          textDecoration: "underline",
+        },
       },
     },
   },
 })
 
-export default theme
+const config = mergeConfigs(defaultConfig, customConfig)
+const system = createSystem(config)
+
+export default system

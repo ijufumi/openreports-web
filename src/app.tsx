@@ -6,6 +6,7 @@ import { observer } from "mobx-react";
 
 import useLoader from "./infrastructure/state/Loader";
 import theme from "./infrastructure/config/theme";
+import { Toaster } from "@/components/ui/toaster";
 import Layout from "./presentation/pages/layout";
 import {
   Path,
@@ -51,11 +52,12 @@ const App: FC<Props> = observer(() => {
   };
 
   return (
-    <ChakraProvider theme={theme}>
-      <Box sx={{ position: "relative" }}>
+    <ChakraProvider value={theme}>
+      <Toaster />
+      <Box css={{ position: "relative" }}>
         {loader.isVisible() && (
           <Flex
-            sx={{
+            css={{
               position: "absolute",
               top: 0,
               left: 0,

@@ -8,25 +8,15 @@ import {
 } from "@tanstack/react-table"
 import {
   Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
   Box,
   Flex,
   Icon,
   IconButton,
-  Tooltip,
-  Select,
+  NativeSelect,
   Text,
   NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
 } from "@chakra-ui/react"
+import { Tooltip } from "@/components/ui/tooltip"
 
 import {
   BsChevronDoubleRight,
@@ -111,24 +101,24 @@ const DataTable: FC<Props> = ({
   })
 
   return (
-    <Box sx={{ bgColor: "#FFFFFF", width: "100%", borderRadius: "6px" }}>
-      <TableContainer>
+    <Box css={{ bgColor: "#FFFFFF", width: "100%", borderRadius: "6px" }}>
+      <Table.ScrollArea>
         <Box
-          sx={{
+          css={{
             maxHeight: `calc(100vh - ${SPACE_HEIGHT}px)`,
             overflowY: "auto",
           }}
         >
-          <Table variant="simple">
-            <Thead>
+          <Table.Root variant="line">
+            <Table.Header>
               {table.getHeaderGroups().map((headerGroup) => (
-                <Tr key={headerGroup.id}>
+                <Table.Row key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     return (
-                      <Th
+                      <Table.ColumnHeader
                         key={header.id}
                         colSpan={header.colSpan}
-                        sx={{ position: "sticky", top: 0, zIndex: 10 }}
+                        css={{ position: "sticky", top: 0, zIndex: 10 }}
                         bg="gray.300"
                       >
                         {header.isPlaceholder ? null : (
@@ -139,31 +129,31 @@ const DataTable: FC<Props> = ({
                             )}
                           </div>
                         )}
-                      </Th>
+                      </Table.ColumnHeader>
                     )
                   })}
-                </Tr>
+                </Table.Row>
               ))}
-            </Thead>
-            <Tbody>
+            </Table.Header>
+            <Table.Body>
               {table.getRowModel().rows.map((row) => {
                 return (
-                  <Tr key={row.id}>
+                  <Table.Row key={row.id}>
                     {row.getVisibleCells().map((cell) => {
                       return (
-                        <Td key={cell.id} width={cell.column.columnDef.size}>
+                        <Table.Cell key={cell.id} width={cell.column.columnDef.size}>
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()
                           )}
-                        </Td>
+                        </Table.Cell>
                       )
                     })}
-                  </Tr>
+                  </Table.Row>
                 )
               })}
-            </Tbody>
-          </Table>
+            </Table.Body>
+          </Table.Root>
         </Box>
         {totalCount > 0 && (
           <Flex
@@ -172,24 +162,26 @@ const DataTable: FC<Props> = ({
             height={PAGER_HEIGHT}
           >
             <Flex>
-              <Tooltip label="First Page">
+              <Tooltip content="First Page">
                 <IconButton
-                  variant="pager"
+                  variant={"pager" as any}
                   onClick={() => table.setPageIndex(0)}
                   disabled={!table.getCanPreviousPage()}
-                  icon={<Icon as={BsChevronDoubleLeft} />}
                   aria-label={"previous page"}
                   mr={4}
-                />
+                >
+                  <Icon as={BsChevronDoubleLeft} />
+                </IconButton>
               </Tooltip>
-              <Tooltip label="Previous Page">
+              <Tooltip content="Previous Page">
                 <IconButton
-                  variant="pager"
+                  variant={"pager" as any}
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
-                  icon={<Icon as={BsChevronLeft} />}
                   aria-label={"previous page"}
-                />
+                >
+                  <Icon as={BsChevronLeft} />
+                </IconButton>
               </Tooltip>
             </Flex>
 
@@ -205,63 +197,64 @@ const DataTable: FC<Props> = ({
                 </Text>
               </Text>
               <Text flexShrink="0">Go to page:</Text>{" "}
-              <NumberInput
-                ml={2}
-                mr={8}
-                w={28}
+              <NumberInput.Root
+                size="sm"
+                value={(table.getState().pagination.pageIndex + 1).toString()}
+                onValueChange={(details) =>
+                  table.setPageIndex(Math.min(Math.max(Number(details.value) - 1, 0), table.getPageCount() - 1))
+                }
                 min={1}
                 max={table.getPageCount()}
-                onChange={(value) => {
-                  const page = value ? parseInt(value, 10) - 1 : 0
-                  table.setPageIndex(page)
-                }}
-                defaultValue={pageState.pageIndex + 1}
+                w="80px"
               >
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-              <Select
-                w={32}
-                value={table.getState().pagination.pageSize}
-                onChange={(e) => {
-                  table.setPageSize(Number(e.target.value))
-                }}
-              >
-                {pageSizes.map((pageSize) => (
-                  <option key={pageSize} value={pageSize}>
-                    Show {pageSize}
-                  </option>
-                ))}
-              </Select>
+                <NumberInput.Input />
+                <NumberInput.Control>
+                  <NumberInput.IncrementTrigger />
+                  <NumberInput.DecrementTrigger />
+                </NumberInput.Control>
+              </NumberInput.Root>
+              <NativeSelect.Root w={32}>
+                <NativeSelect.Field
+                  value={table.getState().pagination.pageSize.toString()}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                    table.setPageSize(Number(e.target.value))
+                  }}
+                >
+                  {pageSizes.map((pageSize) => (
+                    <option key={pageSize} value={pageSize}>
+                      Show {pageSize}
+                    </option>
+                  ))}
+                </NativeSelect.Field>
+              </NativeSelect.Root>
             </Flex>
 
             <Flex>
-              <Tooltip label="Next Page">
+              <Tooltip content="Next Page">
                 <IconButton
-                  variant="pager"
+                  variant={"pager" as any}
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
-                  icon={<Icon as={BsChevronRight} />}
                   aria-label={"next page"}
-                />
+                >
+                  <Icon as={BsChevronRight} />
+                </IconButton>
               </Tooltip>
-              <Tooltip label="Last Page">
+              <Tooltip content="Last Page">
                 <IconButton
-                  variant="pager"
+                  variant={"pager" as any}
                   onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                   disabled={!table.getCanNextPage()}
-                  icon={<Icon as={BsChevronDoubleRight} />}
                   aria-label={"next page"}
                   ml={4}
-                />
+                >
+                  <Icon as={BsChevronDoubleRight} />
+                </IconButton>
               </Tooltip>
             </Flex>
           </Flex>
         )}
-      </TableContainer>
+      </Table.ScrollArea>
     </Box>
   )
 }
