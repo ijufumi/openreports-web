@@ -73,7 +73,9 @@ const TemplateNew: FC<Props> = () => {
       setFile(undefined)
     } else {
       setFile(files[0])
-      fileRef.current.value = ""
+      if (fileRef.current) {
+        fileRef.current.value = ""
+      }
     }
   }
 
