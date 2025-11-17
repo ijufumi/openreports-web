@@ -38,7 +38,7 @@ src/
 │   └── services/          # ドメインサービス
 │
 ├── application/            # Application Layer (ユースケース層)
-│   ├── use-cases/         # ユースケース実装
+│   ├── usecases/          # ユースケース実装
 │   ├── ports/             # ユースケースインターフェース(ポート)
 │   └── dto/               # データ転送オブジェクト
 │       └── vos/
@@ -87,7 +87,7 @@ src/
 
 **責務**: アプリケーションビジネスルール
 
-- **use-cases/**: 特定のユースケースの実装
+- **usecases/**: 特定のユースケースの実装
 - **ports/**: ユースケースのインターフェース定義
 - **dto/**: 層間のデータ転送オブジェクト
 
@@ -95,7 +95,7 @@ src/
 
 **例**:
 ```typescript
-// application/use-cases/LoginUseCaseImpl.ts
+// application/usecases/LoginUseCaseImpl.ts
 class LoginUseCaseImpl implements LoginUseCase {
   constructor(
     private repository: LoginRepository,  // Domain層のインターフェース
@@ -243,7 +243,7 @@ External API
 
 2. **Application層**: ユースケースを実装
    ```typescript
-   // application/use-cases/NewFeatureUseCaseImpl.ts
+   // application/usecases/NewFeatureUseCaseImpl.ts
    class NewFeatureUseCaseImpl implements NewFeatureUseCase {
      constructor(private repository: NewFeatureRepository) {}
      async execute() { /* ... */ }
