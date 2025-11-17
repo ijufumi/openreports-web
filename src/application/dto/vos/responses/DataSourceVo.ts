@@ -1,4 +1,4 @@
-import DateUtils from "../../../infrastructure/utils/date/DateUtils"
+import DateUtils from "../../../../infrastructure/utils/date/DateUtils"
 import DriverTypeVo from "./DriverTypeVo"
 
 export interface Props {

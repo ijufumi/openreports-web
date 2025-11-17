@@ -12,9 +12,9 @@ import {
 } from "@chakra-ui/react"
 import { useParams } from "react-router"
 import useNavigator from "../../navigator"
-import UseCaseFactory from "../../../di/UseCaseFactory"
-import { setBreadcrumbs } from "../../../infrastructure/state/Breadcrumbs"
-import { successToast, errorToast } from "../../../infrastructure/state/Toast"
+import UseCaseFactory from "../../../../di/UseCaseFactory"
+import { setBreadcrumbs } from "../../../../infrastructure/state/Breadcrumbs"
+import { successToast, errorToast } from "../../../../infrastructure/state/Toast"
 
 interface Props {}
 
