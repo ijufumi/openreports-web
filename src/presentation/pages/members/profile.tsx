@@ -5,15 +5,13 @@ import {
   Grid,
   GridItem,
   Input,
-  InputRightElement,
-  InputGroup,
   Text,
   Wrap,
   WrapItem,
   Icon,
-  FormErrorMessage,
-  FormControl,
+  Field,
 } from "@chakra-ui/react"
+import { InputGroup } from "@/components/ui/input-group"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useFormik } from "formik"
 import { z, ZodIssue } from "zod"
@@ -126,7 +124,7 @@ const Profile: FC<Props> = () => {
 
   return (
     <Box
-      sx={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
+      css={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
       p={5}
       w="50%"
     >
@@ -151,8 +149,8 @@ const Profile: FC<Props> = () => {
             alignItems="center"
             bgColor="gray.50"
           >
-            <FormControl
-              isInvalid={!!formik.errors.name && !!formik.touched.name}
+            <Field.Root
+              invalid={!!formik.errors.name && !!formik.touched.name}
             >
               <Input
                 variant="flushed"
@@ -160,8 +158,8 @@ const Profile: FC<Props> = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              <FormErrorMessage>{formik.errors.name}</FormErrorMessage>
-            </FormControl>
+              <Field.ErrorText>{formik.errors.name}</Field.ErrorText>
+            </Field.Root>
           </GridItem>
           <GridItem
             key="password-label"
@@ -180,10 +178,21 @@ const Profile: FC<Props> = () => {
             display="flex"
             alignItems="center"
           >
-            <FormControl
-              isInvalid={!!formik.errors.password && !!formik.touched.password}
+            <Field.Root
+              invalid={!!formik.errors.password && !!formik.touched.password}
             >
-              <InputGroup>
+              <InputGroup
+                endElement={
+                  <Icon
+                    as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
+                    color="gray.500"
+                    w={8}
+                    h={8}
+                    onClick={handleShowPassword}
+                  />
+                }
+                endElementProps={{ cursor: "pointer", width: "4.5rem" }}
+              >
                 <Input
                   variant="flushed"
                   value={formik.values.password}
@@ -192,26 +201,17 @@ const Profile: FC<Props> = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                <InputRightElement width="4.5rem" cursor="pointer">
-                  <Icon
-                    as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
-                    color="gray.500"
-                    w={8}
-                    h={8}
-                    onClick={handleShowPassword}
-                  />
-                </InputRightElement>
               </InputGroup>
               {formik.errors.password
                 ?.split(",")
                 .map((e: string) => (
-                  <FormErrorMessage key={e}>{e}</FormErrorMessage>
+                  <Field.ErrorText key={e}>{e}</Field.ErrorText>
                 ))}
-            </FormControl>
+            </Field.Root>
           </GridItem>
         </Grid>
         <Box mt={1} display="flex" justifyContent="flex-end">
-          <Wrap spacingX={2}>
+          <Wrap gap={2}>
             <WrapItem key="cancel-button">
               <Button onClick={handleCancel} variant="outline">
                 Cancel

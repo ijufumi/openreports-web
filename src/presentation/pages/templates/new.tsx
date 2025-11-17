@@ -8,10 +8,10 @@ import {
   Wrap,
   WrapItem,
   Button,
-  Tooltip,
   IconButton,
   Icon,
 } from "@chakra-ui/react"
+import { Tooltip } from "@/components/ui/tooltip"
 import { GrFormUpload, GrTrash } from "react-icons/gr"
 import useNavigator from "../navigator"
 import UseCaseFactory from "../../../di/UseCaseFactory"
@@ -79,7 +79,7 @@ const TemplateNew: FC<Props> = () => {
 
   return (
     <Box
-      sx={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
+      css={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
       p={5}
       w="50%"
     >
@@ -114,35 +114,37 @@ const TemplateNew: FC<Props> = () => {
           <Text>{file ? file.name : "None"}</Text>
           <Input
             type="file"
-            sx={{ visibility: "hidden", width: 0 }}
+            css={{ visibility: "hidden", width: 0 }}
             ref={fileRef}
             onChange={handleSelectFile}
           />
           <Box ml={2}>
             {file ? (
-              <Tooltip label="Clear file" aria-label="file">
+              <Tooltip content="Clear file">
                 <IconButton
-                  icon={<Icon as={GrTrash} />}
-                  variant="actionIcons"
+                  variant={"actionIcons" as any}
                   aria-label="output"
                   onClick={handleClearFile}
-                />
+                >
+                  <Icon as={GrTrash} />
+                </IconButton>
               </Tooltip>
             ) : (
-              <Tooltip label="Upload file" aria-label="file">
+              <Tooltip content="Upload file">
                 <IconButton
-                  icon={<Icon as={GrFormUpload} />}
-                  variant="actionIcons"
+                  variant={"actionIcons" as any}
                   aria-label="output"
                   onClick={handleOpenFileWindow}
-                />
+                >
+                  <Icon as={GrFormUpload} />
+                </IconButton>
               </Tooltip>
             )}
           </Box>
         </GridItem>
       </Grid>
       <Box mt={1} display="flex" justifyContent="flex-end">
-        <Wrap spacingX={2}>
+        <Wrap gap={2}>
           <WrapItem>
             <Button onClick={handleCancel} variant="outline">
               Cancel

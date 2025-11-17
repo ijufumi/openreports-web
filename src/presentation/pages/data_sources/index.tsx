@@ -5,11 +5,11 @@ import {
   Icon,
   IconButton,
   Link,
-  Tooltip,
   VStack,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react"
+import { Tooltip } from "@/components/ui/tooltip"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
 import DataTable from "../../components/data_table/DataTable"
 import { setBreadcrumbs } from "../../../infrastructure/state/Breadcrumbs"
@@ -124,15 +124,16 @@ const DataSources: FC<Props> = () => {
           return undefined
         }
         return (
-          <Wrap spacing={5}>
+          <Wrap gap={5}>
             <WrapItem>
-              <Tooltip label="Delete report">
+              <Tooltip content="Delete report">
                 <IconButton
-                  icon={<Icon as={GrTrash} />}
-                  variant="actionIcons"
+                  variant={"actionIcons" as any}
                   aria-label="output"
                   onClick={() => handleDelete(reportId)}
-                />
+                >
+                  <Icon as={GrTrash} />
+                </IconButton>
               </Tooltip>
             </WrapItem>
           </Wrap>
@@ -144,7 +145,7 @@ const DataSources: FC<Props> = () => {
   return (
     <VStack>
       <Flex w="100%" justifyContent="flex-end">
-        <Button onClick={handleClickNew} variant="action">
+        <Button onClick={handleClickNew} variant={"action" as any}>
           Create
         </Button>
       </Flex>

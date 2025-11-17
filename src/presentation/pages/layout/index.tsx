@@ -5,19 +5,12 @@ import {
   HStack,
   Box,
   Menu,
-  MenuGroup,
-  MenuList,
-  MenuItem,
-  MenuButton,
-  MenuDivider,
   IconButton,
   Image,
   Icon,
   Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Select,
-  useToast,
+  NativeSelect,
+  Portal,
 } from "@chakra-ui/react"
 import { FaRegUserCircle } from "react-icons/fa"
 import { MdKeyboardArrowRight } from "react-icons/md"
@@ -29,6 +22,7 @@ import useLoginUser from "../../../infrastructure/state/LoginUser"
 import useNavigator from "../navigator"
 import { useToastState } from "../../../infrastructure/state/Toast"
 import { HEADER_HEIGHT } from "../consts"
+import { toaster } from "@/components/ui/toaster"
 
 interface Props {
   children: React.ReactNode
@@ -38,12 +32,6 @@ const Layout: FC<Props> = observer(({ children }) => {
   const [initialized, setInitialized] = useState<boolean>(false)
   const navigator = useNavigator()
   const toastState = useToastState()
-  const toast = useToast({
-    position: "top-left",
-    duration: 3000,
-    onCloseComplete: toastState.clear,
-    isClosable: true,
-  })
   const breadcrumbs = useBreadcrumbsState()
   const loginUser = useLoginUser()
   const membersUseCase = UseCaseFactory.createMembersUseCase()
@@ -62,10 +50,16 @@ const Layout: FC<Props> = observer(({ children }) => {
 
   useEffect(() => {
     if (toastState.message) {
-      toast({
+      toaster.create({
         title: toastState.message.getTitle(),
         description: toastState.message.getDescription(),
-        status: toastState.message.getStatus(),
+        type: toastState.message.getStatus(),
+        meta: { closable: true },
+        onStatusChange: (details) => {
+          if (details.status === "unmounted") {
+            toastState.clear()
+          }
+        },
       })
     }
   }, [toastState.message])
@@ -76,7 +70,7 @@ const Layout: FC<Props> = observer(({ children }) => {
   }
 
   return (
-    <VStack spacing={"5px"} h={"100%"} w={"100%"} overflowY={"auto"}>
+    <VStack gap={"5px"} h={"100%"} w={"100%"} overflowY={"auto"}>
       <Box
         h={`${HEADER_HEIGHT}px`}
         w={"100%"}
@@ -86,32 +80,38 @@ const Layout: FC<Props> = observer(({ children }) => {
         justifyContent={"space-between"}
         padding={"0 10px 0 10px"}
       >
-        <HStack spacing={"10px"} w={"100%"}>
-          <Menu>
-            <MenuButton
-              as={IconButton}
-              aria-label="Options"
-              icon={<CgMenu size="30" />}
-              variant={"icon"}
-            />
-            <MenuList>
-              <MenuGroup key="reporting" title={"Reports"}>
-                <MenuItem onClick={navigator.toReports}>Reports</MenuItem>
-                <MenuItem onClick={navigator.toTemplates}>Templates</MenuItem>
-                <MenuItem isDisabled={true}>Parameters</MenuItem>
-                <MenuItem isDisabled={true}>Groups</MenuItem>
-                <MenuItem isDisabled={true}>Scheduling</MenuItem>
-              </MenuGroup>
-              <MenuDivider />
-              <MenuGroup key="setting" title={"Settings"}>
-                <MenuItem isDisabled={true}>Workspace</MenuItem>
-                <MenuItem onClick={navigator.toDataSources}>
-                  DataSources
-                </MenuItem>
-                <MenuItem isDisabled={true}>Logs</MenuItem>
-              </MenuGroup>
-            </MenuList>
-          </Menu>
+        <HStack gap={"10px"} w={"100%"}>
+          <Menu.Root>
+            <Menu.Trigger asChild>
+              <IconButton
+                aria-label="Options"
+                variant={"icon" as any}
+              >
+                <CgMenu size="30" />
+              </IconButton>
+            </Menu.Trigger>
+            <Portal>
+              <Menu.Positioner>
+                <Menu.Content>
+                  <Menu.ItemGroup title={"Reports"}>
+                    <Menu.Item value="reports" onClick={navigator.toReports}>Reports</Menu.Item>
+                    <Menu.Item value="templates" onClick={navigator.toTemplates}>Templates</Menu.Item>
+                    <Menu.Item value="parameters" disabled>Parameters</Menu.Item>
+                    <Menu.Item value="groups" disabled>Groups</Menu.Item>
+                    <Menu.Item value="scheduling" disabled>Scheduling</Menu.Item>
+                  </Menu.ItemGroup>
+                  <Menu.Separator />
+                  <Menu.ItemGroup title={"Settings"}>
+                    <Menu.Item value="workspace" disabled>Workspace</Menu.Item>
+                    <Menu.Item value="datasources" onClick={navigator.toDataSources}>
+                      DataSources
+                    </Menu.Item>
+                    <Menu.Item value="logs" disabled>Logs</Menu.Item>
+                  </Menu.ItemGroup>
+                </Menu.Content>
+              </Menu.Positioner>
+            </Portal>
+          </Menu.Root>
           <Box>
             <Image
               minW={"250px"}
@@ -126,50 +126,67 @@ const Layout: FC<Props> = observer(({ children }) => {
             />
           </Box>
           <Box>
-            <Select>
-              {loginUser.get()?.workspaces.map((w) => {
-                return (
-                  <option key={w.id} value={w.id}>
-                    {w.name}
-                  </option>
-                )
-              })}
-            </Select>
+            <NativeSelect.Root>
+              <NativeSelect.Field>
+                {loginUser.get()?.workspaces.map((w) => {
+                  return (
+                    <option key={w.id} value={w.id}>
+                      {w.name}
+                    </option>
+                  )
+                })}
+              </NativeSelect.Field>
+            </NativeSelect.Root>
           </Box>
           {breadcrumbs && breadcrumbs.length > 0 && (
-            <Breadcrumb
-              separator={<Icon color="gray.500" as={MdKeyboardArrowRight} />}
-            >
-              <BreadcrumbItem />
-              {breadcrumbs.map((b, idx) => {
-                return (
-                  <BreadcrumbItem
-                    key={b.title}
-                    isCurrentPage={breadcrumbs?.length - 1 === idx}
-                  >
-                    <BreadcrumbLink href={b.path} onClick={b.func}>
-                      {b.title}
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                )
-              })}
-            </Breadcrumb>
+            <Breadcrumb.Root>
+              <Breadcrumb.List>
+                <Breadcrumb.Item />
+                {breadcrumbs.map((b, idx) => {
+                  const isLast = breadcrumbs?.length - 1 === idx
+                  return (
+                    <React.Fragment key={b.title}>
+                      {idx > 0 && (
+                        <Breadcrumb.Separator>
+                          <Icon color="gray.500" as={MdKeyboardArrowRight} />
+                        </Breadcrumb.Separator>
+                      )}
+                      <Breadcrumb.Item>
+                        {isLast ? (
+                          <Breadcrumb.CurrentLink>{b.title}</Breadcrumb.CurrentLink>
+                        ) : (
+                          <Breadcrumb.Link href={b.path} onClick={b.func}>
+                            {b.title}
+                          </Breadcrumb.Link>
+                        )}
+                      </Breadcrumb.Item>
+                    </React.Fragment>
+                  )
+                })}
+              </Breadcrumb.List>
+            </Breadcrumb.Root>
           )}
         </HStack>
         <HStack>
-          <Menu>
-            <MenuButton
-              variant={"icon"}
-              as={IconButton}
-              aria-label="Options"
-              icon={<FaRegUserCircle size="30" style={{ color: "gray" }} />}
-            />
-            <MenuList>
-              <MenuItem onClick={navigator.toProfile}>Profile</MenuItem>
-              <MenuDivider />
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </MenuList>
-          </Menu>
+          <Menu.Root>
+            <Menu.Trigger asChild>
+              <IconButton
+                variant={"icon" as any}
+                aria-label="Options"
+              >
+                <FaRegUserCircle size="30" style={{ color: "gray" }} />
+              </IconButton>
+            </Menu.Trigger>
+            <Portal>
+              <Menu.Positioner>
+                <Menu.Content>
+                  <Menu.Item value="profile" onClick={navigator.toProfile}>Profile</Menu.Item>
+                  <Menu.Separator />
+                  <Menu.Item value="logout" onClick={handleLogout}>Logout</Menu.Item>
+                </Menu.Content>
+              </Menu.Positioner>
+            </Portal>
+          </Menu.Root>
         </HStack>
       </Box>
       <Box w={"100%"} h={"100%"} padding={"10px"}>

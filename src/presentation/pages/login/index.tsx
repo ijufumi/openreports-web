@@ -1,21 +1,17 @@
 import React, { FC, useState, useMemo, useEffect } from "react"
 import {
   Input,
-  InputGroup,
-  InputRightElement,
   Button,
   VStack,
-  InputLeftElement,
   Icon,
   Box,
   Flex,
   Text,
   Image,
-  Divider,
-  FormControl,
-  FormErrorMessage,
-  useToast,
+  Separator,
+  Field,
 } from "@chakra-ui/react"
+import { InputGroup } from "@/components/ui/input-group"
 import { FormikValues, useFormik } from "formik"
 import { z, ZodIssue } from "zod"
 import { MdOutlineEmail } from "react-icons/md"
@@ -26,6 +22,7 @@ import logoImg from "../../../assets/logo.png"
 import UseCaseFactory from "../../../di/UseCaseFactory"
 import useNavigator from "../navigator"
 import { errorToast, useToastState } from "../../../infrastructure/state/Toast"
+import { toaster } from "@/components/ui/toaster"
 
 interface Props {}
 
@@ -35,12 +32,6 @@ const Login: FC<Props> = () => {
 
   const loginUseCase = UseCaseFactory.createLoginUseCase()
   const toastState = useToastState()
-  const toast = useToast({
-    position: "top-left",
-    duration: 3000,
-    onCloseComplete: toastState.clear,
-    isClosable: true,
-  })
 
   const formSchema = z.object({
     email: z.string().email("Invalid email address"),
@@ -68,10 +59,16 @@ const Login: FC<Props> = () => {
 
   useEffect(() => {
     if (toastState.message) {
-      toast({
+      toaster.create({
         title: toastState.message.getTitle(),
         description: toastState.message.getDescription(),
-        status: toastState.message.getStatus(),
+        type: toastState.message.getStatus(),
+        meta: { closable: true },
+        onStatusChange: (details) => {
+          if (details.status === "unmounted") {
+            toastState.clear()
+          }
+        },
       })
     }
   }, [toastState.message])
@@ -115,26 +112,24 @@ const Login: FC<Props> = () => {
     >
       <Box w="450px" bg={"white"} borderRadius="10px">
         <form onSubmit={formik.handleSubmit}>
-          <VStack margin={"10px"} spacing={"25px"}>
+          <VStack margin={"10px"} gap={"25px"}>
             <Image src={logoImg} alt={"logo"} margin={"10px"} />
             <Text fontSize="3xl">Login</Text>
-            <VStack width={"90%"} spacing={"15px"}>
-              <FormControl
-                isInvalid={!!formik.errors.email && !!formik.touched.email}
+            <VStack width={"90%"} gap={"15px"}>
+              <Field.Root
+                invalid={!!formik.errors.email && !!formik.touched.email}
               >
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={
-                      <Icon
-                        as={MdOutlineEmail}
-                        color="gray.500"
-                        w={10}
-                        h={10}
-                        style={{ padding: "0 5px 0 5px" }}
-                      />
-                    }
-                  />
+                <InputGroup
+                  startElement={
+                    <Icon
+                      as={MdOutlineEmail}
+                      color="gray.500"
+                      w={10}
+                      h={10}
+                      style={{ padding: "0 5px 0 5px" }}
+                    />
+                  }
+                >
                   <Input
                     id="email"
                     value={formik.values.email}
@@ -143,24 +138,32 @@ const Login: FC<Props> = () => {
                     onBlur={formik.handleBlur}
                   />
                 </InputGroup>
-                <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
-              </FormControl>
-              <FormControl
-                isInvalid={!!formik.errors.password && !!formik.touched.password}
+                <Field.ErrorText>{formik.errors.email}</Field.ErrorText>
+              </Field.Root>
+              <Field.Root
+                invalid={!!formik.errors.password && !!formik.touched.password}
               >
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={
-                      <Icon
-                        as={CgPassword}
-                        color="gray.500"
-                        w={10}
-                        h={10}
-                        style={{ padding: "0 5px 0 5px" }}
-                      />
-                    }
-                  />
+                <InputGroup
+                  startElement={
+                    <Icon
+                      as={CgPassword}
+                      color="gray.500"
+                      w={10}
+                      h={10}
+                      style={{ padding: "0 5px 0 5px" }}
+                    />
+                  }
+                  endElement={
+                    <Icon
+                      as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
+                      color="gray.500"
+                      w={8}
+                      h={8}
+                      onClick={() => setShowPassword(!showPassword)}
+                    />
+                  }
+                  endElementProps={{ cursor: "pointer", width: "4.5rem" }}
+                >
                   <Input
                     id="password"
                     value={formik.values.password}
@@ -169,39 +172,30 @@ const Login: FC<Props> = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
-                  <InputRightElement width="4.5rem" cursor="pointer">
-                    <Icon
-                      as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
-                      color="gray.500"
-                      w={8}
-                      h={8}
-                      onClick={() => setShowPassword(!showPassword)}
-                    />
-                  </InputRightElement>
                 </InputGroup>
-                <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
-              </FormControl>
+                <Field.ErrorText>{formik.errors.password}</Field.ErrorText>
+              </Field.Root>
             </VStack>
-            <Button type="submit" variant="login" disabled={!canLogin}>
+            <Button type="submit" variant={"login" as any} disabled={!canLogin}>
               Login
             </Button>
           </VStack>
         </form>
-        <Box margin={"10px"} sx={{ position: "relative" }}>
-          <Divider />
+        <Box margin={"10px"} css={{ position: "relative" }}>
+          <Separator />
           <Text
-            sx={{ position: "absolute", top: -3, left: 210 }}
+            css={{ position: "absolute", top: -3, left: 210 }}
             color="gray.400"
           >
             or
           </Text>
         </Box>
-        <VStack margin={"10px"} spacing={"25px"}>
+        <VStack margin={"10px"} gap={"25px"}>
           <Button
-            leftIcon={<Icon as={FcGoogle} />}
             onClick={handleGoogleLogin}
-            variant="login"
+            variant={"login" as any}
           >
+            <Icon as={FcGoogle} />
             Login with Google
           </Button>
         </VStack>
