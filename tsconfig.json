@@ -14,7 +14,8 @@
     "lib": [
       "ES2021",
       "DOM"
-    ]
+    ],
+    "skipLibCheck": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]

@@ -4,15 +4,15 @@ import { ChakraProvider, Box, Flex } from "@chakra-ui/react";
 import { Blocks } from "react-loader-spinner";
 import { observer } from "mobx-react";
 
-import useLoader from "./states/Loader";
-import theme from "./config/theme";
-import Layout from "./pages/layout";
+import useLoader from "./infrastructure/state/Loader";
+import theme from "./infrastructure/config/theme";
+import Layout from "./presentation/pages/layout";
 import {
   Path,
   usePublicPath,
   useAuthorizedPath,
   useErrorsPath,
-} from "./pages/paths";
+} from "./presentation/pages/paths";
 
 interface LayoutRouteProps {
   children: ReactNode;
