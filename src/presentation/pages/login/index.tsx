@@ -10,8 +10,8 @@ import {
   Image,
   Separator,
   Field,
+  InputGroup,
 } from "@chakra-ui/react"
-import { InputGroup } from "@/components/ui/input-group"
 import { FormikValues, useFormik } from "formik"
 import { z, ZodIssue } from "zod"
 import { MdOutlineEmail } from "react-icons/md"
@@ -21,7 +21,7 @@ import { FcGoogle } from "react-icons/fc"
 import logoImg from "../../../assets/logo.png"
 import UseCaseFactory from "../../../di/UseCaseFactory"
 import useNavigator from "../navigator"
-import { errorToast, useToastState } from "../../../infrastructure/state/Toast"
+import { errorToast, useToastState } from "@/infrastructure/state/Toast"
 import { toaster } from "@/components/ui/toaster"
 
 interface Props {}
@@ -64,7 +64,7 @@ const Login: FC<Props> = () => {
         description: toastState.message.getDescription(),
         type: toastState.message.getStatus(),
         meta: { closable: true },
-        onStatusChange: (details) => {
+        onStatusChange: (details: any) => {
           if (details.status === "unmounted") {
             toastState.clear()
           }
@@ -120,13 +120,12 @@ const Login: FC<Props> = () => {
                 invalid={!!formik.errors.email && !!formik.touched.email}
               >
                 <InputGroup
+                  flex={"1"}
                   startElement={
                     <Icon
                       as={MdOutlineEmail}
                       color="gray.500"
-                      w={10}
-                      h={10}
-                      style={{ padding: "0 5px 0 5px" }}
+                      size="lg"
                     />
                   }
                 >
@@ -148,17 +147,14 @@ const Login: FC<Props> = () => {
                     <Icon
                       as={CgPassword}
                       color="gray.500"
-                      w={10}
-                      h={10}
-                      style={{ padding: "0 5px 0 5px" }}
+                      size="lg"
                     />
                   }
                   endElement={
                     <Icon
                       as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
                       color="gray.500"
-                      w={8}
-                      h={8}
+                      size="lg"
                       onClick={() => setShowPassword(!showPassword)}
                     />
                   }

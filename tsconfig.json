@@ -3,10 +3,10 @@
     "strict": true,
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es2022",
-    "module": "es2022",
+    "target": "ESNext",
+    "module": "ESNext",
     "jsx": "react",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "baseUrl": ".",
     "paths": {
       "~/": ["*"],
