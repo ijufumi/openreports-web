@@ -11,7 +11,7 @@ const customConfig = defineConfig({
   },
   theme: {
     recipes: {
-      Button: {
+      button: {
         variants: {
           variant: {
             login: {
@@ -36,7 +36,7 @@ const customConfig = defineConfig({
           },
         },
       },
-      Link: {
+      link: {
         base: {
           color: "blue.600",
           textDecoration: "underline",

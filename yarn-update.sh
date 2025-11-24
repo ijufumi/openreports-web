@@ -17,7 +17,7 @@ if [ -e yarn.lock ]; then
 fi
 
 depList=$(getListName '.dependencies')
-yarn add $depList
+npm i $depList
 
 depList=$(getListName '.devDependencies')
-yarn -D add $depList
+npm -D i $depList
