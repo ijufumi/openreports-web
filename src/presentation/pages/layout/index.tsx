@@ -16,11 +16,11 @@ import { FaRegUserCircle } from "react-icons/fa"
 import { MdKeyboardArrowRight } from "react-icons/md"
 import { CgMenu } from "react-icons/cg"
 import UseCaseFactory from "../../../di/UseCaseFactory"
-import logoImg from "../../../assets/logo.png"
-import { useBreadcrumbsState } from "../../../infrastructure/state/Breadcrumbs"
+import logoImg from "../../../assets/header-logo.png"
+import { useBreadcrumbsState } from "@/infrastructure/state/Breadcrumbs"
 import useLoginUser from "../../../infrastructure/state/LoginUser"
 import useNavigator from "../navigator"
-import { useToastState } from "../../../infrastructure/state/Toast"
+import { useToastState } from "@/infrastructure/state/Toast"
 import { HEADER_HEIGHT } from "../consts"
 import { toaster } from "@/components/ui/toaster"
 
@@ -80,50 +80,51 @@ const Layout: FC<Props> = observer(({ children }) => {
         justifyContent={"space-between"}
         padding={"0 10px 0 10px"}
       >
-        <HStack gap={"10px"} w={"100%"}>
-          <Menu.Root>
-            <Menu.Trigger asChild>
-              <IconButton
-                aria-label="Options"
-                variant={"icon" as any}
-              >
-                <CgMenu size="30" />
-              </IconButton>
-            </Menu.Trigger>
-            <Portal>
-              <Menu.Positioner>
-                <Menu.Content>
-                  <Menu.ItemGroup title={"Reports"}>
-                    <Menu.Item value="reports" onClick={navigator.toReports}>Reports</Menu.Item>
-                    <Menu.Item value="templates" onClick={navigator.toTemplates}>Templates</Menu.Item>
-                    <Menu.Item value="parameters" disabled>Parameters</Menu.Item>
-                    <Menu.Item value="groups" disabled>Groups</Menu.Item>
-                    <Menu.Item value="scheduling" disabled>Scheduling</Menu.Item>
-                  </Menu.ItemGroup>
-                  <Menu.Separator />
-                  <Menu.ItemGroup title={"Settings"}>
-                    <Menu.Item value="workspace" disabled>Workspace</Menu.Item>
-                    <Menu.Item value="datasources" onClick={navigator.toDataSources}>
-                      DataSources
-                    </Menu.Item>
-                    <Menu.Item value="logs" disabled>Logs</Menu.Item>
-                  </Menu.ItemGroup>
-                </Menu.Content>
-              </Menu.Positioner>
-            </Portal>
-          </Menu.Root>
-          <Box>
-            <Image
-              minW={"250px"}
-              onClick={navigator.toTop}
-              src={logoImg}
-              alt={"logo"}
-              margin={"10px"}
-              style={{
-                transform: "scale(0.8, 0.8)",
-                cursor: "pointer",
-              }}
-            />
+        <HStack gap={"10px"} w={"100%"} h={`${HEADER_HEIGHT}px`}>
+          <Box display={"flex"} alignItems={"center"}>
+            <Menu.Root>
+              <Menu.Trigger asChild>
+                <IconButton
+                  variant="subtle"
+                  aria-label="Options"
+                  css={{ "min-width": "50px !important" }}
+                >
+                  <CgMenu size="30" />
+                </IconButton>
+              </Menu.Trigger>
+              <Portal>
+                <Menu.Positioner>
+                  <Menu.Content>
+                    <Menu.ItemGroup title={"Reports"}>
+                      <Menu.Item value="reports" onClick={navigator.toReports}>Reports</Menu.Item>
+                      <Menu.Item value="templates" onClick={navigator.toTemplates}>Templates</Menu.Item>
+                      <Menu.Item value="parameters" disabled>Parameters</Menu.Item>
+                      <Menu.Item value="groups" disabled>Groups</Menu.Item>
+                      <Menu.Item value="scheduling" disabled>Scheduling</Menu.Item>
+                    </Menu.ItemGroup>
+                    <Menu.Separator />
+                    <Menu.ItemGroup title={"Settings"}>
+                      <Menu.Item value="workspace" disabled>Workspace</Menu.Item>
+                      <Menu.Item value="datasources" onClick={navigator.toDataSources}>
+                        DataSources
+                      </Menu.Item>
+                      <Menu.Item value="logs" disabled>Logs</Menu.Item>
+                    </Menu.ItemGroup>
+                  </Menu.Content>
+                </Menu.Positioner>
+              </Portal>
+            </Menu.Root>
+            <Box>
+              <Image
+                w={"150px"}
+                onClick={navigator.toTop}
+                src={logoImg}
+                alt={"logo"}
+                style={{
+                  cursor: "pointer",
+                }}
+              />
+            </Box>
           </Box>
           <Box>
             <NativeSelect.Root>

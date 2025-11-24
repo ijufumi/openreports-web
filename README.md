@@ -1,6 +1,6 @@
 # OpenReports Web Client
 
-![logo](./src/assets/logo.png)
+![logo](./src/assets/main-logo.png)
 
 ## Requirements
 
