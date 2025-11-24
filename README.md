@@ -1,5 +1,7 @@
 # OpenReports Web Client
 
+![logo](./src/assets/logo.png)
+
 ## Requirements
 
 - Node >= 20.x
