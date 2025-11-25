@@ -110,12 +110,21 @@ const Login: FC<Props> = () => {
       justifyContent="center"
       minHeight="100%"
     >
-      <Box w="450px" bg={"white"} borderRadius="10px">
+      <Box
+        w="450px"
+        bg="white"
+        borderRadius="xl"
+        boxShadow="xl"
+        borderWidth="1px"
+        borderColor="gray.200"
+      >
         <form onSubmit={formik.handleSubmit}>
-          <VStack margin={"10px"} gap={"25px"}>
-            <Image src={logoImg} alt={"logo"} margin={"10px"} />
-            <Text fontSize="3xl">Login</Text>
-            <VStack width={"90%"} gap={"15px"}>
+          <VStack p={8} gap={6}>
+            <Image src={logoImg} alt="logo" w="200px" />
+            <Text fontSize="3xl" fontWeight="bold" color="gray.800">
+              Welcome Back
+            </Text>
+            <VStack width="100%" gap={4}>
               <Field.Root
                 invalid={!!formik.errors.email && !!formik.touched.email}
               >
@@ -172,26 +181,43 @@ const Login: FC<Props> = () => {
                 <Field.ErrorText>{formik.errors.password}</Field.ErrorText>
               </Field.Root>
             </VStack>
-            <Button type="submit" variant={"login" as any} disabled={!canLogin}>
+            <Button
+              type="submit"
+              colorScheme="blue"
+              size="lg"
+              width="100%"
+              disabled={!canLogin}
+              boxShadow="sm"
+            >
               Login
             </Button>
           </VStack>
         </form>
-        <Box margin={"10px"} css={{ position: "relative" }}>
-          <Separator />
+        <Box px={8} pb={8} css={{ position: "relative" }}>
+          <Separator my={4} />
           <Text
-            css={{ position: "absolute", top: -3, left: 210 }}
-            color="gray.400"
+            css={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              backgroundColor: "white",
+              padding: "0 10px",
+            }}
+            color="gray.500"
+            fontSize="sm"
           >
             or
           </Text>
         </Box>
-        <VStack margin={"10px"} gap={"25px"}>
+        <VStack px={8} pb={8} gap={4}>
           <Button
             onClick={handleGoogleLogin}
-            variant={"login" as any}
+            variant="outline"
+            size="lg"
+            width="100%"
+            leftIcon={<Icon as={FcGoogle} boxSize={5} />}
           >
-            <Icon as={FcGoogle} />
             Login with Google
           </Button>
         </VStack>

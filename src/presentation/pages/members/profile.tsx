@@ -123,107 +123,130 @@ const Profile: FC<Props> = () => {
   }
 
   return (
-    <Box
-      css={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
-      p={5}
-      w="50%"
-    >
-      <form onSubmit={formik.handleSubmit}>
-        <Grid templateColumns="repeat(5, 1fr)" gap={0}>
-          <GridItem
-            key="name-label"
-            colSpan={2}
-            h={50}
-            p={5}
-            display="flex"
-            alignItems="center"
-            bgColor="gray.50"
-          >
-            <Text fontWeight={600}>Name</Text>
-          </GridItem>
-          <GridItem
-            key="name-value"
-            colSpan={3}
-            minH={50}
-            display="flex"
-            alignItems="center"
-            bgColor="gray.50"
-          >
+    <VStack gap={6} align="stretch" maxW="800px" mx="auto">
+      <Box
+        bg="white"
+        p={6}
+        borderRadius="lg"
+        boxShadow="sm"
+        borderWidth="1px"
+        borderColor="gray.200"
+      >
+        <VStack align="start" gap={2}>
+          <Text fontSize="2xl" fontWeight="bold" color="gray.800">
+            Profile Settings
+          </Text>
+          <Text fontSize="sm" color="gray.600">
+            Update your personal information and password
+          </Text>
+        </VStack>
+      </Box>
+
+      <Box
+        bg="white"
+        borderRadius="lg"
+        boxShadow="sm"
+        borderWidth="1px"
+        borderColor="gray.200"
+        p={8}
+      >
+        <form onSubmit={formik.handleSubmit}>
+          <VStack gap={6} align="stretch">
             <Field.Root
               invalid={!!formik.errors.name && !!formik.touched.name}
             >
+              <Field.Label fontSize="md" fontWeight="600" color="gray.700">
+                Name
+              </Field.Label>
               <Input
-                variant="flushed"
+                id="name"
+                size="lg"
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                placeholder="Enter your name"
+                bg="gray.50"
+                borderColor="gray.300"
+                _focus={{ bg: "white", borderColor: "blue.400" }}
               />
               <Field.ErrorText>{formik.errors.name}</Field.ErrorText>
             </Field.Root>
-          </GridItem>
-          <GridItem
-            key="password-label"
-            colSpan={2}
-            h={50}
-            p={5}
-            display="flex"
-            alignItems="center"
-          >
-            <Text fontWeight={600}>Password</Text>
-          </GridItem>
-          <GridItem
-            key="password-value"
-            colSpan={3}
-            minH={50}
-            display="flex"
-            alignItems="center"
-          >
+
             <Field.Root
               invalid={!!formik.errors.password && !!formik.touched.password}
             >
+              <Field.Label fontSize="md" fontWeight="600" color="gray.700">
+                Password
+              </Field.Label>
               <InputGroup
                 endElement={
                   <Icon
                     as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
                     color="gray.500"
-                    w={8}
-                    h={8}
+                    boxSize={5}
                     onClick={handleShowPassword}
                   />
                 }
-                endElementProps={{ cursor: "pointer", width: "4.5rem" }}
+                endElementProps={{ cursor: "pointer", pr: 3 }}
               >
                 <Input
-                  variant="flushed"
+                  id="password"
+                  size="lg"
                   value={formik.values.password}
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter password"
+                  placeholder="Enter new password (optional)"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
+                  bg="gray.50"
+                  borderColor="gray.300"
+                  _focus={{ bg: "white", borderColor: "blue.400" }}
                 />
               </InputGroup>
-              {formik.errors.password
-                ?.split(",")
-                .map((e: string) => (
-                  <Field.ErrorText key={e}>{e}</Field.ErrorText>
-                ))}
+              {formik.errors.password && (
+                <VStack align="start" gap={1} mt={2}>
+                  {formik.errors.password
+                    .split(",")
+                    .map((e: string) => (
+                      <Field.ErrorText key={e}>{e}</Field.ErrorText>
+                    ))}
+                </VStack>
+              )}
             </Field.Root>
-          </GridItem>
-        </Grid>
-        <Box mt={1} display="flex" justifyContent="flex-end">
-          <Wrap gap={2}>
-            <WrapItem key="cancel-button">
-              <Button onClick={handleCancel} variant="outline">
-                Cancel
-              </Button>
-            </WrapItem>
-            <WrapItem key="submit-button">
-              <Button type="submit">Update</Button>
-            </WrapItem>
-          </Wrap>
-        </Box>
-      </form>
-    </Box>
+
+            <Box
+              pt={4}
+              borderTopWidth="1px"
+              borderColor="gray.200"
+              display="flex"
+              justifyContent="flex-end"
+            >
+              <Wrap gap={3}>
+                <WrapItem key="cancel-button">
+                  <Button
+                    onClick={handleCancel}
+                    variant="outline"
+                    size="lg"
+                    colorScheme="gray"
+                  >
+                    Cancel
+                  </Button>
+                </WrapItem>
+                <WrapItem key="submit-button">
+                  <Button
+                    type="submit"
+                    size="lg"
+                    colorScheme="blue"
+                    boxShadow="sm"
+                  >
+                    Update Profile
+                  </Button>
+                </WrapItem>
+              </Wrap>
+            </Box>
+          </VStack>
+        </form>
+      </Box>
+    </VStack>
   )
 }
 

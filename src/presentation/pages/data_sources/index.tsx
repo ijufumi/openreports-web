@@ -143,10 +143,32 @@ const DataSources: FC<Props> = () => {
   ] as ColumnDef<DataSourceVo>[]
 
   return (
-    <VStack>
-      <Flex w="100%" justifyContent="flex-end">
-        <Button onClick={handleClickNew} variant={"action" as any}>
-          Create
+    <VStack gap={6} align="stretch">
+      <Flex
+        bg="white"
+        p={6}
+        borderRadius="lg"
+        boxShadow="sm"
+        borderWidth="1px"
+        borderColor="gray.200"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <VStack align="start" gap={1}>
+          <Flex fontSize="2xl" fontWeight="bold" color="gray.800">
+            Data Sources
+          </Flex>
+          <Flex fontSize="sm" color="gray.600">
+            Manage your database connections and data sources
+          </Flex>
+        </VStack>
+        <Button
+          onClick={handleClickNew}
+          colorScheme="blue"
+          size="lg"
+          boxShadow="sm"
+        >
+          Create New
         </Button>
       </Flex>
       <DataTable
