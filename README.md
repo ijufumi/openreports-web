@@ -75,18 +75,33 @@ This application's features are here ( including not implemented )
 
 ## Package structure
 
+This project follows Clean Architecture principles with the following structure:
+
 ```
 .
-├── public             # HTML and favicon
-├── src                
-│   ├── assets         # Images
-│   ├── components     # Components using by several pages
-│   ├── config         # Configuration files
-│   ├── pages          # Page component
-│   ├── repositories   # Connecting to external systems
-│   ├── states         # Manage state
-│   ├── usecases       # Use case pattern for pages
-│   └── vos            # Value Object
+├── public/              # Static files
+│   └── assets/          # Public assets
+├── src/
+│   ├── application/     # Application layer
+│   │   ├── dto/         # Data Transfer Objects
+│   │   │   └── vos/     # Value Objects
+│   │   ├── ports/       # Port interfaces
+│   │   └── usecases/    # Use cases (business logic)
+│   ├── assets/          # Application assets (images, etc.)
+│   ├── components/      # Shared UI components
+│   │   └── ui/          # UI component library
+│   ├── di/              # Dependency injection container
+│   ├── domain/          # Domain layer
+│   │   └── repositories/ # Repository interfaces
+│   ├── infrastructure/  # Infrastructure layer
+│   │   ├── config/      # Configuration files
+│   │   ├── http/        # HTTP client implementation
+│   │   ├── repositories/ # Repository implementations
+│   │   ├── state/       # State management
+│   │   └── utils/       # Utility functions
+│   └── presentation/    # Presentation layer
+│       ├── components/  # Presentation components
+│       └── pages/       # Page components
 ├── .eslintrc.json
 ├── .prettierrc.json
 ├── package.json
