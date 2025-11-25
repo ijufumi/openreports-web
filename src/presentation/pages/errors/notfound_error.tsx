@@ -36,9 +36,9 @@ const NotfoundError: FC<Props> = () => {
           colorScheme="blue"
           size="lg"
           onClick={() => navigator.toTop()}
-          leftIcon={<Icon as={FiHome} />}
           mt={4}
         >
+          <Icon as={FiHome} />
           Go to Home
         </Button>
       </VStack>

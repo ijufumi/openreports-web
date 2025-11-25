@@ -216,8 +216,8 @@ const Login: FC<Props> = () => {
             variant="outline"
             size="lg"
             width="100%"
-            leftIcon={<Icon as={FcGoogle} boxSize={5} />}
           >
+            <Icon as={FcGoogle} boxSize={5} />
             Login with Google
           </Button>
         </VStack>

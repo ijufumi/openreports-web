@@ -2,8 +2,6 @@ import React, { FC, useState, useEffect } from "react"
 import {
   Box,
   Button,
-  Grid,
-  GridItem,
   Input,
   Text,
   Wrap,
@@ -11,6 +9,7 @@ import {
   Icon,
   Field,
   InputGroup,
+  VStack,
 } from "@chakra-ui/react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useFormik } from "formik"

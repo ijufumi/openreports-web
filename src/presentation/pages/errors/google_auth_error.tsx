@@ -37,9 +37,9 @@ const GoogleAuthError: FC<Props> = () => {
           colorScheme="blue"
           size="lg"
           onClick={handleRetry}
-          leftIcon={<Icon as={FiRefreshCw} />}
           mt={4}
         >
+          <Icon as={FiRefreshCw} />
           Try Again
         </Button>
       </VStack>
