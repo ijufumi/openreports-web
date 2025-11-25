@@ -101,7 +101,16 @@ const DataTable: FC<Props> = ({
   })
 
   return (
-    <Box css={{ bgColor: "#FFFFFF", width: "100%", borderRadius: "6px" }}>
+    <Box
+      css={{
+        bgColor: "#FFFFFF",
+        width: "100%",
+        borderRadius: "lg",
+        borderWidth: "1px",
+        borderColor: "gray.200",
+        boxShadow: "sm",
+      }}
+    >
       <Table.ScrollArea>
         <Box
           css={{
@@ -119,7 +128,10 @@ const DataTable: FC<Props> = ({
                         key={header.id}
                         colSpan={header.colSpan}
                         css={{ position: "sticky", top: 0, zIndex: 10 }}
-                        bg="gray.300"
+                        bg="gray.100"
+                        fontWeight="600"
+                        fontSize="sm"
+                        color="gray.700"
                       >
                         {header.isPlaceholder ? null : (
                           <div>

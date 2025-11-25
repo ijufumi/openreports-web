@@ -70,15 +70,18 @@ const Layout: FC<Props> = observer(({ children }) => {
   }
 
   return (
-    <VStack gap={"5px"} h={"100%"} w={"100%"} overflowY={"auto"}>
+    <VStack gap={0} h="100%" w="100%" overflowY="auto">
       <Box
         h={`${HEADER_HEIGHT}px`}
-        w={"100%"}
-        bg={"white"}
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"space-between"}
-        padding={"0 10px 0 10px"}
+        w="100%"
+        bg="white"
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        padding="0 20px"
+        boxShadow="sm"
+        borderBottomWidth="1px"
+        borderColor="gray.200"
       >
         <HStack gap={"10px"} w={"100%"} h={`${HEADER_HEIGHT}px`}>
           <Box display={"flex"} alignItems={"center"}>
@@ -190,7 +193,7 @@ const Layout: FC<Props> = observer(({ children }) => {
           </Menu.Root>
         </HStack>
       </Box>
-      <Box w={"100%"} h={"100%"} padding={"10px"}>
+      <Box w="100%" h="100%" padding="20px" overflow="auto">
         {children}
       </Box>
     </VStack>
