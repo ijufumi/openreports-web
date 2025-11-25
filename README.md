@@ -68,10 +68,10 @@ This application's features are here ( including not implemented )
  | Name        | Version | Usage          |
  |-------------|---------|----------------|
  | Node        | >= 20.x | Javascript     |
- | Typescript  | 4.9.4   | Language       |
- | React       | 18.2.0  | All of them    |
- | Chakra UI   | 2.4.6   | UI             |
- | React Table | 8.7.4   | Headless table |
+ | Typescript  | 5.9.3   | Language       |
+ | React       | 19.2.0  | All of them    |
+ | Chakra UI   | 3.30.0  | UI             |
+ | React Table | 8.21.3  | Headless table |
 
 ## Package structure
 
