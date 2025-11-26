@@ -1,0 +1,33 @@
+<svg width="800" height="250" viewBox="0 0 800 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon background with rounded corners -->
+  <rect x="27" y="32" width="240" height="240" rx="40" fill="#2B7FD7"/>
+
+  <!-- Document -->
+  <rect x="70" y="75" width="110" height="154" rx="8" fill="white"/>
+
+  <!-- List lines -->
+  <line x1="90" y1="105" x2="140" y2="105" stroke="#2B7FD7" stroke-width="8" stroke-linecap="round"/>
+  <line x1="90" y1="135" x2="140" y2="135" stroke="#2B7FD7" stroke-width="8" stroke-linecap="round"/>
+  <line x1="90" y1="165" x2="140" y2="165" stroke="#2B7FD7" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Chart bars -->
+  <rect x="95" y="190" width="12" height="20" fill="#2B7FD7"/>
+  <rect x="112" y="180" width="12" height="30" fill="#2B7FD7"/>
+  <rect x="129" y="170" width="12" height="40" fill="#2B7FD7"/>
+
+  <!-- Arrow -->
+  <path d="M 150 95 L 215 95 L 215 160" stroke="#2B7FD7" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 215 95 L 150 160" stroke="#2B7FD7" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- Text "Open" -->
+  <text x="320" y="200" font-family="Arial, sans-serif" font-size="150" font-weight="700" fill="#1a1a1a">Open</text>
+
+  <!-- Text "Report" -->
+  <text x="320" y="200" font-family="Arial, sans-serif" font-size="150" font-weight="700" fill="#1a1a1a">
+    <tspan x="320" dy="0">Open</tspan>
+  </text>
+  <text x="320" y="200" font-family="Arial, sans-serif" font-size="150" font-weight="700" fill="#1a1a1a">
+    <tspan x="320" dy="0"></tspan>
+    <tspan x="320" dy="160">Report</tspan>
+  </text>
+</svg>
