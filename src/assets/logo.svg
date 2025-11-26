@@ -15,13 +15,14 @@
   <rect x="112" y="168" width="12" height="30" fill="#2B7FD7"/>
   <rect x="129" y="158" width="12" height="40" fill="#2B7FD7"/>
 
-  <!-- Arrow -->
-  <path d="M 150 83 L 215 83 L 215 148" stroke="#2B7FD7" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M 215 83 L 150 148" stroke="#2B7FD7" stroke-width="14" stroke-linecap="round"/>
+  <!-- Arrow - extends beyond the box -->
+  <path d="M 150 83 L 230 83 L 230 163" stroke="#2B7FD7" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 230 83 L 150 163" stroke="#2B7FD7" stroke-width="14" stroke-linecap="round"/>
+  <path d="M 205 83 L 230 83 L 230 108" stroke="white" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Text "Open" -->
-  <text x="320" y="145" font-family="Arial, sans-serif" font-size="140" font-weight="700" fill="#1a1a1a">Open</text>
+  <text x="320" y="135" font-family="Arial, sans-serif" font-size="140" font-weight="700" fill="#1a1a1a">Open</text>
 
   <!-- Text "Report" -->
-  <text x="320" y="255" font-family="Arial, sans-serif" font-size="140" font-weight="700" fill="#1a1a1a">Report</text>
+  <text x="320" y="265" font-family="Arial, sans-serif" font-size="140" font-weight="700" fill="#1a1a1a">Report</text>
 </svg>

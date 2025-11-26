@@ -15,9 +15,10 @@
   <rect x="77" y="125" width="8" height="21" fill="#2B7FD7"/>
   <rect x="89" y="118" width="8" height="28" fill="#2B7FD7"/>
 
-  <!-- Arrow -->
-  <path d="M 102 72 L 145 72 L 145 115" stroke="#2B7FD7" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M 145 72 L 102 115" stroke="#2B7FD7" stroke-width="10" stroke-linecap="round"/>
+  <!-- Arrow - extends beyond the box -->
+  <path d="M 102 72 L 158 72 L 158 128" stroke="#2B7FD7" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 158 72 L 102 128" stroke="#2B7FD7" stroke-width="10" stroke-linecap="round"/>
+  <path d="M 140 72 L 158 72 L 158 90" stroke="white" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Text "Open" -->
   <text x="210" y="105" font-family="Arial, sans-serif" font-size="90" font-weight="700" fill="#1a1a1a">Open</text>
