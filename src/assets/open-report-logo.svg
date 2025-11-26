@@ -1,0 +1,44 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Logo Icon - Stylized document/report with gradient -->
+  <defs>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Main document shape -->
+  <path d="M8 6 C8 4.34315 9.34315 3 11 3 L30 3 L38 11 L38 38 C38 39.6569 36.6569 41 35 41 L11 41 C9.34315 41 8 39.6569 8 38 Z"
+        fill="url(#primaryGradient)"/>
+
+  <!-- Folded corner effect -->
+  <path d="M30 3 L30 9 C30 10.1046 30.8954 11 32 11 L38 11 Z"
+        fill="url(#accentGradient)" opacity="0.6"/>
+
+  <!-- Document lines (content representation) -->
+  <rect x="14" y="17" width="16" height="2" rx="1" fill="white" opacity="0.9"/>
+  <rect x="14" y="23" width="12" height="2" rx="1" fill="white" opacity="0.7"/>
+  <rect x="14" y="29" width="14" height="2" rx="1" fill="white" opacity="0.7"/>
+
+  <!-- Modern bar chart element -->
+  <rect x="14" y="35" width="3" height="3" rx="0.5" fill="white" opacity="0.8"/>
+  <rect x="19" y="32" width="3" height="6" rx="0.5" fill="white" opacity="0.8"/>
+  <rect x="24" y="30" width="3" height="8" rx="0.5" fill="white" opacity="0.8"/>
+
+  <!-- Text: "Open" -->
+  <text x="48" y="24" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#1e293b" letter-spacing="-0.5">
+    Open
+  </text>
+
+  <!-- Text: "Report" -->
+  <text x="48" y="39" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="url(#primaryGradient)" letter-spacing="-0.5">
+    Report
+  </text>
+
+  <!-- Modern accent dot -->
+  <circle cx="108" cy="36" r="2" fill="url(#accentGradient)"/>
+</svg>

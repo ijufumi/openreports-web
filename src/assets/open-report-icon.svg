@@ -1,0 +1,31 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon-only version for favicon, app icons, etc. -->
+  <defs>
+    <linearGradient id="iconPrimaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconAccentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Main document shape (centered and scaled) -->
+  <path d="M10 8 C10 6.34315 11.3431 5 13 5 L30 5 L38 13 L38 40 C38 41.6569 36.6569 43 35 43 L13 43 C11.3431 43 10 41.6569 10 40 Z"
+        fill="url(#iconPrimaryGradient)"/>
+
+  <!-- Folded corner effect -->
+  <path d="M30 5 L30 11 C30 12.1046 30.8954 13 32 13 L38 13 Z"
+        fill="url(#iconAccentGradient)" opacity="0.6"/>
+
+  <!-- Document lines (content representation) -->
+  <rect x="16" y="18" width="16" height="2.5" rx="1.25" fill="white" opacity="0.9"/>
+  <rect x="16" y="24" width="12" height="2.5" rx="1.25" fill="white" opacity="0.7"/>
+  <rect x="16" y="30" width="14" height="2.5" rx="1.25" fill="white" opacity="0.7"/>
+
+  <!-- Modern bar chart element -->
+  <rect x="16" y="36" width="3.5" height="3.5" rx="0.75" fill="white" opacity="0.8"/>
+  <rect x="21.5" y="33" width="3.5" height="7" rx="0.75" fill="white" opacity="0.8"/>
+  <rect x="27" y="31" width="3.5" height="9" rx="0.75" fill="white" opacity="0.8"/>
+</svg>
