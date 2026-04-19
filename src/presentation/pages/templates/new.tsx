@@ -1,15 +1,15 @@
 import React, { FC, useState, useRef, useEffect } from "react"
 import {
   Box,
-  Grid,
-  GridItem,
+  VStack,
+  HStack,
   Text,
   Input,
-  Wrap,
-  WrapItem,
   Button,
   IconButton,
   Icon,
+  Field,
+  Flex,
 } from "@chakra-ui/react"
 import { Tooltip } from "@/components/ui/tooltip"
 import { GrFormUpload, GrTrash } from "react-icons/gr"
@@ -31,9 +31,8 @@ const TemplateNew: FC<Props> = () => {
 
   useEffect(() => {
     setBreadcrumbs([
-      {
-        title: "Templates",
-      },
+      { func: navigator.toTemplates, title: "Templates" },
+      { title: "New" },
     ])
   }, [])
 
@@ -80,52 +79,96 @@ const TemplateNew: FC<Props> = () => {
   }
 
   return (
-    <Box
-      css={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
-      p={5}
-      w="50%"
-    >
-      <Grid templateColumns="repeat(5, 1fr)" gap={0}>
-        <GridItem
-          colSpan={2}
-          h={50}
-          p={5}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
+    <VStack gap="48px" align="stretch" maxW="720px">
+      <Box>
+        <Text
+          fontFamily="mono"
+          fontSize="10px"
+          letterSpacing="0.25em"
+          textTransform="uppercase"
+          color="nothing.textSecondary"
+          mb="8px"
         >
-          <Text fontWeight={600}>Name</Text>
-        </GridItem>
-        <GridItem
-          colSpan={3}
-          h={50}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
+          [Templates / New]
+        </Text>
+        <Text
+          fontFamily="heading"
+          fontSize="56px"
+          lineHeight="1"
+          letterSpacing="-0.03em"
+          fontWeight={500}
+          color="nothing.text"
         >
+          New template.
+        </Text>
+      </Box>
+
+      <VStack
+        gap="32px"
+        align="stretch"
+        borderTopWidth="1px"
+        borderColor="nothing.text"
+        pt="32px"
+      >
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Name
+          </Field.Label>
           <Input
             variant="flushed"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            placeholder="Untitled template"
+            fontSize="17px"
+            px={0}
+            borderColor="nothing.border"
+            _focus={{ borderColor: "nothing.text" }}
           />
-        </GridItem>
-        <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
-          <Text fontWeight={600}>File</Text>
-        </GridItem>
-        <GridItem colSpan={3} h={50} display="flex" alignItems="center">
-          <Text>{file ? file.name : "None"}</Text>
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            File
+          </Field.Label>
           <Input
             type="file"
-            css={{ visibility: "hidden", width: 0 }}
             ref={fileRef}
             onChange={handleSelectFile}
+            css={{ visibility: "hidden", width: 0, height: 0, position: "absolute" }}
           />
-          <Box ml={2}>
+          <Flex
+            alignItems="center"
+            justifyContent="space-between"
+            borderBottomWidth="1px"
+            borderColor="nothing.border"
+            pb="12px"
+          >
+            <Text
+              fontFamily="mono"
+              fontSize="14px"
+              color={file ? "nothing.text" : "nothing.textDisabled"}
+            >
+              {file ? file.name : "[no file selected]"}
+            </Text>
             {file ? (
               <Tooltip content="Clear file">
                 <IconButton
                   variant={"actionIcons" as any}
-                  aria-label="output"
+                  aria-label="clear"
                   onClick={handleClearFile}
                 >
                   <Icon as={GrTrash} />
@@ -135,29 +178,42 @@ const TemplateNew: FC<Props> = () => {
               <Tooltip content="Upload file">
                 <IconButton
                   variant={"actionIcons" as any}
-                  aria-label="output"
+                  aria-label="upload"
                   onClick={handleOpenFileWindow}
                 >
                   <Icon as={GrFormUpload} />
                 </IconButton>
               </Tooltip>
             )}
-          </Box>
-        </GridItem>
-      </Grid>
-      <Box mt={1} display="flex" justifyContent="flex-end">
-        <Wrap gap={2}>
-          <WrapItem>
-            <Button onClick={handleCancel} variant="outline">
-              Cancel
-            </Button>
-          </WrapItem>
-          <WrapItem>
-            <Button onClick={handleCreate}>Create</Button>
-          </WrapItem>
-        </Wrap>
-      </Box>
-    </Box>
+          </Flex>
+        </Field.Root>
+      </VStack>
+
+      <HStack justifyContent="flex-end" gap="12px" pt="24px">
+        <Button
+          variant="outline"
+          onClick={handleCancel}
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={handleCreate}
+          disabled={!name || !file}
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
+        >
+          Create →
+        </Button>
+      </HStack>
+    </VStack>
   )
 }
 

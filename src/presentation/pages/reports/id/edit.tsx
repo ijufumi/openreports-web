@@ -1,16 +1,15 @@
 import React, { FC, useEffect, useState } from "react"
 import { useParams } from "react-router"
 import {
-  HStack,
   Box,
-  Grid,
-  GridItem,
+  VStack,
+  HStack,
   Text,
   Input,
   NativeSelect,
   Button,
-  Wrap,
-  WrapItem,
+  Field,
+  Grid,
 } from "@chakra-ui/react"
 import ReportVo from "../../../../application/dto/vos/responses/ReportVo"
 import UseCaseFactory from "../../../../di/UseCaseFactory"
@@ -48,13 +47,8 @@ const ReportEdit: FC<Props> = () => {
         setTemplates(reportTemplatesVo.items)
       }
       setBreadcrumbs([
-        {
-          func: navigator.toReports,
-          title: "Reports",
-        },
-        {
-          title: id,
-        },
+        { func: navigator.toReports, title: "Reports" },
+        { title: id },
       ])
       setInitialized(true)
     }
@@ -98,101 +92,157 @@ const ReportEdit: FC<Props> = () => {
   }
 
   return (
-    <HStack>
-      <Box
-        css={{ borderRadius: "10px", borderColor: "gray.50", bgColor: "white" }}
-        p={5}
-        w="50%"
-      >
-        <Grid templateColumns="repeat(5, 1fr)" gap={0}>
-          <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
-            <Text fontWeight={600}>ID</Text>
-          </GridItem>
-          <GridItem colSpan={3} h={50} display="flex" alignItems="center">
-            <Text>{report.id}</Text>
-          </GridItem>
-          <GridItem
-            colSpan={2}
-            h={50}
-            p={5}
-            display="flex"
-            alignItems="center"
-            bgColor="gray.50"
-          >
-            <Text fontWeight={600}>Name</Text>
-          </GridItem>
-          <GridItem
-            colSpan={3}
-            h={50}
-            display="flex"
-            alignItems="center"
-            bgColor="gray.50"
-          >
-            <Input
-              variant="flushed"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </GridItem>
-          <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
-            <Text fontWeight={600}>Template name</Text>
-          </GridItem>
-          <GridItem colSpan={3} h={50} display="flex" alignItems="center">
-            <NativeSelect.Root>
-              <NativeSelect.Field
-                onChange={(e) => setTemplateId(e.target.value)}
-                value={templateId}
-              >
-                {templates.map((template) => {
-                  return (
-                    <option key={template.id} value={template.id}>
-                      {template.name}
-                    </option>
-                  )
-                })}
-              </NativeSelect.Field>
-            </NativeSelect.Root>
-          </GridItem>
-          <GridItem
-            colSpan={2}
-            h={50}
-            p={5}
-            display="flex"
-            alignItems="center"
-            bgColor="gray.50"
-          >
-            <Text fontWeight={600}>Created at</Text>
-          </GridItem>
-          <GridItem
-            colSpan={3}
-            h={50}
-            display="flex"
-            alignItems="center"
-            bgColor="gray.50"
-          >
-            <Text>{report.formattedCreatedAt}</Text>
-          </GridItem>
-          <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
-            <Text fontWeight={600}>Updated at</Text>
-          </GridItem>
-          <GridItem colSpan={3} h={50} display="flex" alignItems="center">
-            <Text>{report.formattedUpdatedAt}</Text>
-          </GridItem>
-        </Grid>
-        <Box mt={1} display="flex" justifyContent="flex-end">
-          <Wrap gap={2}>
-            <WrapItem>
-              <Button onClick={handleCancel} variant="outline">
-                Cancel
-              </Button>
-            </WrapItem>
-            <WrapItem>
-              <Button onClick={handleUpdate}>Update</Button>
-            </WrapItem>
-          </Wrap>
-        </Box>
+    <VStack gap="48px" align="stretch" maxW="720px">
+      <Box>
+        <Text
+          fontFamily="mono"
+          fontSize="10px"
+          letterSpacing="0.25em"
+          textTransform="uppercase"
+          color="nothing.textSecondary"
+          mb="8px"
+        >
+          [Reports / Edit]
+        </Text>
+        <Text
+          fontFamily="heading"
+          fontSize="56px"
+          lineHeight="1"
+          letterSpacing="-0.03em"
+          fontWeight={500}
+          color="nothing.text"
+        >
+          {report.name || "Untitled"}
+        </Text>
+        <Text
+          mt="12px"
+          fontFamily="mono"
+          fontSize="12px"
+          color="nothing.textDisabled"
+        >
+          {report.id}
+        </Text>
       </Box>
-    </HStack>
+
+      <VStack
+        gap="32px"
+        align="stretch"
+        borderTopWidth="1px"
+        borderColor="nothing.text"
+        pt="32px"
+      >
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Name
+          </Field.Label>
+          <Input
+            variant="flushed"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            fontSize="17px"
+            px={0}
+            borderColor="nothing.border"
+            _focus={{ borderColor: "nothing.text" }}
+          />
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Template
+          </Field.Label>
+          <NativeSelect.Root variant="plain">
+            <NativeSelect.Field
+              onChange={(e) => setTemplateId(e.target.value)}
+              value={templateId}
+              fontSize="17px"
+              px={0}
+              borderBottomWidth="1px"
+              borderColor="nothing.border"
+              borderRadius={0}
+              _focus={{ borderColor: "nothing.text" }}
+            >
+              {templates.map((template) => (
+                <option key={template.id} value={template.id}>
+                  {template.name}
+                </option>
+              ))}
+            </NativeSelect.Field>
+            <NativeSelect.Indicator color="nothing.textSecondary" />
+          </NativeSelect.Root>
+        </Field.Root>
+
+        <Grid templateColumns="1fr 1fr" gap="24px" pt="16px">
+          <Box>
+            <Text
+              fontFamily="mono"
+              fontSize="10px"
+              letterSpacing="0.2em"
+              textTransform="uppercase"
+              color="nothing.textSecondary"
+              mb="6px"
+            >
+              Created
+            </Text>
+            <Text fontFamily="mono" fontSize="13px" color="nothing.text">
+              {report.formattedCreatedAt}
+            </Text>
+          </Box>
+          <Box>
+            <Text
+              fontFamily="mono"
+              fontSize="10px"
+              letterSpacing="0.2em"
+              textTransform="uppercase"
+              color="nothing.textSecondary"
+              mb="6px"
+            >
+              Updated
+            </Text>
+            <Text fontFamily="mono" fontSize="13px" color="nothing.text">
+              {report.formattedUpdatedAt}
+            </Text>
+          </Box>
+        </Grid>
+      </VStack>
+
+      <HStack justifyContent="flex-end" gap="12px" pt="24px">
+        <Button
+          variant="outline"
+          onClick={handleCancel}
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={handleUpdate}
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
+        >
+          Update →
+        </Button>
+      </HStack>
+    </VStack>
   )
 }
 

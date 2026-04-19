@@ -1,14 +1,13 @@
 import React, { FC, useEffect, useState } from "react"
 import {
   Box,
-  Grid,
-  GridItem,
+  VStack,
+  HStack,
   Text,
   Input,
   NativeSelect,
   Button,
-  Wrap,
-  WrapItem,
+  Field,
 } from "@chakra-ui/react"
 import UseCaseFactory from "../../../di/UseCaseFactory"
 import { setBreadcrumbs } from "../../../infrastructure/state/Breadcrumbs"
@@ -25,7 +24,6 @@ const ReportNew: FC<Props> = () => {
   const [templateId, setTemplateId] = useState<string>("")
 
   const navigator = useNavigator()
-
   const reportsUseCase = UseCaseFactory.createReportsUseCase()
 
   useEffect(() => {
@@ -38,13 +36,8 @@ const ReportNew: FC<Props> = () => {
         setReportTemplates(reportTemplatesVo.items)
       }
       setBreadcrumbs([
-        {
-          func: navigator.toReports,
-          title: "Reports",
-        },
-        {
-          title: "new",
-        },
+        { func: navigator.toReports, title: "Reports" },
+        { title: "New" },
       ])
       setInitialized(true)
     }
@@ -52,10 +45,7 @@ const ReportNew: FC<Props> = () => {
   }, [])
 
   const handleCreate = async () => {
-    const _report = await reportsUseCase.registerReport({
-      name,
-      templateId,
-    })
+    const _report = await reportsUseCase.registerReport({ name, templateId })
     if (_report) {
       successToast({
         title: "Creation succeeded.",
@@ -78,68 +68,112 @@ const ReportNew: FC<Props> = () => {
   }
 
   return (
-    <Box
-      css={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
-      p={5}
-      w="50%"
-    >
-      <Grid templateColumns="repeat(5, 1fr)" gap={0}>
-        <GridItem
-          colSpan={2}
-          h={50}
-          p={5}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
+    <VStack gap="48px" align="stretch" maxW="720px">
+      <Box>
+        <Text
+          fontFamily="mono"
+          fontSize="10px"
+          letterSpacing="0.25em"
+          textTransform="uppercase"
+          color="nothing.textSecondary"
+          mb="8px"
         >
-          <Text fontWeight={600}>Name</Text>
-        </GridItem>
-        <GridItem
-          colSpan={3}
-          h={50}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
+          [Reports / New]
+        </Text>
+        <Text
+          fontFamily="heading"
+          fontSize="56px"
+          lineHeight="1"
+          letterSpacing="-0.03em"
+          fontWeight={500}
+          color="nothing.text"
         >
+          New report.
+        </Text>
+      </Box>
+
+      <VStack gap="32px" align="stretch" borderTopWidth="1px" borderColor="nothing.text" pt="32px">
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Name
+          </Field.Label>
           <Input
             variant="flushed"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            placeholder="Untitled report"
+            fontSize="17px"
+            px={0}
+            borderColor="nothing.border"
+            _focus={{ borderColor: "nothing.text" }}
           />
-        </GridItem>
-        <GridItem colSpan={2} h={50} p={5} display="flex" alignItems="center">
-          <Text fontWeight={600}>Template name</Text>
-        </GridItem>
-        <GridItem colSpan={3} h={50} display="flex" alignItems="center">
-          <NativeSelect.Root>
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Template
+          </Field.Label>
+          <NativeSelect.Root variant="plain">
             <NativeSelect.Field
               onChange={(e) => setTemplateId(e.target.value)}
               value={templateId}
+              fontSize="17px"
+              px={0}
+              borderBottomWidth="1px"
+              borderColor="nothing.border"
+              borderRadius={0}
+              _focus={{ borderColor: "nothing.text" }}
             >
-              {reportTemplates.map((template) => {
-                return (
-                  <option key={template.id} value={template.id}>
-                    {template.name}
-                  </option>
-                )
-              })}
+              <option value="">Select template…</option>
+              {reportTemplates.map((template) => (
+                <option key={template.id} value={template.id}>
+                  {template.name}
+                </option>
+              ))}
             </NativeSelect.Field>
+            <NativeSelect.Indicator color="nothing.textSecondary" />
           </NativeSelect.Root>
-        </GridItem>
-      </Grid>
-      <Box mt={1} display="flex" justifyContent="flex-end">
-        <Wrap gap={2}>
-          <WrapItem>
-            <Button onClick={handleCancel} variant="outline">
-              Cancel
-            </Button>
-          </WrapItem>
-          <WrapItem>
-            <Button onClick={handleCreate}>Create</Button>
-          </WrapItem>
-        </Wrap>
-      </Box>
-    </Box>
+        </Field.Root>
+      </VStack>
+
+      <HStack justifyContent="flex-end" gap="12px" pt="24px">
+        <Button
+          variant="outline"
+          onClick={handleCancel}
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={handleCreate}
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
+        >
+          Create →
+        </Button>
+      </HStack>
+    </VStack>
   )
 }
 

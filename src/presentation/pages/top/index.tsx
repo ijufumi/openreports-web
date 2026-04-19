@@ -1,178 +1,200 @@
-import React, { FC, useEffect } from "react";
-import {
-  VStack,
-  Box,
-  Heading,
-  Text,
-  Grid,
-  GridItem,
-  Button,
-  Card,
-  Icon,
-  Flex,
-} from "@chakra-ui/react";
-import { FiFileText, FiDatabase, FiLayout } from "react-icons/fi";
-import { setBreadcrumbs } from "../../../infrastructure/state/Breadcrumbs";
-import useNavigator from "../navigator";
+import React, { FC, useEffect } from "react"
+import { VStack, HStack, Box, Text, Grid, Button } from "@chakra-ui/react"
+import { setBreadcrumbs } from "../../../infrastructure/state/Breadcrumbs"
+import useNavigator from "../navigator"
 
 interface Props {}
 
+interface Section {
+  index: string
+  title: string
+  description: string
+  action: string
+  onClick: () => void
+}
+
 const Top: FC<Props> = () => {
-  const navigator = useNavigator();
+  const navigator = useNavigator()
 
   useEffect(() => {
-    setBreadcrumbs([]);
-  }, []);
+    setBreadcrumbs([])
+  }, [])
 
-  const quickActions = [
+  const sections: Section[] = [
     {
+      index: "01",
       title: "Reports",
-      description: "View and manage your reports",
-      icon: FiFileText,
-      color: "blue.500",
-      bgColor: "blue.50",
+      description: "View, export, and manage report outputs.",
+      action: "Open Reports",
       onClick: () => navigator.toReports(),
     },
     {
+      index: "02",
       title: "Templates",
-      description: "Manage report templates",
-      icon: FiLayout,
-      color: "purple.500",
-      bgColor: "purple.50",
+      description: "Upload and organize reusable report templates.",
+      action: "Open Templates",
       onClick: () => navigator.toTemplates(),
     },
     {
+      index: "03",
       title: "Data Sources",
-      description: "Configure data connections",
-      icon: FiDatabase,
-      color: "green.500",
-      bgColor: "green.50",
+      description: "Configure the databases your reports connect to.",
+      action: "Open Sources",
       onClick: () => navigator.toDataSources(),
     },
-  ];
+  ]
 
   return (
-    <VStack gap={8} align="stretch" w="100%">
-      {/* Welcome Section */}
-      <Box
-        bg="white"
-        borderRadius="xl"
-        p={8}
-        boxShadow="sm"
-        borderWidth="1px"
-        borderColor="gray.200"
-      >
-        <VStack align="start" gap={2}>
-          <Heading size="2xl" color="gray.800">
-            Welcome to OpenReports
-          </Heading>
-          <Text fontSize="lg" color="gray.600">
-            Manage your reports, templates, and data sources efficiently
+    <VStack gap="96px" align="stretch" w="100%">
+      {/* Hero */}
+      <Box pt="24px">
+        <Text
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.25em"
+          textTransform="uppercase"
+          color="nothing.textSecondary"
+          mb="24px"
+        >
+          [OPENREPORT / WORKSPACE]
+        </Text>
+        <Text
+          fontFamily="display"
+          fontSize={{ base: "72px", md: "128px", lg: "160px" }}
+          lineHeight="0.9"
+          letterSpacing="-0.02em"
+          color="nothing.text"
+          mb="24px"
+        >
+          REPORTS.
+        </Text>
+        <HStack gap="32px" alignItems="flex-start" flexWrap="wrap">
+          <Text
+            fontFamily="body"
+            fontSize="17px"
+            color="nothing.textSecondary"
+            maxW="520px"
+            lineHeight="1.5"
+          >
+            Manage reports, templates, and data sources without the noise. A
+            minimal surface, tuned for speed.
           </Text>
-        </VStack>
-      </Box>
-
-      {/* Quick Actions */}
-      <Box>
-        <Heading size="lg" mb={4} color="gray.700">
-          Quick Actions
-        </Heading>
-        <Grid templateColumns="repeat(auto-fit, minmax(300px, 1fr))" gap={6}>
-          {quickActions.map((action) => (
-            <GridItem key={action.title}>
-              <Card.Root
-                bg="white"
-                borderRadius="lg"
-                p={6}
-                boxShadow="md"
-                borderWidth="1px"
-                borderColor="gray.200"
-                transition="all 0.3s"
-                _hover={{
-                  transform: "translateY(-4px)",
-                  boxShadow: "xl",
-                  borderColor: action.color,
-                }}
-                cursor="pointer"
-                onClick={action.onClick}
-              >
-                <Flex direction="column" gap={4}>
-                  <Flex align="center" gap={3}>
-                    <Box
-                      bg={action.bgColor}
-                      p={3}
-                      borderRadius="lg"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                    >
-                      <Icon
-                        as={action.icon}
-                        boxSize={8}
-                        color={action.color}
-                      />
-                    </Box>
-                    <Heading size="md" color="gray.800">
-                      {action.title}
-                    </Heading>
-                  </Flex>
-                  <Text color="gray.600" fontSize="sm">
-                    {action.description}
-                  </Text>
-                  <Button
-                    variant="outline"
-                    colorScheme={action.color.split(".")[0]}
-                    size="sm"
-                    mt={2}
-                  >
-                    View {action.title}
-                  </Button>
-                </Flex>
-              </Card.Root>
-            </GridItem>
-          ))}
-        </Grid>
-      </Box>
-
-      {/* Getting Started */}
-      <Box
-        bg="gradient-to-r"
-        bgGradient="to-r"
-        gradientFrom="blue.50"
-        gradientTo="purple.50"
-        borderRadius="xl"
-        p={8}
-        borderWidth="1px"
-        borderColor="blue.100"
-      >
-        <VStack align="start" gap={4}>
-          <Heading size="lg" color="gray.800">
-            Getting Started
-          </Heading>
-          <Text color="gray.700" fontSize="md">
-            Start by creating a new report or template to organize your data efficiently.
-          </Text>
-          <Flex gap={4} flexWrap="wrap">
+          <HStack gap="12px">
             <Button
-              colorScheme="blue"
               onClick={() => navigator.toReportNew()}
-              size="md"
+              h="44px"
+              fontFamily="mono"
+              fontSize="11px"
+              letterSpacing="0.2em"
+              textTransform="uppercase"
             >
-              Create New Report
+              + New report
             </Button>
             <Button
               variant="outline"
-              colorScheme="purple"
               onClick={() => navigator.toTemplateNew()}
-              size="md"
+              h="44px"
+              fontFamily="mono"
+              fontSize="11px"
+              letterSpacing="0.2em"
+              textTransform="uppercase"
             >
-              Create New Template
+              + New template
             </Button>
-          </Flex>
+          </HStack>
+        </HStack>
+      </Box>
+
+      {/* Index list */}
+      <Box>
+        <HStack
+          borderTopWidth="1px"
+          borderColor="nothing.text"
+          pt="16px"
+          pb="16px"
+          justifyContent="space-between"
+        >
+          <Text
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.25em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+          >
+            Index
+          </Text>
+          <Text
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.25em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+          >
+            {sections.length.toString().padStart(2, "0")} sections
+          </Text>
+        </HStack>
+
+        <VStack gap={0} align="stretch">
+          {sections.map((s) => (
+            <Grid
+              key={s.index}
+              templateColumns={{
+                base: "1fr",
+                md: "80px 1fr 1fr 180px",
+              }}
+              gap="24px"
+              py="32px"
+              borderBottomWidth="1px"
+              borderColor="nothing.border"
+              alignItems="center"
+              cursor="pointer"
+              onClick={s.onClick}
+              transition="background 120ms ease-out"
+              _hover={{ bg: "nothing.subtle" }}
+              px="8px"
+            >
+              <Text
+                fontFamily="mono"
+                fontSize="12px"
+                letterSpacing="0.15em"
+                color="nothing.textDisabled"
+              >
+                {s.index}
+              </Text>
+              <Text
+                fontFamily="heading"
+                fontSize="40px"
+                lineHeight="1"
+                letterSpacing="-0.02em"
+                fontWeight={500}
+                color="nothing.text"
+              >
+                {s.title}
+              </Text>
+              <Text
+                fontFamily="body"
+                fontSize="14px"
+                color="nothing.textSecondary"
+                lineHeight="1.5"
+              >
+                {s.description}
+              </Text>
+              <Text
+                fontFamily="mono"
+                fontSize="11px"
+                letterSpacing="0.2em"
+                textTransform="uppercase"
+                color="nothing.text"
+                justifySelf={{ base: "start", md: "end" }}
+              >
+                {s.action} →
+              </Text>
+            </Grid>
+          ))}
         </VStack>
       </Box>
     </VStack>
-  );
-};
+  )
+}
 
-export default Top;
+export default Top

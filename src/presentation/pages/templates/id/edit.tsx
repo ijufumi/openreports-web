@@ -1,13 +1,12 @@
 import React, { FC, useState, useEffect } from "react"
 import {
   Box,
-  Grid,
-  GridItem,
+  VStack,
+  HStack,
   Text,
   Input,
-  Wrap,
-  WrapItem,
   Button,
+  Field,
 } from "@chakra-ui/react"
 import { useParams } from "react-router"
 import useNavigator from "../../navigator"
@@ -39,13 +38,8 @@ const TemplateEdit: FC<Props> = () => {
         }
       }
       setBreadcrumbs([
-        {
-          func: navigator.toTemplates,
-          title: "Templates",
-        },
-        {
-          title: id,
-        },
+        { func: navigator.toTemplates, title: "Templates" },
+        { title: id },
       ])
       setInitialized(true)
     }
@@ -79,49 +73,92 @@ const TemplateEdit: FC<Props> = () => {
   }
 
   return (
-    <Box
-      css={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
-      p={5}
-      w="50%"
-    >
-      <Grid templateColumns="repeat(5, 1fr)" gap={0}>
-        <GridItem
-          colSpan={2}
-          h={50}
-          p={5}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
+    <VStack gap="48px" align="stretch" maxW="720px">
+      <Box>
+        <Text
+          fontFamily="mono"
+          fontSize="10px"
+          letterSpacing="0.25em"
+          textTransform="uppercase"
+          color="nothing.textSecondary"
+          mb="8px"
         >
-          <Text fontWeight={600}>Name</Text>
-        </GridItem>
-        <GridItem
-          colSpan={3}
-          h={50}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
+          [Templates / Edit]
+        </Text>
+        <Text
+          fontFamily="heading"
+          fontSize="56px"
+          lineHeight="1"
+          letterSpacing="-0.03em"
+          fontWeight={500}
+          color="nothing.text"
         >
+          {name || "Untitled"}
+        </Text>
+        <Text
+          mt="12px"
+          fontFamily="mono"
+          fontSize="12px"
+          color="nothing.textDisabled"
+        >
+          {id}
+        </Text>
+      </Box>
+
+      <VStack
+        gap="32px"
+        align="stretch"
+        borderTopWidth="1px"
+        borderColor="nothing.text"
+        pt="32px"
+      >
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Name
+          </Field.Label>
           <Input
             variant="flushed"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            fontSize="17px"
+            px={0}
+            borderColor="nothing.border"
+            _focus={{ borderColor: "nothing.text" }}
           />
-        </GridItem>
-      </Grid>
-      <Box mt={1} display="flex" justifyContent="flex-end">
-        <Wrap gap={2}>
-          <WrapItem>
-            <Button onClick={handleCancel} variant="outline">
-              Cancel
-            </Button>
-          </WrapItem>
-          <WrapItem>
-            <Button onClick={handleUpdate}>Update</Button>
-          </WrapItem>
-        </Wrap>
-      </Box>
-    </Box>
+        </Field.Root>
+      </VStack>
+
+      <HStack justifyContent="flex-end" gap="12px" pt="24px">
+        <Button
+          variant="outline"
+          onClick={handleCancel}
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={handleUpdate}
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
+        >
+          Update →
+        </Button>
+      </HStack>
+    </VStack>
   )
 }
 

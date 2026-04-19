@@ -2,6 +2,9 @@ import React, { FC, useState, useEffect } from "react"
 import { useLocation } from "react-router"
 import {
   VStack,
+  HStack,
+  Box,
+  Text,
   Link,
   Wrap,
   WrapItem,
@@ -19,10 +22,8 @@ import ReportVo from "../../../application/dto/vos/responses/ReportVo"
 import DataTable from "../../components/data_table/DataTable"
 import { setBreadcrumbs } from "../../../infrastructure/state/Breadcrumbs"
 import DownloadUtils from "../../../infrastructure/utils/download/DownloadUtils"
-import DateUtils from "../../../infrastructure/utils/date/DateUtils"
 import useNavigator from "../navigator"
-import { successToast, errorToast } from "../../../infrastructure/state/Toast"
-import { ACTIONS_HEIGHT } from "../consts"
+import { errorToast } from "../../../infrastructure/state/Toast"
 
 interface Props {}
 
@@ -41,11 +42,7 @@ const Reports: FC<Props> = () => {
         setReports(reports)
       }
       setInitialized(true)
-      setBreadcrumbs([
-        {
-          title: "Reports",
-        },
-      ])
+      setBreadcrumbs([{ title: "Reports" }])
     }
     initialize()
   }, [state])
@@ -95,38 +92,54 @@ const Reports: FC<Props> = () => {
           return ""
         }
         return (
-          <Link onClick={() => handleClick(props.getValue())}>
+          <Link
+            fontFamily="mono"
+            fontSize="13px"
+            onClick={() => handleClick(props.getValue())}
+          >
             {props.getValue()}
           </Link>
         )
       },
-      size: 100,
+      size: 120,
     }),
     columnHelper.accessor("name", {
       header: "Name",
       cell: (props) => props.getValue(),
     }),
     columnHelper.accessor("templateName", {
-      header: "TemplateVo name",
-      cell: (props) => props.getValue(),
+      header: "Template",
+      cell: (props) => (
+        <Text fontFamily="mono" fontSize="13px" color="nothing.textSecondary">
+          {props.getValue()}
+        </Text>
+      ),
     }),
     columnHelper.accessor("formattedCreatedAt", {
-      header: "Created at",
-      cell: (props) => props.getValue(),
+      header: "Created",
+      cell: (props) => (
+        <Text fontFamily="mono" fontSize="12px" color="nothing.textSecondary">
+          {props.getValue()}
+        </Text>
+      ),
     }),
     columnHelper.accessor("formattedUpdatedAt", {
-      header: "Updated at",
-      cell: (props) => props.getValue(),
+      header: "Updated",
+      cell: (props) => (
+        <Text fontFamily="mono" fontSize="12px" color="nothing.textSecondary">
+          {props.getValue()}
+        </Text>
+      ),
     }),
     columnHelper.display({
-      header: "Actions",
+      header: "",
       cell: (props) => {
         const reportId = props.row.getValue("id") as string
         if (!reportId) {
           return undefined
         }
         return (
-          <Wrap gap={5}>
+          <Wrap gap={2} justify="flex-end">
             <WrapItem>
               <Tooltip content="Output report">
                 <IconButton
@@ -142,7 +155,7 @@ const Reports: FC<Props> = () => {
               <Tooltip content="Delete report">
                 <IconButton
                   variant={"actionIcons" as any}
-                  aria-label="output"
+                  aria-label="delete"
                   onClick={() => handleDelete(reportId)}
                 >
                   <Icon as={GrTrash} />
@@ -156,34 +169,59 @@ const Reports: FC<Props> = () => {
   ] as ColumnDef<ReportVo>[]
 
   return (
-    <VStack gap={6} align="stretch">
-      <Flex
-        bg="white"
-        p={6}
-        borderRadius="lg"
-        boxShadow="sm"
-        borderWidth="1px"
-        borderColor="gray.200"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <VStack align="start" gap={1}>
-          <Flex fontSize="2xl" fontWeight="bold" color="gray.800">
-            Reports
-          </Flex>
-          <Flex fontSize="sm" color="gray.600">
-            View, manage, and export your reports
-          </Flex>
-        </VStack>
+    <VStack gap="32px" align="stretch">
+      <Flex justifyContent="space-between" alignItems="flex-end">
+        <Box>
+          <Text
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.25em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            [01 / Reports]
+          </Text>
+          <HStack gap="16px" alignItems="baseline">
+            <Text
+              fontFamily="heading"
+              fontSize="56px"
+              lineHeight="1"
+              letterSpacing="-0.03em"
+              fontWeight={500}
+              color="nothing.text"
+            >
+              Reports
+            </Text>
+            <Text
+              fontFamily="mono"
+              fontSize="13px"
+              color="nothing.textSecondary"
+            >
+              {reports?.count ?? 0} total
+            </Text>
+          </HStack>
+          <Text
+            mt="8px"
+            fontSize="14px"
+            color="nothing.textSecondary"
+            maxW="480px"
+          >
+            View, manage, and export your reports.
+          </Text>
+        </Box>
         <Button
           onClick={handleClickNew}
-          colorScheme="blue"
-          size="lg"
-          boxShadow="sm"
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
         >
-          Create New
+          + New
         </Button>
       </Flex>
+
       <DataTable
         columns={columns}
         data={reports?.items || []}
