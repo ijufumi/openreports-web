@@ -4,9 +4,9 @@ import {
   VStack,
   HStack,
   Box,
+  Text,
   Menu,
   IconButton,
-  Image,
   Icon,
   Breadcrumb,
   NativeSelect,
@@ -16,7 +16,6 @@ import { FaRegUserCircle } from "react-icons/fa"
 import { MdKeyboardArrowRight } from "react-icons/md"
 import { CgMenu } from "react-icons/cg"
 import UseCaseFactory from "../../../di/UseCaseFactory"
-import logoImg from "../../../assets/header-logo.svg"
 import { useBreadcrumbsState } from "@/infrastructure/state/Breadcrumbs"
 import useLoginUser from "../../../infrastructure/state/LoginUser"
 import useNavigator from "../navigator"
@@ -70,96 +69,187 @@ const Layout: FC<Props> = observer(({ children }) => {
   }
 
   return (
-    <VStack gap={0} h="100%" w="100%" overflowY="auto">
+    <VStack gap={0} h="100%" w="100%" overflowY="auto" bg="nothing.bg">
       <Box
         h={`${HEADER_HEIGHT}px`}
         w="100%"
-        bg="white"
+        bg="nothing.bg"
         display="flex"
         alignItems="center"
         justifyContent="space-between"
-        padding="0 20px"
-        boxShadow="sm"
+        px="24px"
         borderBottomWidth="1px"
-        borderColor="gray.200"
+        borderColor="nothing.border"
       >
-        <HStack gap={"10px"} w={"100%"} h={`${HEADER_HEIGHT}px`}>
-          <Box display={"flex"} alignItems={"center"}>
-            <Menu.Root>
-              <Menu.Trigger asChild>
-                <IconButton
-                  variant="subtle"
-                  aria-label="Options"
-                  css={{ "min-width": "50px !important" }}
+        <HStack gap="20px" h={`${HEADER_HEIGHT}px`} alignItems="center">
+          <Menu.Root>
+            <Menu.Trigger asChild>
+              <IconButton
+                variant={"icon" as any}
+                aria-label="Navigation"
+              >
+                <CgMenu size="20" />
+              </IconButton>
+            </Menu.Trigger>
+            <Portal>
+              <Menu.Positioner>
+                <Menu.Content
+                  bg="nothing.surface"
+                  borderWidth="1px"
+                  borderColor="nothing.border"
+                  borderRadius="technical"
+                  boxShadow="none"
+                  p={2}
                 >
-                  <CgMenu size="30" />
-                </IconButton>
-              </Menu.Trigger>
-              <Portal>
-                <Menu.Positioner>
-                  <Menu.Content>
-                    <Menu.ItemGroup title={"Reports"}>
-                      <Menu.Item value="reports" onClick={navigator.toReports}>Reports</Menu.Item>
-                      <Menu.Item value="templates" onClick={navigator.toTemplates}>Templates</Menu.Item>
-                      <Menu.Item value="parameters" disabled>Parameters</Menu.Item>
-                      <Menu.Item value="groups" disabled>Groups</Menu.Item>
-                      <Menu.Item value="scheduling" disabled>Scheduling</Menu.Item>
-                    </Menu.ItemGroup>
-                    <Menu.Separator />
-                    <Menu.ItemGroup title={"Settings"}>
-                      <Menu.Item value="workspace" disabled>Workspace</Menu.Item>
-                      <Menu.Item value="datasources" onClick={navigator.toDataSources}>
-                        DataSources
-                      </Menu.Item>
-                      <Menu.Item value="logs" disabled>Logs</Menu.Item>
-                    </Menu.ItemGroup>
-                  </Menu.Content>
-                </Menu.Positioner>
-              </Portal>
-            </Menu.Root>
-            <Box>
-              <Image
-                w={"150px"}
-                onClick={navigator.toTop}
-                src={logoImg}
-                alt={"logo"}
-                style={{
-                  cursor: "pointer",
-                }}
-              />
-            </Box>
-          </Box>
-          <Box>
-            <NativeSelect.Root>
-              <NativeSelect.Field>
-                {loginUser.get()?.workspaces.map((w) => {
-                  return (
-                    <option key={w.id} value={w.id}>
-                      {w.name}
-                    </option>
-                  )
-                })}
-              </NativeSelect.Field>
-            </NativeSelect.Root>
-          </Box>
+                  <Menu.ItemGroup>
+                    <Menu.ItemGroupLabel
+                      fontFamily="mono"
+                      fontSize="10px"
+                      letterSpacing="0.15em"
+                      textTransform="uppercase"
+                      color="nothing.textSecondary"
+                      px={2}
+                      py={1}
+                    >
+                      Reports
+                    </Menu.ItemGroupLabel>
+                    <Menu.Item value="reports" onClick={navigator.toReports}>
+                      Reports
+                    </Menu.Item>
+                    <Menu.Item
+                      value="templates"
+                      onClick={navigator.toTemplates}
+                    >
+                      Templates
+                    </Menu.Item>
+                    <Menu.Item value="parameters" disabled>
+                      Parameters
+                    </Menu.Item>
+                    <Menu.Item value="groups" disabled>
+                      Groups
+                    </Menu.Item>
+                    <Menu.Item value="scheduling" disabled>
+                      Scheduling
+                    </Menu.Item>
+                  </Menu.ItemGroup>
+                  <Menu.Separator borderColor="nothing.border" my={2} />
+                  <Menu.ItemGroup>
+                    <Menu.ItemGroupLabel
+                      fontFamily="mono"
+                      fontSize="10px"
+                      letterSpacing="0.15em"
+                      textTransform="uppercase"
+                      color="nothing.textSecondary"
+                      px={2}
+                      py={1}
+                    >
+                      Settings
+                    </Menu.ItemGroupLabel>
+                    <Menu.Item value="workspace" disabled>
+                      Workspace
+                    </Menu.Item>
+                    <Menu.Item
+                      value="datasources"
+                      onClick={navigator.toDataSources}
+                    >
+                      Data Sources
+                    </Menu.Item>
+                    <Menu.Item value="logs" disabled>
+                      Logs
+                    </Menu.Item>
+                  </Menu.ItemGroup>
+                </Menu.Content>
+              </Menu.Positioner>
+            </Portal>
+          </Menu.Root>
+          <HStack
+            gap="8px"
+            alignItems="baseline"
+            onClick={navigator.toTop}
+            cursor="pointer"
+          >
+            <Text
+              fontFamily="display"
+              fontSize="22px"
+              lineHeight="1"
+              color="nothing.text"
+            >
+              ●
+            </Text>
+            <Text
+              fontFamily="mono"
+              fontSize="11px"
+              letterSpacing="0.25em"
+              textTransform="uppercase"
+              color="nothing.text"
+            >
+              OpenReport
+            </Text>
+          </HStack>
+          <Box
+            borderLeftWidth="1px"
+            borderColor="nothing.border"
+            h="32px"
+            mx="4px"
+          />
+          <NativeSelect.Root variant="plain" size="sm" w="auto">
+            <NativeSelect.Field
+              fontFamily="mono"
+              fontSize="12px"
+              letterSpacing="0.1em"
+              textTransform="uppercase"
+              color="nothing.text"
+              bg="transparent"
+              pr="24px"
+            >
+              {loginUser.get()?.workspaces.map((w) => {
+                return (
+                  <option key={w.id} value={w.id}>
+                    {w.name}
+                  </option>
+                )
+              })}
+            </NativeSelect.Field>
+            <NativeSelect.Indicator color="nothing.textSecondary" />
+          </NativeSelect.Root>
           {breadcrumbs && breadcrumbs.length > 0 && (
             <Breadcrumb.Root>
-              <Breadcrumb.List>
-                <Breadcrumb.Item />
+              <Breadcrumb.List gap="6px">
                 {breadcrumbs.map((b, idx) => {
                   const isLast = breadcrumbs?.length - 1 === idx
                   return (
                     <React.Fragment key={b.title}>
                       {idx > 0 && (
                         <Breadcrumb.Separator>
-                          <Icon color="gray.500" as={MdKeyboardArrowRight} />
+                          <Icon
+                            color="nothing.textDisabled"
+                            as={MdKeyboardArrowRight}
+                          />
                         </Breadcrumb.Separator>
                       )}
                       <Breadcrumb.Item>
                         {isLast ? (
-                          <Breadcrumb.CurrentLink>{b.title}</Breadcrumb.CurrentLink>
+                          <Breadcrumb.CurrentLink
+                            fontFamily="mono"
+                            fontSize="12px"
+                            letterSpacing="0.1em"
+                            textTransform="uppercase"
+                            color="nothing.text"
+                          >
+                            {b.title}
+                          </Breadcrumb.CurrentLink>
                         ) : (
-                          <Breadcrumb.Link href={b.path} onClick={b.func}>
+                          <Breadcrumb.Link
+                            href={b.path}
+                            onClick={b.func}
+                            fontFamily="mono"
+                            fontSize="12px"
+                            letterSpacing="0.1em"
+                            textTransform="uppercase"
+                            color="nothing.textSecondary"
+                            textDecoration="none"
+                            _hover={{ color: "nothing.text" }}
+                          >
                             {b.title}
                           </Breadcrumb.Link>
                         )}
@@ -171,29 +261,49 @@ const Layout: FC<Props> = observer(({ children }) => {
             </Breadcrumb.Root>
           )}
         </HStack>
-        <HStack>
+        <HStack gap="12px">
+          <Text
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.15em"
+            textTransform="uppercase"
+            color="nothing.textDisabled"
+          >
+            [{loginUser.get()?.name ?? "GUEST"}]
+          </Text>
           <Menu.Root>
             <Menu.Trigger asChild>
               <IconButton
                 variant={"icon" as any}
-                aria-label="Options"
+                aria-label="Account"
               >
-                <FaRegUserCircle size="30" style={{ color: "gray" }} />
+                <FaRegUserCircle size="18" />
               </IconButton>
             </Menu.Trigger>
             <Portal>
               <Menu.Positioner>
-                <Menu.Content>
-                  <Menu.Item value="profile" onClick={navigator.toProfile}>Profile</Menu.Item>
-                  <Menu.Separator />
-                  <Menu.Item value="logout" onClick={handleLogout}>Logout</Menu.Item>
+                <Menu.Content
+                  bg="nothing.surface"
+                  borderWidth="1px"
+                  borderColor="nothing.border"
+                  borderRadius="technical"
+                  boxShadow="none"
+                  p={2}
+                >
+                  <Menu.Item value="profile" onClick={navigator.toProfile}>
+                    Profile
+                  </Menu.Item>
+                  <Menu.Separator borderColor="nothing.border" my={2} />
+                  <Menu.Item value="logout" onClick={handleLogout}>
+                    Logout
+                  </Menu.Item>
                 </Menu.Content>
               </Menu.Positioner>
             </Portal>
           </Menu.Root>
         </HStack>
       </Box>
-      <Box w="100%" h="100%" padding="20px" overflow="auto">
+      <Box w="100%" h="100%" p="40px 48px" overflow="auto">
         {children}
       </Box>
     </VStack>

@@ -1,13 +1,12 @@
 import React, { FC, useState, useEffect } from "react"
 import {
   Box,
+  VStack,
+  HStack,
   Text,
   Input,
-  Wrap,
-  WrapItem,
   Button,
   NativeSelect,
-  VStack,
   Field,
 } from "@chakra-ui/react"
 import useNavigator from "../navigator"
@@ -35,9 +34,8 @@ const DataSourceNew: FC<Props> = () => {
       const _driverTypes = await dataSourceUseCase.getDriverTypes()
       setDriverTypes(_driverTypes)
       setBreadcrumbs([
-        {
-          title: "Data source",
-        },
+        { func: navigator.toDataSources, title: "Data Sources" },
+        { title: "New" },
       ])
       setInitialized(true)
     }
@@ -74,151 +72,188 @@ const DataSourceNew: FC<Props> = () => {
   }
 
   return (
-    <VStack gap={6} align="stretch" maxW="800px" mx="auto">
-      <Box
-        bg="white"
-        p={6}
-        borderRadius="lg"
-        boxShadow="sm"
-        borderWidth="1px"
-        borderColor="gray.200"
-      >
-        <VStack align="start" gap={2}>
-          <Text fontSize="2xl" fontWeight="bold" color="gray.800">
-            Create New Data Source
-          </Text>
-          <Text fontSize="sm" color="gray.600">
-            Configure a new database connection
-          </Text>
-        </VStack>
+    <VStack gap="48px" align="stretch" maxW="720px">
+      <Box>
+        <Text
+          fontFamily="mono"
+          fontSize="10px"
+          letterSpacing="0.25em"
+          textTransform="uppercase"
+          color="nothing.textSecondary"
+          mb="8px"
+        >
+          [Data Sources / New]
+        </Text>
+        <Text
+          fontFamily="heading"
+          fontSize="56px"
+          lineHeight="1"
+          letterSpacing="-0.03em"
+          fontWeight={500}
+          color="nothing.text"
+        >
+          New source.
+        </Text>
       </Box>
 
-      <Box
-        bg="white"
-        borderRadius="lg"
-        boxShadow="sm"
-        borderWidth="1px"
-        borderColor="gray.200"
-        p={8}
+      <VStack
+        gap="32px"
+        align="stretch"
+        borderTopWidth="1px"
+        borderColor="nothing.text"
+        pt="32px"
       >
-        <VStack gap={6} align="stretch">
-          <Field.Root>
-            <Field.Label fontSize="md" fontWeight="600" color="gray.700">
-              Name
-            </Field.Label>
-            <Input
-              size="lg"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter data source name"
-              bg="gray.50"
-              borderColor="gray.300"
-              _focus={{ bg: "white", borderColor: "blue.400" }}
-            />
-          </Field.Root>
-
-          <Field.Root>
-            <Field.Label fontSize="md" fontWeight="600" color="gray.700">
-              URL
-            </Field.Label>
-            <Input
-              size="lg"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="Enter database URL"
-              bg="gray.50"
-              borderColor="gray.300"
-              _focus={{ bg: "white", borderColor: "blue.400" }}
-            />
-          </Field.Root>
-
-          <Field.Root>
-            <Field.Label fontSize="md" fontWeight="600" color="gray.700">
-              Username
-            </Field.Label>
-            <Input
-              size="lg"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter username"
-              bg="gray.50"
-              borderColor="gray.300"
-              _focus={{ bg: "white", borderColor: "blue.400" }}
-            />
-          </Field.Root>
-
-          <Field.Root>
-            <Field.Label fontSize="md" fontWeight="600" color="gray.700">
-              Password
-            </Field.Label>
-            <Input
-              size="lg"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-              bg="gray.50"
-              borderColor="gray.300"
-              _focus={{ bg: "white", borderColor: "blue.400" }}
-            />
-          </Field.Root>
-
-          <Field.Root>
-            <Field.Label fontSize="md" fontWeight="600" color="gray.700">
-              Driver Type
-            </Field.Label>
-            <NativeSelect.Root size="lg">
-              <NativeSelect.Field
-                onChange={(e) => setDriverTypeId(e.target.value)}
-                value={driverTypeId}
-                bg="gray.50"
-                borderColor="gray.300"
-                _focus={{ bg: "white", borderColor: "blue.400" }}
-              >
-                <option value="">Select driver type</option>
-                {driverTypes.map((driverType) => {
-                  return (
-                    <option key={driverType.id} value={driverType.id}>
-                      {driverType.name}
-                    </option>
-                  )
-                })}
-              </NativeSelect.Field>
-            </NativeSelect.Root>
-          </Field.Root>
-
-          <Box
-            pt={4}
-            borderTopWidth="1px"
-            borderColor="gray.200"
-            display="flex"
-            justifyContent="flex-end"
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
           >
-            <Wrap gap={3}>
-              <WrapItem>
-                <Button
-                  onClick={handleCancel}
-                  variant="outline"
-                  size="lg"
-                  colorScheme="gray"
-                >
-                  Cancel
-                </Button>
-              </WrapItem>
-              <WrapItem>
-                <Button
-                  onClick={handleCreate}
-                  size="lg"
-                  colorScheme="blue"
-                  boxShadow="sm"
-                >
-                  Create Data Source
-                </Button>
-              </WrapItem>
-            </Wrap>
-          </Box>
-        </VStack>
-      </Box>
+            Name
+          </Field.Label>
+          <Input
+            variant="flushed"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Untitled source"
+            fontSize="17px"
+            px={0}
+            borderColor="nothing.border"
+            _focus={{ borderColor: "nothing.text" }}
+          />
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            URL
+          </Field.Label>
+          <Input
+            variant="flushed"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="jdbc://…"
+            fontFamily="mono"
+            fontSize="15px"
+            px={0}
+            borderColor="nothing.border"
+            _focus={{ borderColor: "nothing.text" }}
+          />
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Username
+          </Field.Label>
+          <Input
+            variant="flushed"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            fontFamily="mono"
+            fontSize="15px"
+            px={0}
+            borderColor="nothing.border"
+            _focus={{ borderColor: "nothing.text" }}
+          />
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Password
+          </Field.Label>
+          <Input
+            variant="flushed"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            fontFamily="mono"
+            fontSize="15px"
+            px={0}
+            borderColor="nothing.border"
+            _focus={{ borderColor: "nothing.text" }}
+          />
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Driver
+          </Field.Label>
+          <NativeSelect.Root variant="plain">
+            <NativeSelect.Field
+              onChange={(e) => setDriverTypeId(e.target.value)}
+              value={driverTypeId}
+              fontSize="17px"
+              px={0}
+              borderBottomWidth="1px"
+              borderColor="nothing.border"
+              borderRadius={0}
+              _focus={{ borderColor: "nothing.text" }}
+            >
+              <option value="">Select driver…</option>
+              {driverTypes.map((driverType) => (
+                <option key={driverType.id} value={driverType.id}>
+                  {driverType.name}
+                </option>
+              ))}
+            </NativeSelect.Field>
+            <NativeSelect.Indicator color="nothing.textSecondary" />
+          </NativeSelect.Root>
+        </Field.Root>
+      </VStack>
+
+      <HStack justifyContent="flex-end" gap="12px" pt="24px">
+        <Button
+          variant="outline"
+          onClick={handleCancel}
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={handleCreate}
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
+        >
+          Create →
+        </Button>
+      </HStack>
     </VStack>
   )
 }

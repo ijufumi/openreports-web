@@ -1,7 +1,10 @@
 import React, { FC, useEffect, useState } from "react"
 import {
   Button,
+  Box,
   Flex,
+  HStack,
+  Text,
   Icon,
   IconButton,
   Link,
@@ -40,11 +43,7 @@ const DataSources: FC<Props> = () => {
         setDataSources(_dataSources)
       }
       setInitialized(true)
-      setBreadcrumbs([
-        {
-          title: "DataSources",
-        },
-      ])
+      setBreadcrumbs([{ title: "Data Sources" }])
     }
     initialize()
   }, [state])
@@ -93,43 +92,65 @@ const DataSources: FC<Props> = () => {
           return ""
         }
         return (
-          <Link onClick={() => handleClick(props.getValue())}>
+          <Link
+            fontFamily="mono"
+            fontSize="13px"
+            onClick={() => handleClick(props.getValue())}
+          >
             {props.getValue()}
           </Link>
         )
       },
-      size: 100,
+      size: 120,
     }),
     columnHelper.accessor("name", {
       header: "Name",
       cell: (props) => props.getValue(),
     }),
     columnHelper.accessor("driverTypeName", {
-      header: "Driver Type",
-      cell: (props) => props.getValue(),
+      header: "Driver",
+      cell: (props) => (
+        <Text
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.1em"
+          textTransform="uppercase"
+          color="nothing.textSecondary"
+        >
+          {props.getValue()}
+        </Text>
+      ),
     }),
     columnHelper.accessor("formattedCreatedAt", {
-      header: "Created at",
-      cell: (props) => props.getValue(),
+      header: "Created",
+      cell: (props) => (
+        <Text fontFamily="mono" fontSize="12px" color="nothing.textSecondary">
+          {props.getValue()}
+        </Text>
+      ),
     }),
     columnHelper.accessor("formattedUpdatedAt", {
-      header: "Updated at",
-      cell: (props) => props.getValue(),
+      header: "Updated",
+      cell: (props) => (
+        <Text fontFamily="mono" fontSize="12px" color="nothing.textSecondary">
+          {props.getValue()}
+        </Text>
+      ),
     }),
     columnHelper.display({
-      header: "Actions",
+      header: "",
       cell: (props) => {
         const reportId = props.row.getValue("id") as string
         if (!reportId) {
           return undefined
         }
         return (
-          <Wrap gap={5}>
+          <Wrap gap={2} justify="flex-end">
             <WrapItem>
-              <Tooltip content="Delete report">
+              <Tooltip content="Delete data source">
                 <IconButton
                   variant={"actionIcons" as any}
-                  aria-label="output"
+                  aria-label="delete"
                   onClick={() => handleDelete(reportId)}
                 >
                   <Icon as={GrTrash} />
@@ -143,34 +164,59 @@ const DataSources: FC<Props> = () => {
   ] as ColumnDef<DataSourceVo>[]
 
   return (
-    <VStack gap={6} align="stretch">
-      <Flex
-        bg="white"
-        p={6}
-        borderRadius="lg"
-        boxShadow="sm"
-        borderWidth="1px"
-        borderColor="gray.200"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <VStack align="start" gap={1}>
-          <Flex fontSize="2xl" fontWeight="bold" color="gray.800">
-            Data Sources
-          </Flex>
-          <Flex fontSize="sm" color="gray.600">
-            Manage your database connections and data sources
-          </Flex>
-        </VStack>
+    <VStack gap="32px" align="stretch">
+      <Flex justifyContent="space-between" alignItems="flex-end">
+        <Box>
+          <Text
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.25em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            [03 / Data Sources]
+          </Text>
+          <HStack gap="16px" alignItems="baseline">
+            <Text
+              fontFamily="heading"
+              fontSize="56px"
+              lineHeight="1"
+              letterSpacing="-0.03em"
+              fontWeight={500}
+              color="nothing.text"
+            >
+              Sources
+            </Text>
+            <Text
+              fontFamily="mono"
+              fontSize="13px"
+              color="nothing.textSecondary"
+            >
+              {dataSources?.count ?? 0} total
+            </Text>
+          </HStack>
+          <Text
+            mt="8px"
+            fontSize="14px"
+            color="nothing.textSecondary"
+            maxW="480px"
+          >
+            Manage your database connections and data sources.
+          </Text>
+        </Box>
         <Button
           onClick={handleClickNew}
-          colorScheme="blue"
-          size="lg"
-          boxShadow="sm"
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
         >
-          Create New
+          + New
         </Button>
       </Flex>
+
       <DataTable
         columns={columns}
         data={dataSources?.items || []}

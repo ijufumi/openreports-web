@@ -1,14 +1,13 @@
 import React, { FC, useState, useEffect } from "react"
 import {
   Box,
-  Grid,
-  GridItem,
+  VStack,
+  HStack,
   Text,
   Input,
-  Wrap,
-  WrapItem,
   Button,
   NativeSelect,
+  Field,
 } from "@chakra-ui/react"
 import useNavigator from "../../navigator"
 import UseCaseFactory from "../../../../di/UseCaseFactory"
@@ -52,9 +51,8 @@ const DataSourceEdit: FC<Props> = () => {
       const _driverTypes = await dataSourceUseCase.getDriverTypes()
       setDriverTypes(_driverTypes)
       setBreadcrumbs([
-        {
-          title: "Data source",
-        },
+        { func: navigator.toDataSources, title: "Data Sources" },
+        { title: id },
       ])
       setInitialized(true)
     }
@@ -92,150 +90,194 @@ const DataSourceEdit: FC<Props> = () => {
   }
 
   return (
-    <Box
-      css={{ borderRadius: "10px", borderColor: "gray.100", bgColor: "white" }}
-      p={5}
-      w="50%"
-    >
-      <Grid templateColumns="repeat(5, 1fr)" gap={0}>
-        <GridItem
-          colSpan={2}
-          h={50}
-          p={5}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
+    <VStack gap="48px" align="stretch" maxW="720px">
+      <Box>
+        <Text
+          fontFamily="mono"
+          fontSize="10px"
+          letterSpacing="0.25em"
+          textTransform="uppercase"
+          color="nothing.textSecondary"
+          mb="8px"
         >
-          <Text fontWeight={600}>Name</Text>
-        </GridItem>
-        <GridItem
-          colSpan={3}
-          h={50}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
+          [Data Sources / Edit]
+        </Text>
+        <Text
+          fontFamily="heading"
+          fontSize="56px"
+          lineHeight="1"
+          letterSpacing="-0.03em"
+          fontWeight={500}
+          color="nothing.text"
         >
+          {name || "Untitled"}
+        </Text>
+        <Text
+          mt="12px"
+          fontFamily="mono"
+          fontSize="12px"
+          color="nothing.textDisabled"
+        >
+          {id}
+        </Text>
+      </Box>
+
+      <VStack
+        gap="32px"
+        align="stretch"
+        borderTopWidth="1px"
+        borderColor="nothing.text"
+        pt="32px"
+      >
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Name
+          </Field.Label>
           <Input
             variant="flushed"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            fontSize="17px"
+            px={0}
+            borderColor="nothing.border"
+            _focus={{ borderColor: "nothing.text" }}
           />
-        </GridItem>
-        <GridItem
-          colSpan={2}
-          h={50}
-          p={5}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
-        >
-          <Text fontWeight={600}>Url</Text>
-        </GridItem>
-        <GridItem
-          colSpan={3}
-          h={50}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
-        >
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            URL
+          </Field.Label>
           <Input
             variant="flushed"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
+            fontFamily="mono"
+            fontSize="15px"
+            px={0}
+            borderColor="nothing.border"
+            _focus={{ borderColor: "nothing.text" }}
           />
-        </GridItem>
-        <GridItem
-          colSpan={2}
-          h={50}
-          p={5}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
-        >
-          <Text fontWeight={600}>Username</Text>
-        </GridItem>
-        <GridItem
-          colSpan={3}
-          h={50}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
-        >
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Username
+          </Field.Label>
           <Input
             variant="flushed"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            fontFamily="mono"
+            fontSize="15px"
+            px={0}
+            borderColor="nothing.border"
+            _focus={{ borderColor: "nothing.text" }}
           />
-        </GridItem>
-        <GridItem
-          colSpan={2}
-          h={50}
-          p={5}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
-        >
-          <Text fontWeight={600}>Password</Text>
-        </GridItem>
-        <GridItem
-          colSpan={3}
-          h={50}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
-        >
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Password
+          </Field.Label>
           <Input
             variant="flushed"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            fontFamily="mono"
+            fontSize="15px"
+            px={0}
+            borderColor="nothing.border"
+            _focus={{ borderColor: "nothing.text" }}
           />
-        </GridItem>
-        <GridItem
-          colSpan={2}
-          h={50}
-          p={5}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
-        >
-          <Text fontWeight={600}>Driver type</Text>
-        </GridItem>
-        <GridItem
-          colSpan={3}
-          h={50}
-          display="flex"
-          alignItems="center"
-          bgColor="gray.50"
-        >
-          <NativeSelect.Root>
+        </Field.Root>
+
+        <Field.Root>
+          <Field.Label
+            fontFamily="mono"
+            fontSize="10px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+            color="nothing.textSecondary"
+            mb="8px"
+          >
+            Driver
+          </Field.Label>
+          <NativeSelect.Root variant="plain">
             <NativeSelect.Field
               onChange={(e) => setDriverTypeId(e.target.value)}
               value={driverTypeId}
+              fontSize="17px"
+              px={0}
+              borderBottomWidth="1px"
+              borderColor="nothing.border"
+              borderRadius={0}
+              _focus={{ borderColor: "nothing.text" }}
             >
-              {driverTypes.map((driverType) => {
-                return (
-                  <option key={driverType.id} value={driverType.id}>
-                    {driverType.name}
-                  </option>
-                )
-              })}
+              {driverTypes.map((driverType) => (
+                <option key={driverType.id} value={driverType.id}>
+                  {driverType.name}
+                </option>
+              ))}
             </NativeSelect.Field>
+            <NativeSelect.Indicator color="nothing.textSecondary" />
           </NativeSelect.Root>
-        </GridItem>
-      </Grid>
-      <Box mt={1} display="flex" justifyContent="flex-end">
-        <Wrap gap={2}>
-          <WrapItem>
-            <Button onClick={handleCancel} variant="outline">
-              Cancel
-            </Button>
-          </WrapItem>
-          <WrapItem>
-            <Button onClick={handleUpdate}>Update</Button>
-          </WrapItem>
-        </Wrap>
-      </Box>
-    </Box>
+        </Field.Root>
+      </VStack>
+
+      <HStack justifyContent="flex-end" gap="12px" pt="24px">
+        <Button
+          variant="outline"
+          onClick={handleCancel}
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={handleUpdate}
+          h="44px"
+          fontFamily="mono"
+          fontSize="11px"
+          letterSpacing="0.2em"
+          textTransform="uppercase"
+        >
+          Update →
+        </Button>
+      </HStack>
+    </VStack>
   )
 }
 

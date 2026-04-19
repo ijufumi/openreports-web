@@ -27,7 +27,7 @@ import {
 
 import { HEADER_HEIGHT, ACTIONS_HEIGHT } from "../../pages/consts"
 
-const PAGER_HEIGHT = 70
+const PAGER_HEIGHT = 56
 
 const SPACE_HEIGHT = HEADER_HEIGHT + ACTIONS_HEIGHT + PAGER_HEIGHT + 30
 
@@ -102,14 +102,10 @@ const DataTable: FC<Props> = ({
 
   return (
     <Box
-      css={{
-        bgColor: "#FFFFFF",
-        width: "100%",
-        borderRadius: "lg",
-        borderWidth: "1px",
-        borderColor: "gray.200",
-        boxShadow: "sm",
-      }}
+      w="100%"
+      bg="transparent"
+      borderTopWidth="1px"
+      borderColor="nothing.text"
     >
       <Table.ScrollArea>
         <Box
@@ -128,10 +124,16 @@ const DataTable: FC<Props> = ({
                         key={header.id}
                         colSpan={header.colSpan}
                         css={{ position: "sticky", top: 0, zIndex: 10 }}
-                        bg="gray.100"
-                        fontWeight="600"
-                        fontSize="sm"
-                        color="gray.700"
+                        bg="nothing.bg"
+                        fontFamily="mono"
+                        fontWeight={400}
+                        fontSize="10px"
+                        letterSpacing="0.2em"
+                        textTransform="uppercase"
+                        color="nothing.textSecondary"
+                        borderBottomWidth="1px"
+                        borderColor="nothing.border"
+                        py="12px"
                       >
                         {header.isPlaceholder ? null : (
                           <div>
@@ -150,10 +152,23 @@ const DataTable: FC<Props> = ({
             <Table.Body>
               {table.getRowModel().rows.map((row) => {
                 return (
-                  <Table.Row key={row.id}>
+                  <Table.Row
+                    key={row.id}
+                    transition="background 120ms ease-out"
+                    _hover={{ bg: "nothing.subtle" }}
+                  >
                     {row.getVisibleCells().map((cell) => {
                       return (
-                        <Table.Cell key={cell.id} width={cell.column.columnDef.size}>
+                        <Table.Cell
+                          key={cell.id}
+                          width={cell.column.columnDef.size}
+                          fontFamily="body"
+                          fontSize="14px"
+                          color="nothing.text"
+                          borderBottomWidth="1px"
+                          borderColor="nothing.border"
+                          py="16px"
+                        >
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()
@@ -172,15 +187,15 @@ const DataTable: FC<Props> = ({
             justifyContent="space-between"
             alignItems="center"
             height={PAGER_HEIGHT}
+            pt="16px"
           >
-            <Flex>
+            <Flex gap="8px">
               <Tooltip content="First Page">
                 <IconButton
                   variant={"pager" as any}
                   onClick={() => table.setPageIndex(0)}
                   disabled={!table.getCanPreviousPage()}
-                  aria-label={"previous page"}
-                  mr={4}
+                  aria-label="first page"
                 >
                   <Icon as={BsChevronDoubleLeft} />
                 </IconButton>
@@ -190,47 +205,81 @@ const DataTable: FC<Props> = ({
                   variant={"pager" as any}
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
-                  aria-label={"previous page"}
+                  aria-label="previous page"
                 >
                   <Icon as={BsChevronLeft} />
                 </IconButton>
               </Tooltip>
             </Flex>
 
-            <Flex alignItems="center">
-              <Text flexShrink="0" mr={8}>
+            <Flex alignItems="center" gap="24px">
+              <Text
+                fontFamily="mono"
+                fontSize="11px"
+                letterSpacing="0.15em"
+                textTransform="uppercase"
+                color="nothing.textSecondary"
+              >
                 Page{" "}
-                <Text fontWeight="bold" as="span">
-                  {table.getState().pagination.pageIndex + 1}
-                </Text>{" "}
-                of{" "}
-                <Text fontWeight="bold" as="span">
-                  {table.getPageCount()}
+                <Text as="span" color="nothing.text">
+                  {String(table.getState().pagination.pageIndex + 1).padStart(
+                    2,
+                    "0"
+                  )}
+                </Text>
+                {" / "}
+                <Text as="span" color="nothing.text">
+                  {String(table.getPageCount()).padStart(2, "0")}
                 </Text>
               </Text>
-              <Text flexShrink="0">Go to page:</Text>{" "}
-              <NumberInput.Root
-                size="sm"
-                value={(table.getState().pagination.pageIndex + 1).toString()}
-                onValueChange={(details) =>
-                  table.setPageIndex(Math.min(Math.max(Number(details.value) - 1, 0), table.getPageCount() - 1))
-                }
-                min={1}
-                max={table.getPageCount()}
-                w="80px"
-              >
-                <NumberInput.Input />
-                <NumberInput.Control>
-                  <NumberInput.IncrementTrigger />
-                  <NumberInput.DecrementTrigger />
-                </NumberInput.Control>
-              </NumberInput.Root>
-              <NativeSelect.Root w={32}>
+              <Flex alignItems="center" gap="8px">
+                <Text
+                  fontFamily="mono"
+                  fontSize="10px"
+                  letterSpacing="0.2em"
+                  textTransform="uppercase"
+                  color="nothing.textSecondary"
+                >
+                  Go
+                </Text>
+                <NumberInput.Root
+                  size="sm"
+                  value={(table.getState().pagination.pageIndex + 1).toString()}
+                  onValueChange={(details) =>
+                    table.setPageIndex(
+                      Math.min(
+                        Math.max(Number(details.value) - 1, 0),
+                        table.getPageCount() - 1
+                      )
+                    )
+                  }
+                  min={1}
+                  max={table.getPageCount()}
+                  w="72px"
+                >
+                  <NumberInput.Input
+                    fontFamily="mono"
+                    fontSize="13px"
+                    borderColor="nothing.border"
+                    _focus={{ borderColor: "nothing.text" }}
+                  />
+                  <NumberInput.Control>
+                    <NumberInput.IncrementTrigger />
+                    <NumberInput.DecrementTrigger />
+                  </NumberInput.Control>
+                </NumberInput.Root>
+              </Flex>
+              <NativeSelect.Root w="112px" variant="outline">
                 <NativeSelect.Field
                   value={table.getState().pagination.pageSize.toString()}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                     table.setPageSize(Number(e.target.value))
                   }}
+                  fontFamily="mono"
+                  fontSize="11px"
+                  letterSpacing="0.1em"
+                  textTransform="uppercase"
+                  borderColor="nothing.border"
                 >
                   {pageSizes.map((pageSize) => (
                     <option key={pageSize} value={pageSize}>
@@ -241,13 +290,13 @@ const DataTable: FC<Props> = ({
               </NativeSelect.Root>
             </Flex>
 
-            <Flex>
+            <Flex gap="8px">
               <Tooltip content="Next Page">
                 <IconButton
                   variant={"pager" as any}
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
-                  aria-label={"next page"}
+                  aria-label="next page"
                 >
                   <Icon as={BsChevronRight} />
                 </IconButton>
@@ -257,8 +306,7 @@ const DataTable: FC<Props> = ({
                   variant={"pager" as any}
                   onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                   disabled={!table.getCanNextPage()}
-                  aria-label={"next page"}
-                  ml={4}
+                  aria-label="last page"
                 >
                   <Icon as={BsChevronDoubleRight} />
                 </IconButton>

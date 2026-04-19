@@ -1,15 +1,14 @@
 import React, { FC, useState, useEffect } from "react"
 import {
   Box,
+  VStack,
+  HStack,
   Button,
   Input,
   Text,
-  Wrap,
-  WrapItem,
   Icon,
   Field,
   InputGroup,
-  VStack,
 } from "@chakra-ui/react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useFormik } from "formik"
@@ -82,11 +81,7 @@ const Profile: FC<Props> = () => {
       if (user) {
         await formik.setFieldValue("name", user.name)
       }
-      setBreadcrumbs([
-        {
-          title: "Profile",
-        },
-      ])
+      setBreadcrumbs([{ title: "Profile" }])
       setInitialized(true)
     }
     initialize()
@@ -122,129 +117,164 @@ const Profile: FC<Props> = () => {
   }
 
   return (
-    <VStack gap={6} align="stretch" maxW="800px" mx="auto">
-      <Box
-        bg="white"
-        p={6}
-        borderRadius="lg"
-        boxShadow="sm"
-        borderWidth="1px"
-        borderColor="gray.200"
-      >
-        <VStack align="start" gap={2}>
-          <Text fontSize="2xl" fontWeight="bold" color="gray.800">
-            Profile Settings
-          </Text>
-          <Text fontSize="sm" color="gray.600">
-            Update your personal information and password
-          </Text>
-        </VStack>
+    <VStack gap="48px" align="stretch" maxW="720px">
+      <Box>
+        <Text
+          fontFamily="mono"
+          fontSize="10px"
+          letterSpacing="0.25em"
+          textTransform="uppercase"
+          color="nothing.textSecondary"
+          mb="8px"
+        >
+          [Account / Profile]
+        </Text>
+        <Text
+          fontFamily="heading"
+          fontSize="56px"
+          lineHeight="1"
+          letterSpacing="-0.03em"
+          fontWeight={500}
+          color="nothing.text"
+        >
+          Profile.
+        </Text>
+        <Text
+          mt="12px"
+          fontSize="14px"
+          color="nothing.textSecondary"
+          maxW="480px"
+        >
+          Update your personal information and password.
+        </Text>
       </Box>
 
-      <Box
-        bg="white"
-        borderRadius="lg"
-        boxShadow="sm"
-        borderWidth="1px"
-        borderColor="gray.200"
-        p={8}
-      >
-        <form onSubmit={formik.handleSubmit}>
-          <VStack gap={6} align="stretch">
-            <Field.Root
-              invalid={!!formik.errors.name && !!formik.touched.name}
+      <form onSubmit={formik.handleSubmit}>
+        <VStack
+          gap="32px"
+          align="stretch"
+          borderTopWidth="1px"
+          borderColor="nothing.text"
+          pt="32px"
+        >
+          <Field.Root
+            invalid={!!formik.errors.name && !!formik.touched.name}
+          >
+            <Field.Label
+              fontFamily="mono"
+              fontSize="10px"
+              letterSpacing="0.2em"
+              textTransform="uppercase"
+              color="nothing.textSecondary"
+              mb="8px"
             >
-              <Field.Label fontSize="md" fontWeight="600" color="gray.700">
-                Name
-              </Field.Label>
+              Name
+            </Field.Label>
+            <Input
+              id="name"
+              variant="flushed"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              placeholder="Your name"
+              fontSize="17px"
+              px={0}
+              borderColor="nothing.border"
+              _focus={{ borderColor: "nothing.text" }}
+            />
+            <Field.ErrorText
+              fontFamily="mono"
+              fontSize="11px"
+              color="nothing.red"
+            >
+              {formik.errors.name}
+            </Field.ErrorText>
+          </Field.Root>
+
+          <Field.Root
+            invalid={!!formik.errors.password && !!formik.touched.password}
+          >
+            <Field.Label
+              fontFamily="mono"
+              fontSize="10px"
+              letterSpacing="0.2em"
+              textTransform="uppercase"
+              color="nothing.textSecondary"
+              mb="8px"
+            >
+              New password
+              <Text as="span" ml="8px" color="nothing.textDisabled">
+                (optional)
+              </Text>
+            </Field.Label>
+            <InputGroup
+              endElement={
+                <Icon
+                  as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
+                  color="nothing.textSecondary"
+                  boxSize={5}
+                  onClick={handleShowPassword}
+                />
+              }
+              endElementProps={{ cursor: "pointer" }}
+            >
               <Input
-                id="name"
-                size="lg"
-                value={formik.values.name}
+                id="password"
+                variant="flushed"
+                value={formik.values.password}
+                type={showPassword ? "text" : "password"}
+                placeholder="••••••••"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                placeholder="Enter your name"
-                bg="gray.50"
-                borderColor="gray.300"
-                _focus={{ bg: "white", borderColor: "blue.400" }}
+                fontSize="17px"
+                px={0}
+                borderColor="nothing.border"
+                _focus={{ borderColor: "nothing.text" }}
               />
-              <Field.ErrorText>{formik.errors.name}</Field.ErrorText>
-            </Field.Root>
+            </InputGroup>
+            {formik.errors.password && (
+              <VStack align="start" gap={1} mt={2}>
+                {formik.errors.password
+                  .split(",")
+                  .map((e: string) => (
+                    <Field.ErrorText
+                      key={e}
+                      fontFamily="mono"
+                      fontSize="11px"
+                      color="nothing.red"
+                    >
+                      {e}
+                    </Field.ErrorText>
+                  ))}
+              </VStack>
+            )}
+          </Field.Root>
+        </VStack>
 
-            <Field.Root
-              invalid={!!formik.errors.password && !!formik.touched.password}
-            >
-              <Field.Label fontSize="md" fontWeight="600" color="gray.700">
-                Password
-              </Field.Label>
-              <InputGroup
-                endElement={
-                  <Icon
-                    as={showPassword ? AiOutlineEye : AiOutlineEyeInvisible}
-                    color="gray.500"
-                    boxSize={5}
-                    onClick={handleShowPassword}
-                  />
-                }
-                endElementProps={{ cursor: "pointer", pr: 3 }}
-              >
-                <Input
-                  id="password"
-                  size="lg"
-                  value={formik.values.password}
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter new password (optional)"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  bg="gray.50"
-                  borderColor="gray.300"
-                  _focus={{ bg: "white", borderColor: "blue.400" }}
-                />
-              </InputGroup>
-              {formik.errors.password && (
-                <VStack align="start" gap={1} mt={2}>
-                  {formik.errors.password
-                    .split(",")
-                    .map((e: string) => (
-                      <Field.ErrorText key={e}>{e}</Field.ErrorText>
-                    ))}
-                </VStack>
-              )}
-            </Field.Root>
-
-            <Box
-              pt={4}
-              borderTopWidth="1px"
-              borderColor="gray.200"
-              display="flex"
-              justifyContent="flex-end"
-            >
-              <Wrap gap={3}>
-                <WrapItem key="cancel-button">
-                  <Button
-                    onClick={handleCancel}
-                    variant="outline"
-                    size="lg"
-                    colorScheme="gray"
-                  >
-                    Cancel
-                  </Button>
-                </WrapItem>
-                <WrapItem key="submit-button">
-                  <Button
-                    type="submit"
-                    size="lg"
-                    colorScheme="blue"
-                    boxShadow="sm"
-                  >
-                    Update Profile
-                  </Button>
-                </WrapItem>
-              </Wrap>
-            </Box>
-          </VStack>
-        </form>
-      </Box>
+        <HStack justifyContent="flex-end" gap="12px" pt="48px">
+          <Button
+            variant="outline"
+            onClick={handleCancel}
+            h="44px"
+            fontFamily="mono"
+            fontSize="11px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            h="44px"
+            fontFamily="mono"
+            fontSize="11px"
+            letterSpacing="0.2em"
+            textTransform="uppercase"
+          >
+            Update →
+          </Button>
+        </HStack>
+      </form>
     </VStack>
   )
 }
