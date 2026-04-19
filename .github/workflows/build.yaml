@@ -17,15 +17,15 @@ jobs:
         node-version: ['20.x', '22.x', '24.x']
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Cache CDK Dependency
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: cache_cdk_dependency_id
         env:
           cache-name: cache-cdk-dependency-${{ matrix.node-version }}
