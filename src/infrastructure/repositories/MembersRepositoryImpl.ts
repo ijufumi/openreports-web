@@ -23,8 +23,4 @@ export default class MembersRepositoryImpl
   permissions = async () => {
     return await this._get({ path: "/permissions", hasResponse: true })
   }
-
-  accessToken = async () => {
-    await this._post({ path: "/access-token" })
-  }
 }

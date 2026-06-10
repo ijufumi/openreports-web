@@ -27,18 +27,14 @@ class MembersUseCaseImpl extends BaseUseCase implements MembersUseCase {
 
   isLoggedIn = async () => {
     try {
-      if (!credentials.hasToken()) {
+      if (!credentials.hasToken() && !credentials.hasRefreshToken()) {
         return false
       }
-      let user = await this.repository.status()
-      if (!!!user) {
-        if (credentials.hasRefreshToken()) {
-          await this.repository.accessToken()
-          user = await this.repository.status()
-        }
-        if (!!!user) {
-          return false
-        }
+      // アクセストークンが失効していてもリフレッシュトークンが有効なら
+      // サーバー側で新しいトークンが再発行され、レスポンスヘッダー経由で保存される
+      const user = await this.repository.status()
+      if (!user) {
+        return false
       }
       this.updateCredential(user)
       return true
