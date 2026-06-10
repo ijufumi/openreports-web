@@ -11,8 +11,6 @@ interface MembersRepository {
   status(): Promise<UserVo>
 
   permissions(): Promise<FunctionVo>
-
-  accessToken(): Promise<void>
 }
 
 export default MembersRepository

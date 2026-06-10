@@ -50,7 +50,8 @@ export const Credentials = {
   },
 
   has(key: Keys) {
-    return Credentials.get(key) !== undefined
+    const value = Credentials.get(key)
+    return value !== null && value !== ""
   },
 
   set(key: Keys, value: string) {

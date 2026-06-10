@@ -141,12 +141,16 @@ abstract class BaseRepository {
     responseAsBlob?: boolean,
     responseAsJson?: boolean
   ) => {
-    let baseHeaders = {}
+    const baseHeaders: Record<string, string> = {}
     if (!!auth || this.needsAuth) {
-      baseHeaders = {
-        Authorization: `Bearer ${Credentials.getToken()}`,
-        "X-Workspace-Id": Credentials.getWorkspaceId(),
-        "X-Refresh-Token": Credentials.getRefreshToken(),
+      baseHeaders["Authorization"] = `Bearer ${Credentials.getToken()}`
+      const workspaceId = Credentials.getWorkspaceId()
+      if (workspaceId) {
+        baseHeaders["X-Workspace-Id"] = workspaceId
+      }
+      const refreshToken = Credentials.getRefreshToken()
+      if (refreshToken) {
+        baseHeaders["X-Refresh-Token"] = refreshToken
       }
     }
 
