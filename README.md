@@ -6,9 +6,79 @@
 
 - Node >= 20.x
 
-## Features
+## Tech Stack
 
-This application's features are here ( including not implemented )
+| Name                 | Version | Usage                              |
+|----------------------|---------|------------------------------------|
+| Node                 | >= 20.x | JavaScript runtime                 |
+| TypeScript           | 5.9.x   | Language                           |
+| React                | 19.2.x  | UI library                         |
+| React Router         | 7.9.x   | Routing                            |
+| Chakra UI            | 3.30.x  | UI component library               |
+| MobX / mobx-react    | 6.15.x  | State management                   |
+| TanStack React Table | 8.21.x  | Headless table                     |
+| Formik               | 2.4.x   | Form handling                      |
+| Zod                  | 4.1.x   | Schema validation                  |
+| Day.js               | 1.11.x  | Date handling                      |
+| styled-components    | 6.1.x   | Styling                            |
+| webpack              | 5.x     | Bundler / dev server               |
+| ESLint / Prettier    | 9.x / 3.x | Linting / formatting             |
+| Husky / lint-staged  | 9.x / 16.x | Git hooks (pre-commit lint)     |
+
+## Directory structure
+
+This project follows Clean Architecture principles (see [CLEAN_ARCHITECTURE.md](./CLEAN_ARCHITECTURE.md)):
+
+```
+.
+├── public/                    # Static files
+│   └── assets/                # Public assets
+├── src/
+│   ├── application/           # Application layer
+│   │   ├── dto/               # Data Transfer Objects
+│   │   │   └── vos/           # Value Objects
+│   │   │       ├── requests/  # Request VOs
+│   │   │       └── responses/ # Response VOs
+│   │   ├── ports/             # Use case interfaces (input ports)
+│   │   └── usecases/          # Use case implementations (business logic)
+│   ├── assets/                # Application assets (images, etc.)
+│   ├── components/            # Shared UI components
+│   │   └── ui/                # UI component library (input-group, toaster, tooltip)
+│   ├── di/                    # Dependency injection (Repository / UseCase factories)
+│   ├── domain/                # Domain layer
+│   │   └── repositories/      # Repository interfaces
+│   ├── infrastructure/        # Infrastructure layer
+│   │   ├── config/            # Configuration (constants, Chakra UI theme)
+│   │   ├── http/              # HTTP client base (BaseRepository)
+│   │   ├── repositories/      # Repository implementations
+│   │   ├── state/             # Global state (Breadcrumbs, Credentials, Loader, LoginUser, Toast)
+│   │   └── utils/             # Utilities (date, download, string)
+│   ├── presentation/          # Presentation layer
+│   │   ├── components/        # Shared presentation components (data_table, errors)
+│   │   └── pages/             # Page components
+│   │       ├── data_sources/  # Data source list / create / edit
+│   │       ├── errors/        # Error pages
+│   │       ├── google_callback/ # Google OAuth callback
+│   │       ├── layout/        # Authorized layout (header, navigation)
+│   │       ├── login/         # Login page
+│   │       ├── members/       # Member profile
+│   │       ├── reports/       # Report list / create / edit
+│   │       ├── templates/     # Template list / create / edit
+│   │       └── top/           # Top (dashboard) page
+│   ├── app.tsx                # App root (routing)
+│   └── index.tsx              # Entry point
+├── CLEAN_ARCHITECTURE.md
+├── eslint.config.mjs
+├── package.json
+├── README.md
+├── tsconfig.json
+├── webpack.config.js
+└── yarn.lock
+```
+
+## Implemented features
+
+This application's features are here (including not implemented).
 
 * [ ] Common
   * [ ] Login
@@ -20,16 +90,18 @@ This application's features are here ( including not implemented )
     * [ ] Sign up with Google
     * [ ] Sign up with GitHub
   * [x] Logout
-* [ ] Top
+  * [x] Profile update
+* [x] Top (dashboard)
 * [ ] Reporting
   * [x] Reports
     * [x] list
     * [x] create
     * [x] update
     * [x] delete
-  * [x] Template
+    * [x] output (Excel / PDF download)
+  * [x] Templates
     * [x] list
-    * [x] create
+    * [x] create (file upload)
     * [x] update
     * [x] delete
   * [ ] Groups
@@ -55,65 +127,16 @@ This application's features are here ( including not implemented )
       * [ ] add
       * [ ] update
       * [ ] delete
-  * [ ] DataSource
-    * [ ] list
-    * [ ] create
-    * [ ] update
-    * [ ] delete
+  * [x] DataSource
+    * [x] list
+    * [x] create
+    * [x] update
+    * [x] delete
   * [ ] Logs
     * [ ] list
-
-## Technical Stack
-
- | Name        | Version | Usage          |
- |-------------|---------|----------------|
- | Node        | >= 20.x | Javascript     |
- | Typescript  | 5.9.3   | Language       |
- | React       | 19.2.0  | All of them    |
- | Chakra UI   | 3.30.0  | UI             |
- | React Table | 8.21.3  | Headless table |
-
-## Package structure
-
-This project follows Clean Architecture principles with the following structure:
-
-```
-.
-├── public/              # Static files
-│   └── assets/          # Public assets
-├── src/
-│   ├── application/     # Application layer
-│   │   ├── dto/         # Data Transfer Objects
-│   │   │   └── vos/     # Value Objects
-│   │   ├── ports/       # Port interfaces
-│   │   └── usecases/    # Use cases (business logic)
-│   ├── assets/          # Application assets (images, etc.)
-│   ├── components/      # Shared UI components
-│   │   └── ui/          # UI component library
-│   ├── di/              # Dependency injection container
-│   ├── domain/          # Domain layer
-│   │   └── repositories/ # Repository interfaces
-│   ├── infrastructure/  # Infrastructure layer
-│   │   ├── config/      # Configuration files
-│   │   ├── http/        # HTTP client implementation
-│   │   ├── repositories/ # Repository implementations
-│   │   ├── state/       # State management
-│   │   └── utils/       # Utility functions
-│   └── presentation/    # Presentation layer
-│       ├── components/  # Presentation components
-│       └── pages/       # Page components
-├── .eslintrc.json
-├── .prettierrc.json
-├── package.json
-├── README.md
-├── tsconfig.json
-├── webpack.config.js
-└── yarn.lock
-```
 
 ## How to run
 
 ```bash
 yarn start
 ```
-
