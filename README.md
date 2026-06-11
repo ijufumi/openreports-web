@@ -4,13 +4,13 @@
 
 ## Requirements
 
-- Node >= 20.x
+- Node 24.x (Active LTS) or 26.x (Current)
 
 ## Tech Stack
 
 | Name                 | Version | Usage                              |
 |----------------------|---------|------------------------------------|
-| Node                 | >= 20.x | JavaScript runtime                 |
+| Node                 | 24.x / 26.x | JavaScript runtime             |
 | TypeScript           | 5.9.x   | Language                           |
 | React                | 19.2.x  | UI library                         |
 | React Router         | 7.9.x   | Routing                            |
