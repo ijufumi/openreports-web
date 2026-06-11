@@ -5,6 +5,9 @@
   "repository": "git@github.com:ijufumi/openreports_web.git",
   "author": "Takafumi Iju <ijufumi@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "^24.0.0 || ^26.0.0"
+  },
   "dependencies": {
     "@chakra-ui/react": "^3.30.0",
     "@emotion/react": "^11.14.0",
