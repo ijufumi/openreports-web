@@ -1,9 +1,6 @@
 # for React
 node_modules
 dist/
-public/*.js
-public/*.js.map
-public/*.LICENSE.txt
 yarn-error.log
 package-lock.json
 !.node-version

@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const path = require("path");
 
@@ -7,7 +8,8 @@ module.exports = {
   entry: "./src/index.tsx",
   output: {
     filename: "main.js",
-    path: `${__dirname}/public`,
+    path: `${__dirname}/dist`,
+    clean: true,
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".png"],
@@ -44,6 +46,9 @@ module.exports = {
       template: "public/index.html",
       hash: true,
       publicPath: "/"
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: "public/assets", to: "assets" }],
     }),
     new Dotenv({
       systemvars: true,})
